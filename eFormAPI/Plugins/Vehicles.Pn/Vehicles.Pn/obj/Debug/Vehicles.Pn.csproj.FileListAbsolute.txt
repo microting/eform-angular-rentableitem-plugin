@@ -1,0 +1,8 @@
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles.Pn\obj\Debug\Vehicles.Pn.csprojAssemblyReference.cache
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles.Pn\obj\Debug\Vehicles.Pn.csproj.CoreCompileInputs.cache
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles\Vehicles.Pn.dll.config
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles\Vehicles.Pn.dll
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles\Vehicles.Pn.pdb
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles.Pn\obj\Debug\Vehicles.Pn.csproj.CopyComplete
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles.Pn\obj\Debug\Vehicles.Pn.dll
+C:\Users\Gid\Documents\Projects\eform-angular-frontend\eFormAPI\Plugins\Vehicles.Pn\Vehicles.Pn\obj\Debug\Vehicles.Pn.pdb
