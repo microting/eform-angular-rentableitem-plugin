@@ -8,7 +8,7 @@ On front-end part plugins will be included into `eform-client/src/app/plugins/mo
     ...
 },
 {
-    path: 'vehicles-pn'
+    path: 'vehicles-pn',
     canActivate: [AuthGuard],
     loadChildren: './modules/vehicles-pn/vehicles-pn.module#VehiclesPnModule'
 }
@@ -21,9 +21,9 @@ After that add link to the menu. Go to `eform-client/src/app/components/navigati
     ...
 },
 {
-     name: 'Vehicles Pn’,  // here goes plugin name
+     name: 'Vehicles Pn',  // here goes plugin name
      link: '/plugins/plugin-name', 	// here goes plugin link
-     e2eId: ‘’, // here goes e2eid for testing
+     e2eId: '', // here goes e2eid for testing
      submenus: []
 }
 ```
