@@ -22,7 +22,7 @@ After that add link to the menu. Go to `eform-client/src/app/components/navigati
 },
 {
      name: 'Vehicles Pn',  // here goes plugin name
-     link: '/plugins/plugin-name', 	// here goes plugin link
+     link: '/plugins/vehicles-pn', 	// here goes plugin link
      e2eId: '', // here goes e2eid for testing
      submenus: []
 }
