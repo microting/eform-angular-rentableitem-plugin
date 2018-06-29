@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using EformBase.Pn.Infrastructure.Models.API;
 using NLog;
+using Vehicles.Pn.Helpers;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Entities;
 using Vehicles.Pn.Infrastructure.Extensions;
@@ -65,7 +66,8 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(true, "Error while obtaining vehicles info");
+                return new OperationDataResult<VehiclesPnModel>(true,
+                    VehiclePnLocaleHelper.GetString("ErrorObtainingVehiclesInfo"));
             }
         }
 
@@ -89,7 +91,8 @@ namespace Vehicles.Pn.Controllers
                 _dbContext.Vehicles.Add(vehiclePn);
                 _dbContext.SaveChanges();
                 return new OperationResult(true,
-                    $"Vehicle {vehiclePnCreateModel.Brand} {vehiclePnCreateModel.ModelName} created");
+                    VehiclePnLocaleHelper.GetString("VehicleCreated", vehiclePnCreateModel.Brand,
+                        vehiclePnCreateModel.ModelName));
             }
             catch (Exception e)
             {
