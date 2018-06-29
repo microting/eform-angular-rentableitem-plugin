@@ -1,52 +1,132 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Web.Http;
-using EformBase.Pn.Infrastructure;
 using EformBase.Pn.Infrastructure.Models.API;
-using Vehicles.Pn.Models;
+using NLog;
+using Vehicles.Pn.Infrastructure.Data;
+using Vehicles.Pn.Infrastructure.Data.Entities;
+using Vehicles.Pn.Infrastructure.Extensions;
+using Vehicles.Pn.Infrastructure.Models;
 
 namespace Vehicles.Pn.Controllers
 {
     public class VehiclesPnController : ApiController
     {
-        private readonly EFormCoreHelper _coreHelper = new EFormCoreHelper();
+        private readonly Logger _logger;
+        private readonly VehiclesPnDbContext _dbContext;
+
+        public VehiclesPnController()
+        {
+            _dbContext = VehiclesPnDbContext.Create();
+            _logger = LogManager.GetCurrentClassLogger();
+        }
 
         [HttpPost]
         [Route("api/vehicles-pn")]
         public OperationDataResult<VehiclesPnModel> GetAllVehicles(VehiclesPnRequestModel pnRequestModel)
         {
-            var vehiclesPnModel = new VehiclesPnModel()
+            try
             {
-                Total = 1,
-                Vehicles = new List<VehiclePnModel>()
-            };
-            
-            
-            return new OperationDataResult<VehiclesPnModel>(true, vehiclesPnModel);
+                var vehiclesPnModel = new VehiclesPnModel();
+                var vehiclesQuery = _dbContext.Vehicles.AsQueryable();
+                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
+                {
+                    if (pnRequestModel.IsSortDsc)
+                    {
+                        vehiclesQuery = vehiclesQuery.OrderByDescending(pnRequestModel.SortColumnName);
+                    }
+                    else
+                    {
+                        vehiclesQuery = vehiclesQuery.OrderBy(pnRequestModel.SortColumnName);
+                    }
+                }
+                vehiclesPnModel.Total = vehiclesQuery.Count();
+                vehiclesQuery = vehiclesQuery.Skip(pnRequestModel.Offset).Take(pnRequestModel.PageSize);
+                var vehicles = vehiclesQuery.ToList();
+                vehicles.ForEach(vehicle =>
+                {
+                    vehiclesPnModel.Vehicles.Add(new VehiclePnModel()
+                    {
+                        VinNumber = vehicle.VinNumber,
+                        ContractEndDate = vehicle.ContractEndDate,
+                        ContractStartDate = vehicle.ContractStartDate,
+                        CustomerName = vehicle.CustomerName,
+                        RegistrationDate = vehicle.RegistrationDate,
+                        Brand = vehicle.Brand,
+                        ContactNumber = vehicle.ContactNumber,
+                        ModelName = vehicle.ModelName,
+                        Id = vehicle.Id,
+                    });
+                });
+                return new OperationDataResult<VehiclesPnModel>(true, vehiclesPnModel);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.Error(e);
+                return new OperationDataResult<VehiclesPnModel>(true, "Error while obtaining vehicles info");
+            }
         }
 
         [HttpPost]
         [Route("api/vehicles-pn/create-vehicle")]
         public OperationResult CreateVehicle(VehiclePnModel vehiclePnCreateModel)
         {
-            var vehiclePnModel = new VehiclePnModel();
-
-            vehiclePnModel = vehiclePnCreateModel;
-
-
-            return new OperationResult(true, 
-                $"Vehicle {vehiclePnCreateModel.Brand} {vehiclePnCreateModel.ModelName} created");
+            try
+            {
+                var vehiclePn = new VehiclePn
+                {
+                    VinNumber = vehiclePnCreateModel.VinNumber,
+                    Brand = vehiclePnCreateModel.Brand,
+                    ContactNumber = vehiclePnCreateModel.ContactNumber,
+                    ContractEndDate = vehiclePnCreateModel.ContractEndDate,
+                    ContractStartDate = vehiclePnCreateModel.ContractStartDate,
+                    CustomerName = vehiclePnCreateModel.CustomerName,
+                    ModelName = vehiclePnCreateModel.ModelName,
+                    RegistrationDate = vehiclePnCreateModel.RegistrationDate,
+                };
+                _dbContext.Vehicles.Add(vehiclePn);
+                _dbContext.SaveChanges();
+                return new OperationResult(true,
+                    $"Vehicle {vehiclePnCreateModel.Brand} {vehiclePnCreateModel.ModelName} created");
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.Error(e);
+                return new OperationResult(true, "Error while creating Vehicle");
+            }
         }
-        
+
         [HttpPost]
         [Route("api/vehicles-pn/update-vehicle")]
         public OperationResult UpdateVehicle(VehiclePnModel vehiclePnUpdateModel)
         {
-            var vehiclePnEntity = new VehiclePnModel();
-
-            vehiclePnEntity = vehiclePnUpdateModel;
-
-            return new OperationResult(true, $"Vehicle {vehiclePnUpdateModel.Id} updated");
+            try
+            {
+                var vehicle = _dbContext.Vehicles.FirstOrDefault(x => x.Id == vehiclePnUpdateModel.Id);
+                if (vehicle == null)
+                {
+                    return new OperationResult(true, "Vehicle not found");
+                }
+                vehicle.VinNumber = vehiclePnUpdateModel.VinNumber;
+                vehicle.Brand = vehiclePnUpdateModel.Brand;
+                vehicle.ContactNumber = vehiclePnUpdateModel.ContactNumber;
+                vehicle.ContractEndDate = vehiclePnUpdateModel.ContractEndDate;
+                vehicle.ContractStartDate = vehiclePnUpdateModel.ContractStartDate;
+                vehicle.CustomerName = vehiclePnUpdateModel.CustomerName;
+                vehicle.ModelName = vehiclePnUpdateModel.ModelName;
+                vehicle.RegistrationDate = vehiclePnUpdateModel.RegistrationDate;
+                _dbContext.SaveChanges();
+                return new OperationDataResult<VehiclesPnModel>(true);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.Error(e);
+                return new OperationDataResult<VehiclesPnModel>(true, "Error while updating vehicles info");
+            }
         }
-
     }
 }

@@ -1,16 +1,26 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using EformBase.Pn.Infrastructure.Data.Base;
 
-namespace Vehicles.Pn.Infrastructure.Entities
+namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
-    public class VehiclePn
+    public class VehiclePn : BaseEntity
     {
-        public int Id { get; set; }
+        [StringLength(100)]
         public string ContactNumber { get; set; }
+
+        [StringLength(250)]
         public string CustomerName { get; set; }
+
+        [StringLength(100)]
         public string Brand { get; set; }
+
+        [StringLength(100)]
         public string ModelName { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public string WinNumber { get; set; }
+
+        [StringLength(17)]
+        public string VinNumber { get; set; }
         public DateTime ContractStartDate { get; set; }
         public DateTime ContractEndDate { get; set; }
     }
