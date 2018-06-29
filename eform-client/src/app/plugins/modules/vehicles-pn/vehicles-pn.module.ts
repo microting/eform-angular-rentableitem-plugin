@@ -14,6 +14,7 @@ import {
   VehiclesPnDatepickerComponent
 } from './components';
 import {VehiclesPnRoutingModule} from './vehicles-pn.routing.module';
+import { NotifyPnService } from '../shared/services/notify-pn.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import {VehiclesPnRoutingModule} from './vehicles-pn.routing.module';
     VehiclesPnSpinnerComponent,
     VehiclesPnDatepickerComponent
   ],
-  providers: [VehiclesPnService]
+  providers: [VehiclesPnService, NotifyPnService]
 })
 export class VehiclesPnModule {
 }
