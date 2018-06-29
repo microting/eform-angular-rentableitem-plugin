@@ -62,4 +62,10 @@ export class VehiclesPnPageComponent implements OnInit {
     }
   }
 
+  sortByColumn(columnName: string, sortedByDsc: boolean) {
+    this.vehiclesRequestModel.sortColumnName = columnName;
+    this.vehiclesRequestModel.isSortDsc = sortedByDsc;
+    this.getAllVehicles();
+  }
+
 }

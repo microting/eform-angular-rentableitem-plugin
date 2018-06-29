@@ -11,7 +11,8 @@ import {OperationDataResult, OperationResult} from 'app/modules/helpers/operatio
 
 export let VehiclePnMethods = {
   VehiclePn: 'api/vehicles-pn',
-  UpdateVehiclePn: 'api/vehicles-pn/vehicle-update'
+  CreateVehiclePn: 'api/vehicles-pn/create-vehicle',
+  UpdateVehiclePn: 'api/vehicles-pn/update-vehicle'
 };
 
 @Injectable()
@@ -30,10 +31,10 @@ export class VehiclesPnService extends BaseService {
   }
 
   updateVehicle(model: VehiclePnModel): Observable<any> {
-    return this.postModelOperationResult(VehiclePnMethods.VehiclePn, model);
+    return this.postModelOperationResult(VehiclePnMethods.UpdateVehiclePn, model);
   }
 
   createVehicle(model: VehiclePnModel): Observable<any> {
-    return this.postModelOperationResult(VehiclePnMethods.VehiclePn, model);
+    return this.postModelOperationResult(VehiclePnMethods.CreateVehiclePn, model);
   }
 }

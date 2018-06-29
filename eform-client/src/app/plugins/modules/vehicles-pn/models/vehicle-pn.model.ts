@@ -5,7 +5,7 @@ export class VehiclePnModel {
   brand: string;
   modelName: string;
   registrationDate: string;
-  winNumber: string;
+  vinNumber: string;
   contractStartDate: string;
   contractEndDate: string;
 }

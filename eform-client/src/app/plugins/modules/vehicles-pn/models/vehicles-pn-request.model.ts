@@ -6,7 +6,7 @@ export class VehiclesPnRequestModel {
   isSortDsc: boolean;
 
   constructor() {
-    this.sortColumnName = 'id';
+    this.sortColumnName = 'Id';
     this.isSortDsc = true;
     this.pageSize = 10;
     this.pageIndex = 1;

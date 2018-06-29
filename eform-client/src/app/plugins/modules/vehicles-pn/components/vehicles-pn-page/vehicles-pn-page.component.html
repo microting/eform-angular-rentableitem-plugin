@@ -26,31 +26,67 @@
          id="units" style="width: 100%;">
     <thead>
     <tr role="row">
-      <th class="text-center" rowspan="1" colspan="1" id="idSort">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'Id' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'Id' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'Id'"
+          (click)="sortByColumn('Id', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         ID
       </th>
-      <th class="text-center" rowspan="1" colspan="1" id="createdAtSort">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContactNumber' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContactNumber' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContactNumber'"
+          (click)="sortByColumn('ContactNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Contact number' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1" id="nameEFormSort">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'CustomerName' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'CustomerName' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'CustomerName'"
+          (click)="sortByColumn('CustomerName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Customer name' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'Brand' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'Brand' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'Brand'"
+          (click)="sortByColumn('Brand', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Brand' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ModelName' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ModelName' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ModelName'"
+          (click)="sortByColumn('ModelName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Model' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'RegistrationDate'"
+          (click)="sortByColumn('RegistrationDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Registration date' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
-        {{ 'WIN number' | translate }}
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'VinNumber' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'VinNumber' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'VinNumber'"
+          (click)="sortByColumn('VinNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+        {{ 'VIN number' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContractStartDate'"
+          (click)="sortByColumn('ContractStartDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'Start of contract' | translate }}
       </th>
-      <th class="text-center" rowspan="1" colspan="1">
+      <th class="text-center" rowspan="1" colspan="1"
+          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && !vehiclesRequestModel.isSortDsc"
+          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && vehiclesRequestModel.isSortDsc"
+          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContractEndDate'"
+          (click)="sortByColumn('ContractEndDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
         {{ 'End of contract' | translate }}
       </th>
       <th class="col-md-1 text-center" rowspan="1" colspan="1">
@@ -76,16 +112,16 @@
         {{vehicle.modelName}}
       </td>
       <td class="text-center">
-        {{vehicle.registrationDate}}
+        {{vehicle.registrationDate | date:'dd.MM.y'}}
       </td>
       <td class="text-center">
-        {{vehicle.winNumber}}
+        {{vehicle.vinNumber}}
       </td>
       <td class="text-center">
-        {{vehicle.contractStartDate}}
+        {{vehicle.contractStartDate | date:'dd.MM.y'}}
       </td>
       <td class="text-center">
-        {{vehicle.contractEndDate}}
+        {{vehicle.contractEndDate | date:'dd.MM.y'}}
       </td>
       <td class="text-center">
         <div class="row row-buttons-wrapper btn-group" role="group">
@@ -112,4 +148,7 @@
   <vehicles-pn-spinner [middleActive]="spinnerStatus"></vehicles-pn-spinner>
 </div>
 
-<vehicles-pn-add-update-pn-page #vehiclePnAddUpdateComponent [selectedVehicleModel]="selectedVehicleModel"></vehicles-pn-add-update-pn-page>
+<vehicles-pn-add-update-pn-page #vehiclePnAddUpdateComponent
+                                (onVehicleCreatedUpdated)="getAllVehicles()"
+                                [selectedVehicleModel]="selectedVehicleModel">
+</vehicles-pn-add-update-pn-page>
