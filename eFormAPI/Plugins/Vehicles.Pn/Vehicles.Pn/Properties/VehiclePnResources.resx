@@ -120,6 +120,12 @@
   <data name="ErrorObtainingVehiclesInfo" xml:space="preserve">
     <value>Error while obtaining vehicles info</value>
   </data>
+  <data name="ErrorWhileCreatingVehicle" xml:space="preserve">
+    <value>Error while creating vehicle</value>
+  </data>
+  <data name="ErrorWhileUpdatingVehicleInfo" xml:space="preserve">
+    <value>Error while updating vehicles info</value>
+  </data>
   <data name="VehicleCreated" xml:space="preserve">
     <value>Vehicle {0} {1} created</value>
   </data>
