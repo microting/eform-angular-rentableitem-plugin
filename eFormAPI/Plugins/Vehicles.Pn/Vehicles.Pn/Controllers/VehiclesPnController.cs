@@ -98,7 +98,7 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationResult(true, "Error while creating Vehicle");
+                return new OperationResult(true, VehiclePnLocaleHelper.GetString("ErrorWhileCreatingVehicle"));
             }
         }
 

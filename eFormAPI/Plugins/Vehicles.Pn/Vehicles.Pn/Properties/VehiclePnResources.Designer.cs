@@ -70,6 +70,24 @@ namespace Vehicles.Pn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while creating vehicle.
+        /// </summary>
+        internal static string ErrorWhileCreatingVehicle {
+            get {
+                return ResourceManager.GetString("ErrorWhileCreatingVehicle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while updating vehicles info.
+        /// </summary>
+        internal static string ErrorWhileUpdatingVehicleInfo {
+            get {
+                return ResourceManager.GetString("ErrorWhileUpdatingVehicleInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle {0} {1} created.
         /// </summary>
         internal static string VehicleCreated {

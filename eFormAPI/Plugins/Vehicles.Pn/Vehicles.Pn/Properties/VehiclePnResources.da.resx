@@ -118,9 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorObtainingVehiclesInfo" xml:space="preserve">
-    <value>ErrorObtainingVehiclesInfo</value>
+    <value>Fejl ved indhentning af køretøjsoplysninger</value>
+  </data>
+  <data name="ErrorWhileCreatingVehicle" xml:space="preserve">
+    <value>Fejl under oprettelse af køretøj</value>
+  </data>
+  <data name="ErrorWhileUpdatingVehicleInfo" xml:space="preserve">
+    <value>Fejl under opdatering af køretøjsinfo</value>
   </data>
   <data name="VehicleCreated" xml:space="preserve">
-    <value>VehicleCreatedVehicleCreated Vehicle {0} {1}</value>
+    <value>Køretøj {0} {1} oprettet</value>
   </data>
 </root>
