@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using EformBase.Pn.Infrastructure.Data.Base;
+using eFormApi.BasePn.Infrastructure.Data.Base;
 
 namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
