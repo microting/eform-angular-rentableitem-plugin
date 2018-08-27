@@ -4,8 +4,14 @@ export class VehiclePnModel {
   customerName: string;
   brand: string;
   modelName: string;
-  registrationDate: string;
+  registrationDate: Date;
   vinNumber: string;
-  contractStartDate: string;
-  contractEndDate: string;
+  contractStartDate: Date;
+  contractEndDate: Date;
+
+  constructor() {
+    this.contractStartDate = null;
+    this.contractEndDate = null;
+    this.registrationDate = null;
+  }
 }

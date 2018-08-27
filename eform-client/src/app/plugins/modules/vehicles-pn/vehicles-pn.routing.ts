@@ -1,19 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {AuthGuard} from 'app/guards';
-import {VehiclesPnPageComponent, VehiclesPnAddUpdateComponent} from './components';
+import {AuthGuard} from 'src/app/common/guards';
+import {VehiclesPnPageComponent} from './components';
 
 export const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
     component: VehiclesPnPageComponent
-  },
-  {
-    path: 'add-or-update',
-    canActivate: [AuthGuard],
-    component: VehiclesPnAddUpdateComponent
   }
 ];
 
@@ -21,5 +16,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class VehiclesPnRoutingModule {
+export class VehiclesPnRouting {
 }

@@ -1,21 +1,23 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {LocaleService} from 'app/services';
+import {LocaleService} from 'src/app/common/services/auth';
+
 
 import {VehiclePnModel, VehiclesPnModel, VehiclesPnRequestModel} from '../../models';
 import {VehiclesPnService} from '../../services';
-import {VehiclesPnAddUpdateComponent} from '../vehicle-pn-add-update/vehicles-pn-add-update.component';
+declare var require: any;
 
 @Component({
   selector: 'app-vehicles-pn-page',
-  templateUrl: './vehicles-pn-page.component.html'
+  templateUrl: './vehicles-pn-page.component.html',
+  styleUrls: ['./vehicles-pn-page.component.scss']
 })
 export class VehiclesPnPageComponent implements OnInit {
-  @ViewChild('vehiclePnAddUpdateComponent') vehiclePnAddUpdateComponent: VehiclesPnAddUpdateComponent;
+  @ViewChild('createVehicleModal') createVehicleModal;
+  @ViewChild('editVehicleModal') editVehicleModal;
 
   vehiclesRequestModel: VehiclesPnRequestModel = new VehiclesPnRequestModel();
   vehiclesModel: VehiclesPnModel = new VehiclesPnModel();
-  selectedVehicleModel: VehiclePnModel = new VehiclePnModel();
   spinnerStatus = false;
 
   constructor(private vehiclesService: VehiclesPnService,
@@ -36,17 +38,18 @@ export class VehiclesPnPageComponent implements OnInit {
   }
 
   showCreateVehicleModal() {
-    this.vehiclePnAddUpdateComponent.showCreateVehicleModal();
+    this.createVehicleModal.show();
   }
 
   showEditVehicleModal(model: VehiclePnModel) {
-    this.selectedVehicleModel = model;
-    this.vehiclePnAddUpdateComponent.showEditVehicleModal();
+    this.editVehicleModal.show(model);
   }
 
   getAllVehicles() {
+    this.spinnerStatus = true;
     this.vehiclesService.getAllVehicles(this.vehiclesRequestModel).subscribe((data => {
       this.vehiclesModel = data.model;
+      this.spinnerStatus = false;
     }));
   }
 
