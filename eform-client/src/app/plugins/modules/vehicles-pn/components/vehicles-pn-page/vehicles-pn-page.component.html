@@ -1,154 +1,185 @@
-<header class="main-header main-header-title">
-  <div class="container-fluid">
-    <h1 class="page-title header-page-title">
-      <div class="container">
-        {{ 'Vehicles' | translate }}
-      </div>
-    </h1>
-    <div class="pull-right">
-      <button tooltip="{{ 'Create vehicle' | translate }}"
-              class="needs_tooltip btn btn-ar btn-success"
-              (click)="showCreateVehicleModal()"
-              type="button" id="newEFormBtn">{{ 'New vehicle' | translate }}
-      </button>
-    </div>
+<subheader-pn [title]="'Vehicles' | translate">
+  <div class="p-3">
+    <button
+      class="btn btn-success"
+      mdbTooltip="{{ 'Create vehicle' | translate }}"
+      (click)="showCreateVehicleModal()">{{ 'New vehicle' | translate }}
+    </button>
   </div>
-</header>
+</subheader-pn>
 
 <div class="container-fluid">
-  <vehicles-pn-pagination *ngIf="vehiclesModel.total > vehiclesRequestModel.pageSize"
-                       [limit]="vehiclesRequestModel.pageSize"
-                       [size]="vehiclesModel.total"
-                       [offset]="vehiclesRequestModel.offset"
-                       (onPageChanged)="changePage($event)"></vehicles-pn-pagination>
-  <table border="0" cellpadding="0" cellspacing="0"
-         class="table table-striped table-bordered table-condensed table-hover dataTable no-footer"
-         id="units" style="width: 100%;">
-    <thead>
-    <tr role="row">
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'Id' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'Id' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'Id'"
-          (click)="sortByColumn('Id', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        ID
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContactNumber' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContactNumber' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContactNumber'"
-          (click)="sortByColumn('ContactNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Contact number' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'CustomerName' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'CustomerName' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'CustomerName'"
-          (click)="sortByColumn('CustomerName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Customer name' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'Brand' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'Brand' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'Brand'"
-          (click)="sortByColumn('Brand', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Brand' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ModelName' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ModelName' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ModelName'"
-          (click)="sortByColumn('ModelName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Model' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'RegistrationDate'"
-          (click)="sortByColumn('RegistrationDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Registration date' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'VinNumber' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'VinNumber' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'VinNumber'"
-          (click)="sortByColumn('VinNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'VIN number' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContractStartDate'"
-          (click)="sortByColumn('ContractStartDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'Start of contract' | translate }}
-      </th>
-      <th class="text-center" rowspan="1" colspan="1"
-          [class.sorting_asc]="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && !vehiclesRequestModel.isSortDsc"
-          [class.sorting_desc]="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && vehiclesRequestModel.isSortDsc"
-          [class.sorting]="vehiclesRequestModel.sortColumnName != 'ContractEndDate'"
-          (click)="sortByColumn('ContractEndDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
-        {{ 'End of contract' | translate }}
-      </th>
-      <th class="col-md-1 text-center" rowspan="1" colspan="1">
-        {{ 'Actions' | translate }}
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let vehicle of vehiclesModel.vehicles">
-      <td class="text-center">
-        {{vehicle.id}}
-      </td>
-      <td class="text-center">
-        {{vehicle.contactNumber}}
-      </td>
-      <td class="text-center">
-        {{vehicle.customerName}}
-      </td>
-      <td class="text-center">
-        {{vehicle.brand}}
-      </td>
-      <td class="text-center">
-        {{vehicle.modelName}}
-      </td>
-      <td class="text-center">
-        {{vehicle.registrationDate | date:'dd.MM.y'}}
-      </td>
-      <td class="text-center">
-        {{vehicle.vinNumber}}
-      </td>
-      <td class="text-center">
-        {{vehicle.contractStartDate | date:'dd.MM.y'}}
-      </td>
-      <td class="text-center">
-        {{vehicle.contractEndDate | date:'dd.MM.y'}}
-      </td>
-      <td class="text-center">
-        <div class="row row-buttons-wrapper btn-group" role="group">
-          <a class="needs_tooltip btn btn-ar btn-sm btn-default mt-edit-check-list-button"
-             (click)="showEditVehicleModal(vehicle)"
-             type="button" tooltip="{{ 'Edit vehicle' | translate }}">
-            <span class="glyphicon glyphicon-list-alt"></span>
-          </a>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="row" *ngIf="false">
-    <div class="col-xs-6">
-      <div class="dataTables_info"*ngIf="vehiclesModel.total > 0">
-        {{ 'Showing to of records' |
-        translate:{currentPageAmount: (this.vehiclesRequestModel.offset + 1),
-        currentPage: getLastPageNumber(), total: vehiclesModel.total} }}
-      </div>
-    </div>
-    <div class="col-xs-6"></div>
+  <div class="row pt-3 table-responsive no-gutters">
+    <table class="table table-sm table-striped text-center">
+      <thead>
+      <tr>
+        <th scope="col" class="table-header-sortable" id="idSort"
+            (click)="sortByColumn('Id', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            ID
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'Id'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'Id' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'Id' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="contactNumberSort"
+            (click)="sortByColumn('ContactNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Contact number' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'ContactNumber'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContactNumber' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContactNumber' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="customerNameSort"
+            (click)="sortByColumn('CustomerName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Customer name' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'CustomerName'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'CustomerName' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'CustomerName' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="brandSort"
+            (click)="sortByColumn('Brand', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Brand' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'Brand'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'Brand' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'Brand' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="modelSort"
+            (click)="sortByColumn('ModelName', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Model' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'ModelName'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ModelName' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ModelName' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="registerDateSort"
+            (click)="sortByColumn('RegistrationDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Registration date' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'RegistrationDate'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'RegistrationDate' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="vinNumberSort"
+            (click)="sortByColumn('VinNumber', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'VIN number' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'VinNumber'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'VinNumber' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'VinNumber' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="contractStartDate"
+            (click)="sortByColumn('ContractStartDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'Start of contract' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'ContractStartDate'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContractStartDate' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="contractEndDate"
+            (click)="sortByColumn('ContractEndDate', vehiclesRequestModel.isSortDsc = !vehiclesRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{ 'End of contract' | translate }}
+            <i class="material-icons text-black-50" *ngIf="vehiclesRequestModel.sortColumnName != 'ContractEndDate'">unfold_more</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && !vehiclesRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="vehiclesRequestModel.sortColumnName == 'ContractEndDate' && vehiclesRequestModel.isSortDsc">expand_more</i>
+          </div>
+        </th>
+        <th scope="col">
+          {{ 'Actions' | translate }}
+        </th>
+      </tr>
+      </thead>
+      <tbody id="tableBody">
+      <tr *ngFor="let vehicle of vehiclesModel.vehicles">
+        <td>
+          {{vehicle.id}}
+        </td>
+        <td>
+          {{vehicle.contactNumber}}
+        </td>
+        <td>
+          {{vehicle.customerName}}
+        </td>
+        <td>
+          {{vehicle.brand}}
+        </td>
+        <td>
+          {{vehicle.modelName}}
+        </td>
+        <td>
+          {{vehicle.registrationDate | date:'dd.MM.y'}}
+        </td>
+        <td>
+          {{vehicle.vinNumber}}
+        </td>
+        <td>
+          {{vehicle.contractStartDate | date:'dd.MM.y'}}
+        </td>
+        <td>
+          {{vehicle.contractEndDate | date:'dd.MM.y'}}
+        </td>
+        <td>
+          <div class="d-flex flex-row justify-content-center">
+            <button class="btn btn-accent text-black-50 btn-icon mb-2"
+                    mdbTooltip="{{ 'Edit vehicle' | translate }}"
+                    (click)="showEditVehicleModal(vehicle)">
+              <i class="material-icons">
+                edit
+              </i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <vehicles-pn-spinner [middleActive]="spinnerStatus"></vehicles-pn-spinner>
+  <pagination-pn *ngIf="vehiclesModel.total > vehiclesRequestModel.pageSize"
+                 [limit]="vehiclesRequestModel.pageSize"
+                 [size]="vehiclesModel.total"
+                 [offset]="vehiclesRequestModel.offset"
+                 (onPageChanged)="changePage($event)"></pagination-pn>
 </div>
 
-<vehicles-pn-add-update-pn-page #vehiclePnAddUpdateComponent
-                                (onVehicleCreatedUpdated)="getAllVehicles()"
-                                [selectedVehicleModel]="selectedVehicleModel">
-</vehicles-pn-add-update-pn-page>
+<spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
+
+<app-vehicles-pn-add #createVehicleModal
+                     (onVehicleCreated)="getAllVehicles()">
+</app-vehicles-pn-add>
+<app-vehicles-pn-update #editVehicleModal (onVehicleUpdated)="getAllVehicles()"></app-vehicles-pn-update>
