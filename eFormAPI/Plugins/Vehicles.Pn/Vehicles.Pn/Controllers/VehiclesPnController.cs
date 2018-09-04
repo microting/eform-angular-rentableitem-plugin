@@ -128,7 +128,7 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(true, "ErrorWhileUpdatingVehicleInfo");
+                return new OperationDataResult<VehiclesPnModel>(true, VehiclePnLocaleHelper.GetString("ErrorWhileUpdatingVehicleInfo"));
             }
         }
     }
