@@ -4,10 +4,10 @@ using eFormApi.BasePn.Infrastructure.Data.Base;
 
 namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
-    public class VehiclePn : BaseEntity
+    public class Vehicle : BaseEntity
     {
         [StringLength(100)]
-        public string ContactNumber { get; set; }
+        public string ContractNumber { get; set; }
 
         [StringLength(250)]
         public string CustomerName { get; set; }

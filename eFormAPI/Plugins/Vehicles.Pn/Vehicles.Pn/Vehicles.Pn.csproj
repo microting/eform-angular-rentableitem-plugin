@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{771E5E7E-D42B-44F3-8328-13128C3EC10B}</ProjectGuid>
+    <ProjectGuid>{72D43378-C6FD-47F7-9EDC-E0505296976B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vehicles.Pn</RootNamespace>
     <AssemblyName>Vehicles.Pn</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Vehicles\</OutputPath>
+    <OutputPath>..\..\..\eFormApi\Plugins\Vehicles\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -77,11 +77,11 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Microting.eForm, Version=2.1.298.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microting.eForm.2.1.298\lib\net45\Microting.eForm.dll</HintPath>
+    <Reference Include="Microting.eForm, Version=3.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microting.eForm.3.0.20\lib\net45\Microting.eForm.dll</HintPath>
     </Reference>
-    <Reference Include="Microting.eFormApi.BasePn, Version=1.1.9.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Microting.eFormApi.BasePn.1.1.9\lib\net46\Microting.eFormApi.BasePn.dll</HintPath>
+    <Reference Include="Microting.eFormApi.BasePn, Version=1.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microting.eFormApi.BasePn.1.1.28\lib\net461\Microting.eFormApi.BasePn.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
@@ -161,7 +161,7 @@
     <Compile Include="Infrastructure\Models\VehiclePnModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclesPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclesPnRequestModel.cs" />
-    <Compile Include="Infrastructure\Data\Entities\VehiclePn.cs" />
+    <Compile Include="Infrastructure\Data\Entities\Vehicle.cs" />
     <Compile Include="Infrastructure\Data\VehiclesPnDbContext.cs" />
     <Compile Include="Migrations\PnMigrationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
