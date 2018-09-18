@@ -28,14 +28,14 @@ namespace Vehicles.Pn.Infrastructure.Data
             return new VehiclesPnDbContext();
         }
 
-        public DbSet<VehiclePn> Vehicles { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<VehiclePn>()
+            modelBuilder.Entity<Vehicle>()
                 .Property(e => e.VinNumber)
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,

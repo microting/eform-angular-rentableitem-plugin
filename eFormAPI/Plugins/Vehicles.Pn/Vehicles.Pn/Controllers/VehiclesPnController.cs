@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
-using EformBase.Pn.Infrastructure.Models.API;
+using eFormApi.BasePn.Infrastructure.Models.API;
 using NLog;
 using Vehicles.Pn.Helpers;
 using Vehicles.Pn.Infrastructure.Data;
@@ -55,7 +55,7 @@ namespace Vehicles.Pn.Controllers
                         CustomerName = vehicle.CustomerName,
                         RegistrationDate = vehicle.RegistrationDate,
                         Brand = vehicle.Brand,
-                        ContactNumber = vehicle.ContactNumber,
+                        ContactNumber = vehicle.ContractNumber,
                         ModelName = vehicle.ModelName,
                         Id = vehicle.Id,
                     });
@@ -77,11 +77,11 @@ namespace Vehicles.Pn.Controllers
         {
             try
             {
-                var vehiclePn = new VehiclePn
+                var vehiclePn = new Vehicle
                 {
                     VinNumber = vehiclePnCreateModel.VinNumber,
                     Brand = vehiclePnCreateModel.Brand,
-                    ContactNumber = vehiclePnCreateModel.ContactNumber,
+                    ContractNumber = vehiclePnCreateModel.ContactNumber,
                     ContractEndDate = vehiclePnCreateModel.ContractEndDate,
                     ContractStartDate = vehiclePnCreateModel.ContractStartDate,
                     CustomerName = vehiclePnCreateModel.CustomerName,
@@ -115,7 +115,7 @@ namespace Vehicles.Pn.Controllers
                 }
                 vehicle.VinNumber = vehiclePnUpdateModel.VinNumber;
                 vehicle.Brand = vehiclePnUpdateModel.Brand;
-                vehicle.ContactNumber = vehiclePnUpdateModel.ContactNumber;
+                vehicle.ContractNumber = vehiclePnUpdateModel.ContactNumber;
                 vehicle.ContractEndDate = vehiclePnUpdateModel.ContractEndDate;
                 vehicle.ContractStartDate = vehiclePnUpdateModel.ContractStartDate;
                 vehicle.CustomerName = vehiclePnUpdateModel.CustomerName;

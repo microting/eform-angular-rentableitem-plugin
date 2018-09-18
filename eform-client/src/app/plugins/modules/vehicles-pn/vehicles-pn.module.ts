@@ -2,38 +2,35 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
-import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
-import {TooltipModule} from 'ngx-bootstrap';
+import {MDBRootModule} from 'port/angular-bootstrap-md';
+import {NgDatepickerModule} from 'src/app/common/modules/eform-imported/ng-datepicker/module/ng-datepicker.module';
+import {SharedPnModule} from 'src/app/plugins/modules/shared/shared-pn.module.js';
 
 import {VehiclesPnService} from './services';
 import {
-  VehiclesPnPaginationComponent,
-  VehiclesPnAddUpdateComponent,
   VehiclesPnPageComponent,
-  VehiclesPnSpinnerComponent,
-  VehiclesPnDatepickerComponent
+  VehiclesPnAddComponent,
+  VehiclesPnUpdateComponent
 } from './components';
-import {VehiclesPnRoutingModule} from './vehicles-pn.routing.module';
-import { NotifyPnService } from '../shared/services/notify-pn.service';
+import {VehiclesPnRouting} from './vehicles-pn.routing';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    VehiclesPnRoutingModule,
-    TooltipModule,
+    VehiclesPnRouting,
+    MDBRootModule,
     FormsModule,
     TranslateModule,
-    Ng2Bs3ModalModule
+    NgDatepickerModule,
+    SharedPnModule
   ],
   declarations: [
     VehiclesPnPageComponent,
-    VehiclesPnAddUpdateComponent,
-    VehiclesPnPaginationComponent,
-    VehiclesPnSpinnerComponent,
-    VehiclesPnDatepickerComponent
+    VehiclesPnAddComponent,
+    VehiclesPnUpdateComponent
   ],
-  providers: [VehiclesPnService, NotifyPnService]
+  providers: [VehiclesPnService]
 })
 export class VehiclesPnModule {
 }
