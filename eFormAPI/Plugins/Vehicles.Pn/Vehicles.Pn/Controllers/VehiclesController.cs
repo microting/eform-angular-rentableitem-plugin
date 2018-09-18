@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Models;
 
 namespace Vehicles.Pn.Controllers
 {
+    [Authorize]
     public class VehiclesController : Controller
     {
         private readonly IVehiclesService _vehiclesService;
