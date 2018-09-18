@@ -1,45 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure.Annotations;
+﻿using Microsoft.EntityFrameworkCore;
 using Vehicles.Pn.Infrastructure.Data.Entities;
 
 namespace Vehicles.Pn.Infrastructure.Data
 {
     public class VehiclesPnDbContext : DbContext
     {
-        public VehiclesPnDbContext()
-            : base("eFormVehiclesPnConnection")
+        public VehiclesPnDbContext(DbContextOptions<VehiclesPnDbContext> options) : base(options)
         {
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
-            Database.SetInitializer<VehiclesPnDbContext>(null);
-        }
-
-        public VehiclesPnDbContext(string connectionString)
-            : base(connectionString)
-        {
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
-            Database.SetInitializer<VehiclesPnDbContext>(null);
-        }
-
-        public static VehiclesPnDbContext Create()
-        {
-            return new VehiclesPnDbContext();
         }
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Vehicle>()
-                .Property(e => e.VinNumber)
-                .HasColumnAnnotation(
-                    IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+                .HasIndex(x => x.VinNumber)
+                .IsUnique();
         }
     }
 }
