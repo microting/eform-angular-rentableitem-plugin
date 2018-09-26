@@ -23,7 +23,6 @@ namespace Vehicles.Pn
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IEformPlugin, EformBasePlugin>();
             services.AddScoped<IVehiclesService, VehiclesService>();
         }
 
@@ -38,6 +37,10 @@ namespace Vehicles.Pn
         }
 
         public void Configure(IApplicationBuilder appBuilder)
+        {
+        }
+        
+        public void SeedDatabase(string connectionString)
         {
         }
     }

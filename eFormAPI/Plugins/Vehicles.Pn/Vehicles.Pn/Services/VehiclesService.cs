@@ -2,12 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Vehicles.Pn.Abstractions;
-using Vehicles.Pn.Controllers;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Entities;
-using Vehicles.Pn.Infrastructure.Extensions;
 using Vehicles.Pn.Infrastructure.Helpers;
 using Vehicles.Pn.Infrastructure.Models;
 
@@ -15,11 +14,11 @@ namespace Vehicles.Pn.Services
 {
     public class VehiclesService : IVehiclesService
     {
-        private readonly ILogger<VehiclesController> _logger;
+        private readonly ILogger<VehiclesService> _logger;
         private readonly VehiclesPnDbContext _dbContext;
 
         public VehiclesService(VehiclesPnDbContext dbContext,
-            ILogger<VehiclesController> logger)
+            ILogger<VehiclesService> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -35,11 +34,11 @@ namespace Vehicles.Pn.Services
                 {
                     if (pnRequestModel.IsSortDsc)
                     {
-                        vehiclesQuery = vehiclesQuery.OrderByDescending(pnRequestModel.SortColumnName);
+                        vehiclesQuery = vehiclesQuery.CustomOrderByDescending(pnRequestModel.SortColumnName);
                     }
                     else
                     {
-                        vehiclesQuery = vehiclesQuery.OrderBy(pnRequestModel.SortColumnName);
+                        vehiclesQuery = vehiclesQuery.CustomOrderBy(pnRequestModel.SortColumnName);
                     }
                 }
 

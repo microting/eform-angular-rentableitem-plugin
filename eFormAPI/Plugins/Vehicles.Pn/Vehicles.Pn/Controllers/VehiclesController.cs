@@ -18,21 +18,21 @@ namespace Vehicles.Pn.Controllers
 
         [HttpPost]
         [Route("api/vehicles-pn")]
-        public OperationDataResult<VehiclesModel> GetAllVehicles(VehiclesRequestModel requestModel)
+        public OperationDataResult<VehiclesModel> GetAllVehicles([FromBody] VehiclesRequestModel requestModel)
         {
             return _vehiclesService.GetAllVehicles(requestModel);
         }
 
         [HttpPost]
         [Route("api/vehicles-pn/create-vehicle")]
-        public OperationResult CreateVehicle(VehicleModel vehicleCreateModel)
-        { 
+        public OperationResult CreateVehicle([FromBody] VehicleModel vehicleCreateModel)
+        {
             return _vehiclesService.CreateVehicle(vehicleCreateModel);
         }
 
         [HttpPost]
         [Route("api/vehicles-pn/update-vehicle")]
-        public OperationResult UpdateVehicle(VehicleModel vehicleUpdateModel)
+        public OperationResult UpdateVehicle([FromBody] VehicleModel vehicleUpdateModel)
         {
             return _vehiclesService.UpdateVehicle(vehicleUpdateModel);
         }
