@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
-import {NgDatepickerModule} from 'src/app/common/modules/eform-imported/ng-datepicker/module/ng-datepicker.module';
 import {SharedPnModule} from 'src/app/plugins/modules/shared/shared-pn.module.js';
 
 import {VehiclesPnService} from './services';
@@ -13,16 +12,18 @@ import {
   VehiclesPnUpdateComponent
 } from './components';
 import {VehiclesPnRouting} from './vehicles-pn.routing';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     VehiclesPnRouting,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MDBRootModule,
     FormsModule,
     TranslateModule,
-    NgDatepickerModule,
     SharedPnModule
   ],
   declarations: [

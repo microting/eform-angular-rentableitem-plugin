@@ -53,13 +53,21 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <ng-datepicker [(ngModel)]="selectedVehicleModel.registrationDate"
-                               #editRegistrationDate="ngModel"
-                               name="editRegistrationDate"
-                               required
-                               [options]="{placeholder: 'Registration date*' | translate }">
-
-                </ng-datepicker>
+                <div class="md-form" [owlDateTimeTrigger]="dt1">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt1"
+                         [mdbValidate]="false"
+                         [ngModel]="selectedVehicleModel.registrationDate"
+                         (dateTimeChange)="onRegistrationDateSelected($event)"
+                         type="text"
+                         id="registrationDate"
+                         name="registrationDate"
+                         class="form-control">
+                  <label for="registrationDate">{{'Registration date*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt1></owl-date-time>
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="md-form">
@@ -74,16 +82,38 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <ng-datepicker [(ngModel)]="selectedVehicleModel.contractStartDate"
-                               name="editStartOfContract"
-                               #editContractStartDate="ngModel"
-                               [options]="{placeholder: 'Start of contract' | translate }"></ng-datepicker>
+                <div class="md-form" [owlDateTimeTrigger]="dt2">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt2"
+                         [mdbValidate]="false"
+                         [ngModel]="selectedVehicleModel.contractStartDate"
+                         (dateTimeChange)="onContractStartDateSelected($event)"
+                         type="text"
+                         id="contractStartDate"
+                         name="contractStartDate"
+                         class="form-control">
+                  <label for="contractStartDate">{{'Start of contract*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt2></owl-date-time>
+                </div>
               </div>
               <div class="col-md-6">
-                <ng-datepicker [(ngModel)]="selectedVehicleModel.contractEndDate"
-                               #editContractEndDate="ngModel"
-                               name="editEndOfContract"
-                               [options]="{placeholder: 'End of contract' | translate }"></ng-datepicker>
+                <div class="md-form" [owlDateTimeTrigger]="dt3">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt3"
+                         [mdbValidate]="false"
+                         [ngModel]="selectedVehicleModel.contractEndDate"
+                         (dateTimeChange)="onContractEndDateSelected($event)"
+                         type="text"
+                         id="createEndOfContract"
+                         name="createEndOfContract"
+                         class="form-control">
+                  <label for="createEndOfContract">{{'End of contract*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt3></owl-date-time>
+                </div>
               </div>
             </div>
           </form>
