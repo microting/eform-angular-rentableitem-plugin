@@ -21,7 +21,7 @@ After that add link to the menu. Go to `eform-client/src/app/components/navigati
     ...
 },
 {
-     name: 'Vehicles Pn',  // here goes plugin name
+     name: this.translateService.instant('Vehicles'),  // here goes plugin name
      link: '/plugins/vehicles-pn', 	// here goes plugin link
      e2eId: '', // here goes e2eid for testing
      submenus: []
