@@ -29,6 +29,7 @@ namespace Vehicles.Pn.Infrastructure.Data
         }
 
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleInspection> VehicleInspections { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
