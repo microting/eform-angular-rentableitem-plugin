@@ -66,7 +66,7 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(true,
+                return new OperationDataResult<VehiclesPnModel>(false,
                     VehiclePnLocaleHelper.GetString("ErrorObtainingVehiclesInfo"));
             }
         }
@@ -98,7 +98,7 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationResult(true, VehiclePnLocaleHelper.GetString("ErrorWhileCreatingVehicle"));
+                return new OperationResult(false, VehiclePnLocaleHelper.GetString("ErrorWhileCreatingVehicle"));
             }
         }
 
@@ -111,7 +111,7 @@ namespace Vehicles.Pn.Controllers
                 var vehicle = _dbContext.Vehicles.FirstOrDefault(x => x.Id == vehiclePnUpdateModel.Id);
                 if (vehicle == null)
                 {
-                    return new OperationResult(true, "Vehicle not found");
+                    return new OperationResult(false, "Vehicle not found");
                 }
                 vehicle.VinNumber = vehiclePnUpdateModel.VinNumber;
                 vehicle.Brand = vehiclePnUpdateModel.Brand;
@@ -128,7 +128,7 @@ namespace Vehicles.Pn.Controllers
             {
                 Trace.TraceError(e.Message);
                 _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(true, "ErrorWhileUpdatingVehicleInfo");
+                return new OperationDataResult<VehiclesPnModel>(false, VehiclePnLocaleHelper.GetString("ErrorWhileUpdatingVehicleInfo"));
             }
         }
     }

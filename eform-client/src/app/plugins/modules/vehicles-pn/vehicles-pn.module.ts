@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
-import {NgDatepickerModule} from 'src/app/common/modules/eform-imported/ng-datepicker/module/ng-datepicker.module';
-import {SharedPnModule} from 'src/app/plugins/modules/shared/shared-pn.module.js';
+import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
+import {SharedPnModule} from '../shared/shared-pn.module';
 
 import {VehiclesPnService} from './services';
 import {
@@ -13,16 +13,18 @@ import {
   VehiclesPnUpdateComponent
 } from './components';
 import {VehiclesPnRouting} from './vehicles-pn.routing';
+import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     VehiclesPnRouting,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MDBRootModule,
     FormsModule,
     TranslateModule,
-    NgDatepickerModule,
     SharedPnModule
   ],
   declarations: [
@@ -30,7 +32,10 @@ import {VehiclesPnRouting} from './vehicles-pn.routing';
     VehiclesPnAddComponent,
     VehiclesPnUpdateComponent
   ],
-  providers: [VehiclesPnService]
+  providers: [
+    VehiclesPnService,
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
+  ]
 })
 export class VehiclesPnModule {
 }

@@ -369,3 +369,7 @@ eFormAPI/Plugins/Vehicles.Pn/Vehicles.Pn/Areas/HelpPage/HelpPage.css
 eFormAPI/Plugins/Vehicles.Pn/Vehicles.Pn/Areas/HelpPage/Controllers/HelpController.cs
 eFormAPI/Plugins/Vehicles.Pn/Vehicles.Pn/Areas/HelpPage/App_Start/HelpPageConfig.cs
 eFormAPI/Plugins/Vehicles.Pn/Vehicles.Pn/Areas/HelpPage/ApiDescriptionExtensions.cs
+
+eFormAPI/Plugins/Vehicles\.Pn/Vehicles/
+
+eFormAPI/eFormAPI/Plugins/Vehicles/
