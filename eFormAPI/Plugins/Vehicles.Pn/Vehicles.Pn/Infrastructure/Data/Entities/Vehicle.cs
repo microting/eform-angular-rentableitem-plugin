@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Microting.eFormApi.BasePn.Database.Base;
+using Microting.eFormApi.BasePn.Infrastructure.Database.Base;
 
 namespace Vehicles.Pn.Infrastructure.Data.Entities
 {

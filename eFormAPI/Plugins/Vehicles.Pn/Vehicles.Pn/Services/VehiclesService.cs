@@ -7,21 +7,24 @@ using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Entities;
-using Vehicles.Pn.Infrastructure.Helpers;
 using Vehicles.Pn.Infrastructure.Models;
+using Vehicles.Pn.Resources;
 
 namespace Vehicles.Pn.Services
 {
     public class VehiclesService : IVehiclesService
     {
         private readonly ILogger<VehiclesService> _logger;
+        private readonly IVehicleLocalizationService _vehicleLocalizationService;
         private readonly VehiclesPnDbContext _dbContext;
 
         public VehiclesService(VehiclesPnDbContext dbContext,
-            ILogger<VehiclesService> logger)
+            ILogger<VehiclesService> logger, 
+            IVehicleLocalizationService vehicleLocalizationService)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _vehicleLocalizationService = vehicleLocalizationService;
         }
 
         public OperationDataResult<VehiclesModel> GetAllVehicles(VehiclesRequestModel pnRequestModel)
@@ -67,7 +70,7 @@ namespace Vehicles.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<VehiclesModel>(true,
-                    VehiclePnLocaleHelper.GetString("ErrorObtainingVehiclesInfo"));
+                    _vehicleLocalizationService.GetString("ErrorObtainingVehiclesInfo"));
             }
         }
 
@@ -89,14 +92,14 @@ namespace Vehicles.Pn.Services
                 _dbContext.Vehicles.Add(vehiclePn);
                 _dbContext.SaveChanges();
                 return new OperationResult(true,
-                    VehiclePnLocaleHelper.GetString("VehicleCreated", vehiclePnCreateModel.Brand,
+                    _vehicleLocalizationService.GetString("VehicleCreated", vehiclePnCreateModel.Brand,
                         vehiclePnCreateModel.ModelName));
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationResult(true, VehiclePnLocaleHelper.GetString("ErrorWhileCreatingVehicle"));
+                return new OperationResult(true, _vehicleLocalizationService.GetString("ErrorWhileCreatingVehicle"));
             }
         }
 
@@ -126,7 +129,7 @@ namespace Vehicles.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<VehiclesModel>(true,
-                    VehiclePnLocaleHelper.GetString("ErrorWhileUpdatingVehicleInfo"));
+                    _vehicleLocalizationService.GetString("ErrorWhileUpdatingVehicleInfo"));
             }
         }
     }

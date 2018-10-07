@@ -6,6 +6,7 @@ using Microting.eFormApi.BasePn;
 using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Factories;
+using Vehicles.Pn.Resources;
 using Vehicles.Pn.Services;
 
 namespace Vehicles.Pn
@@ -24,6 +25,7 @@ namespace Vehicles.Pn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IVehiclesService, VehiclesService>();
+            services.AddSingleton<IVehicleLocalizationService, VehicleLocalizationService>();
         }
 
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
