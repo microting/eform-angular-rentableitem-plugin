@@ -6,7 +6,6 @@ using Microting.eFormApi.BasePn;
 using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Factories;
-using Vehicles.Pn.Resources;
 using Vehicles.Pn.Services;
 
 namespace Vehicles.Pn

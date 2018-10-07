@@ -1,4 +1,4 @@
-﻿namespace Vehicles.Pn.Resources
+﻿namespace Vehicles.Pn.Abstractions
 {
     public interface IVehicleLocalizationService
     {

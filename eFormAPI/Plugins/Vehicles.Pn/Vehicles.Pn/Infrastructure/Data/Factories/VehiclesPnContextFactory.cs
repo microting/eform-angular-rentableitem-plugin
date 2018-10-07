@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Vehicles.Pn.Infrastructure.Data.Factories
 {

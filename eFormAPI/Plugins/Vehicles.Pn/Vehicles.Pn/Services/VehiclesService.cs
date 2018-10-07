@@ -8,7 +8,6 @@ using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Entities;
 using Vehicles.Pn.Infrastructure.Models;
-using Vehicles.Pn.Resources;
 
 namespace Vehicles.Pn.Services
 {

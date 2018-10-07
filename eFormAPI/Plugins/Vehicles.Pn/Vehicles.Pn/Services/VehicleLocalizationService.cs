@@ -1,9 +1,8 @@
-﻿using System.Globalization;
-using System.Reflection;
-using System.Threading;
+﻿using System.Reflection;
 using Microsoft.Extensions.Localization;
+using Vehicles.Pn.Abstractions;
 
-namespace Vehicles.Pn.Resources
+namespace Vehicles.Pn.Services
 {
     public class VehicleLocalizationService : IVehicleLocalizationService
     {
@@ -17,11 +16,6 @@ namespace Vehicles.Pn.Resources
  
         public string GetString(string key)
         {
-            var cultureInfo = new CultureInfo("da");
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             var str = _localizer[key];
             return str.Value;
         }
