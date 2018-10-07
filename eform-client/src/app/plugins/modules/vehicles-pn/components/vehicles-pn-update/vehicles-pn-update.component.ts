@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {VehiclePnModel} from 'src/app/plugins/modules/vehicles-pn/models';
 import {VehiclesPnService} from 'src/app/plugins/modules/vehicles-pn/services';
+import {formatTimezone} from 'src/app/common/helpers';
 
 @Component({
   selector: 'app-vehicles-pn-update',
@@ -33,4 +34,13 @@ export class VehiclesPnUpdateComponent implements OnInit {
     }));
   }
 
+  onRegistrationDateSelected(e: any) {
+    this.selectedVehicleModel.registrationDate = formatTimezone(e.value);
+  }
+  onContractStartDateSelected(e: any) {
+    this.selectedVehicleModel.contractStartDate = formatTimezone(e.value);
+  }
+  onContractEndDateSelected(e: any) {
+    this.selectedVehicleModel.contractEndDate = formatTimezone(e.value);
+  }
 }
