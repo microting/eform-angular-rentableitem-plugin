@@ -2,8 +2,10 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
+import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
+import {VehiclesPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
 
 import {VehiclesPnService} from './services';
@@ -22,6 +24,7 @@ import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 
     VehiclesPnRouting,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    OwlMomentDateTimeModule,
     MDBRootModule,
     FormsModule,
     TranslateModule,
@@ -30,7 +33,8 @@ import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 
   declarations: [
     VehiclesPnPageComponent,
     VehiclesPnAddComponent,
-    VehiclesPnUpdateComponent
+    VehiclesPnUpdateComponent,
+    VehiclesPnLayoutComponent
   ],
   providers: [
     VehiclesPnService,
