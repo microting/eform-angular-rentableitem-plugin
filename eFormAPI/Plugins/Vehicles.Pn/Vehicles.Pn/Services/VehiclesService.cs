@@ -1,53 +1,55 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Web.Http;
-using eFormApi.BasePn.Infrastructure.Models.API;
-using NLog;
-using Vehicles.Pn.Helpers;
+using Microsoft.Extensions.Logging;
+using Microting.eFormApi.BasePn.Infrastructure.Extensions;
+using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Entities;
-using Vehicles.Pn.Infrastructure.Extensions;
 using Vehicles.Pn.Infrastructure.Models;
 
-namespace Vehicles.Pn.Controllers
+namespace Vehicles.Pn.Services
 {
-    public class VehiclesPnController : ApiController
+    public class VehiclesService : IVehiclesService
     {
-        private readonly Logger _logger;
+        private readonly ILogger<VehiclesService> _logger;
+        private readonly IVehicleLocalizationService _vehicleLocalizationService;
         private readonly VehiclesPnDbContext _dbContext;
 
-        public VehiclesPnController()
+        public VehiclesService(VehiclesPnDbContext dbContext,
+            ILogger<VehiclesService> logger, 
+            IVehicleLocalizationService vehicleLocalizationService)
         {
-            _dbContext = VehiclesPnDbContext.Create();
-            _logger = LogManager.GetCurrentClassLogger();
+            _dbContext = dbContext;
+            _logger = logger;
+            _vehicleLocalizationService = vehicleLocalizationService;
         }
 
-        [HttpPost]
-        [Route("api/vehicles-pn")]
-        public OperationDataResult<VehiclesPnModel> GetAllVehicles(VehiclesPnRequestModel pnRequestModel)
+        public OperationDataResult<VehiclesModel> GetAllVehicles(VehiclesRequestModel pnRequestModel)
         {
             try
             {
-                var vehiclesPnModel = new VehiclesPnModel();
+                var vehiclesPnModel = new VehiclesModel();
                 var vehiclesQuery = _dbContext.Vehicles.AsQueryable();
                 if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
                 {
                     if (pnRequestModel.IsSortDsc)
                     {
-                        vehiclesQuery = vehiclesQuery.OrderByDescending(pnRequestModel.SortColumnName);
+                        vehiclesQuery = vehiclesQuery.CustomOrderByDescending(pnRequestModel.SortColumnName);
                     }
                     else
                     {
-                        vehiclesQuery = vehiclesQuery.OrderBy(pnRequestModel.SortColumnName);
+                        vehiclesQuery = vehiclesQuery.CustomOrderBy(pnRequestModel.SortColumnName);
                     }
                 }
+
                 vehiclesPnModel.Total = vehiclesQuery.Count();
                 vehiclesQuery = vehiclesQuery.Skip(pnRequestModel.Offset).Take(pnRequestModel.PageSize);
                 var vehicles = vehiclesQuery.ToList();
                 vehicles.ForEach(vehicle =>
                 {
-                    vehiclesPnModel.Vehicles.Add(new VehiclePnModel()
+                    vehiclesPnModel.Vehicles.Add(new VehicleModel()
                     {
                         VinNumber = vehicle.VinNumber,
                         ContractEndDate = vehicle.ContractEndDate,
@@ -60,20 +62,18 @@ namespace Vehicles.Pn.Controllers
                         Id = vehicle.Id,
                     });
                 });
-                return new OperationDataResult<VehiclesPnModel>(true, vehiclesPnModel);
+                return new OperationDataResult<VehiclesModel>(true, vehiclesPnModel);
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
-                _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(false,
-                    VehiclePnLocaleHelper.GetString("ErrorObtainingVehiclesInfo"));
+                _logger.LogError(e.Message);
+                return new OperationDataResult<VehiclesModel>(true,
+                    _vehicleLocalizationService.GetString("ErrorObtainingVehiclesInfo"));
             }
         }
 
-        [HttpPost]
-        [Route("api/vehicles-pn/create-vehicle")]
-        public OperationResult CreateVehicle(VehiclePnModel vehiclePnCreateModel)
+        public OperationResult CreateVehicle(VehicleModel vehiclePnCreateModel)
         {
             try
             {
@@ -91,28 +91,27 @@ namespace Vehicles.Pn.Controllers
                 _dbContext.Vehicles.Add(vehiclePn);
                 _dbContext.SaveChanges();
                 return new OperationResult(true,
-                    VehiclePnLocaleHelper.GetString("VehicleCreated", vehiclePnCreateModel.Brand,
+                    _vehicleLocalizationService.GetString("VehicleCreated", vehiclePnCreateModel.Brand,
                         vehiclePnCreateModel.ModelName));
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
-                _logger.Error(e);
-                return new OperationResult(false, VehiclePnLocaleHelper.GetString("ErrorWhileCreatingVehicle"));
+                _logger.LogError(e.Message);
+                return new OperationResult(true, _vehicleLocalizationService.GetString("ErrorWhileCreatingVehicle"));
             }
         }
 
-        [HttpPost]
-        [Route("api/vehicles-pn/update-vehicle")]
-        public OperationResult UpdateVehicle(VehiclePnModel vehiclePnUpdateModel)
+        public OperationResult UpdateVehicle(VehicleModel vehiclePnUpdateModel)
         {
             try
             {
                 var vehicle = _dbContext.Vehicles.FirstOrDefault(x => x.Id == vehiclePnUpdateModel.Id);
                 if (vehicle == null)
                 {
-                    return new OperationResult(false, "Vehicle not found");
+                    return new OperationResult(true, "Vehicle not found");
                 }
+
                 vehicle.VinNumber = vehiclePnUpdateModel.VinNumber;
                 vehicle.Brand = vehiclePnUpdateModel.Brand;
                 vehicle.ContractNumber = vehiclePnUpdateModel.ContactNumber;
@@ -122,13 +121,14 @@ namespace Vehicles.Pn.Controllers
                 vehicle.ModelName = vehiclePnUpdateModel.ModelName;
                 vehicle.RegistrationDate = vehiclePnUpdateModel.RegistrationDate;
                 _dbContext.SaveChanges();
-                return new OperationDataResult<VehiclesPnModel>(true);
+                return new OperationDataResult<VehiclesModel>(true);
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
-                _logger.Error(e);
-                return new OperationDataResult<VehiclesPnModel>(false, VehiclePnLocaleHelper.GetString("ErrorWhileUpdatingVehicleInfo"));
+                _logger.LogError(e.Message);
+                return new OperationDataResult<VehiclesModel>(true,
+                    _vehicleLocalizationService.GetString("ErrorWhileUpdatingVehicleInfo"));
             }
         }
     }
