@@ -36,12 +36,13 @@ export class VehiclesPnAddComponent implements OnInit {
   }
 
   onRegistrationDateSelected(e: any) {
-    this.newVehicleModel.registrationDate = formatTimezone(e.value);
+    debugger;
+    this.newVehicleModel.registrationDate = formatTimezone(e.value._d);
   }
   onContractStartDateSelected(e: any) {
-    this.newVehicleModel.contractStartDate = formatTimezone(e.value);
+    this.newVehicleModel.contractStartDate = formatTimezone(e.value._d);
   }
   onContractEndDateSelected(e: any) {
-    this.newVehicleModel.contractEndDate = formatTimezone(e.value);
+    this.newVehicleModel.contractEndDate = formatTimezone(e.value._d);
   }
 }

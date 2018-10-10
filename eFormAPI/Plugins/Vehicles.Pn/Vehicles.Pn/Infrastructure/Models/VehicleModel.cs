@@ -2,7 +2,7 @@
 
 namespace Vehicles.Pn.Infrastructure.Models
 {
-    public class VehiclePnModel
+    public class VehicleModel
     {
         public int Id { get; set; }
         public string ContactNumber { get; set; }

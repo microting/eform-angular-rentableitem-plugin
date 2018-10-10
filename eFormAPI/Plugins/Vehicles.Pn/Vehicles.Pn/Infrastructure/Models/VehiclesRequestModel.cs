@@ -1,6 +1,6 @@
 ﻿namespace Vehicles.Pn.Infrastructure.Models
 {
-    public class VehiclesPnRequestModel
+    public class VehiclesRequestModel
     {
         public string SortColumnName { get; set; }
         public int Offset { get; set; }
