@@ -14,6 +14,9 @@ import {
 } from './components';
 import {VehiclesPnRouting} from './vehicles-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {VehicleInspectionsPnPageComponent} from './components/vehicle-inspections-pn-page/vehicle-inspections-pn-page.component';
+import { VehicleInspectionPnAddComponent } from './components/vehicle-inspection-pn-add/vehicle-inspection-pn-add.component';
+
 
 @NgModule({
   imports: [
@@ -30,7 +33,9 @@ import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 
   declarations: [
     VehiclesPnPageComponent,
     VehiclesPnAddComponent,
-    VehiclesPnUpdateComponent
+    VehiclesPnUpdateComponent,
+    VehicleInspectionsPnPageComponent,
+    VehicleInspectionPnAddComponent
   ],
   providers: [
     VehiclesPnService,
