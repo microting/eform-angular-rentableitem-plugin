@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
+import {NgSelectModule} from '@ng-select/ng-select';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
 import {SharedPnModule} from '../shared/shared-pn.module';
@@ -16,6 +17,7 @@ import {VehiclesPnRouting} from './vehicles-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {VehicleInspectionsPnPageComponent} from './components/vehicle-inspections-pn-page/vehicle-inspections-pn-page.component';
 import { VehicleInspectionPnAddComponent } from './components/vehicle-inspection-pn-add/vehicle-inspection-pn-add.component';
+import { VehiclesPnImportComponent } from './components/vehicles-pn-import/vehicles-pn-import.component';
 
 
 @NgModule({
@@ -28,14 +30,16 @@ import { VehicleInspectionPnAddComponent } from './components/vehicle-inspection
     MDBRootModule,
     FormsModule,
     TranslateModule,
-    SharedPnModule
+    SharedPnModule,
+    NgSelectModule
   ],
   declarations: [
     VehiclesPnPageComponent,
     VehiclesPnAddComponent,
     VehiclesPnUpdateComponent,
     VehicleInspectionsPnPageComponent,
-    VehicleInspectionPnAddComponent
+    VehicleInspectionPnAddComponent,
+    VehiclesPnImportComponent
   ],
   providers: [
     VehiclesPnService,

@@ -184,3 +184,8 @@
 <spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
 
 
+<app-vehicle-inspection-pn-add
+  #createVehicleInspectionModal
+  (onInspectionCreated)="getAllVehicleInspections()">
+</app-vehicle-inspection-pn-add>
+

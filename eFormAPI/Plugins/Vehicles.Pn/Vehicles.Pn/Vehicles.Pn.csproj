@@ -160,6 +160,7 @@
     <Compile Include="Helpers\VehiclePnLocaleHelper.cs" />
     <Compile Include="Infrastructure\Data\Entities\VehicleInspection.cs" />
     <Compile Include="Infrastructure\Extensions\OrderedQueryableExtensions.cs" />
+    <Compile Include="Infrastructure\Models\VehicleImportModel.cs" />
     <Compile Include="Infrastructure\Models\VehicleInspectionPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehicleInspectionsPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclePnModel.cs" />

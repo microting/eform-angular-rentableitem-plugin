@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
 using eFormApi.BasePn.Infrastructure.Models.API;
+using Newtonsoft.Json.Linq;
 using NLog;
 using Vehicles.Pn.Helpers;
 using Vehicles.Pn.Infrastructure.Data;
@@ -132,7 +133,47 @@ namespace Vehicles.Pn.Controllers
             }
         }
 
-       
+        [HttpPost]
+        [Route("api/vehicles-pn/import-vehicles")]
+        public OperationResult ImportVehicles(VehicleImportModel vehiclesAsJson)
+        {
+            {
+                JToken rawJson = JRaw.Parse(vehiclesAsJson.ImportList);
+                JToken rawHeadersJson = JRaw.Parse(vehiclesAsJson.Headers);
+
+                var headers = rawHeadersJson;
+                var vehicleObjects = rawJson.Skip(1);
+
+                foreach (var vehicleObj in vehicleObjects)
+                {
+                    string vinNumber = vehicleObj[int.Parse(headers[5]["headerValue"].ToString())].ToString();
+                    Vehicle existingVehicle = _dbContext.Vehicles.SingleOrDefault(x => x.VinNumber == vinNumber);
+                    if (existingVehicle == null)
+                    {
+                        Vehicle vehicle = new Vehicle();
+
+                        vehicle.ContractNumber = vehicleObj[int.Parse(headers[0]["headerValue"].ToString())].ToString(); // contractNumber
+                        vehicle.CustomerName = vehicleObj[int.Parse(headers[1]["headerValue"].ToString())].ToString(); // CustomerNumber
+                        vehicle.Brand = vehicleObj[int.Parse(headers[2]["headerValue"].ToString())].ToString(); // Brand
+                        vehicle.ModelName = vehicleObj[int.Parse(headers[3]["headerValue"].ToString())].ToString(); // ModelName
+                        vehicle.RegistrationDate = DateTime.UtcNow;// RegistrationDate
+                        vehicle.VinNumber = vehicleObj[int.Parse(headers[5]["headerValue"].ToString())].ToString(); // VinNumber
+                        vehicle.ContractStartDate = DateTime.UtcNow; // ContractStartDate
+                        vehicle.ContractEndDate = DateTime.UtcNow; // ContractEndDate
+
+                        _dbContext.Vehicles.Add(vehicle);
+                        _dbContext.SaveChanges();
+                    }
+
+                }
+                return new OperationResult(true,
+                    VehiclePnLocaleHelper.GetString("VehicleCreated"));
+
+                //return new OperationResult(false,
+                //                    CustomersPnLocaleHelper.GetString("ErrorWhileCreatingCustomer"));
+                /*            throw new NotImplementedException()*/
+            }
+        }
 
     }
 }
