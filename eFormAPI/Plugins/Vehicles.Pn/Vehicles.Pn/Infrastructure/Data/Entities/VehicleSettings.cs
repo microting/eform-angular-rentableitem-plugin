@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using eFormApi.BasePn.Infrastructure.Data.Base;
 
 namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
-    public class VehicleInspection : BaseEntity
+    public class VehicleSettings : BaseEntity
     {
         [Key]
         public int id { get; set; }
@@ -23,13 +27,7 @@ namespace Vehicles.Pn.Infrastructure.Data.Entities
 
         public int Updated_By_User_Id { get; set; }
 
-        public DateTime? DoneAt { get; set; }
+        public int Eform_Id { get; set; }
 
-        public int SDK_Case_Id { get; set; }
-
-        [ForeignKey("VehicleContract")]
-        public int VehicleContractId { get; set; }
-
-        public int? Status { get; set; }
-}
+    }
 }

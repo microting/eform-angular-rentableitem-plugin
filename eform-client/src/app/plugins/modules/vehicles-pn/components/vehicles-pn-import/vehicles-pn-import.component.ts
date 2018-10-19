@@ -22,7 +22,7 @@ export class VehiclesPnImportComponent implements OnInit {
     {value: 2, label: 'Brand'},
     {value: 3, label: 'Model'},
     {value: 4, label: 'RegistrationDate'},
-    {value: 5, label: 'Win Number'},
+    {value: 5, label: 'Vin Number'},
     {value: 6, label: 'ContractStartDate'},
     {value: 7, label: 'ContractEndDate'}
   ];

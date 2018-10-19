@@ -6,11 +6,21 @@ namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
     public class Vehicle : BaseEntity
     {
-        [StringLength(100)]
-        public string ContractNumber { get; set; }
+        [Key]
+        public int id { get; set; }
 
-        [StringLength(250)]
-        public string CustomerName { get; set; }
+        public DateTime? created_at { get; set; }
+
+        public DateTime? updated_at { get; set; }
+
+        [StringLength(255)]
+        public string workflow_state { get; set; }
+
+        public int version { get; set; }
+
+        public int Created_By_User_Id { get; set; }
+
+        public int Updated_By_User_Id { get; set; }
 
         [StringLength(100)]
         public string Brand { get; set; }
@@ -21,7 +31,8 @@ namespace Vehicles.Pn.Infrastructure.Data.Entities
 
         [StringLength(17)]
         public string VinNumber { get; set; }
-        public DateTime ContractStartDate { get; set; }
-        public DateTime ContractEndDate { get; set; }
+
+        public string PlateNumber { get; set; }
+
     }
 }

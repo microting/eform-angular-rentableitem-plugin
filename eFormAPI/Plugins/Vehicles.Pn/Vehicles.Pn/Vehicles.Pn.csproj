@@ -157,13 +157,22 @@
   <ItemGroup>
     <Compile Include="Controllers\VehicleInspectionsPnController.cs" />
     <Compile Include="Controllers\VehiclesPnController.cs" />
+    <Compile Include="Helpers\VehiclePnDbHelper.cs" />
     <Compile Include="Helpers\VehiclePnLocaleHelper.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleContract.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleContractVersions.cs" />
     <Compile Include="Infrastructure\Data\Entities\VehicleInspection.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleInspectionVersions.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleSettings.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleSettingsVersions.cs" />
+    <Compile Include="Infrastructure\Data\Entities\VehicleVersions.cs" />
     <Compile Include="Infrastructure\Extensions\OrderedQueryableExtensions.cs" />
+    <Compile Include="Infrastructure\Models\VehicleContractModel.cs" />
     <Compile Include="Infrastructure\Models\VehicleImportModel.cs" />
     <Compile Include="Infrastructure\Models\VehicleInspectionPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehicleInspectionsPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclePnModel.cs" />
+    <Compile Include="Infrastructure\Models\VehicleSettingsModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclesPnModel.cs" />
     <Compile Include="Infrastructure\Models\VehiclesPnRequestModel.cs" />
     <Compile Include="Infrastructure\Data\Entities\Vehicle.cs" />
@@ -212,6 +221,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="JasperExporter.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Customers.Pn\Customers.Pn\Customers.Pn.csproj">
+      <Project>{771e5e7e-d42b-44f3-8328-13128c3ec10b}</Project>
+      <Name>Customers.Pn</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

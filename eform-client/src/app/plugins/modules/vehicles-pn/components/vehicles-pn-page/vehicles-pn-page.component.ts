@@ -71,4 +71,7 @@ export class VehiclesPnPageComponent implements OnInit {
     this.getAllVehicles();
   }
 
+  importVehicle() {
+    return true;
+  }
 }

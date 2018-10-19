@@ -51,14 +51,13 @@ namespace Vehicles.Pn.Controllers
                     vehicleInspectionsPnModel.Inspections.Add(new VehicleInspectionPnModel()
                     {
                         Id = inspection.Id,
-                        WorkflowState = inspection.WorkflowState,
-                        Version = inspection.Version,
+                        WorkflowState = inspection.workflow_state,
+                        Version = inspection.version,
                         Status = inspection.Status,
-                        CreatedAt = inspection.CreatedAt,
-                        UpdatedAt = inspection.UpdatedAt,
+                        CreatedAt = inspection.created_at,
+                        UpdatedAt = inspection.updated_at,
                         DoneAt = inspection.DoneAt,
-                        EformId = inspection.EformId,
-                        VehicleId = inspection.VehicleId,
+                        VehicleContractId = inspection.VehicleContractId,
                     });
                 });
                 return new OperationDataResult<VehicleInspectionsPnModel>(true, vehicleInspectionsPnModel);
@@ -81,14 +80,13 @@ namespace Vehicles.Pn.Controllers
                 var vehicleInspectionPn = new VehicleInspection
                 {
                     Id = vehicleInspectionPnCreateModel.Id,
-                    WorkflowState = vehicleInspectionPnCreateModel.WorkflowState,
-                    Version = vehicleInspectionPnCreateModel.Version,
+                    workflow_state = vehicleInspectionPnCreateModel.WorkflowState,
+                    version = vehicleInspectionPnCreateModel.Version,
                     Status = vehicleInspectionPnCreateModel.Status,
-                    CreatedAt = vehicleInspectionPnCreateModel.CreatedAt,
-                    UpdatedAt = vehicleInspectionPnCreateModel.UpdatedAt,
+                    created_at = vehicleInspectionPnCreateModel.CreatedAt,
+                    updated_at = vehicleInspectionPnCreateModel.UpdatedAt,
                     DoneAt = vehicleInspectionPnCreateModel.DoneAt,
-                    EformId = vehicleInspectionPnCreateModel.EformId,
-                    VehicleId = vehicleInspectionPnCreateModel.VehicleId,
+                    VehicleContractId = vehicleInspectionPnCreateModel.VehicleContractId,
                 };
                 _dbContext.VehicleInspections.Add(vehicleInspectionPn);
                 _dbContext.SaveChanges();
@@ -115,14 +113,13 @@ namespace Vehicles.Pn.Controllers
                     return new OperationResult(false, "Vehicle not found");
                 }
                 vehicleInspection.Id = vehicleInspectionPnUpdateModel.Id;
-                vehicleInspection.WorkflowState = vehicleInspectionPnUpdateModel.WorkflowState;
-                vehicleInspection.Version = vehicleInspectionPnUpdateModel.Version;
+                vehicleInspection.workflow_state = vehicleInspectionPnUpdateModel.WorkflowState;
+                vehicleInspection.version = vehicleInspectionPnUpdateModel.Version;
                 vehicleInspection.Status = vehicleInspectionPnUpdateModel.Status;
-                vehicleInspection.CreatedAt = vehicleInspectionPnUpdateModel.CreatedAt;
-                vehicleInspection.UpdatedAt = vehicleInspectionPnUpdateModel.UpdatedAt;
+                vehicleInspection.created_at = vehicleInspectionPnUpdateModel.CreatedAt;
+                vehicleInspection.updated_at = vehicleInspectionPnUpdateModel.UpdatedAt;
                 vehicleInspection.DoneAt = vehicleInspectionPnUpdateModel.DoneAt;
-                vehicleInspection.EformId = vehicleInspectionPnUpdateModel.EformId;
-                vehicleInspection.VehicleId = vehicleInspectionPnUpdateModel.VehicleId;
+                vehicleInspection.VehicleContractId = vehicleInspectionPnUpdateModel.VehicleContractId;
                 _dbContext.SaveChanges();
                 return new OperationDataResult<VehicleInspectionPnModel>(true);
             }

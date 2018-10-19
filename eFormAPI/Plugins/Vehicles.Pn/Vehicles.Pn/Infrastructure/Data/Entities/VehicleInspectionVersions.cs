@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using eFormApi.BasePn.Infrastructure.Data.Base;
 
+
 namespace Vehicles.Pn.Infrastructure.Data.Entities
 {
-    public class VehicleInspection : BaseEntity
+    public class VehicleInspectionVersions : BaseEntity
     {
+
         [Key]
         public int id { get; set; }
 
@@ -31,5 +37,7 @@ namespace Vehicles.Pn.Infrastructure.Data.Entities
         public int VehicleContractId { get; set; }
 
         public int? Status { get; set; }
-}
+
+        public int VehicleInspectionId { get; set; }
+    }
 }
