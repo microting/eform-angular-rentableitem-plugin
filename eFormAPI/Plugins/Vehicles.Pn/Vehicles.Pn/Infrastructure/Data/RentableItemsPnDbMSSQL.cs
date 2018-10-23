@@ -3,15 +3,13 @@
     using Microsoft.EntityFrameworkCore;
     using RentableItems.Pn.Infrastructure.Data.Entities;
 
-    public partial class RentableItemsPnDbMSSQL : DbContext, MicrotingContextInterface
+    public partial class RentableItemsPnDbMSSQL : DbContext//, MicrotingContextInterface
     {
-
         public RentableItemsPnDbMSSQL() { }
 
         public RentableItemsPnDbMSSQL(DbContextOptions options)
           : base(options)
         {
-
         }
         public virtual Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade ContextDatabase
         {
@@ -27,5 +25,15 @@
         public virtual DbSet<RentableItemsContractVersions> RentableItemsContractVersions { get; set; }
         public virtual DbSet<RentableItemsSettings> RentableItemsSettings { get; set; }
         public virtual DbSet<RentableItemsSettingsVersions> RentableItemsSettingsVersions { get; set; }
+
+        // Uncomment the below section, when creating migrations
+        // Add-Migration -Context RentableItemsPnDbMSSQL -OutputDir Infrastructure\Migrations\MSSQL
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer(@"data source=(LocalDb)\SharedInstance;Initial catalog=rentableitems;Integrated Security=True");
+        //    }
+        //}
     }
 }
