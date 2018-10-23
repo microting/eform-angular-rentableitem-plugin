@@ -7,9 +7,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 {
     public class ContractInspection : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
+      
         [StringLength(255)]
         public string WorkflowState { get; set; }
 

@@ -13,10 +13,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
         {
             this.ContractInspections = new HashSet<ContractInspection>();
         }
-
-        [Key]
-        public int Id { get; set; }
-
+        
         [StringLength(255)]
         public string WorkflowState { get; set; }
 
