@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using eFormApi.BasePn.Infrastructure.Data.Base;
+using Microting.eFormApi.BasePn.Infrastructure.Database.Base;
 
-namespace Vehicles.Pn.Infrastructure.Data.Entities
+namespace RentableItems.Pn.Infrastructure.Data.Entities
 {
-    public class VehicleInspection : BaseEntity
+    public class ContractInspection : BaseEntity
     {
         [Key]
         public int Id { get; set; }
@@ -21,13 +21,18 @@ namespace Vehicles.Pn.Infrastructure.Data.Entities
 
         public DateTime? UpdatedAt { get; set; }
 
+        public int Created_By_User_Id { get; set; }
+
+        public int Updated_By_User_Id { get; set; }
+
         public DateTime? DoneAt { get; set; }
 
-        public int EformId { get; set; }
+        [ForeignKey("Contract")]
+        public int ContractId { get; set; }
 
-        [ForeignKey("Vehicle")]
-        public int VehicleId { get; set; }
+        public virtual Contract Contract { get; set; }
 
-        public virtual Vehicle Vehicle { get; set; }
+        public int SDK_Case_Id { get; set; }
+
     }
 }

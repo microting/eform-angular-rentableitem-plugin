@@ -1,6 +1,6 @@
-﻿namespace Vehicles.Pn.Abstractions
+﻿namespace RentableItems.Pn.Abstractions
 {
-    public interface IVehicleLocalizationService
+    public interface IRentableItemsLocalizationService
     {
         string GetString(string key);
         string GetString(string format, params object[] args);

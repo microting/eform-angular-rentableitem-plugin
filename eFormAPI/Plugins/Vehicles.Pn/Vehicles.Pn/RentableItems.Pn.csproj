@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>RentableItems.Pn</AssemblyName>
+    <RootNamespace>RentableItems.Pn</RootNamespace>
   </PropertyGroup>
   
     <ItemGroup>
@@ -14,6 +16,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.3" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="1.1.36" />
   </ItemGroup>
+  
+    <ItemGroup>
+      <Folder Include="Infrastructure\Data\Factories\" />
+    </ItemGroup>
   
 
 </Project>

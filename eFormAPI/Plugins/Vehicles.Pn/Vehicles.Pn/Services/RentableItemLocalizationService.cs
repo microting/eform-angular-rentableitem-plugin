@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Localization;
-using Vehicles.Pn.Abstractions;
+using RentableItems.Pn.Abstractions;
 
-namespace Vehicles.Pn.Services
+namespace RentableItems.Pn.Services
 {
-    public class VehicleLocalizationService : IVehicleLocalizationService
+    public class RentableItemLocalizationService : IRentableItemsLocalizationService
     {
         private readonly IStringLocalizer _localizer;
  
-        public VehicleLocalizationService(IStringLocalizerFactory factory)
+        public RentableItemLocalizationService(IStringLocalizerFactory factory)
         {
             _localizer = factory.Create("VehicleResources",
                 Assembly.GetEntryAssembly().FullName);

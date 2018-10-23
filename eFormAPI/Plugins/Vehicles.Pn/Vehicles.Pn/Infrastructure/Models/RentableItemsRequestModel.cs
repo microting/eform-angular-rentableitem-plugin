@@ -1,6 +1,6 @@
-﻿namespace Vehicles.Pn.Infrastructure.Models
+﻿namespace RentableItems.Pn.Infrastructure.Models
 {
-    public class VehiclesRequestModel
+    public class RentableItemsRequestModel
     {
         public string SortColumnName { get; set; }
         public int Offset { get; set; }

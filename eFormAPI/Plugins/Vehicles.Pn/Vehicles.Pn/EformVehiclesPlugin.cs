@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
-using Vehicles.Pn.Abstractions;
-using Vehicles.Pn.Infrastructure.Data;
-using Vehicles.Pn.Infrastructure.Data.Factories;
-using Vehicles.Pn.Services;
+using RentableItems.Pn.Abstractions;
+using RentableItems.Pn.Infrastructure.Data;
+//using RentableItems.Pn.Infrastructure.Data.Factories;
+using RentableItems.Pn.Services;
 
-namespace Vehicles.Pn
+namespace RentableItems.Pn
 {
     public class EformVehiclesPlugin : IEformPlugin
     {
@@ -23,17 +23,28 @@ namespace Vehicles.Pn
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IVehiclesService, VehiclesService>();
-            services.AddSingleton<IVehicleLocalizationService, VehicleLocalizationService>();
+            services.AddScoped<IRentableItemsService, RentableItemsService>();
+            services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
         }
 
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<VehiclesPnDbContext>(o => o.UseSqlServer(connectionString,
-                b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
 
-            var contextFactory = new VehiclesPnContextFactory();
-            var context = contextFactory.CreateDbContext(new[] {connectionString});
+            if (connectionString.ToLower().Contains("convert zero datetime"))
+            {
+                dbContextOptionsBuilder.UseMySQL(connectionString);
+                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseMySQL(connectionString,
+                b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            }
+            else
+            {
+                dbContextOptionsBuilder.UseSqlServer(connectionString);
+                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
+                b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            }
+            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+            var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
             context.Database.Migrate();
         }
 
