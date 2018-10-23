@@ -5,23 +5,23 @@ import {TranslateModule} from '@ngx-translate/core';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
-import {VehiclesPnLayoutComponent} from './layouts';
+import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
 
-import {VehiclesPnService} from './services';
+import {RentableItemsPnService} from './services';
 import {
-  VehiclesPnPageComponent,
-  VehiclesPnAddComponent,
-  VehiclesPnUpdateComponent
+  RentableItemsPnPageComponent,
+  RentableItemsPnAddComponent,
+  RentableItemsPnUpdateComponent
 } from './components';
-import {VehiclesPnRouting} from './vehicles-pn.routing';
+import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    VehiclesPnRouting,
+    RentableItemsPnRouting,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     OwlMomentDateTimeModule,
@@ -31,15 +31,15 @@ import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 
     SharedPnModule
   ],
   declarations: [
-    VehiclesPnPageComponent,
-    VehiclesPnAddComponent,
-    VehiclesPnUpdateComponent,
-    VehiclesPnLayoutComponent
+    RentableItemsPnPageComponent,
+    RentableItemsPnAddComponent,
+    RentableItemsPnUpdateComponent,
+    RentableItemsPnLayoutComponent
   ],
   providers: [
-    VehiclesPnService,
+    RentableItemsPnService,
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
   ]
 })
-export class VehiclesPnModule {
+export class RentableItemsPnModule {
 }

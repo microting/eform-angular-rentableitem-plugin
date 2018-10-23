@@ -1,74 +1,42 @@
-<modal #createVehicleModal [size]="'md'">
+<modal #createRentableItemModal [size]="'md'">
   <modal-header [show-close]="true">
-    <h4 class="modal-title">{{ 'New vehicle' | translate }}</h4>
+    <h4 class="modal-title">{{ 'New rentable item' | translate }}</h4>
   </modal-header>
   <modal-body>
     <div class="container-fluid">
       <form #createForm="ngForm">
         <div class="row">
-          <div class="form-group col-xs-12 col-md-6">
-            <label class="mt-validation-container">{{'Contact number' | translate}}*</label>
-            <input class="form-control" required #createContactNumber="ngModel"
-                   type="text" [(ngModel)]="newVehicleModel.contactNumber"
-                   name="createContactNumber"/>
-          </div>
-          <div class="form-group col-xs-12 col-md-6">
-            <label class="mt-validation-container">{{'Customer name' | translate}}*</label>
-            <input class="form-control" required #createCustomerName="ngModel"
-                   type="text" [(ngModel)]="newVehicleModel.customerName"
-                   name="createCustomerName"/>
-          </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Brand' | translate}}*</label>
             <input class="form-control" required #createBrand="ngModel"
-                   type="text" [(ngModel)]="newVehicleModel.brand"
+                   type="text" [(ngModel)]="newRentableItemModel.brand"
                    name="createBrand"/>
           </div>
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Model' | translate}}*</label>
             <input class="form-control"
-                   required [(ngModel)]="newVehicleModel.modelName"
-                   type="text" #createVehicleModel="ngModel"
-                   name="createVehicleModel"/>
+                   required [(ngModel)]="newRentableItemModel.modelName"
+                   type="text" #createRentableItemModel="ngModel"
+                   name="createRentableItemModel"/>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Registration date' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="newVehicleModel.registrationDate"
+            <rentable-items-pn-datepicker [(ngModel)]="newRentableItemModel.registrationDate"
                                     #createRegistrationDate="ngModel"
                                     name="createRegistrationDate" required
                                     [datepicker]="{format: 'yyyy-mm-dd' }"
                                     [timepicker]="false">
-            </vehicles-pn-datepicker>
+            </rentable-items-pn-datepicker>
           </div>
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{ 'VIN number' | translate }}*</label>
             <input class="form-control" required #createWINNumber="ngModel"
-                   type="text" [(ngModel)]="newVehicleModel.vinNumber"
+                   type="text" [(ngModel)]="newRentableItemModel.vinNumber"
                    name="createWINNumber"/>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-xs-12 col-md-6">
-            <label class="mt-validation-container">{{'Start of contract' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="newVehicleModel.contractStartDate"
-                                    name="createStartOfContract" required
-                                    #createStartOfContract="ngModel"
-                                    [datepicker]="{format: 'yyyy-mm-dd' }"
-                                    [timepicker]="false">
-            </vehicles-pn-datepicker>
-          </div>
-          <div class="form-group col-xs-12 col-md-6">
-            <label class="mt-validation-container">{{'End of contract' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="newVehicleModel.contractEndDate"
-                                    #createEndOfContract="ngModel"
-                                    name="createEndOfContract" required
-                                    [datepicker]="{format: 'yyyy-mm-dd' }"
-                                    [timepicker]="false">
-            </vehicles-pn-datepicker>
           </div>
         </div>
       </form>
@@ -76,15 +44,15 @@
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-success"
-            [disabled]="!createForm.form.valid" (click)="createVehicle()">{{ 'Create' | translate }}</button>
-    <button type="button" class="btn btn-default" (click)="createVehicleModal.dismiss()">{{ 'Cancel' | translate }}
+            [disabled]="!createForm.form.valid" (click)="createRentableItem()">{{ 'Create' | translate }}</button>
+    <button type="button" class="btn btn-default" (click)="createRentableItemModal.dismiss()">{{ 'Cancel' | translate }}
     </button>
   </modal-footer>
 </modal>
 
-<modal #editVehicleModal>
+<modal #editRentableItemModal>
   <modal-header [show-close]="true">
-    <h4 class="modal-title" translate>{{ 'Create vehicle' | translate }}</h4>
+    <h4 class="modal-title" translate>{{ 'Create rentable item' | translate }}</h4>
   </modal-header>
   <modal-body>
     <div class="container-fluid">
@@ -93,13 +61,13 @@
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Contact number' | translate}}*</label>
             <input class="form-control" required #editCustomerNumber="ngModel"
-                   type="text" [(ngModel)]="selectedVehicleModel.contactNumber"
+                   type="text" [(ngModel)]="selectedRentableItemModel.contactNumber"
                    name="editContactNumber"/>
           </div>
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Customer name' | translate}}*</label>
             <input class="form-control" required #editCustomerName="ngModel"
-                   type="text" [(ngModel)]="selectedVehicleModel.customerName"
+                   type="text" [(ngModel)]="selectedRentableItemModel.customerName"
                    name="editCustomerName"/>
           </div>
         </div>
@@ -107,52 +75,52 @@
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Brand' | translate}}*</label>
             <input class="form-control" required #editBrand="ngModel"
-                   type="text" [(ngModel)]="selectedVehicleModel.brand"
+                   type="text" [(ngModel)]="selectedRentableItemModel.brand"
                    name="editMark"/>
           </div>
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Model' | translate}}*</label>
-            <input class="form-control" required #editVehicleModel="ngModel"
-                   type="text" [(ngModel)]="selectedVehicleModel.modelName"
-                   name="editVehicleModel"/>
+            <input class="form-control" required #editRentableItemModel="ngModel"
+                   type="text" [(ngModel)]="selectedRentableItemModel.modelName"
+                   name="editRentableItemModel"/>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Registration date' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="selectedVehicleModel.registrationDate"
+            <rentable-items-pn-datepicker [(ngModel)]="selectedRentableItemModel.registrationDate"
                                     #editRegistrationDate="ngModel"
                                     name="editRegistrationDate" required
                                     [datepicker]="{format: 'yyyy-mm-dd' }"
                                     [timepicker]="false">
-            </vehicles-pn-datepicker>
+            </rentable-items-pn-datepicker>
           </div>
 
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{ 'VIN number' | translate }}*</label>
             <input class="form-control" required #editWinNumber="ngModel"
-                   type="text" [(ngModel)]="selectedVehicleModel.vinNumber"
+                   type="text" [(ngModel)]="selectedRentableItemModel.vinNumber"
                    name="editWINNumber"/>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'Start of contract' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="selectedVehicleModel.contractStartDate"
+            <rentable-items-pn-datepicker [(ngModel)]="selectedRentableItemModel.contractStartDate"
                                     name="editStartOfContract"
                                     #editContractStartDate="ngModel"
                                     [datepicker]="{format: 'yyyy-mm-dd' }"
                                     [timepicker]="false">
-            </vehicles-pn-datepicker>
+            </rentable-items-pn-datepicker>
           </div>
           <div class="form-group col-xs-12 col-md-6">
             <label class="mt-validation-container">{{'End of contract' | translate}}*</label>
-            <vehicles-pn-datepicker [(ngModel)]="selectedVehicleModel.contractEndDate"
+            <rentable-items-pn-datepicker [(ngModel)]="selectedRentableItemModel.contractEndDate"
                                     #editContractEndDate="ngModel"
                                     name="editEndOfContract"
                                     [datepicker]="{format: 'yyyy-mm-dd' }"
                                     [timepicker]="false">
-            </vehicles-pn-datepicker>
+            </rentable-items-pn-datepicker>
           </div>
         </div>
       </form>
@@ -160,8 +128,8 @@
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-success"
-            [disabled]="!editForm.form.valid" (click)="updateVehicle()">{{ 'Save' | translate }}</button>
-    <button type="button" class="btn btn-default" (click)="cancelUpdateVehicle()">{{ 'Cancel' | translate }}
+            [disabled]="!editForm.form.valid" (click)="updateRentableItem()">{{ 'Save' | translate }}</button>
+    <button type="button" class="btn btn-default" (click)="cancelUpdateRentableItem()">{{ 'Cancel' | translate }}
     </button>
   </modal-footer>
 </modal>

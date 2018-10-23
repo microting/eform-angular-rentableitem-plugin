@@ -1,4 +1,4 @@
-export class VehiclesPnRequestModel {
+export class RentableItemsPnRequestModel {
   sortColumnName: string;
   pageIndex: number;
   offset: number;

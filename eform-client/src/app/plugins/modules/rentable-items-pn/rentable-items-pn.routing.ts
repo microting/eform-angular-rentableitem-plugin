@@ -2,18 +2,18 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AdminGuard, AuthGuard} from 'src/app/common/guards';
-import {VehiclesPnLayoutComponent} from './layouts';
-import {VehiclesPnPageComponent} from './components';
+import {RentableItemsPnLayoutComponent} from './layouts';
+import {RentableItemsPnPageComponent} from './components';
 
 export const routes: Routes = [
   {
     path: '',
-    component: VehiclesPnLayoutComponent,
+    component: RentableItemsPnLayoutComponent,
     children: [
       {
         path: '',
         canActivate: [AuthGuard],
-        component: VehiclesPnPageComponent
+        component: RentableItemsPnPageComponent
       }
     ]
   }
@@ -23,5 +23,5 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class VehiclesPnRouting {
+export class RentableItemsPnRouting {
 }

@@ -4,10 +4,10 @@ import {LocaleService} from 'src/app/common/services/auth';
 declare var require: any;
 
 @Component({
-  selector: 'app-vehicles-pn-layout',
+  selector: 'app-rentable-items-pn-layout',
   template: `<router-outlet></router-outlet>`
 })
-export class VehiclesPnLayoutComponent implements AfterViewInit {
+export class RentableItemsPnLayoutComponent implements AfterViewInit {
   constructor(private localeService: LocaleService, private translateService: TranslateService) {
 
   }

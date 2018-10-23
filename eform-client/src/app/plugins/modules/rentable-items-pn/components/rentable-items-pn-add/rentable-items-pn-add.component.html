@@ -1,0 +1,77 @@
+<div mdbModal class="modal fade" #frame="mdbModal">
+  <div class="modal-dialog modal-md" *ngIf="frameShow">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ 'New rentable item' | translate }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form #createForm="ngForm">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" required #createBrand="ngModel"
+                         type="text" [(ngModel)]="newRentableItemModel.brand" id="createBrand"
+                         class="form-control"
+                         name="createBrand">
+                  <label for="createBrand">{{'Brand' | translate}}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         required [(ngModel)]="newRentableItemModel.modelName"
+                         type="text" #createRentableItemModel="ngModel" class="form-control"
+                         name="createRentableItemModel" id="createRentableItemModel">
+                  <label for="createRentableItemModel">{{'Model' | translate}}*</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt1">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt1"
+                         [mdbValidate]="false"
+                         [ngModel]="newRentableItemModel.registrationDate"
+                         (dateTimeChange)="onRegistrationDateSelected($event)"
+                         type="text"
+                         id="registrationDate"
+                         name="registrationDate"
+                         class="form-control">
+                  <label for="registrationDate">{{'Registration date*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt1></owl-date-time>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" required #createWINNumber="ngModel"
+                         type="text" [(ngModel)]="newRentableItemModel.vinNumber" id="createWINNumber"
+                         name="createWINNumber">
+                  <label for="createWINNumber">{{ 'WIN number' | translate }}*</label>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createRentableItem()">{{ 'Create' |
+          translate }}
+        </button>
+        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
