@@ -36,16 +36,21 @@ namespace RentableItems.Pn
                 dbContextOptionsBuilder.UseMySQL(connectionString);
                 services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseMySQL(connectionString,
                 b => b.MigrationsAssembly(PluginAssembly().FullName)));
+
+                dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+                var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
+                context.Database.Migrate();
             }
             else
             {
                 dbContextOptionsBuilder.UseSqlServer(connectionString);
-                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
+                services.AddDbContext<RentableItemsPnDbMSSQL>(o => o.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly(PluginAssembly().FullName)));
+
+                dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+                var context = new RentableItemsPnDbMSSQL(dbContextOptionsBuilder.Options);
+                context.Database.Migrate();
             }
-            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
-            context.Database.Migrate();
         }
 
         public void Configure(IApplicationBuilder appBuilder)

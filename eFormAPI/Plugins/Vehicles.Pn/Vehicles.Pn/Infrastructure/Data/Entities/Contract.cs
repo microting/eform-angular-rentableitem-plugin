@@ -29,9 +29,9 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 
         public int Updated_By_User_Id { get; set; }
 
-        public DateTime ContractStart { get; set; }
+        public DateTime? ContractStart { get; set; }
 
-        public DateTime ContractEnd { get; set; }
+        public DateTime? ContractEnd { get; set; }
 
         public int CustomerId { get; set; }
 

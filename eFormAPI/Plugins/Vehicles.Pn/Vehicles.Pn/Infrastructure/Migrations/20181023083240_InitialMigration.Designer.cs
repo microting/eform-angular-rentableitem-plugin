@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentableItems.Pn.Infrastructure.Data;
 
-namespace RentableItems.Pn.Migrations.MSSQL
+namespace RentableItems.Pn.Migrations
 {
     [DbContext(typeof(RentableItemsPnDbMSSQL))]
     [Migration("20181023083240_InitialMigration")]

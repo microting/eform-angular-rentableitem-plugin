@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RentableItems.Pn.Migrations.MSSQL
+namespace RentableItems.Pn.Migrations
 {
     public partial class InitialMigration : Migration
     {

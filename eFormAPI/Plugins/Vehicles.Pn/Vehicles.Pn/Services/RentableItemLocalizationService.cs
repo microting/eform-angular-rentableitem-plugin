@@ -10,7 +10,7 @@ namespace RentableItems.Pn.Services
  
         public RentableItemLocalizationService(IStringLocalizerFactory factory)
         {
-            _localizer = factory.Create("VehicleResources",
+            _localizer = factory.Create("RentableItemsResources",
                 Assembly.GetEntryAssembly().FullName);
         }
  

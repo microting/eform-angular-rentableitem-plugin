@@ -5,6 +5,16 @@
     <AssemblyName>RentableItems.Pn</AssemblyName>
     <RootNamespace>RentableItems.Pn</RootNamespace>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\eFormAPI.Web\Plugins\RentableItems\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Infrastructure\Migrations\MySQL\**" />
+    <EmbeddedResource Remove="Infrastructure\Migrations\MySQL\**" />
+    <None Remove="Infrastructure\Migrations\MySQL\**" />
+  </ItemGroup>
   
     <ItemGroup>
     <PackageReference Include="Automapper" Version="6.1.0" />
@@ -20,7 +30,6 @@
   
     <ItemGroup>
       <Folder Include="Infrastructure\Data\Factories\" />
-      <Folder Include="Infrastructure\Migrations\MySQL\" />
     </ItemGroup>
   
 

@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using RentableItems.Pn.Infrastructure.Data.Entities;
 
-    public partial class RentableItemsPnDbMySQL : DbContext //, MicrotingContextInterface
+    public partial class RentableItemsPnDbMySQL : DbContext, MicrotingContextInterface
     {
 
         public RentableItemsPnDbMySQL() { }

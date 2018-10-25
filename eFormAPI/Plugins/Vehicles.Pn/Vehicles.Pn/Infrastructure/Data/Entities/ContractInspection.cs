@@ -11,7 +11,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
         [StringLength(255)]
         public string WorkflowState { get; set; }
 
-        public int? Version { get; set; }
+        public int Version { get; set; }
 
         public int? Status { get; set; }
 
