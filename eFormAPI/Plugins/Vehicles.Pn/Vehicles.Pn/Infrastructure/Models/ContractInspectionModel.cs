@@ -35,6 +35,10 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             _dbContext.ContractInspection.Add(contractInspection);
             _dbContext.SaveChanges();
+
+            _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
+            _dbContext.SaveChanges();
+
         }
 
         public void Update(RentableItemsPnDbMSSQL _dbContext)
@@ -46,7 +50,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find Contract Inspection with id {Id}");
             }
 
-            contractInspection.WorkflowState = WorkflowState;
+            contractInspection.WorkflowState = contractInspection.WorkflowState;
             contractInspection.ContractId = ContractId;
             contractInspection.SDK_Case_Id = SdkCaseId;
             
@@ -55,8 +59,10 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contractInspection.UpdatedAt = DateTime.Now;
                 contractInspection.Updated_By_User_Id = UpdatedByUserID;
                 contractInspection.Version += 1;
+
+                _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
                 _dbContext.SaveChanges();
-                MapContractInspection(_dbContext, contractInspection);
+
             }
 
         }
@@ -67,7 +73,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             Update(_dbContext);
         }
 
-        public void MapContractInspection(RentableItemsPnDbMSSQL _dbContext, ContractInspection contractInspection)
+        public ContractInspectionVersion MapContractInspection(RentableItemsPnDbMSSQL _dbContext, ContractInspection contractInspection)
         {
             ContractInspectionVersion contractInspectionVer = new ContractInspectionVersion();
 
@@ -83,6 +89,8 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspectionVer.Workflow_state = contractInspection.WorkflowState;
 
             contractInspectionVer.ContractInspectionId = contractInspection.Id;
+
+            return contractInspectionVer;
 
         }
     }

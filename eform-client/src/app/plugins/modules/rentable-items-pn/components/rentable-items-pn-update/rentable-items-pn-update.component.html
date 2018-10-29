@@ -51,10 +51,30 @@
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
-                         class="form-control" required #editWinNumber="ngModel"
+                         class="form-control" #editVinNumber="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.vinNumber"
-                         name="editWINNumber" id="editWINNumber">
-                  <label for="editWINNumber">{{ 'WIN number' | translate }}*</label>
+                         name="editVINNumber" id="editVINNumber">
+                  <label for="editVINNumber">{{ 'VIN number' | translate }}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+              <div class="md-form">
+                <input mdbInputDirective
+                       [mdbValidate]="false"
+                       class="form-control"  #editSerialNumber="ngModel"
+                       type="text" [(ngModel)]="selectedRentableItemModel.serialNumber"
+                       name="editSerialNumber" id="editSerialNumber">
+                <label for="editSerialNumber">{{ 'Serial number' | translate }}*</label>
+              </div>
+            </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control"  #editPlateNumber="ngModel"
+                         type="text" [(ngModel)]="selectedRentableItemModel.plateNumber"
+                         name="editPlateNumber" id="editPlateNNumber">
+                  <label for="editPlateNNumber">{{ 'Plate number' | translate }}*</label>
                 </div>
               </div>
             </div>

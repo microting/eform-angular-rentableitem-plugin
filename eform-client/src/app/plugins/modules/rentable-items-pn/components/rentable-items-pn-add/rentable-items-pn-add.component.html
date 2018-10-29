@@ -7,7 +7,6 @@
       <div class="modal-body">
         <div class="container-fluid">
           <form #createForm="ngForm">
-
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
@@ -53,14 +52,33 @@
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
-                         class="form-control" required #createWINNumber="ngModel"
-                         type="text" [(ngModel)]="newRentableItemModel.vinNumber" id="createWINNumber"
-                         name="createWINNumber">
-                  <label for="createWINNumber">{{ 'WIN number' | translate }}*</label>
+                         class="form-control" #createWINNumber="ngModel"
+                         type="text" [(ngModel)]="newRentableItemModel.vinNumber" id="createVINNumber"
+                         name="createVINNumber">
+                  <label for="createVINNumber">{{ 'VIN number' | translate }}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" #createSerialNumber="ngModel"
+                         type="text" [(ngModel)]="newRentableItemModel.serialNumber" id="createSerialNumber"
+                         name="createSerialNumber">
+                  <label for="createSerialNumber">{{ 'Serial number' | translate }}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" #createPlateNumber="ngModel"
+                         type="text" [(ngModel)]="newRentableItemModel.plateNumber" id="createPlateNumber"
+                         name="createPlateNumber">
+                  <label for="createPlateNumber">{{ 'Plate number' | translate }}*</label>
                 </div>
               </div>
             </div>
-
           </form>
         </div>
       </div>

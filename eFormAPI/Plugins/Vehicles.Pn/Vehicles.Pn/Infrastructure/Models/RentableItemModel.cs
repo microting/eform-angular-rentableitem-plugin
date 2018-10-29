@@ -47,6 +47,9 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.Updated_By_User_Id = UpdatedByUserId;
             _dbContext.RentableItem.Add(rentableItem);
             _dbContext.SaveChanges();
+
+            _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
+            _dbContext.SaveChanges();
         }
 
         public void Update(RentableItemsPnDbMSSQL _dbContext)
@@ -64,14 +67,15 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.VinNumber = VinNumber;
             rentableItem.SerialNumber = SerialNumber;
             rentableItem.PlateNumber = PlateNumber;
-            rentableItem.Workflow_state = WorkflowState;
+            rentableItem.Workflow_state = rentableItem.Workflow_state;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
                 rentableItem.Updated_at = DateTime.Now;
                 rentableItem.Version += 1;
+
+                _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
                 _dbContext.SaveChanges();
-                MapRentableItemVersions(_dbContext, rentableItem);
             }
 
         }
@@ -83,7 +87,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        private void MapRentableItemVersions(RentableItemsPnDbMSSQL _dbContext, RentableItem rentableItem)
+        private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbMSSQL _dbContext, RentableItem rentableItem)
         {
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
@@ -102,6 +106,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemVer.RentableItemId = rentableItem.Id;
 
+            return rentableItemVer;
         }
 
     }
