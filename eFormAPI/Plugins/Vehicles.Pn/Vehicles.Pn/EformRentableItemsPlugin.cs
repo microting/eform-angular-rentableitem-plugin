@@ -10,15 +10,15 @@ using RentableItems.Pn.Services;
 
 namespace RentableItems.Pn
 {
-    public class EformVehiclesPlugin : IEformPlugin
+    public class EformRentableItemsPlugin : IEformPlugin
     {
-        public string GetName() => "Microting Vehicles plugin";
+        public string GetName() => "Microting Rentable plugin";
         public string ConnectionStringName() => "EFormVehiclesPnConnection";
         public string PluginPath() => PluginAssembly().Location;
 
         public Assembly PluginAssembly()
         {
-            return typeof(EformVehiclesPlugin).GetTypeInfo().Assembly;
+            return typeof(EformRentableItemsPlugin).GetTypeInfo().Assembly;
         }
 
         public void ConfigureServices(IServiceCollection services)
