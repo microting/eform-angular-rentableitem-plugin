@@ -8,9 +8,11 @@ addons:
     - google-chrome-stable fluxbox
 sudo: required
 language: csharp
+solution: RentableItems.Pn.sln
+env: DOTNETCORE=2.1S
 mono: latest
 dotnet: 2.0.0
-install: 
+install:
 - nvm install 8.0.0
 - nvm use 8.0.0
 before_script:
