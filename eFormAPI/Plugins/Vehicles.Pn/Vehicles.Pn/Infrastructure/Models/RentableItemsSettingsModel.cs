@@ -69,7 +69,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);
         }
-        public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbMSSQL _dbContext, RentableItemsSettings rentableItemsSettings)
+        public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbAnySql _dbContext, RentableItemsSettings rentableItemsSettings)
         {
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
 
