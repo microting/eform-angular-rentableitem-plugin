@@ -8,12 +8,24 @@ namespace RentableItems.Pn.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
+            string autoIDGenStrategy = "SqlServer:ValueGenerationStrategy";
+            object autoIDGenStrategyValue = SqlServerValueGenerationStrategy.IdentityColumn;
+
+            // Setup for MySQL Provider
+            if (migrationBuilder.ActiveProvider == "Pomelo.EntityFrameworkCore.MySql")
+            {
+                DbConfig.IsMySQL = true;
+                autoIDGenStrategy = "MySQL:ValueGeneratedOnAdd";
+                autoIDGenStrategyValue = true;
+            }
+
             migrationBuilder.CreateTable(
                 name: "Contract",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     WorkflowState = table.Column<string>(maxLength: 255, nullable: true),
                     Version = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: true),
@@ -36,7 +48,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -59,7 +71,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     WorkflowState = table.Column<string>(maxLength: 255, nullable: true),
                     Version = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: true),
@@ -83,7 +95,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -107,7 +119,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -128,7 +140,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -147,7 +159,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -167,7 +179,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),
@@ -192,7 +204,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     WorkflowState = table.Column<string>(maxLength: 255, nullable: true),
                     Version = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: true),
@@ -220,7 +232,7 @@ namespace RentableItems.Pn.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     Created_at = table.Column<DateTime>(nullable: true),
                     Updated_at = table.Column<DateTime>(nullable: true),
                     Workflow_state = table.Column<string>(maxLength: 255, nullable: true),

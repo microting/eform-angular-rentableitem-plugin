@@ -18,7 +18,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int EformId { get; set; }
 
-        public void Save(RentableItemsPnDbMSSQL _dbContext)
+        public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 
@@ -40,7 +40,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Update(RentableItemsPnDbMSSQL _dbContext)
+        public void Update(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
 
@@ -64,7 +64,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public void Delete(RentableItemsPnDbMSSQL _dbContext)
+        public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);

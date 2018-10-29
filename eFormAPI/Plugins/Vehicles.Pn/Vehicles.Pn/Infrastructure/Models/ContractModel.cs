@@ -21,7 +21,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CustomerId { get; set; }
         public int ContractNr { get; set; }
 
-        public void Save(RentableItemsPnDbMSSQL _dbContext)
+        public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             Contract contract = new Contract();
 
@@ -44,7 +44,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Update(RentableItemsPnDbMSSQL _dbContext)
+        public void Update(RentableItemsPnDbAnySql _dbContext)
         {
             Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
 
@@ -70,7 +70,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Delete(RentableItemsPnDbMSSQL _dbContext)
+        public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);

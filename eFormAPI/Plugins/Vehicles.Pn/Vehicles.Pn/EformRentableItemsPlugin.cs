@@ -10,15 +10,15 @@ using RentableItems.Pn.Services;
 
 namespace RentableItems.Pn
 {
-    public class EformVehiclesPlugin : IEformPlugin
+    public class EformRentableItemsPlugin : IEformPlugin
     {
-        public string GetName() => "Microting Vehicles plugin";
+        public string GetName() => "Microting Rentable plugin";
         public string ConnectionStringName() => "EFormVehiclesPnConnection";
         public string PluginPath() => PluginAssembly().Location;
 
         public Assembly PluginAssembly()
         {
-            return typeof(EformVehiclesPlugin).GetTypeInfo().Assembly;
+            return typeof(EformRentableItemsPlugin).GetTypeInfo().Assembly;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -44,11 +44,11 @@ namespace RentableItems.Pn
             else
             {
                 dbContextOptionsBuilder.UseSqlServer(connectionString);
-                services.AddDbContext<RentableItemsPnDbMSSQL>(o => o.UseSqlServer(connectionString,
+                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly(PluginAssembly().FullName)));
 
                 dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-                var context = new RentableItemsPnDbMSSQL(dbContextOptionsBuilder.Options);
+                var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
                 context.Database.Migrate();
             }
         }

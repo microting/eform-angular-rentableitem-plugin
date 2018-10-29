@@ -7,11 +7,11 @@ namespace RentableItems.Pn.Infrastructure.Models
 {
     public interface IModel
     {
-        void Save(RentableItemsPnDbMSSQL _dbContext);
+        void Save(RentableItemsPnDbAnySql _dbContext);
 
-        void Update(RentableItemsPnDbMSSQL _dbContext);
+        void Update(RentableItemsPnDbAnySql _dbContext);
 
-        void Delete(RentableItemsPnDbMSSQL _dbContext);
+        void Delete(RentableItemsPnDbAnySql _dbContext);
 
     }
 }
