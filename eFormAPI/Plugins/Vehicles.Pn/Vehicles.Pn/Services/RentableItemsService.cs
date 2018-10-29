@@ -15,9 +15,9 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<RentableItemsService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-        private readonly RentableItemsPnDbMSSQL _dbContext;
+        private readonly RentableItemsPnDbAnySql _dbContext;
 
-        public RentableItemsService(RentableItemsPnDbMSSQL dbContext,
+        public RentableItemsService(RentableItemsPnDbAnySql dbContext,
             ILogger<RentableItemsService> logger,
             IRentableItemsLocalizationService rentableItemLocalizationService)
         {

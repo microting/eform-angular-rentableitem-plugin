@@ -44,11 +44,11 @@ namespace RentableItems.Pn
             else
             {
                 dbContextOptionsBuilder.UseSqlServer(connectionString);
-                services.AddDbContext<RentableItemsPnDbMSSQL>(o => o.UseSqlServer(connectionString,
+                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly(PluginAssembly().FullName)));
 
                 dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-                var context = new RentableItemsPnDbMSSQL(dbContextOptionsBuilder.Options);
+                var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
                 context.Database.Migrate();
             }
         }

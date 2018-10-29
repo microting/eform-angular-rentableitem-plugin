@@ -19,7 +19,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int RentableItemId { get; set; }
         public int ContractId { get; set; }
 
-        public void Save(RentableItemsPnDbMSSQL _dbContext)
+        public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemContract rentableItemContract = new RentableItemContract();
 
@@ -35,7 +35,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.SaveChanges();
 
         }
-        public void Update(RentableItemsPnDbMSSQL _dbContext)
+        public void Update(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemContract rentableItemContract = _dbContext.RentableItemContract.FirstOrDefault(x => x.Id == Id);
 
@@ -57,13 +57,13 @@ namespace RentableItems.Pn.Infrastructure.Models
                 MapRentableItemContractVersions(_dbContext, rentableItemContract);
             }
         }
-        public void Delete(RentableItemsPnDbMSSQL _dbContext)
+        public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);
         }
 
-        public void MapRentableItemContractVersions(RentableItemsPnDbMSSQL _dbContext, RentableItemContract rentableItemContract)
+        public void MapRentableItemContractVersions(RentableItemsPnDbAnySql _dbContext, RentableItemContract rentableItemContract)
         {
             RentableItemsContractVersions rentableItemscontractVer = new RentableItemsContractVersions();
 

@@ -31,7 +31,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         //    this.PlateNumber = plateNumber;
         //}
 
-        public void Save(RentableItemsPnDbMSSQL _dbContext)
+        public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItem rentableItem = new RentableItem();
             rentableItem.VinNumber = VinNumber;
@@ -49,7 +49,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.SaveChanges();
         }
 
-        public void Update(RentableItemsPnDbMSSQL _dbContext)
+        public void Update(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
@@ -76,14 +76,14 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Delete(RentableItemsPnDbMSSQL _dbContext)
+        public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);
 
         }
 
-        private void MapRentableItemVersions(RentableItemsPnDbMSSQL _dbContext, RentableItem rentableItem)
+        private void MapRentableItemVersions(RentableItemsPnDbAnySql _dbContext, RentableItem rentableItem)
         {
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 

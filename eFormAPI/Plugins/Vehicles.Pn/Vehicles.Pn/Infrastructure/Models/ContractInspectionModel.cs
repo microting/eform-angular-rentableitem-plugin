@@ -21,7 +21,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? DoneAt { get; set; }
 
 
-        public void Save(RentableItemsPnDbMSSQL _dbContext)
+        public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             ContractInspection contractInspection = new ContractInspection();
 
@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.SaveChanges();
         }
 
-        public void Update(RentableItemsPnDbMSSQL _dbContext)
+        public void Update(RentableItemsPnDbAnySql _dbContext)
         {
             ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
 
@@ -61,13 +61,13 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Delete(RentableItemsPnDbMSSQL _dbContext)
+        public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);
         }
 
-        public void MapContractInspection(RentableItemsPnDbMSSQL _dbContext, ContractInspection contractInspection)
+        public void MapContractInspection(RentableItemsPnDbAnySql _dbContext, ContractInspection contractInspection)
         {
             ContractInspectionVersion contractInspectionVer = new ContractInspectionVersion();
 
