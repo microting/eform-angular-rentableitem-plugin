@@ -8,7 +8,7 @@ import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
 import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
 
-import {RentableItemsPnService} from './services';
+import {ContractsService, InspectionsService, RentableItemsPnService} from './services';
 import {
   RentableItemsPnPageComponent,
   RentableItemsPnAddComponent,
@@ -16,6 +16,12 @@ import {
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { ContractsAddComponent } from './components/contracts-add/contracts-add.component';
+import { InspectionsAddComponent } from './components/inspections-add/inspections-add.component';
+import { InspectionsUpdateComponent } from './components/inspections-update/inspections-update.component';
+import { ContractsUpdateComponent } from './components/contracts-update/contracts-update.component';
+import { ContractsPageComponent } from './components/contracts-page/contracts-page.component';
+import { InspectionsPageComponent } from './components/inspections-page/inspections-page.component';
 
 @NgModule({
   imports: [
@@ -34,10 +40,18 @@ import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 
     RentableItemsPnPageComponent,
     RentableItemsPnAddComponent,
     RentableItemsPnUpdateComponent,
-    RentableItemsPnLayoutComponent
+    RentableItemsPnLayoutComponent,
+    ContractsAddComponent,
+    InspectionsAddComponent,
+    InspectionsUpdateComponent,
+    ContractsUpdateComponent,
+    ContractsPageComponent,
+    InspectionsPageComponent
   ],
   providers: [
     RentableItemsPnService,
+    ContractsService,
+    InspectionsService,
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
   ]
 })

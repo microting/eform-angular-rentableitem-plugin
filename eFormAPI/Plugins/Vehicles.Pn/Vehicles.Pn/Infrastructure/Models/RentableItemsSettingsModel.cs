@@ -33,6 +33,11 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
             _dbContext.SaveChanges();
 
+            _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
+            _dbContext.SaveChanges();
+
+            
+
         }
 
         public void Update(RentableItemsPnDbAnySql _dbContext)
@@ -45,15 +50,17 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
 
             rentableItemsSettings.Eform_Id = EformId;
-            rentableItemsSettings.Workflow_state = WorkflowState;
+            rentableItemsSettings.Workflow_state = rentableItemsSettings.Workflow_state;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
                 rentableItemsSettings.Updated_at = DateTime.Now;
                 rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
                 rentableItemsSettings.Version += 1;
+
+                _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
                 _dbContext.SaveChanges();
-                MapRentableItemsSettings(_dbContext, rentableItemsSettings);
+
             }
         }
 
@@ -62,7 +69,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
             Update(_dbContext);
         }
-        public void MapRentableItemsSettings(RentableItemsPnDbAnySql _dbContext, RentableItemsSettings rentableItemsSettings)
+        public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbAnySql _dbContext, RentableItemsSettings rentableItemsSettings)
         {
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
 
@@ -76,6 +83,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
+            return rentableItemsSettingsVer;
         }
     }
 }

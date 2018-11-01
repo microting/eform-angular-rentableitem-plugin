@@ -23,11 +23,12 @@ export class RentableItemsPnService extends BaseService {
     return this.post(RentableItemsMethods.RentableItemPn, model);
   }
 
+  createRentableItem(model: RentableItemPnModel): Observable<any> {
+    return this.post(RentableItemsMethods.CreateRentableItemPn, model);
+  }
+
   updateRentableItem(model: RentableItemPnModel): Observable<any> {
     return this.post(RentableItemsMethods.UpdateRentableItemPn, model);
   }
 
-  createRentableItem(model: RentableItemPnModel): Observable<any> {
-    return this.post(RentableItemsMethods.CreateRentableItemPn, model);
-  }
 }

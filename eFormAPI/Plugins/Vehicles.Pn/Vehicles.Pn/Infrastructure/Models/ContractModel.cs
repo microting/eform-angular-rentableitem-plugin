@@ -38,6 +38,10 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             _dbContext.Contract.Add(contract);
             _dbContext.SaveChanges();
+
+            _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
+            _dbContext.SaveChanges();
+
         }
 
         public void Update(RentableItemsPnDbAnySql _dbContext)
@@ -50,7 +54,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
 
             contract.CustomerId = CustomerId;
-            contract.WorkflowState = WorkflowState;
+            contract.WorkflowState = contract.WorkflowState;
             contract.ContractNr = ContractNr;
 
             if (_dbContext.ChangeTracker.HasChanges())
@@ -58,8 +62,10 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contract.UpdatedAt = DateTime.Now;
                 contract.Updated_By_User_Id = UpdatedByUserID;
                 contract.Version += 1;
+
+                _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
                 _dbContext.SaveChanges();
-                MapContract(_dbContext, contract);
+
             }
 
         }
@@ -70,7 +76,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             Update(_dbContext);
         }
 
-        public void MapContract(RentableItemsPnDbAnySql _dbContext, Contract contract)
+        public ContractVersions MapContract(RentableItemsPnDbMSSQL _dbContext, Contract contract)
         {
             ContractVersions contractVer = new ContractVersions();
 
@@ -86,6 +92,8 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractVer.WorkflowState = contract.WorkflowState;
 
             contractVer.ContractId = contract.Id;
+
+            return contractVer;
 
         }
     }

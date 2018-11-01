@@ -34,6 +34,9 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.RentableItemContract.Add(rentableItemContract);
             _dbContext.SaveChanges();
 
+            _dbContext.RentableItemsContractVersions.Add(MapRentableItemContractVersions(_dbContext, rentableItemContract));
+            _dbContext.SaveChanges();
+
         }
         public void Update(RentableItemsPnDbAnySql _dbContext)
         {
@@ -46,15 +49,17 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemContract.ContractId = ContractId;
             rentableItemContract.RentableItemId = RentableItemId;
-            rentableItemContract.Workflow_state = WorkflowState;
+            rentableItemContract.Workflow_state = rentableItemContract.Workflow_state;
             
             if (_dbContext.ChangeTracker.HasChanges())
             {
                 rentableItemContract.Updated_at = DateTime.Now;
                 rentableItemContract.Updated_By_User_Id = UpdatedByUserID;
                 rentableItemContract.Version += 1;
+
+                _dbContext.RentableItemsContractVersions.Add(MapRentableItemContractVersions(_dbContext, rentableItemContract));
                 _dbContext.SaveChanges();
-                MapRentableItemContractVersions(_dbContext, rentableItemContract);
+
             }
         }
         public void Delete(RentableItemsPnDbAnySql _dbContext)
@@ -63,7 +68,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             Update(_dbContext);
         }
 
-        public void MapRentableItemContractVersions(RentableItemsPnDbAnySql _dbContext, RentableItemContract rentableItemContract)
+        public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbMSSQL _dbContext, RentableItemContract rentableItemContract)
         {
             RentableItemsContractVersions rentableItemscontractVer = new RentableItemsContractVersions();
 
@@ -77,6 +82,8 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItemscontractVer.Workflow_state = rentableItemContract.Workflow_state;
 
             rentableItemscontractVer.RentableItemContractId = rentableItemContract.Id;
+
+            return rentableItemscontractVer;
 
         }
     }
