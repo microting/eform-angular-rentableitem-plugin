@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {LocaleService} from 'src/app/common/services/auth';
+import {AuthService, LocaleService} from 'src/app/common/services/auth';
 
 
-import {RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../models';
-import {RentableItemsPnService} from '../../services';
+import {RentableItemPnModel, RentableItemsFieldsPnUpdateModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../models';
+import {RentableItemsPnFieldsService, RentableItemsPnService} from '../../services';
 declare var require: any;
 
 @Component({
@@ -20,15 +20,19 @@ export class RentableItemsPnPageComponent implements OnInit {
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   spinnerStatus = false;
 
+  fieldsModel: RentableItemsFieldsPnUpdateModel = new RentableItemsFieldsPnUpdateModel();
+
   constructor(private rentableItemsService: RentableItemsPnService,
+              private rentableItemsFieldsService: RentableItemsPnFieldsService,
               private translateService: TranslateService,
-              private localeService: LocaleService) {
+              private localeService: LocaleService,
+              private authService: AuthService) {
 
   }
 
   ngOnInit() {
     this.setTranslation();
-    this.getAllRentableItems();
+    this.getAllInitialData();
   }
 
   setTranslation() {
@@ -44,6 +48,26 @@ export class RentableItemsPnPageComponent implements OnInit {
   showEditRentableItemModal(model: RentableItemPnModel) {
     this.editRentableItemModal.show(model);
   }
+
+  get currentRole(): string {
+    return this.authService.currentRole;
+  }
+
+  getAllInitialData() {
+    this.spinnerStatus = true;
+    this.rentableItemsFieldsService.getAllFields().subscribe((data) => {
+      if (data && data.success) {
+        this.fieldsModel = data.model;
+        this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
+          if (result && result.success) {
+            this.rentableItemsModel = result.model;
+          }
+          this.spinnerStatus = false;
+        }));
+      } this.spinnerStatus = false;
+    });
+  }
+
 
   getAllRentableItems() {
     this.spinnerStatus = true;
@@ -71,4 +95,8 @@ export class RentableItemsPnPageComponent implements OnInit {
     this.getAllRentableItems();
   }
 
+  onSearchInputChanged(value: any) {
+    this.rentableItemsRequestModel.model = value;
+    this.getAllRentableItems();
+  }
 }

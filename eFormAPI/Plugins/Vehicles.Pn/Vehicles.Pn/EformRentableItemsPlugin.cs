@@ -1,12 +1,18 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
-//using RentableItems.Pn.Infrastructure.Data.Factories;
+using RentableItems.Pn.Infrastructure.Data.Entities;
+using RentableItems.Pn.Infrastructure.Data.Factories;
+using RentableItems.Pn.Infrastructure.Enums;
+using RentableItems.Pn.Infrastructure.Extensions;
 using RentableItems.Pn.Services;
+
 
 namespace RentableItems.Pn
 {
@@ -29,28 +35,16 @@ namespace RentableItems.Pn
 
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
-            DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
+            services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
+             b => b.MigrationsAssembly(PluginAssembly().FullName)));
 
-            if (connectionString.ToLower().Contains("convert zero datetime"))
+            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
+            using (RentableItemsPnDbAnySql context = contextFactory.CreateDbContext(new[] { connectionString }))
             {
-                dbContextOptionsBuilder.UseMySQL(connectionString);
-                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseMySQL(connectionString,
-                b => b.MigrationsAssembly(PluginAssembly().FullName)));
-
-                dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-                var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
                 context.Database.Migrate();
             }
-            else
-            {
-                dbContextOptionsBuilder.UseSqlServer(connectionString);
-                services.AddDbContext<RentableItemsPnDbAnySql>(o => o.UseSqlServer(connectionString,
-                b => b.MigrationsAssembly(PluginAssembly().FullName)));
-
-                dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-                var context = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
-                context.Database.Migrate();
-            }
+            // Seed database
+            SeedDatabase(connectionString);
         }
 
         public void Configure(IApplicationBuilder appBuilder)
@@ -59,6 +53,41 @@ namespace RentableItems.Pn
         
         public void SeedDatabase(string connectionString)
         {
+            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
+            using (RentableItemsPnDbAnySql context = contextFactory.CreateDbContext(new[] { connectionString }))
+            {
+
+                //Add Data
+                List<string> rentableItemsFields = new RentableItem().GetPropList();
+                foreach (string name in rentableItemsFields)
+                {
+                    Field field = new Field()
+                    {
+                        Name = name
+                    };
+                    if (!context.Fields.Any(x => x.Name == name))
+                    {
+                        context.Fields.Add(field);
+                    }
+                }
+                context.SaveChanges();
+
+                List<Field> fields = context.Fields.ToList();
+                foreach (Field field in fields)
+                {
+                    RentableItemsField rentableItemsField = new RentableItemsField
+                    {
+                        FieldId = field.Id,
+                        FieldStatus = FieldStatus.Enabled
+                    };
+                    if (!context.RentableItemsFields.Any(x => x.FieldId == field.Id))
+                    {
+                        context.RentableItemsFields.Add(rentableItemsField);
+                    }
+                }
+
+                context.SaveChanges();
+            }
         }
     }
 }

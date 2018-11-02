@@ -1,5 +1,13 @@
 <subheader-pn [title]="'Rentable Items' | translate">
   <div class="p-3">
+    <button *ngIf="currentRole == 'admin'"
+            class="btn btn-danger text-black-50 btn-icon"
+            routerLink="settings"
+            mdbTooltip="{{ 'Settings' | translate }}">
+      <i class="material-icons">
+        build
+      </i>
+    </button>
     <button
       class="btn btn-success"
       mdbTooltip="{{ 'Create rentable item' | translate }}"
@@ -9,6 +17,16 @@
 </subheader-pn>
 
 <div class="container-fluid">
+  <div class="row pl-1">
+    <div class="col-md-2">
+      <div class="md-form">
+        <input mdbInputDirective [mdbValidate]="false"
+               type="text" (input)="onSearchInputChanged($event.target.value)"
+               class="form-control input-sm" id="searchInput">
+        <label for="searchInput">{{'Search' | translate}}</label>
+      </div>
+    </div>
+  </div>
   <div class="row pt-3 table-responsive no-gutters">
     <table class="table table-sm table-striped text-center">
       <thead>
@@ -17,7 +35,8 @@
             (click)="sortByColumn('Id', rentableItemsRequestModel.isSortDsc = !rentableItemsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             ID
-            <i class="material-icons text-black-50" *ngIf="rentableItemsRequestModel.sortColumnName != 'Id'">unfold_more</i>
+            <i class="material-icons text-black-50"
+               *ngIf="rentableItemsRequestModel.sortColumnName != 'Id'">unfold_more</i>
             <i class="material-icons"
                *ngIf="rentableItemsRequestModel.sortColumnName == 'Id' && !rentableItemsRequestModel.isSortDsc">
               expand_less</i>
@@ -157,6 +176,6 @@
 <spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
 
 <app-rentable-items-pn-add #createRentableItemModal
-                     (onRentableItemCreated)="getAllRentableItems()">
-</app-rentable-items-pn-add>
-<app-rentable-items-pn-update #editRentableItemModal (onRentableItemUpdated)="getAllRentableItems()"></app-rentable-items-pn-update>
+                           (onRentableItemCreated)="getAllRentableItems()"></app-rentable-items-pn-add>
+<app-rentable-items-pn-update #editRentableItemModal
+                              (onRentableItemUpdated)="getAllRentableItems()"></app-rentable-items-pn-update>

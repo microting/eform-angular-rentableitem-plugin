@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AdminGuard, AuthGuard} from 'src/app/common/guards';
 import {RentableItemsPnLayoutComponent} from './layouts';
-import {RentableItemsPnPageComponent} from './components';
+import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent} from './components';
 import {ContractsPageComponent} from './components/contracts-page/contracts-page.component';
 import {InspectionsPageComponent} from './components/inspections-page/inspections-page.component';
 
@@ -26,6 +26,11 @@ export const routes: Routes = [
         path: 'inspections',
         canActivate: [AuthGuard],
         component: InspectionsPageComponent
+      },
+      {
+        path: 'settings',
+        canActivate: [AdminGuard],
+        component: RentableItemsPnFieldsComponent
       }
     ]
   }

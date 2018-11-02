@@ -87,7 +87,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbMSSQL _dbContext, RentableItem rentableItem)
+        private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbAnySql _dbContext, RentableItem rentableItem)
         {
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 

@@ -18,16 +18,16 @@
                   <label for="contractId">{{ 'Customer Id' | translate }}*</label>
                 </div>
               </div>
-              <!--<div class="col-md-6">-->
-                <!--<div class="md-form">-->
-                  <!--<input mdbInputDirective-->
-                         <!--[mdbValidate]="false"-->
-                         <!--class="form-control" #contractNumber="ngModel"-->
-                         <!--type="text" [(ngModel)]="newInspectionModel" id="contractNumber"-->
-                         <!--name="contractNumber">-->
-                  <!--<label for="contractNumber">{{ 'Contract Number' | translate }}*</label>-->
-                <!--</div>-->
-              <!--</div>-->
+              <div class="col-md-6">
+                <div class="md-form">
+                  <ng-select
+                    class="custom"
+                    placeholder="Vælg"
+                    >
+                    <ng-option *ngFor="let user of sitesDto">{{user.firstName + ' ' + user.lastName}}</ng-option>
+                  </ng-select>
+                </div>
+              </div>
             </div>
           </form>
         </div>

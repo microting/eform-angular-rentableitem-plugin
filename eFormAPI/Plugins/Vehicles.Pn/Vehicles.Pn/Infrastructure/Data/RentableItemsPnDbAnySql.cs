@@ -19,7 +19,9 @@
         public virtual DbSet<ContractVersions> ContractVersions { get; set; }
         public virtual DbSet<ContractInspection> ContractInspection { get; set; }
         public virtual DbSet<ContractInspectionVersion> ContractInspectionVersion { get; set; }
+        public virtual DbSet<Field> Fields { get; set; }
         public virtual DbSet<RentableItem> RentableItem { get; set; }
+        public virtual DbSet<RentableItemsField> RentableItemsFields { get; set; }
         public virtual DbSet<RentableItemsVersions> RentableItemsVersion { get; set; }
         public virtual DbSet<RentableItemContract> RentableItemContract { get; set; }
         public virtual DbSet<RentableItemsContractVersions> RentableItemsContractVersions { get; set; }
@@ -33,6 +35,8 @@
             modelBuilder.Entity<RentableItem>()
                 .HasIndex(x => x.VinNumber)
                 .IsUnique();
+            modelBuilder.Entity<Field>()
+                 .HasIndex(x => x.Name);
         }
     }
 }

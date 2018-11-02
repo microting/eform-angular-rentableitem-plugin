@@ -73,7 +73,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             Update(_dbContext);
         }
 
-        public ContractInspectionVersion MapContractInspection(RentableItemsPnDbMSSQL _dbContext, ContractInspection contractInspection)
+        public ContractInspectionVersion MapContractInspection(RentableItemsPnDbAnySql _dbContext, ContractInspection contractInspection)
         {
             ContractInspectionVersion contractInspectionVer = new ContractInspectionVersion();
 

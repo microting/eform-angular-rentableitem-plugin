@@ -7,3 +7,7 @@ export * from './contracts-request.model';
 export * from './inspection.model';
 export * from './inspections.model';
 export * from './inspections-request.model';
+export * from './rentable-items-pn-settings.model';
+export * from './field/rentable-items-field-pn.model';
+export * from './field/rentable-items-fields-pn-update.model';
+export * from './field/rentable-items-field-pn-update.model';

@@ -11,7 +11,9 @@ namespace RentableItems.Pn.Infrastructure.Data
         DbSet<ContractVersions> ContractVersions { get; set; }
         DbSet<ContractInspection> ContractInspection { get; set; }
         DbSet<ContractInspectionVersion> ContractInspectionVersion { get; set; }
+        DbSet<Field> Fields { get; set; }
         DbSet<RentableItem> RentableItem { get; set; }
+        DbSet<RentableItemsField> RentableItemsFields { get; set; }
         DbSet<RentableItemsVersions> RentableItemsVersion { get; set; }
         DbSet<RentableItemContract> RentableItemContract { get; set; }
         DbSet<RentableItemsContractVersions> RentableItemsContractVersions { get; set; }

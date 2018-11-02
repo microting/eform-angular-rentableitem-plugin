@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {BaseService} from 'src/app/common/services/base.service';
 import {RentableItemPnModel, RentableItemsPnRequestModel} from 'src/app/plugins/modules/rentable-items-pn/models';
 
-
 const RentableItemsMethods = {
   RentableItemPn: 'api/rentableItems-pn',
   CreateRentableItemPn: 'api/rentbaleItems-pn/create-rentableItem',

@@ -7,12 +7,14 @@ import {MDBRootModule} from 'port/angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
 import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 import {ContractsService, InspectionsService, RentableItemsPnService} from './services';
 import {
   RentableItemsPnPageComponent,
   RentableItemsPnAddComponent,
-  RentableItemsPnUpdateComponent
+  RentableItemsPnUpdateComponent,
+  RentableItemsPnFieldsComponent
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
@@ -34,7 +36,8 @@ import { InspectionsPageComponent } from './components/inspections-page/inspecti
     MDBRootModule,
     FormsModule,
     TranslateModule,
-    SharedPnModule
+    SharedPnModule,
+    NgSelectModule
   ],
   declarations: [
     RentableItemsPnPageComponent,
@@ -46,7 +49,8 @@ import { InspectionsPageComponent } from './components/inspections-page/inspecti
     InspectionsUpdateComponent,
     ContractsUpdateComponent,
     ContractsPageComponent,
-    InspectionsPageComponent
+    InspectionsPageComponent,
+    RentableItemsPnFieldsComponent
   ],
   providers: [
     RentableItemsPnService,

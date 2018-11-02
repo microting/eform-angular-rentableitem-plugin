@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.Extensions.Logging;
@@ -30,8 +31,8 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                var rentableItemsPnModel = new RentableItemsModel();
-                var rentableItemsQuery = _dbContext.RentableItem.AsQueryable();
+                RentableItemsModel rentableItemsPnModel = new RentableItemsModel();
+                IQueryable<RentableItem> rentableItemsQuery = _dbContext.RentableItem.AsQueryable();
                 if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
                 {
                     if (pnRequestModel.IsSortDsc)
@@ -46,7 +47,7 @@ namespace RentableItems.Pn.Services
 
                 rentableItemsPnModel.Total = rentableItemsQuery.Count();
                 rentableItemsQuery = rentableItemsQuery.Skip(pnRequestModel.Offset).Take(pnRequestModel.PageSize);
-                var rentableItems = rentableItemsQuery.ToList();
+                List<RentableItem> rentableItems = rentableItemsQuery.ToList();
                 rentableItems.ForEach(rentableItem =>
                 {
                     rentableItemsPnModel.RentableItems.Add(new RentableItemModel()

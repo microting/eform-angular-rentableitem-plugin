@@ -1,4 +1,5 @@
 export class RentableItemsPnRequestModel {
+  model: string;
   sortColumnName: string;
   pageIndex: number;
   offset: number;

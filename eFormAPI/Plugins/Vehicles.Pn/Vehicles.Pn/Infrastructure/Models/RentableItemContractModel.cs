@@ -68,7 +68,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             Update(_dbContext);
         }
 
-        public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbMSSQL _dbContext, RentableItemContract rentableItemContract)
+        public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbAnySql _dbContext, RentableItemContract rentableItemContract)
         {
             RentableItemsContractVersions rentableItemscontractVer = new RentableItemsContractVersions();
 
