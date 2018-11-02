@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
+using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
 using Vehicles.Pn.Abstractions;
 using Vehicles.Pn.Infrastructure.Data;
 using Vehicles.Pn.Infrastructure.Data.Factories;
@@ -39,6 +40,18 @@ namespace Vehicles.Pn
 
         public void Configure(IApplicationBuilder appBuilder)
         {
+        }
+
+        public MenuModel HeaderMenu()
+        {
+            var result = new MenuModel();
+            result.LeftMenu.Add(new MenuItemModel()
+            {
+                Name = "Vehicles",
+                E2EId = "",
+                Link = "/plugins/vehicles-pn"
+            });
+            return result;
         }
         
         public void SeedDatabase(string connectionString)
