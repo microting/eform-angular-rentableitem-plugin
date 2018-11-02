@@ -9,24 +9,6 @@ namespace RentableItems.Pn.Tests
     [TestFixture]
     public class RentableItemUTest :DbTestFixture
     {
-        RentableItemsPnDbAnySql rentableItemsPnDbAnySql;
-
-        public override void DoSetup()
-        {
-
-            DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-
-            if (ConnectionString.ToLower().Contains("convert zero datetime"))
-            {
-                dbContextOptionsBuilder.UseMySql(ConnectionString);
-            }
-            else
-            {
-                dbContextOptionsBuilder.UseSqlServer(ConnectionString);
-            }
-            //dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            rentableItemsPnDbAnySql = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
-        }
 
         [Test]
         public void RentableItemModel_Save_DoesSave()
@@ -44,7 +26,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.RegistrationDate = registrationDate;
 
             // Act
-            rentableItemModel.Save(rentableItemsPnDbAnySql);
+            rentableItemModel.Save(DbContext);
 
             // Assert
 

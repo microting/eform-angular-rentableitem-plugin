@@ -24,7 +24,9 @@ namespace RentableItems.Pn.Tests
         private static string directoryId = "__DIRECTORY_ID__";
         private static string applicationId = "__APPLICATION_ID__";
 
-        private RentableItemsPnDbAnySql GetContext(string connectionStr)
+        //public RentableItemsPnDbAnySql db;
+
+        public void GetContext(string connectionStr)
         {
 
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
@@ -38,7 +40,11 @@ namespace RentableItems.Pn.Tests
                 dbContextOptionsBuilder.UseSqlServer(connectionStr);
             }
             //dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            return new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
+            DbContext = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
+
+            DbContext.Database.Migrate();
+            DbContext.Database.EnsureCreated();
+            //return db;
 
         }
 
@@ -46,7 +52,7 @@ namespace RentableItems.Pn.Tests
         public void Setup()
         {
 
-            DbContext = GetContext(ConnectionString);
+            GetContext(ConnectionString);
 
 
             DbContext.Database.SetCommandTimeout(300);
