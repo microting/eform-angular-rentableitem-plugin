@@ -24,7 +24,7 @@ namespace RentableItems.Pn.Tests
             {
                 dbContextOptionsBuilder.UseSqlServer(ConnectionString);
             }
-            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+            //dbContextOptionsBuilder.UseLazyLoadingProxies(true);
             rentableItemsPnDbAnySql = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
         }
 
