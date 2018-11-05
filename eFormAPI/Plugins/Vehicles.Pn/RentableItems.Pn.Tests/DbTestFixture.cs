@@ -39,7 +39,7 @@ namespace RentableItems.Pn.Tests
             {
                 dbContextOptionsBuilder.UseSqlServer(connectionStr);
             }
-            //dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
             DbContext = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
 
             DbContext.Database.Migrate();
