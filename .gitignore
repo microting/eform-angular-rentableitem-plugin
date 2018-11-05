@@ -374,3 +374,5 @@ eFormAPI/Plugins/Vehicles\.Pn/Vehicles/
 
 eFormAPI/eFormAPI/Plugins/Vehicles/
 eFormAPI/eFormAPI.Web/Plugins/RentableItems/netcoreapp2.1/RentableItems.Pn.dll
+eFormAPI/eFormAPI.Web/Plugins/RentableItems/netcoreapp2.1/RentableItems.Pn.runtimeconfig.dev.json
+eFormAPI/eFormAPI.Web/Plugins/RentableItems/netcoreapp2.1/RentableItems.Pn.deps.json

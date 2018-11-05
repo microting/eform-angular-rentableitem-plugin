@@ -29,7 +29,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.Save(DbContext);
 
             // Assert
-
+            Assert.NotNull(rentableItemModel);
             //rentableItemsPnDbAnySql.RentableItem.
         }
     }
