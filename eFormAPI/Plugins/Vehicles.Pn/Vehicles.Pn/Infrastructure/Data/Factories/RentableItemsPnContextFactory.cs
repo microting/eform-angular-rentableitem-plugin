@@ -25,7 +25,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
             {
                 throw new ArgumentNullException("Connection string not present");
             }
-            //optionsBuilder.UseLazyLoadingProxies(true);
+            optionsBuilder.UseLazyLoadingProxies(true);
             return new RentableItemsPnDbAnySql(optionsBuilder.Options);
         }
     }
