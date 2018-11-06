@@ -66,8 +66,25 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
-            WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
-            Update(_dbContext);
+            RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
+
+            if (rentableItemsSettings == null)
+            {
+                throw new NullReferenceException($"Could not find RentableItem Setting with id {Id}");
+            }
+
+            rentableItemsSettings.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+
+            if (_dbContext.ChangeTracker.HasChanges())
+            {
+                rentableItemsSettings.Updated_at = DateTime.Now;
+                rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemsSettings.Version += 1;
+
+                _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
+                _dbContext.SaveChanges();
+
+            }
         }
         public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbAnySql _dbContext, RentableItemsSettings rentableItemsSettings)
         {

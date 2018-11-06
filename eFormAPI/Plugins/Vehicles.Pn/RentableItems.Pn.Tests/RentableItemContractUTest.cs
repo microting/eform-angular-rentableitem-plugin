@@ -1,0 +1,234 @@
+﻿using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
+using RentableItems.Pn.Infrastructure.Data;
+using RentableItems.Pn.Infrastructure.Data.Entities;
+using RentableItems.Pn.Infrastructure.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace RentableItems.Pn.Tests
+{
+    [TestFixture]
+    public class RentableItemContractUTest : DbTestFixture
+    {
+        [Test]
+        public void RentableItemContractModel_Save_DoesSave()
+        {
+            // Arrange
+            #region Create
+            #region creating Item
+            RentableItem rentableItemModel = new RentableItem();
+            rentableItemModel.Brand = Guid.NewGuid().ToString();
+            rentableItemModel.ModelName = Guid.NewGuid().ToString();
+            rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
+            rentableItemModel.VinNumber = Guid.NewGuid().ToString();
+            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
+            DateTime registrationDate = DateTime.Now;
+            rentableItemModel.RegistrationDate = registrationDate;
+            DbContext.RentableItem.Add(rentableItemModel);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region creating Contract
+            Contract contractModel = new Contract();
+            Random rnd = new Random();
+            DateTime contractEnd = DateTime.Now;
+            DateTime contractStart = DateTime.Now;
+            contractModel.ContractEnd = contractEnd;
+            contractModel.ContractNr = rnd.Next(1, 123);
+            contractModel.ContractStart = contractStart;
+            contractModel.CustomerId = rnd.Next(1, 99);
+            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            DbContext.Contract.Add(contractModel);
+            DbContext.SaveChanges();
+            #endregion
+            #endregion
+
+            RentableItemContractModel rentableItemContractModel = new RentableItemContractModel();
+
+            rentableItemContractModel.ContractId = contractModel.Id;
+            rentableItemContractModel.RentableItemId = rentableItemModel.Id;
+            rentableItemContractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            // Act
+            rentableItemContractModel.Save(DbContext);
+
+            RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
+            List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();
+            List<RentableItemsContractVersions> versionList = DbContext.RentableItemsContractVersions.AsNoTracking().ToList();
+            // Assert
+            Assert.NotNull(rentableItemcontract);
+
+            Assert.AreEqual(1, rentableItemcontractList.Count());
+
+            Assert.AreEqual(1, versionList.Count());
+
+            Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
+            Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
+            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.Workflow_state);
+
+        }
+        [Test]
+        public void RentableItemContractModel_Update_DoesUpdate()
+        {
+            // Arrange
+            #region Create
+            #region create Item
+            RentableItem rentableItemModel = new RentableItem();
+            rentableItemModel.Brand = Guid.NewGuid().ToString();
+            rentableItemModel.ModelName = Guid.NewGuid().ToString();
+            rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
+            rentableItemModel.VinNumber = Guid.NewGuid().ToString();
+            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
+            DateTime registrationDate = DateTime.Now;
+            rentableItemModel.RegistrationDate = registrationDate;
+
+            DbContext.RentableItem.Add(rentableItemModel);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create Contract
+            Contract contractModel = new Contract();
+            Random rnd = new Random();
+            DateTime contractEnd = DateTime.Now;
+            DateTime contractStart = DateTime.Now;
+            contractModel.ContractEnd = contractEnd;
+            contractModel.ContractNr = rnd.Next(1, 123);
+            contractModel.ContractStart = contractStart;
+            contractModel.CustomerId = rnd.Next(1, 99);
+            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+
+            DbContext.Contract.Add(contractModel);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create rentableContract
+            RentableItemContract rentableItemContract = new RentableItemContract();
+            rentableItemContract.ContractId = contractModel.Id;
+            rentableItemContract.RentableItemId = rentableItemModel.Id;
+
+            DbContext.RentableItemContract.Add(rentableItemContract);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create version
+            RentableItemsContractVersions rentableItemsContractVersions = new RentableItemsContractVersions();
+            rentableItemsContractVersions.RentableItemContractId = rentableItemContract.Id;
+            rentableItemsContractVersions.ContractId = rentableItemContract.ContractId;
+            rentableItemsContractVersions.RentableItemId = rentableItemContract.RentableItemId;
+
+            DbContext.RentableItemsContractVersions.Add(rentableItemsContractVersions);
+            DbContext.SaveChanges();
+
+            #endregion
+            #endregion
+
+            // Act
+            RentableItemContractModel rentableItemContractModel = new RentableItemContractModel();
+            rentableItemContractModel.ContractId = 5;
+            rentableItemContractModel.RentableItemId = rentableItemContract.RentableItemId;
+            rentableItemContractModel.Id = rentableItemContract.Id;
+            rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
+            rentableItemContractModel.Update(DbContext);
+
+            RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
+            List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();
+            List<RentableItemsContractVersions> versionList = DbContext.RentableItemsContractVersions.AsNoTracking().ToList();
+
+            // Assert
+            Assert.NotNull(rentableItemcontract);
+
+            Assert.AreEqual(1, rentableItemcontractList.Count());
+
+            Assert.AreEqual(2, versionList.Count());
+
+            Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
+            Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
+            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.Workflow_state);
+
+        }
+        [Test]
+        public void RentableItemContractModel_Delete_DoesDelete()
+        {
+            // Arrange
+            #region Create
+            #region create Item
+            RentableItem rentableItemModel = new RentableItem();
+            rentableItemModel.Brand = Guid.NewGuid().ToString();
+            rentableItemModel.ModelName = Guid.NewGuid().ToString();
+            rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
+            rentableItemModel.VinNumber = Guid.NewGuid().ToString();
+            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
+            DateTime registrationDate = DateTime.Now;
+            rentableItemModel.RegistrationDate = registrationDate;
+
+            DbContext.RentableItem.Add(rentableItemModel);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create Contract
+            Contract contractModel = new Contract();
+            Random rnd = new Random();
+            DateTime contractEnd = DateTime.Now;
+            DateTime contractStart = DateTime.Now;
+            contractModel.ContractEnd = contractEnd;
+            contractModel.ContractNr = rnd.Next(1, 123);
+            contractModel.ContractStart = contractStart;
+            contractModel.CustomerId = rnd.Next(1, 99);
+            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+
+            DbContext.Contract.Add(contractModel);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create rentableContract
+            RentableItemContract rentableItemContract = new RentableItemContract();
+            rentableItemContract.ContractId = contractModel.Id;
+            rentableItemContract.RentableItemId = rentableItemModel.Id;
+
+            DbContext.RentableItemContract.Add(rentableItemContract);
+            DbContext.SaveChanges();
+            #endregion
+
+            #region create version
+            RentableItemsContractVersions rentableItemsContractVersions = new RentableItemsContractVersions();
+            rentableItemsContractVersions.RentableItemContractId = rentableItemContract.Id;
+            rentableItemsContractVersions.ContractId = rentableItemContract.ContractId;
+            rentableItemsContractVersions.RentableItemId = rentableItemContract.RentableItemId;
+
+            DbContext.RentableItemsContractVersions.Add(rentableItemsContractVersions);
+            DbContext.SaveChanges();
+
+            #endregion
+            #endregion
+
+            // Act
+            RentableItemContractModel rentableItemContractModel = new RentableItemContractModel();
+            rentableItemContractModel.ContractId = rentableItemContract.ContractId;
+            rentableItemContractModel.RentableItemId = rentableItemContract.RentableItemId;
+            rentableItemContractModel.Id = rentableItemContract.Id;
+            rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
+
+            rentableItemContractModel.Delete(DbContext);
+
+            RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
+            List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();
+            List<RentableItemsContractVersions> versionList = DbContext.RentableItemsContractVersions.AsNoTracking().ToList();
+
+            // Assert
+            Assert.NotNull(rentableItemcontract);
+
+            Assert.AreEqual(1, rentableItemcontractList.Count());
+
+            Assert.AreEqual(2, versionList.Count());
+
+            Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
+            Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
+            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, rentableItemcontract.Workflow_state);
+
+        }
+    }
+}

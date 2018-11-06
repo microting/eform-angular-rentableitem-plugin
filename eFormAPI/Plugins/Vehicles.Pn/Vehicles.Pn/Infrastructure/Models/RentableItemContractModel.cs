@@ -64,8 +64,26 @@ namespace RentableItems.Pn.Infrastructure.Models
         }
         public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
-            WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
-            Update(_dbContext);
+            RentableItemContract rentableItemContract = _dbContext.RentableItemContract.FirstOrDefault(x => x.Id == Id);
+
+            if (rentableItemContract == null)
+            {
+                throw new NullReferenceException($"Could not find RentableItem Contract with id {Id}");
+            }
+
+
+            rentableItemContract.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+
+            if (_dbContext.ChangeTracker.HasChanges())
+            {
+                rentableItemContract.Updated_at = DateTime.Now;
+                rentableItemContract.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemContract.Version += 1;
+
+                _dbContext.RentableItemsContractVersions.Add(MapRentableItemContractVersions(_dbContext, rentableItemContract));
+                _dbContext.SaveChanges();
+
+            }
         }
 
         public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbAnySql _dbContext, RentableItemContract rentableItemContract)

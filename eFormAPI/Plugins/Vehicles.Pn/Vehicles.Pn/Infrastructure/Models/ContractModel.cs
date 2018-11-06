@@ -72,8 +72,25 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
-            WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
-            Update(_dbContext);
+            Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
+
+            if (contract == null)
+            {
+                throw new NullReferenceException($"Could not find Contract with id {Id}");
+            }
+
+            contract.WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
+
+            if (_dbContext.ChangeTracker.HasChanges())
+            {
+                contract.UpdatedAt = DateTime.Now;
+                contract.Updated_By_User_Id = UpdatedByUserID;
+                contract.Version += 1;
+
+                _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
+                _dbContext.SaveChanges();
+
+            }
         }
 
         public ContractVersions MapContract(RentableItemsPnDbAnySql _dbContext, Contract contract)

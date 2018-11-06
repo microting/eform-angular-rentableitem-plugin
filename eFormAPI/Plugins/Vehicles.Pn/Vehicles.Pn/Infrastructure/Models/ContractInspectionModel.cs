@@ -32,6 +32,8 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspection.Created_By_User_Id = CreatedByUserID;
             contractInspection.Updated_By_User_Id = UpdatedByUserID;
             contractInspection.ContractId = ContractId;
+            contractInspection.SDK_Case_Id = SdkCaseId;
+            contractInspection.DoneAt = DoneAt;
 
             _dbContext.ContractInspection.Add(contractInspection);
             _dbContext.SaveChanges();
@@ -69,8 +71,26 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
-            WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
-            Update(_dbContext);
+            ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
+
+            if (contractInspection == null)
+            {
+                throw new NullReferenceException($"Could not find Contract Inspection with id {Id}");
+            }
+
+            contractInspection.WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
+            
+
+            if (_dbContext.ChangeTracker.HasChanges())
+            {
+                contractInspection.UpdatedAt = DateTime.Now;
+                contractInspection.Updated_By_User_Id = UpdatedByUserID;
+                contractInspection.Version += 1;
+
+                _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
+                _dbContext.SaveChanges();
+
+            }
         }
 
         public ContractInspectionVersion MapContractInspection(RentableItemsPnDbAnySql _dbContext, ContractInspection contractInspection)

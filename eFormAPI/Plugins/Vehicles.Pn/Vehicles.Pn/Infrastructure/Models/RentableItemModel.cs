@@ -11,8 +11,8 @@ namespace RentableItems.Pn.Infrastructure.Models
         public string Brand { get; set; }
         public string ModelName { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         public int CreatedByUserId { get; set; }
         public int UpdatedByUserId { get; set; }
         public string VinNumber { get; set; }
@@ -82,9 +82,24 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         public void Delete(RentableItemsPnDbAnySql _dbContext)
         {
-            WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
-            Update(_dbContext);
+            RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
+            if (rentableItem == null)
+            {
+                throw new NullReferenceException($"Could not find RentableItem with id {Id}");
+            }
+
+            rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+
+            if (_dbContext.ChangeTracker.HasChanges())
+            {
+                rentableItem.Updated_at = DateTime.Now;
+                rentableItem.Updated_By_User_Id = UpdatedByUserId;
+                rentableItem.Version += 1;
+
+                _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
+                _dbContext.SaveChanges();
+            }
         }
 
         private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbAnySql _dbContext, RentableItem rentableItem)
