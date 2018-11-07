@@ -4,10 +4,11 @@ mono:
   - latest
 dotnet: 2.1.0
 script:
-- dotnet restore
-- dotnet build eFormAPI.sln
-- dotnet test eFormAPI.sln
-- cd eform-client && npm install
+  - dotnet --info
+  - dotnet restore
+  - dotnet build eFormAPI.sln
+  - dotnet test eFormAPI.sln
+  - cd eform-client && npm install
 after_success:
 - echo dotnet test and npm test succeeded
 after_faliure:
