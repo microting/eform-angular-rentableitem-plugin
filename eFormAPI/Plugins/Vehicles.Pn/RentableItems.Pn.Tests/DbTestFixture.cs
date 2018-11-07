@@ -58,7 +58,7 @@ namespace RentableItems.Pn.Tests
             }
             else
             {
-                ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = travis; Convert Zero Datetime = true;";
+                ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = root; Convert Zero Datetime = true;";
             }
 
 
