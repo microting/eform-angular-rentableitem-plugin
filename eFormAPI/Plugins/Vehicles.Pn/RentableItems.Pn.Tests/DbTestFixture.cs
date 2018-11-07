@@ -58,7 +58,7 @@ namespace RentableItems.Pn.Tests
             }
             else
             {
-                ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = root; Convert Zero Datetime = true;";
+                ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = travis; Convert Zero Datetime = true;";
             }
 
 
@@ -112,7 +112,7 @@ namespace RentableItems.Pn.Tests
                     string sqlCmd = string.Empty;
                     if (DbContext.Database.IsMySql())
                     {
-                        sqlCmd = string.Format("DELETE FROM `{0}`.`{1}`", "eformsdk-tests", modelName);
+                        sqlCmd = string.Format("DELETE FROM `{0}`.`{1}`", "rentable-items-pn-tests", modelName);
                     }
                     else
                     {
