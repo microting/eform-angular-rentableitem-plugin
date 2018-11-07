@@ -3,6 +3,6 @@ solution: RentableItems.Pn.sln
 mono: none
 dotnet: 2.1
 script:
-  - dotnet restore RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
-  - dotnet build RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
-  - dotnet test RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
+  - dotnet restore eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
+  - dotnet build eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
+  - dotnet test eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
