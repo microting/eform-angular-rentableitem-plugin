@@ -4,6 +4,9 @@ mono:
   - latest
 dotnet: 2.1.0
 script:
+  - cd eFormAPI
+  - cd Plugins
+  - cd Vehicles.pn
   - dotnet --info
   - dotnet restore
   - dotnet build eFormAPI.sln
