@@ -1,9 +1,6 @@
 language: csharp
 solution: RentableItems.Pn.sln
 script:
-  - cd eFormAPI
-  - cd Plugins
-  - cd Vehicles.pn
   - dotnet restore eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
   - dotnet build eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
   - dotnet test eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn-Tests.csproj
