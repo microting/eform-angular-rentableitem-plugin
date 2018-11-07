@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RentableItems.Pn.Infrastructure.Data;
 using System.IO;
+using System.Runtime.InteropServices;
+
 
 namespace RentableItems.Pn.Tests
 {
@@ -13,9 +15,8 @@ namespace RentableItems.Pn.Tests
     {
 
         protected RentableItemsPnDbAnySql DbContext;
+        protected string ConnectionString;
 
-        protected string ConnectionString => @"data source=(LocalDb)\SharedInstance;Initial catalog=rentableitems-tests;Integrated Security=True";
-        //protected string ConnectionString => @"Server = localhost; port = 3306; Database = rentableitems-tests; user = eform; password = eform; Convert Zero Datetime = true;";
 
         private static string userName = "__USER_NAME__";
         private static string password = "__PASSWORD__";
@@ -51,6 +52,15 @@ namespace RentableItems.Pn.Tests
         [SetUp]
         public void Setup()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                ConnectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=rentable-items-pn-tests;Integrated Security=True";
+            }
+            else
+            {
+                ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = root; Convert Zero Datetime = true;";
+            }
+
 
             GetContext(ConnectionString);
 

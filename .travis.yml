@@ -12,9 +12,9 @@ addons:
 sudo: required
 language: csharp
 solution: RentableItems.Pn.sln
-env: DOTNETCORE=2.1
-mono: latest
-dotnet: 2.0.0
+mono:
+  - latest
+dotnet: 2.1.0
 before_install:
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('new_password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
 - sudo mysql_upgrade -u root -pnew_password
@@ -28,6 +28,9 @@ before_script:
 - sleep 3
 - fluxbox > /dev/null 2>&1 &
 script:
+- dotnet restore
+- dotnet build eFormAPI.sln
+- dotnet test eFormAPI.sln
 - cd eform-client && npm install
 after_success:
 - echo dotnet test and npm test succeeded
