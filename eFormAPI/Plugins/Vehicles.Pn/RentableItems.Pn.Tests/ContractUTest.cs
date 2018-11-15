@@ -40,7 +40,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(1, versionList.Count());
 
-            //Assert.AreEqual(contractModel.ContractEnd, dbContract.ContractEnd);
+            Assert.AreEqual(contractModel.ContractEnd, dbContract.ContractEnd);
             Assert.AreEqual(contractModel.ContractNr, dbContract.ContractNr);
             Assert.AreEqual(contractModel.ContractStart, dbContract.ContractStart);
             Assert.AreEqual(contractModel.CustomerId, dbContract.CustomerId);

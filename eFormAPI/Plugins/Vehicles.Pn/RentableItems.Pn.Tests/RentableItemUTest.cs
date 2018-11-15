@@ -26,7 +26,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
-            rentableItemModel.RegistrationDate = registrationDate;
+            rentableItemModel.RegistrationDate = DateTime.UtcNow; 
 
             // Act
             rentableItemModel.Save(DbContext);
