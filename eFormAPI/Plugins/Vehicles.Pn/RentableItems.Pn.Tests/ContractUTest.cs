@@ -18,8 +18,8 @@ namespace RentableItems.Pn.Tests
             // Arrange
             ContractModel contractModel = new ContractModel();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr =  rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
@@ -53,8 +53,8 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contract.ContractEnd = contractEnd;
             contract.ContractNr = rnd.Next(1, 123);
             contract.ContractStart = contractStart;
@@ -115,8 +115,8 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contract.ContractEnd = contractEnd;
             contract.ContractNr = rnd.Next(1, 123);
             contract.ContractStart = contractStart;

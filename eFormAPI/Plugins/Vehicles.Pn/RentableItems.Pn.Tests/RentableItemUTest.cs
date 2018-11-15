@@ -25,7 +25,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
             rentableItemModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
 
             // Act
@@ -62,7 +62,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.VinNumber = Guid.NewGuid().ToString();
             rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItem);         
@@ -136,7 +136,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.VinNumber = Guid.NewGuid().ToString();
             rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItem);

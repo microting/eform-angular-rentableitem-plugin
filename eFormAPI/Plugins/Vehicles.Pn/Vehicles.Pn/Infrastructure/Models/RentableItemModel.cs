@@ -33,6 +33,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         public void Save(RentableItemsPnDbAnySql _dbContext)
         {
+            
             RentableItem rentableItem = new RentableItem();
             rentableItem.VinNumber = VinNumber;
             rentableItem.Brand = Brand;

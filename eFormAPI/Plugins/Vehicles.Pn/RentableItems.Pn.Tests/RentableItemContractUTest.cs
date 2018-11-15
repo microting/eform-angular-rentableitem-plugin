@@ -25,7 +25,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
             rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
             DbContext.RentableItem.Add(rentableItemModel);
             DbContext.SaveChanges();
@@ -34,8 +34,8 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
@@ -82,7 +82,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
             rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItemModel);
@@ -92,8 +92,8 @@ namespace RentableItems.Pn.Tests
             #region create Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
@@ -162,7 +162,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
             rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
-            DateTime registrationDate = DateTime.Now;
+            DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItemModel);
@@ -172,8 +172,8 @@ namespace RentableItems.Pn.Tests
             #region create Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;

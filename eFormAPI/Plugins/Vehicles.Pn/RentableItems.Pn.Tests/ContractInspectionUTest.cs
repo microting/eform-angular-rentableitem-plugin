@@ -33,7 +33,7 @@ namespace RentableItems.Pn.Tests
 
             ContractInspectionModel contractInspectionModel = new ContractInspectionModel();
       
-            DateTime doneAt = DateTime.Now;
+            DateTime doneAt = DateTime.UtcNow;
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.SdkCaseId = rnd.Next(1, 255);
             contractInspectionModel.CreatedByUserID = rnd.Next(1, 222);
@@ -68,8 +68,8 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
@@ -128,8 +128,8 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
             contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;

@@ -2,10 +2,6 @@
 {
     using Microsoft.EntityFrameworkCore;
     using RentableItems.Pn.Infrastructure.Data.Entities;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Storage;
-    using MySql.Data.MySqlClient;
-    using System;
 
     public partial class RentableItemsPnDbAnySql : DbContext
     {
