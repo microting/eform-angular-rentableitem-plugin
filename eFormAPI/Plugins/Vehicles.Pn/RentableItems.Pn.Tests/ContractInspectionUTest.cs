@@ -113,7 +113,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionList.Count());
 
-            //Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
+            Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
             Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
             Assert.AreEqual(contractInspectionModel.DoneAt, dbContractInspection.DoneAt);
@@ -158,7 +158,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.DoneAt = contractInspection.DoneAt;
             contractInspectionModel.Id = contractInspection.Id;
-            contractInspectionModel.SdkCaseId = contractInspection.SDK_Case_Id;
+            //contractInspectionModel.SdkCaseId = contractInspection.SDK_Case_Id;
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
             contractInspectionModel.Delete(DbContext);
@@ -173,8 +173,8 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionList.Count());
 
-            //Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
-            Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
+            Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
+            //Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
             Assert.AreEqual(contractInspectionModel.DoneAt, dbContractInspection.DoneAt);
             Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
