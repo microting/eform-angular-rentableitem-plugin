@@ -18,11 +18,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             ContractModel contractModel = new ContractModel();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.UtcNow;
-            DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.UtcNow;
+            //DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = DateTime.UtcNow;
             contractModel.ContractNr =  rnd.Next(1, 123);
-            contractModel.ContractStart = contractStart;
+            contractModel.ContractStart = DateTime.UtcNow;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -53,11 +53,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.UtcNow;
-            DateTime contractStart = DateTime.UtcNow;
-            contract.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.UtcNow;
+            //DateTime contractStart = DateTime.UtcNow;
+            contract.ContractEnd = DateTime.UtcNow;
             contract.ContractNr = rnd.Next(1, 123);
-            contract.ContractStart = contractStart;
+            contract.ContractStart = DateTime.UtcNow;
             contract.CustomerId = rnd.Next(1, 99);
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -115,11 +115,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.UtcNow;
-            DateTime contractStart = DateTime.UtcNow;
-            contract.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.UtcNow;
+            //DateTime contractStart = DateTime.UtcNow;
+            contract.ContractEnd = DateTime.UtcNow;
             contract.ContractNr = rnd.Next(1, 123);
-            contract.ContractStart = contractStart;
+            contract.ContractStart = DateTime.UtcNow;
             contract.CustomerId = rnd.Next(1, 99);
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 

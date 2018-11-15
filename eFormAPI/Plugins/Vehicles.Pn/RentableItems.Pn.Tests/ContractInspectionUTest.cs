@@ -19,11 +19,11 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.Now;
-            DateTime contractStart = DateTime.Now;
-            contractModel.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.Now;
+            //DateTime contractStart = DateTime.Now;
+            contractModel.ContractEnd = DateTime.UtcNow;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = contractStart;
+            contractModel.ContractStart = DateTime.UtcNow;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.SdkCaseId = rnd.Next(1, 255);
             contractInspectionModel.CreatedByUserID = rnd.Next(1, 222);
-            contractInspectionModel.DoneAt = doneAt;
+            contractInspectionModel.DoneAt = DateTime.UtcNow;
             contractInspectionModel.UpdatedByUserID = rnd.Next(1, 333);
             contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -68,11 +68,11 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.UtcNow;
-            DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.UtcNow;
+            //DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = DateTime.UtcNow;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = contractStart;
+            contractModel.ContractStart = DateTime.UtcNow;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
@@ -82,6 +82,7 @@ namespace RentableItems.Pn.Tests
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
             contractInspection.SDK_Case_Id = rnd.Next(1, 666);
+            contractInspection.DoneAt = DateTime.UtcNow;
 
             DbContext.ContractInspection.Add(contractInspection);
             DbContext.SaveChanges();
@@ -128,11 +129,11 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            DateTime contractEnd = DateTime.UtcNow;
-            DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = contractEnd;
+            //DateTime contractEnd = DateTime.UtcNow;
+            //DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = DateTime.UtcNow;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = contractStart;
+            contractModel.ContractStart = DateTime.UtcNow;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
@@ -142,7 +143,7 @@ namespace RentableItems.Pn.Tests
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
             contractInspection.SDK_Case_Id = rnd.Next(1, 666);
-
+            contractInspection.DoneAt = DateTime.UtcNow;
             DbContext.ContractInspection.Add(contractInspection);
             DbContext.SaveChanges();
 
