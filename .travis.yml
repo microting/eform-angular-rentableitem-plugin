@@ -5,4 +5,4 @@ dotnet: 2.1
 script:
   - dotnet restore eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
   - dotnet build eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
-  - dotnet test eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
+  - dotnet test -v n eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
