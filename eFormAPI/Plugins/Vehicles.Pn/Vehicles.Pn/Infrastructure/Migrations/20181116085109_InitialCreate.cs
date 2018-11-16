@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RentableItems.Pn.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
             string autoIDGenStrategy = "SqlServer:ValueGenerationStrategy";
             object autoIDGenStrategyValue = SqlServerValueGenerationStrategy.IdentityColumn;
 
@@ -19,7 +18,6 @@ namespace RentableItems.Pn.Migrations
                 autoIDGenStrategy = "MySQL:ValueGeneratedOnAdd";
                 autoIDGenStrategyValue = true;
             }
-
             migrationBuilder.CreateTable(
                 name: "Contract",
                 columns: table => new
@@ -33,8 +31,8 @@ namespace RentableItems.Pn.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Created_By_User_Id = table.Column<int>(nullable: false),
                     Updated_By_User_Id = table.Column<int>(nullable: false),
-                    ContractStart = table.Column<DateTime>(nullable: false),
-                    ContractEnd = table.Column<DateTime>(nullable: false),
+                    ContractStart = table.Column<DateTime>(nullable: true),
+                    ContractEnd = table.Column<DateTime>(nullable: true),
                     CustomerId = table.Column<int>(nullable: false),
                     ContractNr = table.Column<int>(nullable: false)
                 },
@@ -79,8 +77,8 @@ namespace RentableItems.Pn.Migrations
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     Created_By_User_Id = table.Column<int>(nullable: false),
                     Updated_By_User_Id = table.Column<int>(nullable: false),
-                    ContractStart = table.Column<DateTime>(nullable: false),
-                    ContractEnd = table.Column<DateTime>(nullable: false),
+                    ContractStart = table.Column<DateTime>(nullable: true),
+                    ContractEnd = table.Column<DateTime>(nullable: true),
                     CustomerId = table.Column<int>(nullable: false),
                     ContractNr = table.Column<int>(nullable: false),
                     ContractId = table.Column<int>(nullable: false)
@@ -88,6 +86,19 @@ namespace RentableItems.Pn.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContractVersions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fields",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
+                    Name = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fields", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,7 +217,7 @@ namespace RentableItems.Pn.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
                     WorkflowState = table.Column<string>(maxLength: 255, nullable: true),
-                    Version = table.Column<int>(nullable: true),
+                    Version = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
@@ -223,6 +234,26 @@ namespace RentableItems.Pn.Migrations
                         name: "FK_ContractInspection_Contract_ContractId",
                         column: x => x.ContractId,
                         principalTable: "Contract",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RentableItemsFields",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation(autoIDGenStrategy, autoIDGenStrategyValue),
+                    FieldId = table.Column<int>(nullable: false),
+                    FieldStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentableItemsFields", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RentableItemsFields_Fields_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "Fields",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -259,9 +290,26 @@ namespace RentableItems.Pn.Migrations
                 column: "ContractId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fields_Name",
+                table: "Fields",
+                column: "Name");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentableItem_VinNumber",
+                table: "RentableItem",
+                column: "VinNumber",
+                unique: true,
+                filter: "[VinNumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RentableItemContract_RentableItemId",
                 table: "RentableItemContract",
                 column: "RentableItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentableItemsFields_FieldId",
+                table: "RentableItemsFields",
+                column: "FieldId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -282,6 +330,9 @@ namespace RentableItems.Pn.Migrations
                 name: "RentableItemsContractVersions");
 
             migrationBuilder.DropTable(
+                name: "RentableItemsFields");
+
+            migrationBuilder.DropTable(
                 name: "RentableItemsSettings");
 
             migrationBuilder.DropTable(
@@ -295,6 +346,9 @@ namespace RentableItems.Pn.Migrations
 
             migrationBuilder.DropTable(
                 name: "RentableItem");
+
+            migrationBuilder.DropTable(
+                name: "Fields");
         }
     }
 }

@@ -10,8 +10,8 @@ using RentableItems.Pn.Infrastructure.Data;
 namespace RentableItems.Pn.Migrations
 {
     [DbContext(typeof(RentableItemsPnDbAnySql))]
-    [Migration("20181023083240_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20181116085109_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,11 +34,11 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation(autoIDGenStrategy, autoIDGenStrategyValue);
 
-                    b.Property<DateTime>("ContractEnd");
+                    b.Property<DateTime?>("ContractEnd");
 
                     b.Property<int>("ContractNr");
 
-                    b.Property<DateTime>("ContractStart");
+                    b.Property<DateTime?>("ContractStart");
 
                     b.Property<DateTime?>("CreatedAt");
 
@@ -84,7 +84,7 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("Updated_By_User_Id");
 
-                    b.Property<int?>("Version");
+                    b.Property<int>("Version");
 
                     b.Property<string>("WorkflowState")
                         .HasMaxLength(255);
@@ -136,13 +136,13 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation(autoIDGenStrategy, autoIDGenStrategyValue);
 
-                    b.Property<DateTime>("ContractEnd");
+                    b.Property<DateTime?>("ContractEnd");
 
                     b.Property<int>("ContractId");
 
                     b.Property<int>("ContractNr");
 
-                    b.Property<DateTime>("ContractStart");
+                    b.Property<DateTime?>("ContractStart");
 
                     b.Property<DateTime?>("CreatedAt");
 
@@ -164,6 +164,22 @@ namespace RentableItems.Pn.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContractVersions");
+                });
+
+            modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.Field", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation(autoIDGenStrategy, autoIDGenStrategyValue);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("Fields");
                 });
 
             modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.RentableItem", b =>
@@ -200,6 +216,10 @@ namespace RentableItems.Pn.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("VinNumber")
+                        .IsUnique()
+                        .HasFilter("[VinNumber] IS NOT NULL");
 
                     b.ToTable("RentableItem");
                 });
@@ -262,6 +282,23 @@ namespace RentableItems.Pn.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RentableItemsContractVersions");
+                });
+
+            modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.RentableItemsField", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation(autoIDGenStrategy, autoIDGenStrategyValue);
+
+                    b.Property<int>("FieldId");
+
+                    b.Property<int>("FieldStatus");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
+
+                    b.ToTable("RentableItemsFields");
                 });
 
             modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.RentableItemsSettings", b =>
@@ -371,6 +408,14 @@ namespace RentableItems.Pn.Migrations
                     b.HasOne("RentableItems.Pn.Infrastructure.Data.Entities.RentableItem", "RentableItem")
                         .WithMany("RentableItemContracts")
                         .HasForeignKey("RentableItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.RentableItemsField", b =>
+                {
+                    b.HasOne("RentableItems.Pn.Infrastructure.Data.Entities.Field", "Field")
+                        .WithMany()
+                        .HasForeignKey("FieldId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
