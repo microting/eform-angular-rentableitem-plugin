@@ -19,11 +19,11 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.Now;
-            //DateTime contractStart = DateTime.Now;
-            contractModel.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.Now;
+            DateTime contractStart = DateTime.Now;
+            contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = DateTime.UtcNow;
+            contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.SdkCaseId = rnd.Next(1, 255);
             contractInspectionModel.CreatedByUserID = rnd.Next(1, 222);
-            contractInspectionModel.DoneAt = DateTime.UtcNow;
+            contractInspectionModel.DoneAt = doneAt;
             contractInspectionModel.UpdatedByUserID = rnd.Next(1, 333);
             contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -57,7 +57,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
             Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
-            Assert.AreEqual(contractInspectionModel.DoneAt, dbContractInspection.DoneAt);
+            Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
             Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
             Assert.AreEqual(contractInspectionModel.WorkflowState, dbContractInspection.WorkflowState);
         }
@@ -68,21 +68,22 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.UtcNow;
-            //DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = DateTime.UtcNow;
+            contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
             DbContext.SaveChanges();
             #endregion
 
+            DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
             contractInspection.SDK_Case_Id = rnd.Next(1, 666);
-            contractInspection.DoneAt = DateTime.UtcNow;
+            contractInspection.DoneAt = doneAt;
 
             DbContext.ContractInspection.Add(contractInspection);
             DbContext.SaveChanges();
@@ -117,7 +118,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
             Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
-            Assert.AreEqual(contractInspectionModel.DoneAt, dbContractInspection.DoneAt);
+            Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
             Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
             Assert.AreEqual(contractInspectionModel.WorkflowState, dbContractInspection.WorkflowState);
 
@@ -129,21 +130,22 @@ namespace RentableItems.Pn.Tests
             #region creating Contract
             Contract contractModel = new Contract();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.UtcNow;
-            //DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr = rnd.Next(1, 123);
-            contractModel.ContractStart = DateTime.UtcNow;
+            contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
             DbContext.SaveChanges();
             #endregion
 
+            DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
             contractInspection.SDK_Case_Id = rnd.Next(1, 666);
-            contractInspection.DoneAt = DateTime.UtcNow;
+            contractInspection.DoneAt = doneAt;
             DbContext.ContractInspection.Add(contractInspection);
             DbContext.SaveChanges();
 
@@ -173,11 +175,12 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(1, inspectionList.Count());
 
             Assert.AreEqual(2, versionList.Count());
-
+            
+            
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
             Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
-            Assert.AreEqual(contractInspectionModel.DoneAt, dbContractInspection.DoneAt);
+            Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
             Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
             Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbContractInspection.WorkflowState);
         }

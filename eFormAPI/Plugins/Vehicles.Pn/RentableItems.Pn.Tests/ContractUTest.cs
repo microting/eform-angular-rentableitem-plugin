@@ -18,11 +18,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             ContractModel contractModel = new ContractModel();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.UtcNow;
-            //DateTime contractStart = DateTime.UtcNow;
-            contractModel.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
+            contractModel.ContractEnd = contractEnd;
             contractModel.ContractNr =  rnd.Next(1, 123);
-            contractModel.ContractStart = DateTime.UtcNow;
+            contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -40,9 +40,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(1, versionList.Count());
 
-            Assert.AreEqual(contractModel.ContractEnd, dbContract.ContractEnd);
+            Assert.AreEqual(contractModel.ContractEnd.ToString(), dbContract.ContractEnd.ToString());
             Assert.AreEqual(contractModel.ContractNr, dbContract.ContractNr);
-            Assert.AreEqual(contractModel.ContractStart, dbContract.ContractStart);
+            Assert.AreEqual(contractModel.ContractStart.ToString(), dbContract.ContractStart.ToString());
             Assert.AreEqual(contractModel.CustomerId, dbContract.CustomerId);
             Assert.AreEqual(contractModel.WorkflowState, dbContract.WorkflowState);
         }
@@ -53,11 +53,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.UtcNow;
-            //DateTime contractStart = DateTime.UtcNow;
-            contract.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
+            contract.ContractEnd = contractEnd;
             contract.ContractNr = rnd.Next(1, 123);
-            contract.ContractStart = DateTime.UtcNow;
+            contract.ContractStart = contractStart;
             contract.CustomerId = rnd.Next(1, 99);
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -88,6 +88,8 @@ namespace RentableItems.Pn.Tests
             contractModel.Version = contract.Version;
             contractModel.WorkflowState = contract.WorkflowState;
 
+            contractModel.Id = contract.Id;
+
             contractModel.Update(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
@@ -101,9 +103,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionList.Count());
 
-            Assert.AreEqual(contract.ContractEnd, dbContract.ContractEnd);
+            Assert.AreEqual(contract.ContractEnd.ToString(), dbContract.ContractEnd.ToString());
             Assert.AreEqual(contract.ContractNr, dbContract.ContractNr);
-            Assert.AreEqual(contract.ContractStart, dbContract.ContractStart);
+            Assert.AreEqual(contract.ContractStart.ToString(), dbContract.ContractStart.ToString());
             Assert.AreEqual(contract.CustomerId, dbContract.CustomerId);
             Assert.AreEqual(contract.WorkflowState, dbContract.WorkflowState);
         }
@@ -114,11 +116,11 @@ namespace RentableItems.Pn.Tests
             // Arrange
             Contract contract = new Contract();
             Random rnd = new Random();
-            //DateTime contractEnd = DateTime.UtcNow;
-            //DateTime contractStart = DateTime.UtcNow;
-            contract.ContractEnd = DateTime.UtcNow;
+            DateTime contractEnd = DateTime.UtcNow;
+            DateTime contractStart = DateTime.UtcNow;
+            contract.ContractEnd = contractEnd;
             contract.ContractNr = rnd.Next(1, 123);
-            contract.ContractStart = DateTime.UtcNow;
+            contract.ContractStart = contractStart;
             contract.CustomerId = rnd.Next(1, 99);
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
@@ -149,6 +151,8 @@ namespace RentableItems.Pn.Tests
             contractModel.Version = contract.Version;
             contractModel.WorkflowState = contract.WorkflowState;
 
+            contractModel.Id = contract.Id;
+
             contractModel.Delete(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
@@ -162,9 +166,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionList.Count());
 
-            Assert.AreEqual(contract.ContractEnd, dbContract.ContractEnd);
+            Assert.AreEqual(contract.ContractEnd.ToString(), dbContract.ContractEnd.ToString());
             Assert.AreEqual(contract.ContractNr, dbContract.ContractNr);
-            Assert.AreEqual(contract.ContractStart, dbContract.ContractStart);
+            Assert.AreEqual(contract.ContractStart.ToString(), dbContract.ContractStart.ToString());
             Assert.AreEqual(contract.CustomerId, dbContract.CustomerId);
             Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbContract.WorkflowState);
 

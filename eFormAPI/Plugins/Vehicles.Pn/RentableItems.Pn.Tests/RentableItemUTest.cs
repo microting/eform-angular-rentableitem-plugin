@@ -10,7 +10,7 @@ using System.Linq;
 namespace RentableItems.Pn.Tests
 {
     [TestFixture]
-    public class RentableItemUTest :DbTestFixture
+    public class RentableItemUTest : DbTestFixture
     {
 
         [Test]
@@ -26,7 +26,8 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
-            rentableItemModel.RegistrationDate = DateTime.UtcNow; 
+            rentableItemModel.RegistrationDate = registrationDate; 
+
 
             // Act
             rentableItemModel.Save(DbContext);
@@ -46,7 +47,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItemModel.PlateNumber, rentableItem.PlateNumber);
             Assert.AreEqual(rentableItemModel.VinNumber, rentableItem.VinNumber);
             Assert.AreEqual(rentableItemModel.SerialNumber, rentableItem.SerialNumber);
-            Assert.AreEqual(rentableItemModel.RegistrationDate, rentableItem.RegistrationDate);
+            Assert.AreEqual(rentableItemModel.RegistrationDate.ToString(), rentableItem.RegistrationDate.ToString());
             Assert.AreEqual(rentableItemModel.WorkflowState, rentableItem.Workflow_state);
             //rentableItemsPnDbAnySql.RentableItem.
         }
@@ -103,6 +104,8 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.VinNumber = "656565F";
             rentableItemModel.WorkflowState = rentableItem.Workflow_state;
 
+            rentableItemModel.Id = rentableItem.Id;
+
             rentableItemModel.Update(DbContext);
 
             RentableItem dbRentableItem = DbContext.RentableItem.AsNoTracking().First();
@@ -120,7 +123,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItem.PlateNumber, dbRentableItem.PlateNumber);
             Assert.AreEqual(rentableItem.VinNumber, dbRentableItem.VinNumber);
             Assert.AreEqual(rentableItem.SerialNumber, dbRentableItem.SerialNumber);
-            Assert.AreEqual(rentableItem.RegistrationDate, dbRentableItem.RegistrationDate);
+            Assert.AreEqual(rentableItem.RegistrationDate.ToString(), dbRentableItem.RegistrationDate.ToString());
             Assert.AreEqual(rentableItem.Workflow_state, dbRentableItem.Workflow_state);
         }
 
@@ -154,6 +157,8 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.UpdatedByUserId = rentableItem.Updated_By_User_Id;
             rentableItemModel.VinNumber = rentableItem.VinNumber;
             rentableItemModel.WorkflowState = rentableItem.Workflow_state;
+
+            rentableItemModel.Id = rentableItem.Id;
 
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
@@ -193,7 +198,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItem.PlateNumber, dbRentableItem.PlateNumber);
             Assert.AreEqual(rentableItem.VinNumber, dbRentableItem.VinNumber);
             Assert.AreEqual(rentableItem.SerialNumber, dbRentableItem.SerialNumber);
-            Assert.AreEqual(rentableItem.RegistrationDate, dbRentableItem.RegistrationDate);
+            Assert.AreEqual(rentableItem.RegistrationDate.ToString(), dbRentableItem.RegistrationDate.ToString());
             Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbRentableItem.Workflow_state);
         }
     }
