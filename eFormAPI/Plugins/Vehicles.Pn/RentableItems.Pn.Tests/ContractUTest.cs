@@ -83,7 +83,6 @@ namespace RentableItems.Pn.Tests
             contractModel.CreatedAt = contract.CreatedAt;
             contractModel.CreatedByUserID = contract.Created_By_User_Id;
             contractModel.CustomerId = contract.CustomerId;
-            contractModel.Id = contract.Id;
             contractModel.UpdatedAt = contract.UpdatedAt;
             contractModel.UpdatedByUserID = contract.Updated_By_User_Id;
             contractModel.Version = contract.Version;
@@ -145,7 +144,6 @@ namespace RentableItems.Pn.Tests
             contractModel.CreatedAt = contract.CreatedAt;
             contractModel.CreatedByUserID = contract.Created_By_User_Id;
             contractModel.CustomerId = contract.CustomerId;
-            contractModel.Id = contract.Id;
             contractModel.UpdatedAt = contract.UpdatedAt;
             contractModel.UpdatedByUserID = contract.Updated_By_User_Id;
             contractModel.Version = contract.Version;
