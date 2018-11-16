@@ -6,6 +6,8 @@ script:
   - dotnet restore eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.sln
   - dotnet build eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.sln
   - dotnet test -v n eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
+  - cd eform-client && npm install
+  - npm test -v
 after_success:
 - echo dotnet test and npm test succeeded
 after_faliure:

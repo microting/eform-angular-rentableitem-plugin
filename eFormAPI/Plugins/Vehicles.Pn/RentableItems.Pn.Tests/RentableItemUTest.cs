@@ -91,7 +91,6 @@ namespace RentableItems.Pn.Tests
 
             // Act
             RentableItemModel rentableItemModel = new RentableItemModel();
-            rentableItemModel.Id = rentableItem.Id;
             rentableItemModel.Brand = rentableItem.Brand;
             rentableItemModel.CreatedAt = rentableItem.Created_at;
             rentableItemModel.CreatedByUserId = rentableItem.Created_By_User_Id;
@@ -144,7 +143,6 @@ namespace RentableItems.Pn.Tests
 
             // Act
             RentableItemModel rentableItemModel = new RentableItemModel();
-            rentableItemModel.Id = rentableItem.Id;
             rentableItemModel.Brand = rentableItem.Brand;
             rentableItemModel.CreatedAt = rentableItem.Created_at;
             rentableItemModel.CreatedByUserId = rentableItem.Created_By_User_Id;
