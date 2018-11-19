@@ -55,7 +55,7 @@ namespace RentableItems.Pn.Tests
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id;
+            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id.Value;
             rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
@@ -100,7 +100,7 @@ namespace RentableItems.Pn.Tests
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id;
+            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id.Value;
             rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
