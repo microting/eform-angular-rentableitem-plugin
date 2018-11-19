@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using eFormCore;
+using eFormData;
 using Microsoft.Extensions.Logging;
+using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
@@ -17,13 +20,16 @@ namespace RentableItems.Pn.Services
         private readonly ILogger<RentableItemsService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
         private readonly RentableItemsPnDbAnySql _dbContext;
+        private readonly IEFormCoreService _coreHelper;
 
         public RentableItemsService(RentableItemsPnDbAnySql dbContext,
-            ILogger<RentableItemsService> logger,
+            ILogger<RentableItemsService> logger, 
+            IEFormCoreService coreHelper,
             IRentableItemsLocalizationService rentableItemLocalizationService)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
         }
 

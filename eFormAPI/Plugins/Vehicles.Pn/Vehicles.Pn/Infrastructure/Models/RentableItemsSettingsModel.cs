@@ -16,7 +16,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? UpdatedAt { get; set; }
         public int CreatedByUserID { get; set; }
         public int UpdatedByUserID { get; set; }
-        public int EformId { get; set; }
+        public int? EformId { get; set; }
 
         public void Save(RentableItemsPnDbAnySql _dbContext)
         {
