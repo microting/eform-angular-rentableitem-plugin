@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
+using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
@@ -50,7 +51,19 @@ namespace RentableItems.Pn
         public void Configure(IApplicationBuilder appBuilder)
         {
         }
-        
+
+        public MenuModel HeaderMenu()
+        {
+            MenuModel result = new MenuModel();
+            result.LeftMenu.Add(new MenuItemModel()
+            {
+                Name = "Rentable Items",
+                E2EId = "",
+                Link = "/plugins/rentable-items"
+            });
+            return result;
+        }
+
         public void SeedDatabase(string connectionString)
         {
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
