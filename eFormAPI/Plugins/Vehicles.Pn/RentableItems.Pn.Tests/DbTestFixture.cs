@@ -52,14 +52,14 @@ namespace RentableItems.Pn.Tests
         [SetUp]
         public void Setup()
         {
-            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            //{
-            //    ConnectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=rentable-items-pn-tests;Integrated Security=True";
-            //}
-            //else
-            //{
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                ConnectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=rentable-items-pn-tests;Integrated Security=True";
+            }
+            else
+            {
                 ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = root; Convert Zero Datetime = true;";
-            //}
+            }
 
 
             GetContext(ConnectionString);
