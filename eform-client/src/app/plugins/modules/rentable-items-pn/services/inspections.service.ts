@@ -8,8 +8,8 @@ import {Observable} from 'rxjs';
 
 const InspectionsMethods = {
   Inspections: 'api/inspections',
-  CreateInspections: 'api/create-inspection',
-  UpdateInspection: 'api/update-inspection'
+  CreateInspections: 'api/inspections/create-inspection',
+  UpdateInspection: 'api/inspections/update-inspection'
 };
 
 @Injectable()

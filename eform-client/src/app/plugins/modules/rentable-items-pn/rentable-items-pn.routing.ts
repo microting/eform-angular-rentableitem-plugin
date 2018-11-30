@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AdminGuard, AuthGuard} from 'src/app/common/guards';
 import {RentableItemsPnLayoutComponent} from './layouts';
-import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent} from './components';
+import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent, RentableItemsSettingsComponent} from './components';
 import {ContractsPageComponent} from './components/contracts-page/contracts-page.component';
 import {InspectionsPageComponent} from './components/inspections-page/inspections-page.component';
 
@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: RentableItemsPnLayoutComponent,
     children: [
       {
-        path: 'rentable-items',
+        path: '',
         canActivate: [AuthGuard],
         component: RentableItemsPnPageComponent
       },
@@ -30,7 +30,7 @@ export const routes: Routes = [
       {
         path: 'settings',
         canActivate: [AdminGuard],
-        component: RentableItemsPnFieldsComponent
+        component: RentableItemsSettingsComponent
       }
     ]
   }

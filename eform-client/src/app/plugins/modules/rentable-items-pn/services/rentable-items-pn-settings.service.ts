@@ -8,12 +8,10 @@ import {OperationDataResult, OperationResult} from '../../../../common/models';
 import {RentableItemsPnSettingsModel} from '../models';
 
 export let RentableItemsSettingsMethods = {
-  RentableItemsPnSettings: 'api/rentable-items/settings'
+  RentableItemsPnSettings: 'api/rentable-items-pn/settings'
 };
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RentableItemsPnSettingsService extends BaseService {
   constructor(private _http: HttpClient, router: Router, toastrService: ToastrService) {
     super(_http, router, toastrService);

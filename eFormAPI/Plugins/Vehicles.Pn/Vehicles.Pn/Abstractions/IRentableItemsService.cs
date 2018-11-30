@@ -8,5 +8,6 @@ namespace RentableItems.Pn.Abstractions
         OperationDataResult<RentableItemsModel> GetAllRentableItems(RentableItemsRequestModel pnRequestModel);
         OperationResult CreateRentableItem(RentableItemModel rentableItemPnCreateModel);
         OperationResult UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel);
+        OperationResult DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel);
     }
 }

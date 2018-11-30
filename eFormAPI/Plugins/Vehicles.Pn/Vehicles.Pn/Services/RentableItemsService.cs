@@ -17,21 +17,21 @@ namespace RentableItems.Pn.Services
 {
     public class RentableItemsService : IRentableItemsService
     {
-        private readonly ILogger<RentableItemsService> _logger;
-        private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-        private readonly RentableItemsPnDbAnySql _dbContext;
-        private readonly IEFormCoreService _coreHelper;
+            private readonly ILogger<RentableItemsService> _logger;
+            private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
+            private readonly RentableItemsPnDbAnySql _dbContext;
+            private readonly IEFormCoreService _coreHelper;
 
-        public RentableItemsService(RentableItemsPnDbAnySql dbContext,
-            ILogger<RentableItemsService> logger, 
-            IEFormCoreService coreHelper,
-            IRentableItemsLocalizationService rentableItemLocalizationService)
-        {
-            _dbContext = dbContext;
-            _logger = logger;
-            _coreHelper = coreHelper;
-            _rentableItemsLocalizationService = rentableItemLocalizationService;
-        }
+            public RentableItemsService(RentableItemsPnDbAnySql dbContext,
+                ILogger<RentableItemsService> logger, 
+                IEFormCoreService coreHelper,
+                IRentableItemsLocalizationService rentableItemLocalizationService)
+            {
+                _dbContext = dbContext;
+                _logger = logger;
+                _coreHelper = coreHelper;
+                _rentableItemsLocalizationService = rentableItemLocalizationService;
+            }
 
         public OperationDataResult<RentableItemsModel> GetAllRentableItems(RentableItemsRequestModel pnRequestModel)
         {
@@ -135,6 +135,21 @@ namespace RentableItems.Pn.Services
                 _logger.LogError(e.Message);
                 return new OperationDataResult<RentableItemsModel>(true,
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
+            }
+        }
+        public OperationResult DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel)
+        {
+            try
+            {
+                rentableItemPnDeleteModel.Delete(_dbContext);
+                return new OperationDataResult<RentableItemsModel>(true);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationDataResult<RentableItemsModel>(true,
+                    _rentableItemsLocalizationService.GetString("ErrorWhileDeleringRentableItem"));
             }
         }
     }

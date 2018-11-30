@@ -3,7 +3,7 @@
     <button
       class="btn btn-success"
       mdbTooltip="{{'Create Inspection' | translate}}"
-    (click)="showCreateInspectionModal()">
+      (click)="showCreateInspectionModal()">
       {{'New Inspection'}}
     </button>
   </div>
@@ -15,14 +15,14 @@
       <thead>
       <tr>
         <th scope="col" class="table-header-sortable" id="idSort"
-        (click)="sortByColumn('Id', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('Id', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             ID
             <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'Id'">
               unfold_more</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'Id' && !inspectionsRequestModel.isSortDsc">
-              unfold_less</i>
+              expand_less</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'Id' && inspectionsRequestModel.isSortDsc">
               expand_more</i>
@@ -36,7 +36,7 @@
               unfold_more</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'contractId' && !inspectionsRequestModel.isSortDsc">
-              unfold_less</i>
+              expand_less</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'contractId' && inspectionsRequestModel.isSortDsc">
               expand_more</i>
@@ -50,7 +50,7 @@
               unfold_more</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'SdkCaseId' && !inspectionsRequestModel.isSortDsc">
-              unfold_less</i>
+              expand_less</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'SdkCaseId' && inspectionsRequestModel.isSortDsc">
               expand_more</i>
@@ -64,7 +64,7 @@
               unfold_more</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'Status' && !inspectionsRequestModel.isSortDsc">
-              unfold_less</i>
+              expand_less</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'Status' && inspectionsRequestModel.isSortDsc">
               expand_more</i>
@@ -78,7 +78,7 @@
               unfold_more</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'doneAt' && !inspectionsRequestModel.isSortDsc">
-              unfold_less</i>
+              expand_less</i>
             <i class="material-icons"
                *ngIf="inspectionsRequestModel.sortColumnName == 'doneAt' && inspectionsRequestModel.isSortDsc">
               expand_more</i>
@@ -104,7 +104,7 @@
           {{inspection.status}}
         </td>
         <td>
-          {{inspection.doneAt}}
+          {{inspection.doneAt | date:'dd/MM/yyyy'}}
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
@@ -128,6 +128,12 @@
       </tbody>
     </table>
   </div>
+  <pagination-pn *ngIf="inspectionsModel?.total > inspectionsRequestModel.pageSize"
+                 [limit]="inspectionsRequestModel.pageSize"
+                 [size]="inspectionsModel.total"
+                 [offset]="inspectionsRequestModel.offset"
+                 (onPageChanged)="changePage($event)"></pagination-pn>
 </div>
 
 <app-inspections-add #createInspectionModal></app-inspections-add>
+<app-inspections-update #editInspectionModal></app-inspections-update>

@@ -4,7 +4,7 @@ using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Models;
 
-namespace Vehicles.Pn.Controllers
+namespace RentableItems.Pn.Controllers
 {
     [Authorize]
     public class RentableItemsController : Controller
@@ -24,17 +24,24 @@ namespace Vehicles.Pn.Controllers
         }
 
         [HttpPost]
-        [Route("api/rentbaleItems-pn/create-rentableItem")]
+        [Route("api/rentableItems-pn/create-rentableItem")]
         public OperationResult CreateRentableItem([FromBody] RentableItemModel rentableItemCreateModel)
         {
             return _rentableItemsService.CreateRentableItem(rentableItemCreateModel);
         }
 
         [HttpPost]
-        [Route("api/rentbaleItems-pn/update-rentableItem")]
+        [Route("api/rentableItems-pn/update-rentableItem")]
         public OperationResult UpdateRentableItem([FromBody] RentableItemModel rentableItemUpdateModel)
         {
             return _rentableItemsService.UpdateRentableItem(rentableItemUpdateModel);
+        }
+
+        [HttpDelete]
+        [Route("api/rentableItems-pn/delete-rentableItem")]
+        public OperationResult DeleteRentableItem([FromBody] RentableItemModel rentableItemDeleteModel)
+        {
+            return _rentableItemsService.DeleteRentableItem(rentableItemDeleteModel);
         }
     }
 }

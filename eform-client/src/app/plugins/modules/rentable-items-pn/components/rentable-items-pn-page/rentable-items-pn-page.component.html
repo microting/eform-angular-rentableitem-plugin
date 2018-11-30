@@ -45,7 +45,7 @@
           </div>
         </th>
         <th scope="col" class="table-header-sortable" id="brandSort"
-            (click)="sortByColumn('ContactNumber', rentableItemsRequestModel.isSortDsc = !rentableItemsRequestModel.isSortDsc)">
+            (click)="sortByColumn('Brand', rentableItemsRequestModel.isSortDsc = !rentableItemsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             {{ 'Brand' | translate }}
             <i class="material-icons text-black-50" *ngIf="rentableItemsRequestModel.sortColumnName != 'Brand'">unfold_more</i>

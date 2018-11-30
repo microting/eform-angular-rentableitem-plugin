@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using eFormCore;
+using eFormData;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -38,14 +39,13 @@ namespace RentableItems.Pn.Services
             {
                 RentableItemsSettingsModel result = new RentableItemsSettingsModel();
                 RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault();
-                if(rentableItemsSettings?.Eform_Id != null)
+                if(rentableItemsSettings?.eForm_Id != null)
                 {
-                    result.EformId = (int)rentableItemsSettings.Eform_Id;
-                    
+                    result.eFormId = (int)rentableItemsSettings.eForm_Id;
                 }
                 else
                 {
-                    result.EformId = null;
+                    result.eFormId = null;
                 }
                 return new OperationDataResult<RentableItemsSettingsModel>(true, result);
             }
@@ -62,23 +62,30 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                if(rentableItemsSettingsModel.EformId == 0)
+                if(rentableItemsSettingsModel.eFormId == 0)
                 {
                     return new OperationResult(true);
                 }
                 RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault();
                 if(rentableItemsSettings == null)
                 {
-                    rentableItemsSettings = new RentableItemsSettings()
-                    {
-                        Eform_Id = rentableItemsSettingsModel.EformId
-                    };
+                    rentableItemsSettings = new RentableItemsSettings();
+                    
+                    rentableItemsSettings.eForm_Id = rentableItemsSettingsModel.eFormId;
+                    
                     _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
                 }
                 else
                 {
-                    rentableItemsSettings.Eform_Id = rentableItemsSettingsModel.EformId;
+                    rentableItemsSettings.eForm_Id = rentableItemsSettingsModel.eFormId;
                 }
+                if(rentableItemsSettingsModel.eFormId != null)
+                {
+                    Core core = _coreHelper.GetCore();
+                    MainElement eForm = core.TemplateRead((int)rentableItemsSettingsModel.eFormId);
+                    rentableItemsSettingsModel.eFormId = eForm.Id;
+                }
+
                 _dbContext.SaveChanges();
                 return new OperationResult(true,
                     _rentablteItemsLocalizationsService.GetString("SettingsHasBeenUpdatedSuccessfully"));

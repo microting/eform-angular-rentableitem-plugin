@@ -89,6 +89,6 @@ export class RentableItemsPnFieldsComponent implements OnInit {
   }
 
   onSelectedChanged(e: any) {
-    this.rentableItemsPnSettingsModel.EformId = e.microtingUUID;
+    this.rentableItemsPnSettingsModel.eFormId = e.microtingUUID;
   }
 }

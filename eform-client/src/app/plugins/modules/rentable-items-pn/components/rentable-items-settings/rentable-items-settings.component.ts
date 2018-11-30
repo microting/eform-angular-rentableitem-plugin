@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {debounceTime, switchMap} from 'rxjs/operators';
 import {TemplateListModel, TemplateRequestModel} from 'src/app/common/models/eforms';
@@ -7,9 +7,9 @@ import {RentableItemsPnSettingsModel} from '../../models';
 import {RentableItemsPnSettingsService} from '../../services';
 
 @Component({
-  selector: 'app-case-management-pn-settings',
-  templateUrl: './case-management-pn-settings.component.html',
-  styleUrls: ['./case-management-pn-settings.component.scss']
+  selector: 'app-rentable-items-settings',
+  templateUrl: './rentable-items-settings.component.html',
+  styleUrls: ['./rentable-items-settings.component.scss']
 })
 export class RentableItemsSettingsComponent implements OnInit {
   spinnerStatus = false;
@@ -19,7 +19,7 @@ export class RentableItemsSettingsComponent implements OnInit {
   templatesModel: TemplateListModel = new TemplateListModel();
   constructor(private activateRoute: ActivatedRoute,
               private eFormService: EFormService,
-              private rentableItemsService: RentableItemsPnSettingsService,
+              private rentableItemsSettingsService: RentableItemsPnSettingsService,
               private cd: ChangeDetectorRef) {
     this.typeahead
       .pipe(
@@ -41,7 +41,7 @@ export class RentableItemsSettingsComponent implements OnInit {
 
   getSettings() {
     this.spinnerStatus = true;
-    this.rentableItemsService.getAllSettings().subscribe((data) => {
+    this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
       if (data && data.success) {
         this.settingsModel = data.model;
       } this.spinnerStatus = false;
@@ -50,7 +50,7 @@ export class RentableItemsSettingsComponent implements OnInit {
 
   updateSettings() {
     this.spinnerStatus = true;
-    this.rentableItemsService.updateSettings(this.settingsModel)
+    this.rentableItemsSettingsService.updateSettings(this.settingsModel)
       .subscribe((data) => {
       if (data && data.success) {
 
@@ -59,6 +59,6 @@ export class RentableItemsSettingsComponent implements OnInit {
   }
 
   onSelectedChanged(e: any) {
-    this.settingsModel.EformId = e.id;
+    this.settingsModel.eFormId = e.id;
   }
 }

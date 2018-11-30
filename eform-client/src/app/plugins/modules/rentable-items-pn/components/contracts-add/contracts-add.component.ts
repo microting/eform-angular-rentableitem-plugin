@@ -38,7 +38,7 @@ export class ContractsAddComponent implements OnInit {
   onStartDateSelected(e: any) {
     this.newContractModel.contractStart = formatTimezone(e.value._d);
   }
-  onEndDateSelected(e: any) {
-    this.newContractModel.contractEnd = formatTimezone(e.value._d);
+  onEndDateSelected(f: any) {
+    this.newContractModel.contractEnd = formatTimezone(f.value._d);
   }
 }

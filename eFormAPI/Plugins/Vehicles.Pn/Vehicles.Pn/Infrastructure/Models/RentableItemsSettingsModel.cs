@@ -16,8 +16,8 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? UpdatedAt { get; set; }
         public int CreatedByUserID { get; set; }
         public int UpdatedByUserID { get; set; }
-        public int? EformId { get; set; }
-
+        public int? eFormId { get; set; }
+        
         public void Save(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
@@ -28,7 +28,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItemsSettings.Updated_at = DateTime.Now;
             rentableItemsSettings.Created_By_User_Id = CreatedByUserID;
             rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
-            rentableItemsSettings.Eform_Id = EformId;
+            rentableItemsSettings.eForm_Id = eFormId;
 
             _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
             _dbContext.SaveChanges();
@@ -49,7 +49,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem Setting with id {Id}");
             }
 
-            rentableItemsSettings.Eform_Id = EformId;
+            rentableItemsSettings.eForm_Id = eFormId;
             rentableItemsSettings.Workflow_state = rentableItemsSettings.Workflow_state;
 
             if (_dbContext.ChangeTracker.HasChanges())

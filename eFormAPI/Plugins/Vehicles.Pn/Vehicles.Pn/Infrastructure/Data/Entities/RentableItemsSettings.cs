@@ -21,7 +21,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 
         public int Updated_By_User_Id { get; set; }
 
-        public int? Eform_Id { get; set; }
+        public int? eForm_Id { get; set; }
 
     }
 }

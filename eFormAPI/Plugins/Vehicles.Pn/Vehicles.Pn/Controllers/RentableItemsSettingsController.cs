@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -22,7 +19,7 @@ namespace RentableItems.Pn.Controllers
 
         [HttpGet]
         [Authorize(Roles = EformRole.Admin)]
-        [Route("api/rentable-items/settings")]
+        [Route("api/rentable-items-pn/settings")]
         public OperationDataResult<RentableItemsSettingsModel> GetSettings()
         {
             return _rentableItemsSettingsService.GetSettings();
@@ -30,8 +27,8 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Authorize(Roles = EformRole.Admin)]
-        [Route("api/rentable-items/settings")]
-        public OperationResult UpdateSettings(RentableItemsSettingsModel rentableItemsSettingsModel)
+        [Route("api/rentable-items-pn/settings")]
+        public OperationResult UpdateSettings([FromBody]RentableItemsSettingsModel rentableItemsSettingsModel)
         {
             return _rentableItemsSettingsService.UpdateSettings(rentableItemsSettingsModel);
         }

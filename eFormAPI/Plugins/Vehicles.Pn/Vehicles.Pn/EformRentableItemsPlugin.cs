@@ -31,6 +31,9 @@ namespace RentableItems.Pn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRentableItemsService, RentableItemsService>();
+            services.AddScoped<IRentableItemsSettingsService, RentableItemsSettingsService>();
+            services.AddScoped<IContractsService, ContractService>();
+            services.AddScoped<IContractsInspectionService, ContractsInspectionService>();
             services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
         }
 
@@ -54,12 +57,47 @@ namespace RentableItems.Pn
 
         public MenuModel HeaderMenu()
         {
+            MenuItemModel rentableItem = new MenuItemModel()
+            {
+                Name = "Rentable Items",
+                E2EId = "",
+                Link = "/plugins/rentable-items-pn"
+
+            };
+            MenuItemModel contracts = new MenuItemModel()
+            {
+                Name = "Contracts",
+                E2EId = "",
+                Link = "/plugins/rentable-items-pn/contracts"
+
+            };
+            MenuItemModel inspeciton = new MenuItemModel()
+            {
+                Name = "Inspections",
+                E2EId = "",
+                Link = "/plugins/rentable-items-pn/inspections"
+
+            };
+            MenuItemModel settings = new MenuItemModel()
+            {
+                Name = "Settings",
+                E2EId = "",
+                Link = "/plugins/rentable-items-pn/settings"
+
+            };
+            List<MenuItemModel> items = new List<MenuItemModel>();
+            items.Add(rentableItem);
+            items.Add(contracts);
+            items.Add(inspeciton);
+            items.Add(settings);
             MenuModel result = new MenuModel();
             result.LeftMenu.Add(new MenuItemModel()
             {
                 Name = "Rentable Items",
                 E2EId = "",
-                Link = "/plugins/rentable-items"
+                Link = "/plugins/rentable-items-pn",
+                MenuItems = items
+                
             });
             return result;
         }

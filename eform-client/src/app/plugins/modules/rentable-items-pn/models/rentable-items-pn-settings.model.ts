@@ -1,3 +1,3 @@
 export class RentableItemsPnSettingsModel {
-    EformId: number;
+    eFormId: number;
 }

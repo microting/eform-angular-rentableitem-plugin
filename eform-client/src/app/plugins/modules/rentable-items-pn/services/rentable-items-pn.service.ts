@@ -8,8 +8,8 @@ import {RentableItemPnModel, RentableItemsPnRequestModel} from 'src/app/plugins/
 
 const RentableItemsMethods = {
   RentableItemPn: 'api/rentableItems-pn',
-  CreateRentableItemPn: 'api/rentbaleItems-pn/create-rentableItem',
-  UpdateRentableItemPn: 'api/rentbaleItems-pn/update-rentableItem'
+  CreateRentableItemPn: 'api/rentableItems-pn/create-rentableItem',
+  UpdateRentableItemPn: 'api/rentableItems-pn/update-rentableItem'
 };
 
 @Injectable()

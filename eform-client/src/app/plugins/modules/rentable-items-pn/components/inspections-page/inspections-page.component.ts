@@ -42,6 +42,7 @@ export class InspectionsPageComponent implements OnInit {
     this.editInspectionModal.show(model);
   }
   getAllInspections() {
+    // debugger;
     this.spinnerStatus = true;
     this.inspectionsService.getAllInspections(this.inspectionsRequestModel).subscribe(( data => {
       this.inspectionsModel = data.model;

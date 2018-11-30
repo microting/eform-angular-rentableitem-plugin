@@ -3,8 +3,13 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthService, LocaleService} from 'src/app/common/services/auth';
 
 
-import {RentableItemPnModel, RentableItemsFieldsPnUpdateModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../models';
-import {RentableItemsPnFieldsService, RentableItemsPnService} from '../../services';
+import {
+  RentableItemPnModel,
+  RentableItemsPnModel,
+  RentableItemsPnRequestModel,
+  RentableItemsPnSettingsModel
+} from '../../models';
+import {RentableItemsPnService, RentableItemsPnSettingsService} from '../../services';
 declare var require: any;
 
 @Component({
@@ -20,10 +25,10 @@ export class RentableItemsPnPageComponent implements OnInit {
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   spinnerStatus = false;
 
-  fieldsModel: RentableItemsFieldsPnUpdateModel = new RentableItemsFieldsPnUpdateModel();
+  settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
 
   constructor(private rentableItemsService: RentableItemsPnService,
-              private rentableItemsFieldsService: RentableItemsPnFieldsService,
+              private rentableItemsSettingsService: RentableItemsPnSettingsService,
               private translateService: TranslateService,
               private localeService: LocaleService,
               private authService: AuthService) {
@@ -55,9 +60,9 @@ export class RentableItemsPnPageComponent implements OnInit {
 
   getAllInitialData() {
     this.spinnerStatus = true;
-    this.rentableItemsFieldsService.getAllFields().subscribe((data) => {
+    this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
       if (data && data.success) {
-        this.fieldsModel = data.model;
+        this.settingsModel = data.model;
         this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
           if (result && result.success) {
             this.rentableItemsModel = result.model;
@@ -67,7 +72,16 @@ export class RentableItemsPnPageComponent implements OnInit {
       } this.spinnerStatus = false;
     });
   }
-
+  //
+  // getAllSettings() {
+  //   this.spinnerStatus = true;
+  //   this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
+  //     if (data && data.success) {
+  //       this.settingsModel = data.model;
+  //     }
+  //   });
+  //   this.spinnerStatus = false;
+  // }
 
   getAllRentableItems() {
     this.spinnerStatus = true;
