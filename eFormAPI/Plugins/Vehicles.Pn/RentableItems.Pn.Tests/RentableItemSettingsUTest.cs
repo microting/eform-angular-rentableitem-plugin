@@ -20,7 +20,7 @@ namespace RentableItems.Pn.Tests
             Random rnd = new Random();
             rentableItemsSettingsModel.CreatedByUserID = rnd.Next(1, 541);
             rentableItemsSettingsModel.UpdatedByUserID = rnd.Next(1, 541);
-            rentableItemsSettingsModel.EformId = rnd.Next(123, 582);
+            rentableItemsSettingsModel.eFormId = rnd.Next(123, 582);
 
             // Act
             rentableItemsSettingsModel.Save(DbContext);
@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
             Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.EformId, dbRentableItemsSettings.Eform_Id);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
 
         }
         [Test]
@@ -47,7 +47,7 @@ namespace RentableItems.Pn.Tests
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
             Random rnd = new Random();
             rentableItemsSettings.Created_By_User_Id = rnd.Next(1, 82);
-            rentableItemsSettings.Eform_Id = rnd.Next(5, 100);
+            rentableItemsSettings.eForm_Id = rnd.Next(5, 100);
             rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
@@ -55,7 +55,7 @@ namespace RentableItems.Pn.Tests
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id.Value;
+            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.eForm_Id.Value;
             rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
@@ -64,7 +64,7 @@ namespace RentableItems.Pn.Tests
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
             rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsModel.EformId = 555;
+            rentableItemsSettingsModel.eFormId = 555;
             rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
             rentableItemsSettingsModel.Update(DbContext);
@@ -81,7 +81,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
             Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.EformId, dbRentableItemsSettings.Eform_Id);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
 
 
         }
@@ -92,7 +92,7 @@ namespace RentableItems.Pn.Tests
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
             Random rnd = new Random();
             rentableItemsSettings.Created_By_User_Id = rnd.Next(1, 82);
-            rentableItemsSettings.Eform_Id = rnd.Next(5, 100);
+            rentableItemsSettings.eForm_Id = rnd.Next(5, 100);
             rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
@@ -100,7 +100,7 @@ namespace RentableItems.Pn.Tests
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.Eform_Id.Value;
+            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.eForm_Id.Value;
             rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
@@ -109,7 +109,7 @@ namespace RentableItems.Pn.Tests
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
             rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsModel.EformId = rentableItemsSettings.Eform_Id;
+            rentableItemsSettingsModel.eFormId = rentableItemsSettings.eForm_Id;
             rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
 
@@ -127,7 +127,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
             Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.EformId, dbRentableItemsSettings.Eform_Id);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
             Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbRentableItemsSettings.Workflow_state);
 
 
