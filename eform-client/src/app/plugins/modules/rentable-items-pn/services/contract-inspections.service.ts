@@ -3,7 +3,7 @@ import {BaseService} from '../../../../common/services/base.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {InspectionModel, InspectionsRequestModel} from '../models';
+import {ContractInspectionModel, ContractInspectionsRequestModel} from '../models';
 import {Observable} from 'rxjs';
 
 const InspectionsMethods = {
@@ -14,21 +14,22 @@ const InspectionsMethods = {
 
 @Injectable()
 
-export class InspectionsService extends BaseService {
+export class ContractInspectionsService extends BaseService {
 
   constructor(private _http: HttpClient, router: Router, toastrService: ToastrService) {
     super(_http, router, toastrService);
   }
 
-  getAllInspections(model: InspectionsRequestModel): Observable<any> {
+  getAllInspections(model: ContractInspectionsRequestModel): Observable<any> {
     return this.post(InspectionsMethods.Inspections, model);
   }
 
-  createInspection(model: InspectionModel): Observable<any> {
+  createInspection(model: ContractInspectionModel): Observable<any> {
     return this.post(InspectionsMethods.CreateInspections, model);
   }
 
-  updateInspection(model: InspectionModel): Observable<any> {
-    return this.put(InspectionsMethods.UpdateInspection, model);
+  updateInspection(model: ContractInspectionModel): Observable<any> {
+    // debugger;
+    return this.post(InspectionsMethods.UpdateInspection, model);
   }
 }

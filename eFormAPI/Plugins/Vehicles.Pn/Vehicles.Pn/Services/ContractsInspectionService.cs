@@ -58,6 +58,7 @@ namespace RentableItems.Pn.Services
                         ContractId = contractInspection.ContractId,
                         DoneAt = contractInspection.DoneAt,
                         SdkCaseId = contractInspection.SDK_Case_Id,
+                        SiteId = contractInspection.SiteId,
                         Id = contractInspection.Id,
                     });
                 });

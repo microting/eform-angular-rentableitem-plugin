@@ -5,7 +5,7 @@ import {AdminGuard, AuthGuard} from 'src/app/common/guards';
 import {RentableItemsPnLayoutComponent} from './layouts';
 import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent, RentableItemsSettingsComponent} from './components';
 import {ContractsPageComponent} from './components/contracts-page/contracts-page.component';
-import {InspectionsPageComponent} from './components/inspections-page/inspections-page.component';
+import {ContractInspectionsPageComponent} from './components/contract-inspections-page/contract-inspections-page.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
       {
         path: 'inspections',
         canActivate: [AuthGuard],
-        component: InspectionsPageComponent
+        component: ContractInspectionsPageComponent
       },
       {
         path: 'settings',

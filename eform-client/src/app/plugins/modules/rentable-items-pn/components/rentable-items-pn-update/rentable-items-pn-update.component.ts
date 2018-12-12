@@ -35,6 +35,6 @@ export class RentableItemsPnUpdateComponent implements OnInit {
   }
 
   onRegistrationDateSelected(e: any) {
-    this.selectedRentableItemModel.registrationDate = formatTimezone(e.value);
+    this.selectedRentableItemModel.registrationDate = formatTimezone(e.value._d);
   }
 }

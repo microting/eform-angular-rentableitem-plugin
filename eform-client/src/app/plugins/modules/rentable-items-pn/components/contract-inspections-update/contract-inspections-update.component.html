@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>{{ 'Update rentable item' | translate }}</h3>
+        <h3>{{ 'Update Contract Inspection' | translate }}</h3>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -12,31 +12,19 @@
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
-                         class="form-control" required #editBrand="ngModel"
-                         type="text" [(ngModel)]="selectedInspectionModel.contractId"
+                         class="form-control" required #editContractId="ngModel"
+                         type="text" [(ngModel)]="selectedContractInspectionModel.contractId"
                          name="editContractId" id="editContractId">
                   <label for="editContractId">{{'Contract Id' | translate}}*</label>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false" class="form-control"
-                         required #editRentableItemModel="ngModel"
-                         type="text" [(ngModel)]="selectedInspectionModel.id"
-                         name="editInspectionModel" id="editInspectionModel">
-                  <label for="editInspectionModel">{{'Model' | translate}}*</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
               <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInputDirective
                          [owlDateTime]="dt1"
                          [mdbValidate]="false"
-                         [ngModel]="selectedInspectionModel.doneAt"
+                         [ngModel]="selectedContractInspectionModel.doneAt"
                          (dateTimeChange)="onDoneAtSelected($event)"
                          type="text"
                          id="doneAt"
@@ -47,12 +35,14 @@
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
-                         class="form-control" #editVinNumber="ngModel"
-                         type="text" [(ngModel)]="selectedInspectionModel.SdkCaseId"
+                         class="form-control" #editSdkCaseId="ngModel"
+                         type="text" [(ngModel)]="selectedContractInspectionModel.sdkCaseId"
                          name="editSdkCaseId" id="editSdkCaseId">
                   <label for="editSdkCaseId">{{ 'SDK Case Id' | translate }}*</label>
                 </div>
@@ -61,8 +51,8 @@
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
-                         class="form-control"  #editSerialNumber="ngModel"
-                         type="text" [(ngModel)]="selectedInspectionModel.status"
+                         class="form-control"  #editStatus="ngModel"
+                         type="text" [(ngModel)]="selectedContractInspectionModel.status"
                          name="editStatus" id="editStatus">
                   <label for="editStatus">{{ 'Status' | translate }}*</label>
                 </div>
@@ -72,7 +62,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" [disabled]="!editForm.form.valid" (click)="updateInspection()">{{ 'Save' | translate
+        <button class="btn btn-success" [disabled]="!editForm.form.valid" (click)="updateInspection()">{{ 'Save' | translate
           }}
         </button>
         <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>

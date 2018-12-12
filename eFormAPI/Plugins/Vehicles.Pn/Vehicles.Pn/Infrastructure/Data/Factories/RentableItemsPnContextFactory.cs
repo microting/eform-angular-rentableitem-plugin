@@ -10,21 +10,22 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
         public RentableItemsPnDbAnySql CreateDbContext(string[] args)
         {
             DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbAnySql>();
-            if (args.Any())
-            {
-                if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))
-                {
-                    optionsBuilder.UseMySql(args.FirstOrDefault());
-                }
-                else
-                {
-                    optionsBuilder.UseSqlServer(args.FirstOrDefault());
-                }
-            }
-            else
-            {
-                throw new ArgumentNullException("Connection string not present");
-            }
+            //if (args.Any())
+            //{
+            //    if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))
+            //    {
+            //        optionsBuilder.UseMySql(args.FirstOrDefault());
+            //    }
+            //    else
+            //    {
+            //        optionsBuilder.UseSqlServer(args.FirstOrDefault());
+            //    }
+            //}
+            //else
+            //{
+            //    throw new ArgumentNullException("Connection string not present");
+            //}
+            optionsBuilder.UseSqlServer(@"Data Source=.\\SQLEXPRESS;Initial Catalog=555_RentableItems;User ID=sa;Password=aiT1sueh;Trusted_Connection=True;");
             optionsBuilder.UseLazyLoadingProxies(true);
             return new RentableItemsPnDbAnySql(optionsBuilder.Options);
         }

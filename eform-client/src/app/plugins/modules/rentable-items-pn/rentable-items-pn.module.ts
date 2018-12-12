@@ -9,7 +9,7 @@ import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {RouterModule} from '@angular/router';
-import {ContractsService, InspectionsService, RentableItemsPnService, RentableItemsPnSettingsService} from './services';
+import {ContractsService, ContractInspectionsService, RentableItemsPnService, RentableItemsPnSettingsService} from './services';
 import {
   RentableItemsPnPageComponent,
   RentableItemsPnAddComponent,
@@ -20,11 +20,11 @@ import {
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import { ContractsAddComponent } from './components/contracts-add/contracts-add.component';
-import { InspectionsAddComponent } from './components/inspections-add/inspections-add.component';
-import { InspectionsUpdateComponent } from './components/inspections-update/inspections-update.component';
+import { ContractInspectionsAddComponent } from './components/contract-inspections-add/contract-inspections-add.component';
+import { ContractInspectionsUpdateComponent } from './components/contract-inspections-update/contract-inspections-update.component';
 import { ContractsUpdateComponent } from './components/contracts-update/contracts-update.component';
 import { ContractsPageComponent } from './components/contracts-page/contracts-page.component';
-import { InspectionsPageComponent } from './components/inspections-page/inspections-page.component';
+import { ContractInspectionsPageComponent } from './components/contract-inspections-page/contract-inspections-page.component';
 
 @NgModule({
   imports: [
@@ -47,11 +47,11 @@ import { InspectionsPageComponent } from './components/inspections-page/inspecti
     RentableItemsPnUpdateComponent,
     RentableItemsPnLayoutComponent,
     ContractsAddComponent,
-    InspectionsAddComponent,
-    InspectionsUpdateComponent,
+    ContractInspectionsAddComponent,
+    ContractInspectionsUpdateComponent,
     ContractsUpdateComponent,
     ContractsPageComponent,
-    InspectionsPageComponent,
+    ContractInspectionsPageComponent,
     RentableItemsPnFieldsComponent,
     RentableItemsSettingsComponent
   ],
@@ -59,7 +59,7 @@ import { InspectionsPageComponent } from './components/inspections-page/inspecti
     RentableItemsPnService,
     RentableItemsPnSettingsService,
     ContractsService,
-    InspectionsService,
+    ContractInspectionsService,
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
   ]
 })

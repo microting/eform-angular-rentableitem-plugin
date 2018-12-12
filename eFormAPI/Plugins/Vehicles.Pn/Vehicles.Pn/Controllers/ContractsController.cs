@@ -30,7 +30,7 @@ namespace RentableItems.Pn.Controllers
             return _contractsService.CreateContract(contractCreateModel);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("api/contracts/update-contract")]
         public OperationResult UpdateContract([FromBody] ContractModel contractUpdateModel)
         {

@@ -8,41 +8,42 @@
         <div class="container-fluid">
           <form #editForm="ngForm">
             <div class="row">
-              <div class="col-md-12 col-xs-12">
-                <div class="md-form">
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInputDirective
                          [owlDateTime]="dt1"
                          [mdbValidate]="false"
-                         [ngModel]="selectedContractModel.contractEnd"
+                         [ngModel]="selectedContractModel.contractStart"
                          (dateTimeChange)="onStartDateSelected($event)"
                          type="text"
-                         id="contractEnd"
-                         name="contractEnd"
+                         id="startDate"
+                         name="startDate"
                          class="form-control">
-                  <label for="contractEnd">{{'Contract End*' | translate}}</label>
+                  <label for="startDate">{{'Contract Start' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
               </div>
-              <div class="col-md-12 col-xs-12">
-                <div class="md-form">
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt2">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInputDirective
                          [owlDateTime]="dt2"
                          [mdbValidate]="false"
-                         [ngModel]="selectedContractModel.contractStart"
+                         [ngModel]="selectedContractModel.contractEnd"
                          (dateTimeChange)="onEndDateSelected($event)"
                          type="text"
-                         id="contractStart"
-                         name="contractStart"
+                         id="endDate"
+                         name="endDate"
                          class="form-control">
-                  <label for="contractStart">{{'Contract Start' | translate}}</label>
+                  <label for="endDate">{{'Contract End*' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt2></owl-date-time>
                 </div>
               </div>
-              <div class="col-md-12 col-xs-12">
+
+              <div class="col-md-6">
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
@@ -53,7 +54,7 @@
                   <label for="editContractNr">{{'contractNr' | translate}}</label>
                 </div>
               </div>
-              <div class="col-md-12 col-xs-12">
+              <div class="col-md-6">
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"

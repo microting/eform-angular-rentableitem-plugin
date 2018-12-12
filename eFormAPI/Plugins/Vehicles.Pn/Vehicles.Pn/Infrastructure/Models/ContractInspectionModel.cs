@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using eFormCore;
+using eFormData;
+using eFormShared;
+using Microting.eFormApi.BasePn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -18,7 +22,9 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int ContractId { get; set; }
         public int SdkCaseId { get; set; }
+        public int SiteId { get; set; }
         public DateTime? DoneAt { get; set; }
+        private readonly IEFormCoreService _coreHelper;
 
 
         public void Save(RentableItemsPnDbAnySql _dbContext)
@@ -31,8 +37,9 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspection.UpdatedAt = DateTime.Now;
             contractInspection.Created_By_User_Id = CreatedByUserID;
             contractInspection.Updated_By_User_Id = UpdatedByUserID;
+            contractInspection.SiteId = SiteId;
             contractInspection.ContractId = ContractId;
-            contractInspection.SDK_Case_Id = SdkCaseId;
+            //contractInspection.SDK_Case_Id = SdkCaseId;
             contractInspection.DoneAt = DoneAt;
 
             _dbContext.ContractInspection.Add(contractInspection);
@@ -40,6 +47,21 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
             _dbContext.SaveChanges();
+
+
+            Core core = _coreHelper.GetCore();
+            //Template_Dto templateDto = core.TemplateItemRead(RentableItemsSettings.eformid);
+            //    MainElement mainElement = core.TemplateRead(RentableItemsSettings.eformid);
+            //    mainElement.Repeated =
+            //        0; // We set this right now hardcoded, this will let the eForm be deployed until end date or we actively retract it.
+            //    mainElement.EndDate = DateTime.Now.AddYears(10).ToUniversalTime();
+            //    mainElement.StartDate = DateTime.Now.ToUniversalTime();
+            //    core.CaseCreate(mainElement, "", sitesToBeDeployedTo, "");            
+
+            //foreach (int siteUId in sitesToBeRetractedFrom)
+            //{
+            //    core.CaseDelete(deployModel.Id, siteUId);
+            //}
 
         }
 
@@ -55,6 +77,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspection.WorkflowState = contractInspection.WorkflowState;
             contractInspection.ContractId = ContractId;
             contractInspection.SDK_Case_Id = SdkCaseId;
+            contractInspection.DoneAt = DoneAt;
             
             if(_dbContext.ChangeTracker.HasChanges())
             {

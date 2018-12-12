@@ -14,6 +14,7 @@ declare var require: any;
 export class ContractsPageComponent implements OnInit {
   @ViewChild('createContractModal') createContractModal;
   @ViewChild('editContractModal') editContractModal;
+  @ViewChild('createInspectionModal') createInspectionModal;
 
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
@@ -41,7 +42,9 @@ export class ContractsPageComponent implements OnInit {
   showEditContractModal(model: ContractModel) {
     this.editContractModal.show(model);
   }
-
+  showCreateInspectionModal(model: ContractModel) {
+    this.createInspectionModal.show(model);
+  }
   getAllContracts() {
     this.spinnerStatus = true;
     this.contractsService.getAllContracts(this.contractsRequestModel).subscribe((data => {

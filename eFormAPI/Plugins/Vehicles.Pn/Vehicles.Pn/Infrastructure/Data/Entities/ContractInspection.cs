@@ -32,5 +32,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 
         public int SDK_Case_Id { get; set; }
 
+        public int SiteId { get; set; }
+
     }
 }

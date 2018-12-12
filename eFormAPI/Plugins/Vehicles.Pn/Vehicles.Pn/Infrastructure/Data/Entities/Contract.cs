@@ -35,7 +35,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 
         public int CustomerId { get; set; }
 
-        public int ContractNr { get; set; }
+        public int? ContractNr { get; set; }
 
         public virtual ICollection<ContractInspection> ContractInspections { get; set; }
 

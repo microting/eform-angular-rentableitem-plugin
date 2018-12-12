@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 const ContractMethods = {
   Contracts: 'api/contracts',
   CreateContract: 'api/contracts/create-contract',
-  UpdateContract: 'api/contracts/create-contract'
+  UpdateContract: 'api/contracts/update-contract'
 };
 
 @Injectable()
@@ -28,7 +28,7 @@ export class ContractsService extends BaseService {
   }
 
   updateContract(model: ContractModel): Observable<any> {
-    return this.put(ContractMethods.UpdateContract, model);
+    return this.post(ContractMethods.UpdateContract, model);
   }
 
 }

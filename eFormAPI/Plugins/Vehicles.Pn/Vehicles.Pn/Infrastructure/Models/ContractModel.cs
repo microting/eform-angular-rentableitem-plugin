@@ -19,29 +19,33 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? ContractStart { get; set; }
         public DateTime? ContractEnd { get; set; }
         public int CustomerId { get; set; }
-        public int ContractNr { get; set; }
+        public int? ContractNr { get; set; }
 
         public void Save(RentableItemsPnDbAnySql _dbContext)
         {
-            Contract contract = new Contract();
+            Contract dbContract = _dbContext.Contract.FirstOrDefault(x => x.ContractNr == ContractNr);
 
-            contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
-            contract.Version = Version;
-            contract.CreatedAt = DateTime.Now;
-            contract.UpdatedAt = DateTime.Now;
-            contract.Created_By_User_Id = CreatedByUserID;
-            contract.Updated_By_User_Id = UpdatedByUserID;
-            contract.ContractStart = ContractStart;
-            contract.ContractEnd = ContractEnd;
-            contract.CustomerId = CustomerId;
-            contract.ContractNr = ContractNr;
+            if (dbContract == null)
+            {
+                Contract contract = new Contract();
 
-            _dbContext.Contract.Add(contract);
-            _dbContext.SaveChanges();
+                contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+                contract.Version = Version;
+                contract.CreatedAt = DateTime.Now;
+                contract.UpdatedAt = DateTime.Now;
+                contract.Created_By_User_Id = CreatedByUserID;
+                contract.Updated_By_User_Id = UpdatedByUserID;
+                contract.ContractStart = ContractStart;
+                contract.ContractEnd = ContractEnd;
+                contract.CustomerId = CustomerId;
+                contract.ContractNr = ContractNr;
+                
+                _dbContext.Contract.Add(contract);
+                _dbContext.SaveChanges();
 
-            _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
-            _dbContext.SaveChanges();
-
+                _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
+                _dbContext.SaveChanges();
+            }
         }
 
         public void Update(RentableItemsPnDbAnySql _dbContext)
@@ -56,6 +60,8 @@ namespace RentableItems.Pn.Infrastructure.Models
             contract.CustomerId = CustomerId;
             contract.WorkflowState = contract.WorkflowState;
             contract.ContractNr = ContractNr;
+            contract.ContractStart = ContractStart;
+            contract.ContractEnd = ContractEnd;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {

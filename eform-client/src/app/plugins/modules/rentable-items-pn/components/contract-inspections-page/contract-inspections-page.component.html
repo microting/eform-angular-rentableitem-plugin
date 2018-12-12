@@ -1,11 +1,6 @@
 <subheader-pn [title]="'Inspections' | translate">
   <div class="p-3">
-    <button
-      class="btn btn-success"
-      mdbTooltip="{{'Create Inspection' | translate}}"
-      (click)="showCreateInspectionModal()">
-      {{'New Inspection'}}
-    </button>
+
   </div>
 </subheader-pn>
 
@@ -15,72 +10,72 @@
       <thead>
       <tr>
         <th scope="col" class="table-header-sortable" id="idSort"
-            (click)="sortByColumn('Id', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('Id', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             ID
-            <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'Id'">
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'Id'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'Id' && !inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Id' && !contractInspectionsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'Id' && inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Id' && contractInspectionsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
         <th scope="col" class="table-header-sortable" id="contractIdSort"
-            (click)="sortByColumn('contractId', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('contractId', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             Contract Id
-            <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'contractId'">
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'contractId'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'contractId' && !inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'contractId' && !contractInspectionsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'contractId' && inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'contractId' && contractInspectionsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
         <th scope="col" class="table-header-sortable" id="sdkCaseIdSort"
-            (click)="sortByColumn('SdkCaseId', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('sdkCaseId', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             SDK Case Id
-            <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'SdkCaseId'">
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'sdkCaseId'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'SdkCaseId' && !inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'sdkCaseId' && !contractInspectionsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'SdkCaseId' && inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'sdkCaseId' && contractInspectionsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
         <th scope="col" class="table-header-sortable" id="statusSort"
-            (click)="sortByColumn('Status', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('Status', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             Status
-            <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'Status'">
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'Status'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'Status' && !inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && !contractInspectionsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'Status' && inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && contractInspectionsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
         <th scope="col" class="table-header-sortable" id="doneAtSort"
-            (click)="sortByColumn('doneAt', inspectionsRequestModel.isSortDsc = !inspectionsRequestModel.isSortDsc)">
+            (click)="sortByColumn('doneAt', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
             Done at
-            <i class="material-icons text-black-50" *ngIf="inspectionsRequestModel.sortColumnName != 'doneAt'">
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'doneAt'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'doneAt' && !inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'doneAt' && !contractInspectionsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="inspectionsRequestModel.sortColumnName == 'doneAt' && inspectionsRequestModel.isSortDsc">
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'doneAt' && contractInspectionsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
@@ -90,7 +85,7 @@
       </tr>
       </thead>
       <tbody id="tableBody">
-      <tr *ngFor="let inspection of inspectionsModel?.inspections">
+      <tr *ngFor="let inspection of contractInspectionsModel?.contractInspections">
         <td>
           {{inspection.id}}
         </td>
@@ -98,7 +93,7 @@
           {{inspection.contractId}}
         </td>
         <td>
-          {{inspection.SdkCaseId}}
+          {{inspection.sdkCaseId}}
         </td>
         <td>
           {{inspection.status}}
@@ -128,10 +123,10 @@
       </tbody>
     </table>
   </div>
-  <pagination-pn *ngIf="inspectionsModel?.total > inspectionsRequestModel.pageSize"
-                 [limit]="inspectionsRequestModel.pageSize"
-                 [size]="inspectionsModel.total"
-                 [offset]="inspectionsRequestModel.offset"
+  <pagination-pn *ngIf="contractInspectionsModel?.total > contractInspectionsRequestModel.pageSize"
+                 [limit]="contractInspectionsRequestModel.pageSize"
+                 [size]="contractInspectionsModel.total"
+                 [offset]="contractInspectionsRequestModel.offset"
                  (onPageChanged)="changePage($event)"></pagination-pn>
 </div>
 
