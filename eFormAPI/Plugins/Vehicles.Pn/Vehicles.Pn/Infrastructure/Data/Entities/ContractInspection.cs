@@ -28,11 +28,11 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
         [ForeignKey("Contract")]
         public int ContractId { get; set; }
 
-        public virtual Contract Contract { get; set; }
-
         public int SDK_Case_Id { get; set; }
 
         public int SiteId { get; set; }
+
+        public virtual Contract Contract { get; set; }
 
     }
 }
