@@ -1,7 +1,10 @@
+dist: xenial
 language: csharp
 solution: RentableItems.Pn.sln
 mono: none
 dotnet: 2.2
+services:
+  - mysql
 script:
   - dotnet restore eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.sln
   - dotnet build eFormAPI/Plugins/Vehicles.Pn/RentableItems.Pn.sln
