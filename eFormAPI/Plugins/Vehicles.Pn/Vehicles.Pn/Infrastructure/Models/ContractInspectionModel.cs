@@ -49,7 +49,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             _dbContext.SaveChanges();
 
 
-            Core core = _coreHelper.GetCore();
+            //Core core = _coreHelper.GetCore();
             //Template_Dto templateDto = core.TemplateItemRead(RentableItemsSettings.eformid);
             //    MainElement mainElement = core.TemplateRead(RentableItemsSettings.eformid);
             //    mainElement.Repeated =
