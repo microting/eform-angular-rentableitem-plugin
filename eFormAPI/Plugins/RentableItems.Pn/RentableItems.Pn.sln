@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentableItems.Pn", "Vehicles.Pn\RentableItems.Pn.csproj", "{0AEEC436-87DF-4C45-9A3D-41CC8E7D5E12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentableItems.Pn", "RentableItems.Pn\RentableItems.Pn.csproj", "{0AEEC436-87DF-4C45-9A3D-41CC8E7D5E12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevOps", "DevOps", "{CE038391-1A6B-4AAC-B470-2CED08E085BA}"
 	ProjectSection(SolutionItems) = preProject

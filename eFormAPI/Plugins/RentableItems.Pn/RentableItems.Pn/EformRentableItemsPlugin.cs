@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
@@ -19,9 +20,10 @@ namespace RentableItems.Pn
 {
     public class EformRentableItemsPlugin : IEformPlugin
     {
-        public string GetName() => "Microting Rentable plugin";
-        public string ConnectionStringName() => "EFormVehiclesPnConnection";
-        public string PluginPath() => PluginAssembly().Location;
+        private string _pluginPath;
+        public string Name => "Microting Rentable Items plugin";
+        public string PluginId => "EFormRentableItemsPn";
+        public string PluginPath => PluginAssembly().Location;
 
         public Assembly PluginAssembly()
         {
@@ -55,32 +57,35 @@ namespace RentableItems.Pn
         {
         }
 
-        public MenuModel HeaderMenu()
+        public MenuModel HeaderMenu(IServiceProvider serviceProvider)
         {
+            var localizationService = serviceProvider
+                .GetService<IRentableItemsLocalizationService>();
+
             MenuItemModel rentableItem = new MenuItemModel()
             {
-                Name = "Rentable Items",
+                Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn"
 
             };
             MenuItemModel contracts = new MenuItemModel()
             {
-                Name = "Contracts",
+                Name = localizationService.GetString("Contracts"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/contracts"
 
             };
             MenuItemModel inspeciton = new MenuItemModel()
             {
-                Name = "Inspections",
+                Name = localizationService.GetString("Inspections"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/inspections"
 
             };
             MenuItemModel settings = new MenuItemModel()
             {
-                Name = "Settings",
+                Name = localizationService.GetString("Settings"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/settings"
 
@@ -93,7 +98,7 @@ namespace RentableItems.Pn
             MenuModel result = new MenuModel();
             result.LeftMenu.Add(new MenuItemModel()
             {
-                Name = "Rentable Items",
+                Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn",
                 MenuItems = items
