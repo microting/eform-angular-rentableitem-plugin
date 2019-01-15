@@ -23,9 +23,9 @@ On front-end part plugins will be included into `eform-client/src/app/plugins/mo
     ...
 },
 {
-    path: 'vehicles-pn',
+    path: 'rentable-items-pn',
     canActivate: [AuthGuard],
-    loadChildren: './modules/vehicles-pn/vehicles-pn.module#VehiclesPnModule'
+    loadChildren: './modules/rentable-items-pn/rentable-items-pn.module#RentableItemsPnModule'
 }
 ```
 
