@@ -6,6 +6,7 @@ using RentableItems.Pn.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentableItems.Pn.Tests
 {
@@ -13,7 +14,7 @@ namespace RentableItems.Pn.Tests
     public class RentableItemSettingsUTest : DbTestFixture
     {
         [Test]
-        public void RentableItemSettingsModel_Save_DoesSave()
+        public async Task RentableItemSettingsModel_Save_DoesSave()
         {
             // Arrange
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
@@ -23,7 +24,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettingsModel.eFormId = rnd.Next(123, 582);
 
             // Act
-            rentableItemsSettingsModel.Save(DbContext);
+            await rentableItemsSettingsModel.Save(DbContext);
 
             RentableItemsSettings dbRentableItemsSettings = DbContext.RentableItemsSettings.AsNoTracking().First();
             List<RentableItemsSettings> settingsList = DbContext.RentableItemsSettings.AsNoTracking().ToList();
@@ -41,7 +42,7 @@ namespace RentableItems.Pn.Tests
 
         }
         [Test]
-        public void RentableItemSettingsModel_Update_DoesUpdate()
+        public async Task RentableItemSettingsModel_Update_DoesUpdate()
         {
             // Arrange
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
@@ -51,7 +52,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
@@ -60,14 +61,14 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
             DbContext.RentableItemsSettingsVersions.Add(rentableItemsSettingsVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
             rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
             rentableItemsSettingsModel.eFormId = 555;
             rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
-            rentableItemsSettingsModel.Update(DbContext);
+            await rentableItemsSettingsModel.Update(DbContext);
             
             RentableItemsSettings dbRentableItemsSettings = DbContext.RentableItemsSettings.AsNoTracking().First();
             List<RentableItemsSettings> settingsList = DbContext.RentableItemsSettings.AsNoTracking().ToList();
@@ -86,7 +87,7 @@ namespace RentableItems.Pn.Tests
 
         }
         [Test]
-        public void RentableItemSettingsModel_Delete_DoesDelete()
+        public async Task RentableItemSettingsModel_Delete_DoesDelete()
         {
             // Arrange
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
@@ -96,7 +97,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
             rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
@@ -105,7 +106,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
             DbContext.RentableItemsSettingsVersions.Add(rentableItemsSettingsVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
             rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
@@ -113,7 +114,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
 
-            rentableItemsSettingsModel.Delete(DbContext);
+            await rentableItemsSettingsModel.Delete(DbContext);
 
             RentableItemsSettings dbRentableItemsSettings = DbContext.RentableItemsSettings.AsNoTracking().First();
             List<RentableItemsSettings> settingsList = DbContext.RentableItemsSettings.AsNoTracking().ToList();

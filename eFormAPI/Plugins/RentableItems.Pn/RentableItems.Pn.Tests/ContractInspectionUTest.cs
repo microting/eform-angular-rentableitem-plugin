@@ -6,6 +6,7 @@ using RentableItems.Pn.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentableItems.Pn.Tests
 {
@@ -13,7 +14,7 @@ namespace RentableItems.Pn.Tests
     public class ContractInspectionUTest : DbTestFixture
     {
         [Test]
-        public void ContractInspectionModel_Save_DoesSave()
+        public async Task ContractInspectionModel_Save_DoesSave()
         {
             // Arrange
             #region creating Contract
@@ -27,7 +28,7 @@ namespace RentableItems.Pn.Tests
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
             
 
@@ -42,7 +43,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             // Act
-            contractInspectionModel.Save(DbContext);
+           await contractInspectionModel.Save(DbContext);
 
             ContractInspection dbContractInspection = DbContext.ContractInspection.AsNoTracking().First();
             List<ContractInspection> inspectionList = DbContext.ContractInspection.AsNoTracking().ToList();
@@ -62,7 +63,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(contractInspectionModel.WorkflowState, dbContractInspection.WorkflowState);
         }
         [Test]
-        public void ContractInspectionModel_Update_DoesUpdate()
+        public async Task ContractInspectionModel_Update_DoesUpdate()
         {
             // Arrange
             #region creating Contract
@@ -76,7 +77,7 @@ namespace RentableItems.Pn.Tests
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             DateTime doneAt = DateTime.UtcNow;
@@ -86,7 +87,7 @@ namespace RentableItems.Pn.Tests
             contractInspection.DoneAt = doneAt;
 
             DbContext.ContractInspection.Add(contractInspection);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             ContractInspectionVersion contractInspectionVersion = new ContractInspectionVersion();
             contractInspectionVersion.ContractInspectionId = contractInspection.Id;
@@ -94,7 +95,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionVersion.SDK_Case_Id = contractInspection.SDK_Case_Id;
 
             DbContext.ContractInspectionVersion.Add(contractInspectionVersion);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             // Act
             ContractInspectionModel contractInspectionModel = new ContractInspectionModel();
             contractInspectionModel.ContractId = contractModel.Id;
@@ -103,7 +104,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.SdkCaseId = 55;
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
-            contractInspectionModel.Update(DbContext);
+            await contractInspectionModel.Update(DbContext);
 
             ContractInspection dbContractInspection = DbContext.ContractInspection.AsNoTracking().First();
             List<ContractInspection> inspectionList = DbContext.ContractInspection.AsNoTracking().ToList();
@@ -124,7 +125,7 @@ namespace RentableItems.Pn.Tests
 
         }
         [Test]
-        public void ContractInspectionModel_Delete_DoesDelete()
+        public async Task ContractInspectionModel_Delete_DoesDelete()
         {
             // Arrange
             #region creating Contract
@@ -138,7 +139,7 @@ namespace RentableItems.Pn.Tests
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             DateTime doneAt = DateTime.UtcNow;
@@ -147,7 +148,7 @@ namespace RentableItems.Pn.Tests
             contractInspection.SDK_Case_Id = rnd.Next(1, 666);
             contractInspection.DoneAt = doneAt;
             DbContext.ContractInspection.Add(contractInspection);
-            DbContext.SaveChanges();
+           await DbContext.SaveChangesAsync();
 
             ContractInspectionVersion contractInspectionVersion = new ContractInspectionVersion();
             contractInspectionVersion.ContractInspectionId = contractInspection.Id;
@@ -155,7 +156,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionVersion.SDK_Case_Id = contractInspection.SDK_Case_Id;
 
             DbContext.ContractInspectionVersion.Add(contractInspectionVersion);
-            DbContext.SaveChanges();
+           await DbContext.SaveChangesAsync();
             // Act
             ContractInspectionModel contractInspectionModel = new ContractInspectionModel();
             contractInspectionModel.ContractId = contractModel.Id;
@@ -164,7 +165,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.SdkCaseId = contractInspection.SDK_Case_Id;
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
-            contractInspectionModel.Delete(DbContext);
+            await contractInspectionModel.Delete(DbContext);
 
             ContractInspection dbContractInspection = DbContext.ContractInspection.AsNoTracking().First();
             List<ContractInspection> inspectionList = DbContext.ContractInspection.AsNoTracking().ToList();

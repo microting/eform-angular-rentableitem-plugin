@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
@@ -18,30 +19,30 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/rentableItems-pn")]
-        public OperationDataResult<RentableItemsModel> GetAllRentableIems([FromBody] RentableItemsRequestModel requestModel)
+        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableIems([FromBody] RentableItemsRequestModel requestModel)
         {
-            return _rentableItemsService.GetAllRentableItems(requestModel);
+            return await _rentableItemsService.GetAllRentableItems(requestModel);
         }
 
         [HttpPost]
         [Route("api/rentableItems-pn/create-rentableItem")]
-        public OperationResult CreateRentableItem([FromBody] RentableItemModel rentableItemCreateModel)
+        public async Task<OperationResult> CreateRentableItem([FromBody] RentableItemModel rentableItemCreateModel)
         {
-            return _rentableItemsService.CreateRentableItem(rentableItemCreateModel);
+            return await _rentableItemsService.CreateRentableItem(rentableItemCreateModel);
         }
 
         [HttpPost]
         [Route("api/rentableItems-pn/update-rentableItem")]
-        public OperationResult UpdateRentableItem([FromBody] RentableItemModel rentableItemUpdateModel)
+        public async Task<OperationResult> UpdateRentableItem([FromBody] RentableItemModel rentableItemUpdateModel)
         {
-            return _rentableItemsService.UpdateRentableItem(rentableItemUpdateModel);
+            return await _rentableItemsService.UpdateRentableItem(rentableItemUpdateModel);
         }
 
         [HttpDelete]
         [Route("api/rentableItems-pn/delete-rentableItem")]
-        public OperationResult DeleteRentableItem([FromBody] RentableItemModel rentableItemDeleteModel)
+        public  async Task<OperationResult> DeleteRentableItem([FromBody] RentableItemModel rentableItemDeleteModel)
         {
-            return _rentableItemsService.DeleteRentableItem(rentableItemDeleteModel);
+            return await _rentableItemsService.DeleteRentableItem(rentableItemDeleteModel);
         }
     }
 }

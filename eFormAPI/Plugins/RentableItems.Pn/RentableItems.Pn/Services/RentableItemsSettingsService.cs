@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ namespace RentableItems.Pn.Services
             _rentablteItemsLocalizationsService = rentableItemsLocalizationService;
         }
 
-        public OperationDataResult<RentableItemsSettingsModel> GetSettings()
+        public async Task<OperationDataResult<RentableItemsSettingsModel>> GetSettings()
         {
             try
             {
@@ -58,7 +59,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult UpdateSettings(RentableItemsSettingsModel rentableItemsSettingsModel)
+        public async Task<OperationResult> UpdateSettings(RentableItemsSettingsModel rentableItemsSettingsModel)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace RentableItems.Pn.Services
                     rentableItemsSettingsModel.eFormId = eForm.Id;
                 }
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
                 return new OperationResult(true,
                     _rentablteItemsLocalizationsService.GetString("SettingsHasBeenUpdatedSuccessfully"));
             }

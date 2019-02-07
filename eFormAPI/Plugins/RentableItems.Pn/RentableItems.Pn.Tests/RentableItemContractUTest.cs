@@ -6,6 +6,7 @@ using RentableItems.Pn.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentableItems.Pn.Tests
 {
@@ -13,7 +14,7 @@ namespace RentableItems.Pn.Tests
     public class RentableItemContractUTest : DbTestFixture
     {
         [Test]
-        public void RentableItemContractModel_Save_DoesSave()
+        public async Task RentableItemContractModel_Save_DoesSave()
         {
             // Arrange
             #region Create
@@ -28,7 +29,7 @@ namespace RentableItems.Pn.Tests
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
             DbContext.RentableItem.Add(rentableItemModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region creating Contract
@@ -42,7 +43,7 @@ namespace RentableItems.Pn.Tests
             contractModel.CustomerId = rnd.Next(1, 99);
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+          await DbContext.SaveChangesAsync();
             #endregion
             #endregion
 
@@ -52,7 +53,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.RentableItemId = rentableItemModel.Id;
             rentableItemContractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             // Act
-            rentableItemContractModel.Save(DbContext);
+           await rentableItemContractModel.Save(DbContext);
 
             RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
             List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();
@@ -70,7 +71,7 @@ namespace RentableItems.Pn.Tests
 
         }
         [Test]
-        public void RentableItemContractModel_Update_DoesUpdate()
+        public async Task RentableItemContractModel_Update_DoesUpdate()
         {
             // Arrange
             #region Create
@@ -86,7 +87,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItemModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region create Contract
@@ -101,7 +102,7 @@ namespace RentableItems.Pn.Tests
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+           await DbContext.SaveChangesAsync();
             #endregion
 
             #region create rentableContract
@@ -110,7 +111,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContract.RentableItemId = rentableItemModel.Id;
 
             DbContext.RentableItemContract.Add(rentableItemContract);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region create version
@@ -120,7 +121,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsContractVersions.RentableItemId = rentableItemContract.RentableItemId;
 
             DbContext.RentableItemsContractVersions.Add(rentableItemsContractVersions);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             #endregion
             #endregion
@@ -131,7 +132,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.RentableItemId = rentableItemContract.RentableItemId;
             rentableItemContractModel.Id = rentableItemContract.Id;
             rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
-            rentableItemContractModel.Update(DbContext);
+            await rentableItemContractModel.Update(DbContext);
 
             RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
             List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();
@@ -150,7 +151,7 @@ namespace RentableItems.Pn.Tests
 
         }
         [Test]
-        public void RentableItemContractModel_Delete_DoesDelete()
+        public async Task RentableItemContractModel_Delete_DoesDelete()
         {
             // Arrange
             #region Create
@@ -166,7 +167,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItemModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region create Contract
@@ -181,7 +182,7 @@ namespace RentableItems.Pn.Tests
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contractModel);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region create rentableContract
@@ -190,7 +191,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContract.RentableItemId = rentableItemModel.Id;
 
             DbContext.RentableItemContract.Add(rentableItemContract);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
             #endregion
 
             #region create version
@@ -200,7 +201,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsContractVersions.RentableItemId = rentableItemContract.RentableItemId;
 
             DbContext.RentableItemsContractVersions.Add(rentableItemsContractVersions);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             #endregion
             #endregion
@@ -212,7 +213,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.Id = rentableItemContract.Id;
             rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
 
-            rentableItemContractModel.Delete(DbContext);
+            await rentableItemContractModel.Delete(DbContext);
 
             RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
             List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();

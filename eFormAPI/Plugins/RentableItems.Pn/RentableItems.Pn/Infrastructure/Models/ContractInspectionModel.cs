@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
 using eFormShared;
@@ -27,7 +28,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         private readonly IEFormCoreService _coreHelper;
 
 
-        public void Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbAnySql _dbContext)
         {
             ContractInspection contractInspection = new ContractInspection();
 
@@ -43,10 +44,10 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspection.DoneAt = DoneAt;
 
             _dbContext.ContractInspection.Add(contractInspection);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
 
             //Core core = _coreHelper.GetCore();
@@ -65,7 +66,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public void Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbAnySql _dbContext)
         {
             ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
 
@@ -86,13 +87,13 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contractInspection.Version += 1;
 
                 _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
 
             }
 
         }
 
-        public void Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
         {
             ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
 
@@ -111,7 +112,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contractInspection.Version += 1;
 
                 _dbContext.ContractInspectionVersion.Add(MapContractInspection(_dbContext, contractInspection));
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
 
             }
         }

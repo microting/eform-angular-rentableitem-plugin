@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -21,7 +22,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CustomerId { get; set; }
         public int? ContractNr { get; set; }
 
-        public void Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbAnySql _dbContext)
         {
             Contract dbContract = _dbContext.Contract.FirstOrDefault(x => x.ContractNr == ContractNr);
 
@@ -41,14 +42,14 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contract.ContractNr = ContractNr;
                 
                 _dbContext.Contract.Add(contract);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
 
                 _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
             }
         }
 
-        public void Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbAnySql _dbContext)
         {
             Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
 
@@ -70,13 +71,13 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contract.Version += 1;
 
                 _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
 
             }
 
         }
 
-        public void Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
         {
             Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
 
@@ -94,7 +95,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 contract.Version += 1;
 
                 _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
 
             }
         }

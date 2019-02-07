@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -31,7 +32,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         //    this.PlateNumber = plateNumber;
         //}
 
-        public void Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbAnySql _dbContext)
         {
             
             RentableItem rentableItem = new RentableItem();
@@ -47,13 +48,13 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.Created_By_User_Id = CreatedByUserId;
             rentableItem.Updated_By_User_Id = UpdatedByUserId;
             _dbContext.RentableItem.Add(rentableItem);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
@@ -76,12 +77,12 @@ namespace RentableItems.Pn.Infrastructure.Models
                 rentableItem.Version += 1;
 
                 _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
 
         }
 
-        public void Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
@@ -99,7 +100,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 rentableItem.Version += 1;
 
                 _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 

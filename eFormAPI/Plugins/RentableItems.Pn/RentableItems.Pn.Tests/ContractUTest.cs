@@ -6,6 +6,7 @@ using RentableItems.Pn.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentableItems.Pn.Tests
 {
@@ -13,7 +14,7 @@ namespace RentableItems.Pn.Tests
     public class ContractUTest : DbTestFixture
     {
         [Test]
-        public void ContractModel_Save_DoesSave()
+        public async Task ContractModel_Save_DoesSave()
         {
             // Arrange
             ContractModel contractModel = new ContractModel();
@@ -27,7 +28,7 @@ namespace RentableItems.Pn.Tests
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             // Act
-            contractModel.Save(DbContext);
+            await contractModel.Save(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
             List<Contract> contractList = DbContext.Contract.AsNoTracking().ToList();
@@ -48,7 +49,7 @@ namespace RentableItems.Pn.Tests
         }
 
         [Test]
-        public void ContractModel_Update_DoesUpdate()
+        public async Task ContractModel_Update_DoesUpdate()
         {
             // Arrange
             Contract contract = new Contract();
@@ -62,7 +63,7 @@ namespace RentableItems.Pn.Tests
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contract);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             ContractVersions contractVer = new ContractVersions();
             contractVer.ContractEnd = contract.ContractEnd;
@@ -73,7 +74,7 @@ namespace RentableItems.Pn.Tests
             contractVer.ContractId = contract.Id;
 
             DbContext.ContractVersions.Add(contractVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             // Act
             ContractModel contractModel = new ContractModel();
@@ -90,7 +91,7 @@ namespace RentableItems.Pn.Tests
 
             contractModel.Id = contract.Id;
 
-            contractModel.Update(DbContext);
+            await contractModel.Update(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
             List<Contract> contractList = DbContext.Contract.AsNoTracking().ToList();
@@ -111,7 +112,7 @@ namespace RentableItems.Pn.Tests
         }
 
         [Test]
-        public void ContractModel_Delete_DoesDelete()
+        public async Task ContractModel_Delete_DoesDelete()
         {
             // Arrange
             Contract contract = new Contract();
@@ -125,7 +126,7 @@ namespace RentableItems.Pn.Tests
             contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contract);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             ContractVersions contractVer = new ContractVersions();
             contractVer.ContractEnd = contract.ContractEnd;
@@ -136,7 +137,7 @@ namespace RentableItems.Pn.Tests
             contractVer.ContractId = contract.Id;
 
             DbContext.ContractVersions.Add(contractVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             // Act
             ContractModel contractModel = new ContractModel();
@@ -153,7 +154,7 @@ namespace RentableItems.Pn.Tests
 
             contractModel.Id = contract.Id;
 
-            contractModel.Delete(DbContext);
+            await contractModel.Delete(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
             List<Contract> contractList = DbContext.Contract.AsNoTracking().ToList();

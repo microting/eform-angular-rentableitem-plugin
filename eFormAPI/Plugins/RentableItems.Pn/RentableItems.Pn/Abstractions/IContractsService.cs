@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Infrastructure.Models;
 
@@ -8,9 +9,9 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IContractsService
     {
-        OperationDataResult<ContractsModel> GetAllContracts(ContractsRequestModel contractsRequestModel);
-        OperationResult CreateContract(ContractModel contractCreateModel);
-        OperationResult UpdateContract(ContractModel contractUpdateModel);
-        OperationResult DeleteContract(ContractModel contractDeleteModel);
+        Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsRequestModel);
+        Task<OperationResult> CreateContract(ContractModel contractCreateModel);
+        Task<OperationResult> UpdateContract(ContractModel contractUpdateModel);
+        Task<OperationResult> DeleteContract(ContractModel contractDeleteModel);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -31,7 +32,7 @@ namespace RentableItems.Pn.Services
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
         }
-        public OperationDataResult<ContractsModel> GetAllContracts(ContractsRequestModel contractsPnRequestModel)
+        public async Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsPnRequestModel)
         {
             try
             {
@@ -77,12 +78,12 @@ namespace RentableItems.Pn.Services
             
             
 
-        public OperationResult CreateContract(ContractModel contractCreateModel)
+        public async Task<OperationResult> CreateContract(ContractModel contractCreateModel)
         {
             try
             {
 
-                contractCreateModel.Save(_dbContext);
+                await contractCreateModel.Save(_dbContext);
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractCreated",
                     contractCreateModel.CustomerId,
                         contractCreateModel.ContractNr));
@@ -97,11 +98,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult UpdateContract(ContractModel contractUpdateModel)
+        public async Task<OperationResult> UpdateContract(ContractModel contractUpdateModel)
         {
             try
             {
-                contractUpdateModel.Update(_dbContext);
+                await contractUpdateModel.Update(_dbContext);
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -112,11 +113,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult DeleteContract(ContractModel contractDeleteModel)
+        public async Task<OperationResult> DeleteContract(ContractModel contractDeleteModel)
         {
             try
             {
-                contractDeleteModel.Delete(_dbContext);
+                await contractDeleteModel.Delete(_dbContext);
                 return new OperationResult(true);
             }
             catch (Exception e)

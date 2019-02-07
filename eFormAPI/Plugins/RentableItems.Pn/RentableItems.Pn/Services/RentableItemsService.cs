@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ namespace RentableItems.Pn.Services
                 _rentableItemsLocalizationService = rentableItemLocalizationService;
             }
 
-        public OperationDataResult<RentableItemsModel> GetAllRentableItems(RentableItemsRequestModel pnRequestModel)
+        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableItems(RentableItemsRequestModel pnRequestModel)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult CreateRentableItem(RentableItemModel rentableItemPnCreateModel)
+        public async Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel)
         {
             try
             {
@@ -93,7 +94,7 @@ namespace RentableItems.Pn.Services
                 //rentableItemPn.ModelName = rentableItemPnCreateModel.ModelName;
                 //rentableItemPn.RegistrationDate = rentableItemPnCreateModel.RegistrationDate;
 
-                rentableItemPnCreateModel.Save(_dbContext);
+                await rentableItemPnCreateModel.Save(_dbContext);
 
                 //_dbContext.RentableItem.Add(rentableItemPn);
                 //_dbContext.SaveChanges();
@@ -109,7 +110,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel)
+        public async Task<OperationResult> UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel)
         {
             try
             {
@@ -126,7 +127,7 @@ namespace RentableItems.Pn.Services
                 //    rentableItem.ModelName = rentableItemPnUpdateModel.ModelName;
                 //    rentableItem.RegistrationDate = rentableItemPnUpdateModel.RegistrationDate;
 
-                rentableItemPnUpdateModel.Update(_dbContext);
+                await rentableItemPnUpdateModel.Update(_dbContext);
                 return new OperationDataResult<RentableItemsModel>(true);
             }
             catch (Exception e)
@@ -137,11 +138,11 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
             }
         }
-        public OperationResult DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel)
+        public async Task<OperationResult> DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel)
         {
             try
             {
-                rentableItemPnDeleteModel.Delete(_dbContext);
+                await rentableItemPnDeleteModel.Delete(_dbContext);
                 return new OperationDataResult<RentableItemsModel>(true);
             }
             catch (Exception e)

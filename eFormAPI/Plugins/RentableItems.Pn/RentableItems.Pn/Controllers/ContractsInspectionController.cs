@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
@@ -18,30 +19,30 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/inspections")]
-        public OperationDataResult<ContractInspectionsModel> GetAllContracts([FromBody] ContractInspectionsRequestModel requestModel)
+        public async Task<OperationDataResult<ContractInspectionsModel>> GetAllContracts([FromBody] ContractInspectionsRequestModel requestModel)
         {
-            return _contractsInspectionService.GetAllContractInspections(requestModel);
+            return await _contractsInspectionService.GetAllContractInspections(requestModel);
         }
 
         [HttpPost]
         [Route("api/inspections/create-inspection")]
-        public OperationResult CreateContractInspection([FromBody] ContractInspectionModel contractInspectionCreateModel)
+        public async Task<OperationResult> CreateContractInspection([FromBody] ContractInspectionModel contractInspectionCreateModel)
         {
-            return _contractsInspectionService.CreateContractInspection(contractInspectionCreateModel);
+            return await _contractsInspectionService.CreateContractInspection(contractInspectionCreateModel);
         }
 
         [HttpPost]
         [Route("api/inspections/update-inspection")]
-        public OperationResult UpdateContractInspection([FromBody] ContractInspectionModel contractInspectionUpdateModel)
+        public async Task<OperationResult> UpdateContractInspection([FromBody] ContractInspectionModel contractInspectionUpdateModel)
         {
-            return _contractsInspectionService.UpdateContractInspection(contractInspectionUpdateModel);
+            return await _contractsInspectionService.UpdateContractInspection(contractInspectionUpdateModel);
         }
 
         [HttpDelete]
         [Route("api/inspections/delete-inspection")]
-        public OperationResult DeleteContractInspection([FromBody] ContractInspectionModel contractinspectionDeleteModel)
+        public async Task<OperationResult> DeleteContractInspection([FromBody] ContractInspectionModel contractinspectionDeleteModel)
         {
-            return _contractsInspectionService.DeleteContractInspection(contractinspectionDeleteModel);
+            return await _contractsInspectionService.DeleteContractInspection(contractinspectionDeleteModel);
         }
     }
 }

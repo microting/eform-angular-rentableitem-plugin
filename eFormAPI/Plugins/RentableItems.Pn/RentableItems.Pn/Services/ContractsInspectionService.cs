@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -30,7 +31,7 @@ namespace RentableItems.Pn.Services
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
         }
-        public OperationDataResult<ContractInspectionsModel> GetAllContractInspections(ContractInspectionsRequestModel contractInspectionsPnRequestModel)
+        public async Task<OperationDataResult<ContractInspectionsModel>> GetAllContractInspections(ContractInspectionsRequestModel contractInspectionsPnRequestModel)
         {
             try
             {
@@ -73,11 +74,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult CreateContractInspection(ContractInspectionModel contractInspectionCreateModel)
+        public async Task<OperationResult> CreateContractInspection(ContractInspectionModel contractInspectionCreateModel)
         {
             try
             {
-                contractInspectionCreateModel. Save(_dbContext);
+                await contractInspectionCreateModel. Save(_dbContext);
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -88,11 +89,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public OperationResult UpdateContractInspection(ContractInspectionModel contractInspectionUpdateModel)
+        public async Task<OperationResult> UpdateContractInspection(ContractInspectionModel contractInspectionUpdateModel)
         {
             try
             {
-                contractInspectionUpdateModel.Update(_dbContext);
+                await contractInspectionUpdateModel.Update(_dbContext);
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -102,11 +103,11 @@ namespace RentableItems.Pn.Services
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContractInspection"));
             }
         }
-        public OperationResult DeleteContractInspection(ContractInspectionModel contractInspectionDeleteModel)
+        public async Task<OperationResult> DeleteContractInspection(ContractInspectionModel contractInspectionDeleteModel)
         {
             try
             {
-                contractInspectionDeleteModel.Delete(_dbContext);
+                await contractInspectionDeleteModel.Delete(_dbContext);
                 return new OperationResult(true);
             }
             catch ( Exception e)

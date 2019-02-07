@@ -1,4 +1,5 @@
-﻿using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+﻿using System.Threading.Tasks;
+using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RentableItems.Pn.Abstractions;
@@ -18,30 +19,30 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/contracts")]
-        public OperationDataResult<ContractsModel> GetAllContracts([FromBody] ContractsRequestModel requestModel)
+        public async Task<OperationDataResult<ContractsModel>> GetAllContracts([FromBody] ContractsRequestModel requestModel)
         {
-            return _contractsService.GetAllContracts(requestModel);
+            return await _contractsService.GetAllContracts(requestModel);
         }
 
         [HttpPost]
         [Route("api/contracts/create-contract")]
-        public OperationResult CreateContract([FromBody] ContractModel contractCreateModel)
+        public async Task<OperationResult> CreateContract([FromBody] ContractModel contractCreateModel)
         {
-            return _contractsService.CreateContract(contractCreateModel);
+            return await _contractsService.CreateContract(contractCreateModel);
         }
 
         [HttpPost]
         [Route("api/contracts/update-contract")]
-        public OperationResult UpdateContract([FromBody] ContractModel contractUpdateModel)
+        public async Task<OperationResult> UpdateContract([FromBody] ContractModel contractUpdateModel)
         {
-            return _contractsService.UpdateContract(contractUpdateModel);
+            return await _contractsService.UpdateContract(contractUpdateModel);
         }
 
         [HttpDelete]
         [Route("api/contracts/delete-contract")]
-        public OperationResult DeleteContract([FromBody] ContractModel contractDeleteModel)
+        public async Task<OperationResult> DeleteContract([FromBody] ContractModel contractDeleteModel)
         {
-            return _contractsService.DeleteContract(contractDeleteModel);
+            return await _contractsService.DeleteContract(contractDeleteModel);
         }
 
     }

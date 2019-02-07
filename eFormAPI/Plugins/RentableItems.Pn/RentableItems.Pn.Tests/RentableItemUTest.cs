@@ -6,6 +6,7 @@ using RentableItems.Pn.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RentableItems.Pn.Tests
 {
@@ -14,7 +15,7 @@ namespace RentableItems.Pn.Tests
     {
 
         [Test]
-        public void RentableItemModel_Save_DoesSave()
+        public async Task RentableItemModel_Save_DoesSave()
         {
 
             // Arrange
@@ -30,7 +31,7 @@ namespace RentableItems.Pn.Tests
 
 
             // Act
-            rentableItemModel.Save(DbContext);
+            await rentableItemModel.Save(DbContext);
 
             RentableItem rentableItem = DbContext.RentableItem.AsNoTracking().First();
             List<RentableItem> itemList = DbContext.RentableItem.AsNoTracking().ToList();
@@ -53,7 +54,7 @@ namespace RentableItems.Pn.Tests
         }
 
         [Test]
-        public void RentableItemModel_Update_DoesUpdate()
+        public async Task RentableItemModel_Update_DoesUpdate()
         {
             // Arrange
             RentableItem rentableItem = new RentableItem();
@@ -67,7 +68,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItem);         
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
@@ -87,7 +88,7 @@ namespace RentableItems.Pn.Tests
             rentableItemVer.RentableItemId = rentableItem.Id;
 
             DbContext.RentableItemsVersion.Add(rentableItemVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
         
 
             // Act
@@ -106,7 +107,7 @@ namespace RentableItems.Pn.Tests
 
             rentableItemModel.Id = rentableItem.Id;
 
-            rentableItemModel.Update(DbContext);
+            await rentableItemModel.Update(DbContext);
 
             RentableItem dbRentableItem = DbContext.RentableItem.AsNoTracking().First();
             List<RentableItem> itemList = DbContext.RentableItem.AsNoTracking().ToList();
@@ -128,7 +129,7 @@ namespace RentableItems.Pn.Tests
         }
 
         [Test]
-        public void RentableItemModel_Delete_DoesDelete()
+        public async Task RentableItemModel_Delete_DoesDelete()
         {
             // Arrange
             RentableItem rentableItem = new RentableItem();
@@ -142,7 +143,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.RegistrationDate = registrationDate;
 
             DbContext.RentableItem.Add(rentableItem);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
             // Act
             RentableItemModel rentableItemModel = new RentableItemModel();
@@ -178,9 +179,9 @@ namespace RentableItems.Pn.Tests
             rentableItemVer.RentableItemId = rentableItem.Id;
 
             DbContext.RentableItemsVersion.Add(rentableItemVer);
-            DbContext.SaveChanges();
+            await DbContext.SaveChangesAsync();
 
-            rentableItemModel.Delete(DbContext);
+            await rentableItemModel.Delete(DbContext);
 
             RentableItem dbRentableItem = DbContext.RentableItem.AsNoTracking().First();
             List<RentableItem> itemList = DbContext.RentableItem.AsNoTracking().ToList();

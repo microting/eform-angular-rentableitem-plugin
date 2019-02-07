@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -18,7 +19,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int? eFormId { get; set; }
         
-        public void Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 
@@ -31,16 +32,16 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItemsSettings.eForm_Id = eFormId;
 
             _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
 
             _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
 
             
 
         }
 
-        public void Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
 
@@ -59,12 +60,12 @@ namespace RentableItems.Pn.Infrastructure.Models
                 rentableItemsSettings.Version += 1;
 
                 _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
-                _dbContext.SaveChanges();
+              await _dbContext.SaveChangesAsync();
 
             }
         }
 
-        public void Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
 
@@ -82,7 +83,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 rentableItemsSettings.Version += 1;
 
                 _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
-                _dbContext.SaveChanges();
+               await _dbContext.SaveChangesAsync();
 
             }
         }
