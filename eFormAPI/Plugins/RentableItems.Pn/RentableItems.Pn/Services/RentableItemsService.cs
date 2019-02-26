@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
+using eFormShared;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -53,7 +54,11 @@ namespace RentableItems.Pn.Services
                 }
 
                 rentableItemsPnModel.Total = rentableItemsQuery.Count();
-                rentableItemsQuery = rentableItemsQuery.Skip(pnRequestModel.Offset).Take(pnRequestModel.PageSize);
+                rentableItemsQuery 
+                    = rentableItemsQuery
+                        .Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
+                        .Skip(pnRequestModel.Offset)
+                        .Take(pnRequestModel.PageSize);
                 List<RentableItem> rentableItems = rentableItemsQuery.ToList();
                 rentableItems.ForEach(rentableItem =>
                 {

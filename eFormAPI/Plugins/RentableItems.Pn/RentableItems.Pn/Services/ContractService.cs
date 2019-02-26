@@ -51,7 +51,11 @@ namespace RentableItems.Pn.Services
                     }
                 }
                 contractsModel.Total = contractsQuery.Count();
-                contractsQuery = contractsQuery.Skip(contractsPnRequestModel.Offset).Take(contractsPnRequestModel.PageSize);
+                contractsQuery 
+                    = contractsQuery
+                        .Where(x => x.WorkflowState != eFormShared.Constants.WorkflowStates.Removed)
+                        .Skip(contractsPnRequestModel.Offset)
+                        .Take(contractsPnRequestModel.PageSize);
                 List<Contract> contracts = contractsQuery.ToList();
                 contracts.ForEach(contract =>
                 {

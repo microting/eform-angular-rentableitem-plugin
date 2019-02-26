@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eFormShared;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -50,7 +51,11 @@ namespace RentableItems.Pn.Services
                     }
                 }
                 contractInspectionsModel.Total = contractInspectionsQuery.Count();
-                contractInspectionsQuery = contractInspectionsQuery.Skip(contractInspectionsPnRequestModel.Offset).Take(contractInspectionsPnRequestModel.PageSize);
+                contractInspectionsQuery
+                    = contractInspectionsQuery
+                        .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
+                        .Skip(contractInspectionsPnRequestModel.Offset)
+                        .Take(contractInspectionsPnRequestModel.PageSize);
                 List<ContractInspection> contractInspections = contractInspectionsQuery.ToList();
                 contractInspections.ForEach(contractInspection =>
                 {
