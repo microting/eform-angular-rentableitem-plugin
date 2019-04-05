@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
@@ -37,6 +38,9 @@ namespace RentableItems.Pn
             services.AddScoped<IContractsService, ContractService>();
             services.AddScoped<IContractsInspectionService, ContractsInspectionService>();
             services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
+        }
+        public void AddPluginConfig(IConfigurationBuilder builder, string connectionString)
+        {
         }
 
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
@@ -144,6 +148,9 @@ namespace RentableItems.Pn
 
                 context.SaveChanges();
             }
+        }
+        public void ConfigureOptionsServices(IServiceCollection services, IConfiguration configuration)
+        {
         }
     }
 }
