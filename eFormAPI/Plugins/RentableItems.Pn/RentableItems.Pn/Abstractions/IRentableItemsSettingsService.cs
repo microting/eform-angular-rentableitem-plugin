@@ -6,7 +6,7 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IRentableItemsSettingsService
     {
-        Task<OperationDataResult<RentableItemsSettingsModel>> GetSettings();
-        Task<OperationResult> UpdateSettings(RentableItemsSettingsModel rentableItemsSettingsModel);
+        Task<OperationDataResult<RentableItemBaseSettings>> GetSettings();
+        Task<OperationResult> UpdateSettings(RentableItemBaseSettings rentableItemsSettingsModel);
     }
 }

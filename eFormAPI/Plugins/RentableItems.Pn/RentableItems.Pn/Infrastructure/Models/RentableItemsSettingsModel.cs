@@ -19,7 +19,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int? eFormId { get; set; }
         
-        public async Task Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbContext _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 
@@ -41,7 +41,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public async Task Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbContext _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
 
@@ -65,7 +65,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbContext _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault(x => x.Id == Id);
 
@@ -87,7 +87,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             }
         }
-        public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbAnySql _dbContext, RentableItemsSettings rentableItemsSettings)
+        public RentableItemsSettingsVersions MapRentableItemsSettings(RentableItemsPnDbContext _dbContext, RentableItemsSettings rentableItemsSettings)
         {
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
 

@@ -1,13 +1,16 @@
-﻿namespace RentableItems.Pn.Infrastructure.Data
+﻿using Microting.eFormApi.BasePn.Abstractions;
+using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
+
+namespace RentableItems.Pn.Infrastructure.Data
 {
     using Microsoft.EntityFrameworkCore;
     using RentableItems.Pn.Infrastructure.Data.Entities;
 
-    public partial class RentableItemsPnDbAnySql : DbContext
+    public partial class RentableItemsPnDbContext : DbContext, IPluginDbContext
     {
-        public RentableItemsPnDbAnySql() { }
+        public RentableItemsPnDbContext() { }
 
-        public RentableItemsPnDbAnySql(DbContextOptions options) : base(options)
+        public RentableItemsPnDbContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -34,5 +37,9 @@
             modelBuilder.Entity<Field>()
                  .HasIndex(x => x.Name);
         }
+        
+        public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
+
+        public DbSet<PluginConfigurationValueVersion> PluginConfigurationValueVersions { get; set; }
     }
 }

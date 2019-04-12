@@ -32,7 +32,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         //    this.PlateNumber = plateNumber;
         //}
 
-        public async Task Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbContext _dbContext)
         {
             
             RentableItem rentableItem = new RentableItem();
@@ -54,7 +54,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbContext _dbContext)
         {
             RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
@@ -82,7 +82,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbContext _dbContext)
         {
             RentableItem rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == Id);
 
@@ -104,7 +104,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbAnySql _dbContext, RentableItem rentableItem)
+        private RentableItemsVersions MapRentableItemVersions(RentableItemsPnDbContext _dbContext, RentableItem rentableItem)
         {
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 

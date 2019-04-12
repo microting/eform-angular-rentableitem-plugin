@@ -21,7 +21,7 @@ namespace RentableItems.Pn.Controllers
         [HttpGet]
         [Authorize(Roles = EformRole.Admin)]
         [Route("api/rentable-items-pn/settings")]
-        public async Task<OperationDataResult<RentableItemsSettingsModel>> GetSettings()
+        public async Task<OperationDataResult<RentableItemBaseSettings>> GetSettings()
         {
             return await _rentableItemsSettingsService.GetSettings();
         }
@@ -29,7 +29,7 @@ namespace RentableItems.Pn.Controllers
         [HttpPost]
         [Authorize(Roles = EformRole.Admin)]
         [Route("api/rentable-items-pn/settings")]
-        public async Task<OperationResult> UpdateSettings([FromBody]RentableItemsSettingsModel rentableItemsSettingsModel)
+        public async Task<OperationResult> UpdateSettings([FromBody]RentableItemBaseSettings rentableItemsSettingsModel)
         {
             return await _rentableItemsSettingsService.UpdateSettings(rentableItemsSettingsModel);
         }

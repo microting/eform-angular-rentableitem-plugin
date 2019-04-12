@@ -19,10 +19,10 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<ContractService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-        private readonly RentableItemsPnDbAnySql _dbContext;
+        private readonly RentableItemsPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
 
-        public ContractService(RentableItemsPnDbAnySql dbContext,
+        public ContractService(RentableItemsPnDbContext dbContext,
             ILogger<ContractService> logger,
             IEFormCoreService coreHelper,
             IRentableItemsLocalizationService rentableItemLocalizationService)

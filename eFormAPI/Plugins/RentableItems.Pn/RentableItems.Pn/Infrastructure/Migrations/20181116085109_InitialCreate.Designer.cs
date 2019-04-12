@@ -9,7 +9,7 @@ using RentableItems.Pn.Infrastructure.Data;
 
 namespace RentableItems.Pn.Migrations
 {
-    [DbContext(typeof(RentableItemsPnDbAnySql))]
+    [DbContext(typeof(RentableItemsPnDbContext))]
     [Migration("20181116085109_InitialCreate")]
     partial class InitialCreate
     {

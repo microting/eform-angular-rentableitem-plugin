@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
+using Microting.eFormApi.BasePn.Infrastructure.Helpers.PluginDbOptions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
@@ -20,74 +25,70 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<RentableItemsSettingsService> _logger;
         private readonly IRentableItemsLocalizationService _rentablteItemsLocalizationsService;
-        private readonly RentableItemsPnDbAnySql _dbContext;
+        private readonly RentableItemsPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
+        private readonly IPluginDbOptions<RentableItemBaseSettings> _options;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public RentableItemsSettingsService(ILogger<RentableItemsSettingsService> logger,
-            RentableItemsPnDbAnySql dbContext,
+            RentableItemsPnDbContext dbContext,
             IEFormCoreService coreHelper,
-            IRentableItemsLocalizationService rentableItemsLocalizationService)
+            IPluginDbOptions<RentableItemBaseSettings> options,
+            IRentableItemsLocalizationService rentableItemsLocalizationService,           
+            IHttpContextAccessor httpContextAccessor)
+            
         {
             _logger = logger;
             _dbContext = dbContext;
             _coreHelper = coreHelper;
+            _options = options;
+            _httpContextAccessor = httpContextAccessor;
             _rentablteItemsLocalizationsService = rentableItemsLocalizationService;
         }
 
-        public async Task<OperationDataResult<RentableItemsSettingsModel>> GetSettings()
+        public async Task<OperationDataResult<RentableItemBaseSettings>> GetSettings()
         {
             try
             {
-                RentableItemsSettingsModel result = new RentableItemsSettingsModel();
-                RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault();
-                if(rentableItemsSettings?.eForm_Id != null)
+                var option = _options.Value;
+                
+                if (option.SdkConnectionString == "...")
                 {
-                    result.eFormId = (int)rentableItemsSettings.eForm_Id;
+                    string connectionString = _dbContext.Database.GetDbConnection().ConnectionString;
+
+                    string dbNameSection = Regex.Match(connectionString, @"(Database=(...)_eform-angular-\w*-plugin;)").Groups[0].Value;
+                    string dbPrefix = Regex.Match(connectionString, @"Database=(\d*)_").Groups[1].Value;
+                    string sdk = $"Database={dbPrefix}_SDK;";
+                    connectionString = connectionString.Replace(dbNameSection, sdk);
+                    await _options.UpdateDb(settings => { settings.SdkConnectionString = connectionString;}, _dbContext, UserId);
+
                 }
-                else
-                {
-                    result.eFormId = null;
-                }
-                return new OperationDataResult<RentableItemsSettingsModel>(true, result);
+                
+                return new OperationDataResult<RentableItemBaseSettings>(true, option);
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<RentableItemsSettingsModel>(false,
+                return new OperationDataResult<RentableItemBaseSettings>(false,
                     _rentablteItemsLocalizationsService.GetString("ErrorWhileObtainingRentableItemsSettings"));
             }
         }
 
-        public async Task<OperationResult> UpdateSettings(RentableItemsSettingsModel rentableItemsSettingsModel)
+        public async Task<OperationResult> UpdateSettings(RentableItemBaseSettings rentableItemsSettingsModel)
         {
             try
             {
-                if(rentableItemsSettingsModel.eFormId == 0)
-                {
-                    return new OperationResult(true);
-                }
-                RentableItemsSettings rentableItemsSettings = _dbContext.RentableItemsSettings.FirstOrDefault();
-                if(rentableItemsSettings == null)
-                {
-                    rentableItemsSettings = new RentableItemsSettings();
-                    
-                    rentableItemsSettings.eForm_Id = rentableItemsSettingsModel.eFormId;
-                    
-                    _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
-                }
-                else
-                {
-                    rentableItemsSettings.eForm_Id = rentableItemsSettingsModel.eFormId;
-                }
-                if(rentableItemsSettingsModel.eFormId != null)
-                {
-                    Core core = _coreHelper.GetCore();
-                    MainElement eForm = core.TemplateRead((int)rentableItemsSettingsModel.eFormId);
-                    rentableItemsSettingsModel.eFormId = eForm.Id;
-                }
-
-                await _dbContext.SaveChangesAsync();
+                await _options.UpdateDb(settings =>
+                    {
+                        settings.LogLevel = rentableItemsSettingsModel.LogLevel;
+                        settings.LogLimit = rentableItemsSettingsModel.LogLimit;
+                        settings.MaxParallelism = rentableItemsSettingsModel.MaxParallelism;
+                        settings.NumberOfWorkers = rentableItemsSettingsModel.NumberOfWorkers;
+                        settings.SdkConnectionString = rentableItemsSettingsModel.SdkConnectionString;
+                        settings.SdkeFormId = rentableItemsSettingsModel.SdkeFormId;
+                    }, _dbContext, UserId
+                );
                 return new OperationResult(true,
                     _rentablteItemsLocalizationsService.GetString("SettingsHasBeenUpdatedSuccessfully"));
             }
@@ -99,6 +100,14 @@ namespace RentableItems.Pn.Services
                     _rentablteItemsLocalizationsService.GetString("ErrorWhileUpdatingRentableItemsSettings"));
             }
 
+        }
+        public int UserId
+        {
+            get
+            {
+                var value = _httpContextAccessor?.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+                return value == null ? 0 : int.Parse(value);
+            }
         }
     }
 }

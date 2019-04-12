@@ -28,7 +28,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         private readonly IEFormCoreService _coreHelper;
 
 
-        public async Task Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbContext _dbContext)
         {
             ContractInspection contractInspection = new ContractInspection();
 
@@ -66,7 +66,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public async Task Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbContext _dbContext)
         {
             ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
 
@@ -93,7 +93,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbContext _dbContext)
         {
             ContractInspection contractInspection = _dbContext.ContractInspection.FirstOrDefault(x => x.Id == Id);
 
@@ -117,7 +117,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public ContractInspectionVersion MapContractInspection(RentableItemsPnDbAnySql _dbContext, ContractInspection contractInspection)
+        public ContractInspectionVersion MapContractInspection(RentableItemsPnDbContext _dbContext, ContractInspection contractInspection)
         {
             ContractInspectionVersion contractInspectionVer = new ContractInspectionVersion();
 

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace RentableItems.Pn.Infrastructure.Data.Factories
 {
-    public class RentableItemsPnContextFactory : IDesignTimeDbContextFactory<RentableItemsPnDbAnySql>
+    public class RentableItemsPnContextFactory : IDesignTimeDbContextFactory<RentableItemsPnDbContext>
     {
-        public RentableItemsPnDbAnySql CreateDbContext(string[] args)
+        public RentableItemsPnDbContext CreateDbContext(string[] args)
         {
-            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbAnySql>();
+            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
             if (args.Any())
             {
                 if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))
@@ -27,7 +27,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
             }
             //optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=555_RentableItems;Integrated Security=True;");
             optionsBuilder.UseLazyLoadingProxies(true);
-            return new RentableItemsPnDbAnySql(optionsBuilder.Options);
+            return new RentableItemsPnDbContext(optionsBuilder.Options);
         }
     }
 }

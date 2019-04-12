@@ -22,7 +22,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CustomerId { get; set; }
         public int? ContractNr { get; set; }
 
-        public async Task Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbContext _dbContext)
         {
             Contract dbContract = _dbContext.Contract.FirstOrDefault(x => x.ContractNr == ContractNr);
 
@@ -49,7 +49,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public async Task Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbContext _dbContext)
         {
             Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
 
@@ -77,7 +77,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
         }
 
-        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbContext _dbContext)
         {
             Contract contract = _dbContext.Contract.FirstOrDefault(x => x.Id == Id);
 
@@ -100,7 +100,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public ContractVersions MapContract(RentableItemsPnDbAnySql _dbContext, Contract contract)
+        public ContractVersions MapContract(RentableItemsPnDbContext _dbContext, Contract contract)
         {
             ContractVersions contractVer = new ContractVersions();
 

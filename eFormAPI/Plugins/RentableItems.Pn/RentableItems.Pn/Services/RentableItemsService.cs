@@ -21,10 +21,10 @@ namespace RentableItems.Pn.Services
     {
             private readonly ILogger<RentableItemsService> _logger;
             private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-            private readonly RentableItemsPnDbAnySql _dbContext;
+            private readonly RentableItemsPnDbContext _dbContext;
             private readonly IEFormCoreService _coreHelper;
 
-            public RentableItemsService(RentableItemsPnDbAnySql dbContext,
+            public RentableItemsService(RentableItemsPnDbContext dbContext,
                 ILogger<RentableItemsService> logger, 
                 IEFormCoreService coreHelper,
                 IRentableItemsLocalizationService rentableItemLocalizationService)

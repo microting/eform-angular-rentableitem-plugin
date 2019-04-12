@@ -16,10 +16,10 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<RentableItemsFieldsService> _logger;
         private readonly IRentableItemsLocalizationService _localizationService;
-        private readonly RentableItemsPnDbAnySql _dbContext;
+        private readonly RentableItemsPnDbContext _dbContext;
 
         public RentableItemsFieldsService(ILogger<RentableItemsFieldsService> logger,
-            RentableItemsPnDbAnySql dbContext,
+            RentableItemsPnDbContext dbContext,
             IRentableItemsLocalizationService localizationService)
         {
             _logger = logger;

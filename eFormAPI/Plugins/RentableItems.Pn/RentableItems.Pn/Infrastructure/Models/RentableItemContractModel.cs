@@ -20,7 +20,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int RentableItemId { get; set; }
         public int ContractId { get; set; }
 
-        public async Task Save(RentableItemsPnDbAnySql _dbContext)
+        public async Task Save(RentableItemsPnDbContext _dbContext)
         {
             RentableItemContract rentableItemContract = new RentableItemContract();
 
@@ -39,7 +39,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             await _dbContext.SaveChangesAsync();
 
         }
-        public async Task Update(RentableItemsPnDbAnySql _dbContext)
+        public async Task Update(RentableItemsPnDbContext _dbContext)
         {
             RentableItemContract rentableItemContract = _dbContext.RentableItemContract.FirstOrDefault(x => x.Id == Id);
 
@@ -63,7 +63,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             }
         }
-        public async Task Delete(RentableItemsPnDbAnySql _dbContext)
+        public async Task Delete(RentableItemsPnDbContext _dbContext)
         {
             RentableItemContract rentableItemContract = _dbContext.RentableItemContract.FirstOrDefault(x => x.Id == Id);
 
@@ -87,7 +87,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
         }
 
-        public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbAnySql _dbContext, RentableItemContract rentableItemContract)
+        public RentableItemsContractVersions MapRentableItemContractVersions(RentableItemsPnDbContext _dbContext, RentableItemContract rentableItemContract)
         {
             RentableItemsContractVersions rentableItemscontractVer = new RentableItemsContractVersions();
 

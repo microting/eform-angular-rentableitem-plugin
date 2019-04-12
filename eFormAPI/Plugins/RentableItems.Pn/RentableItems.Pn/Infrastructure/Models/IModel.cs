@@ -8,11 +8,11 @@ namespace RentableItems.Pn.Infrastructure.Models
 {
     public interface IModel
     {
-        Task Save(RentableItemsPnDbAnySql _dbContext);
+        Task Save(RentableItemsPnDbContext _dbContext);
 
-        Task Update(RentableItemsPnDbAnySql _dbContext);
+        Task Update(RentableItemsPnDbContext _dbContext);
 
-        Task Delete(RentableItemsPnDbAnySql _dbContext);
+        Task Delete(RentableItemsPnDbContext _dbContext);
 
     }
 }

@@ -8,7 +8,7 @@ using RentableItems.Pn.Infrastructure.Data;
 
 namespace RentableItems.Pn.Migrations
 {
-    [DbContext(typeof(RentableItemsPnDbAnySql))]
+    [DbContext(typeof(RentableItemsPnDbContext))]
     partial class RentableItemsPnDbAnySqlModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

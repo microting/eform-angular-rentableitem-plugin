@@ -9,7 +9,7 @@ using RentableItems.Pn.Infrastructure.Data;
 
 namespace RentableItems.Pn.Migrations
 {
-    [DbContext(typeof(RentableItemsPnDbAnySql))]
+    [DbContext(typeof(RentableItemsPnDbContext))]
     [Migration("20181212120204_AddSiteitToContractInspection")]
     partial class AddSiteitToContractInspection
     {
