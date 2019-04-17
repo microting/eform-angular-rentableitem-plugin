@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2B0139A9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentableItems.Pn.Tests", "RentableItems.Pn.Tests\RentableItems.Pn.Tests.csproj", "{FE2DAE9E-87F7-484B-8562-DA1A7086B34C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBMigrator", "DBMigrator\DBMigrator.csproj", "{4868AF30-41BE-4A46-92AC-B7A3968EB691}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{FE2DAE9E-87F7-484B-8562-DA1A7086B34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2DAE9E-87F7-484B-8562-DA1A7086B34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2DAE9E-87F7-484B-8562-DA1A7086B34C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4868AF30-41BE-4A46-92AC-B7A3968EB691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4868AF30-41BE-4A46-92AC-B7A3968EB691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4868AF30-41BE-4A46-92AC-B7A3968EB691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4868AF30-41BE-4A46-92AC-B7A3968EB691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

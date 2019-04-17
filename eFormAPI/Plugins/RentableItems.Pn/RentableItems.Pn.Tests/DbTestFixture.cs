@@ -14,7 +14,7 @@ namespace RentableItems.Pn.Tests
     public abstract class DbTestFixture
     {
 
-        protected RentableItemsPnDbAnySql DbContext;
+        protected RentableItemsPnDbContext DbContext;
         protected string ConnectionString;
 
 
@@ -41,7 +41,7 @@ namespace RentableItems.Pn.Tests
                 dbContextOptionsBuilder.UseSqlServer(connectionStr);
             }
             dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            DbContext = new RentableItemsPnDbAnySql(dbContextOptionsBuilder.Options);
+            DbContext = new RentableItemsPnDbContext(dbContextOptionsBuilder.Options);
 
             DbContext.Database.Migrate();
             DbContext.Database.EnsureCreated();

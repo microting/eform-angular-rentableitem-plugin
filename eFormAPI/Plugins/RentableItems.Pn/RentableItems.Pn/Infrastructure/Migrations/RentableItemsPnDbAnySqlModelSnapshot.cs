@@ -15,9 +15,65 @@ namespace RentableItems.Pn.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Microting.eFormApi.BasePn.Infrastructure.Database.Entities.PluginConfigurationValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<string>("Value");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PluginConfigurationValues");
+                });
+
+            modelBuilder.Entity("Microting.eFormApi.BasePn.Infrastructure.Database.Entities.PluginConfigurationValueVersion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<string>("Value");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PluginConfigurationValueVersions");
+                });
 
             modelBuilder.Entity("RentableItems.Pn.Infrastructure.Data.Entities.Contract", b =>
                 {
@@ -33,6 +89,8 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<int>("CustomerId");
@@ -40,6 +98,8 @@ namespace RentableItems.Pn.Migrations
                     b.Property<int?>("Status");
 
                     b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
 
                     b.Property<int>("Updated_By_User_Id");
 
@@ -63,6 +123,8 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("DoneAt");
@@ -74,6 +136,8 @@ namespace RentableItems.Pn.Migrations
                     b.Property<int?>("Status");
 
                     b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
 
                     b.Property<int>("Updated_By_User_Id");
 
@@ -99,6 +163,10 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("ContractInspectionId");
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
@@ -111,11 +179,18 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int?>("Status");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
 
                     b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -141,6 +216,8 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<int>("CustomerId");
@@ -148,6 +225,8 @@ namespace RentableItems.Pn.Migrations
                     b.Property<int?>("Status");
 
                     b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
 
                     b.Property<int>("Updated_By_User_Id");
 
@@ -167,8 +246,21 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50);
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
@@ -186,6 +278,10 @@ namespace RentableItems.Pn.Migrations
                     b.Property<string>("Brand")
                         .HasMaxLength(100);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
@@ -199,6 +295,10 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<string>("SerialNumber");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
@@ -206,6 +306,9 @@ namespace RentableItems.Pn.Migrations
                     b.Property<int>("Version");
 
                     b.Property<string>("VinNumber");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -227,17 +330,28 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("ContractId");
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
 
                     b.Property<int>("RentableItemId");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
 
                     b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -257,6 +371,10 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("ContractId");
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
@@ -265,11 +383,18 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("RentableItemId");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
 
                     b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -285,9 +410,22 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("FieldId");
 
                     b.Property<int>("FieldStatus");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
@@ -302,15 +440,26 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
+
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
 
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
 
                     b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -328,6 +477,10 @@ namespace RentableItems.Pn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
@@ -336,11 +489,18 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<int>("RentableItemsSettingId");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
 
                     b.Property<int>("Version");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);
@@ -359,6 +519,10 @@ namespace RentableItems.Pn.Migrations
                     b.Property<string>("Brand")
                         .HasMaxLength(100);
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("CreatedByUserId");
+
                     b.Property<int>("Created_By_User_Id");
 
                     b.Property<DateTime?>("Created_at");
@@ -374,6 +538,10 @@ namespace RentableItems.Pn.Migrations
 
                     b.Property<string>("SerialNumber");
 
+                    b.Property<DateTime?>("UpdatedAt");
+
+                    b.Property<int>("UpdatedByUserId");
+
                     b.Property<int>("Updated_By_User_Id");
 
                     b.Property<DateTime?>("Updated_at");
@@ -381,6 +549,9 @@ namespace RentableItems.Pn.Migrations
                     b.Property<int>("Version");
 
                     b.Property<string>("VinNumber");
+
+                    b.Property<string>("WorkflowState")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Workflow_state")
                         .HasMaxLength(255);

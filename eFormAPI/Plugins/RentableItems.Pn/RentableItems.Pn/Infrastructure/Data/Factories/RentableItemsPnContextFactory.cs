@@ -25,7 +25,8 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
             {
                 throw new ArgumentNullException("Connection string not present");
             }
-            //optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=555_RentableItems;Integrated Security=True;");
+//            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=555_RentableItems;Integrated Security=True;");
+            //            dotnet ef migrations add InitialCreate --project RentableItems.Pn --startup-project DBMigrator
             optionsBuilder.UseLazyLoadingProxies(true);
             return new RentableItemsPnDbContext(optionsBuilder.Options);
         }
