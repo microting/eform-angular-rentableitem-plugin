@@ -44,6 +44,7 @@ export class RentableItemsSettingsComponent implements OnInit {
     this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
       if (data && data.success) {
         this.settingsModel = data.model;
+        console.log(data);
       } this.spinnerStatus = false;
     });
   }
@@ -53,12 +54,11 @@ export class RentableItemsSettingsComponent implements OnInit {
     this.rentableItemsSettingsService.updateSettings(this.settingsModel)
       .subscribe((data) => {
       if (data && data.success) {
-
       } this.spinnerStatus = false;
     });
   }
 
   onSelectedChanged(e: any) {
-    this.settingsModel.eFormId = e.id;
+    this.settingsModel.sdkeFormId = e.id;
   }
 }

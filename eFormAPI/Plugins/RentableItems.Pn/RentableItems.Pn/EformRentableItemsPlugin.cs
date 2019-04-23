@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
+using Microting.eFormApi.BasePn.Infrastructure.Settings;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
-using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Data.Factories;
 using RentableItems.Pn.Infrastructure.Data.Seed;
-using RentableItems.Pn.Infrastructure.Enums;
-using RentableItems.Pn.Infrastructure.Extensions;
+using RentableItems.Pn.Infrastructure.Data.Seed.Data;
 using RentableItems.Pn.Infrastructure.Models;
 using RentableItems.Pn.Services;
 
@@ -26,8 +24,9 @@ namespace RentableItems.Pn
     {
         private string _pluginPath;
         public string Name => "Microting Rentable Items plugin";
-        public string PluginId => "EFormRentableItemsPn";
+        public string PluginId => "eform-angular-rentableitem-plugin";
         public string PluginPath => PluginAssembly().Location;
+        private string _connectionString;
 
         public Assembly PluginAssembly()
         {
@@ -46,18 +45,41 @@ namespace RentableItems.Pn
         }
         public void AddPluginConfig(IConfigurationBuilder builder, string connectionString)
         {
+            var seedData = new RentableItemsConfiguraitonSeedData();
+            var contextFactory = new RentableItemsPnContextFactory();
+            builder.AddPluginConfiguration(
+                connectionString,
+                seedData,
+                contextFactory);
         }
-
+        public void ConfigureOptionsServices(
+            IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
+                configuration.GetSection("RentableItemBaseSettings"));
+        }
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
-             b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            _connectionString = connectionString;
+            if (connectionString.ToLower().Contains("convert zero datetime"))
+            {
+                services.AddDbContext<RentableItemsPnDbContext>(o => o.UseMySql(connectionString,
+                    b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            }
+            else
+            {
+                services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
+                    b => b.MigrationsAssembly(PluginAssembly().FullName)));
+            }
 
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
-            using (RentableItemsPnDbContext context = contextFactory.CreateDbContext(new[] { connectionString }))
-            {
+
+            using (var context = contextFactory.CreateDbContext(new[] {connectionString}))
+            {  
                 context.Database.Migrate();
             }
+
             // Seed database
             SeedDatabase(connectionString);
         }
@@ -65,6 +87,8 @@ namespace RentableItems.Pn
         public void Configure(IApplicationBuilder appBuilder)
         {
             var serviceProvider = appBuilder.ApplicationServices;
+            IRebusService rebusService = serviceProvider.GetService<IRebusService>();
+            rebusService.Start(_connectionString);
         }
 
         public MenuModel HeaderMenu(IServiceProvider serviceProvider)
@@ -125,10 +149,6 @@ namespace RentableItems.Pn
                     RentableItemPluginSeed.SeedData(context);
                 }
         }
-        public void ConfigureOptionsServices(IServiceCollection services, IConfiguration configuration)
-        {
-            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
-                configuration.GetSection("RentableItemBaseSettings"));
-        }
+       
     }
 }

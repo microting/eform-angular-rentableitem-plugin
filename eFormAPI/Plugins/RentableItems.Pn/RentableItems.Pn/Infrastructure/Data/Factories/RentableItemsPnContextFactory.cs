@@ -9,7 +9,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
     {
         public RentableItemsPnDbContext CreateDbContext(string[] args)
         {
-            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
             if (args.Any())
             {
                 if (args.FirstOrDefault().ToLower().Contains("convert zero datetime"))

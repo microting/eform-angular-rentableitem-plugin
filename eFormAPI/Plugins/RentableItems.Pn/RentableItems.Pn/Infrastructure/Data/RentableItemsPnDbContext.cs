@@ -1,16 +1,17 @@
 ﻿using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
+using Microsoft.EntityFrameworkCore;
+using RentableItems.Pn.Infrastructure.Data.Entities;
 
 namespace RentableItems.Pn.Infrastructure.Data
 {
-    using Microsoft.EntityFrameworkCore;
-    using RentableItems.Pn.Infrastructure.Data.Entities;
+
 
     public partial class RentableItemsPnDbContext : DbContext, IPluginDbContext
     {
         public RentableItemsPnDbContext() { }
 
-        public RentableItemsPnDbContext(DbContextOptions options) : base(options)
+        public RentableItemsPnDbContext(DbContextOptions<RentableItemsPnDbContext> options) : base(options)
         {
 
         }

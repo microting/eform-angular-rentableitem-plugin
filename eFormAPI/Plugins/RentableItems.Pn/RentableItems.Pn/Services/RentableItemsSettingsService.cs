@@ -50,7 +50,7 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                var option = _options.Value;
+                RentableItemBaseSettings option = _options.Value;
                 
                 if (option.SdkConnectionString == "...")
                 {
