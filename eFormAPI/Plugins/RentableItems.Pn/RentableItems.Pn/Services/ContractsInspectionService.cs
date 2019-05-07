@@ -4,13 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eFormCore;
+using eFormData;
 using eFormShared;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
+using RentableItems.Pn.Infrastructure.Data.Consts;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
 namespace RentableItems.Pn.Services
@@ -21,16 +25,19 @@ namespace RentableItems.Pn.Services
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
         private readonly RentableItemsPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
+        private readonly Core _core;
 
         public ContractsInspectionService(RentableItemsPnDbContext dbContext,
             ILogger<ContractsInspectionService> logger,
             IEFormCoreService coreHelper,
-            IRentableItemsLocalizationService rentableItemLocalizationService)
+            IRentableItemsLocalizationService rentableItemLocalizationService,
+            Core core)
         {
             _dbContext = dbContext;
             _logger = logger;
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
+            _core = core;
         }
         public async Task<OperationDataResult<ContractInspectionsModel>> GetAllContractInspections(ContractInspectionsRequestModel contractInspectionsPnRequestModel)
         {
@@ -82,8 +89,63 @@ namespace RentableItems.Pn.Services
         public async Task<OperationResult> CreateContractInspection(ContractInspectionModel contractInspectionCreateModel)
         {
             try
-            {
-                await contractInspectionCreateModel. Save(_dbContext);
+            {                
+                // finde eform fra settings
+
+                string lookup = $"RentableItemsBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
+
+                LogEvent($"lookup is {lookup}");
+
+                string result = _dbContext.PluginConfigurationValues.AsNoTracking()
+                    .FirstOrDefault(x => 
+                        x.Name == lookup)
+                    ?.Value;
+                
+                LogEvent($"result is {result}");
+                // modificere mainelement
+
+                int eFormId = int.Parse(result);
+
+                MainElement mainElement = _core.TemplateRead(eFormId);
+                
+                // finde sites som eform skal sendes til
+
+                List<Site_Dto> sites = new List<Site_Dto>();
+                
+
+                lookup = $"RentableItemsBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
+                LogEvent($"lookup is {lookup}");
+
+                string sdkSiteIds = _dbContext.PluginConfigurationValues.AsNoTracking()
+                    .FirstOrDefault(x => 
+                        x.Name == lookup)
+                    ?.Value;
+                
+                LogEvent($"sdkSiteIds is {sdkSiteIds}");
+                
+                foreach (string siteId in sdkSiteIds.Split(","))
+                {
+                    LogEvent($"found siteId {siteId}");
+                    sites.Add(_core.SiteRead(int.Parse(siteId)));
+                }
+
+                foreach (Site_Dto siteDto in sites)
+                {
+                    // sende eform core.caseCreate
+
+                    string sdkCaseId = _core.CaseCreate(mainElement, "", siteDto.SiteId);
+
+                    if (!string.IsNullOrEmpty(sdkCaseId))
+                    {
+                        // gemme caseid på contractInspectionCreateModel
+
+                        contractInspectionCreateModel.SiteId = siteDto.SiteId;
+                        contractInspectionCreateModel.SdkCaseId = int.Parse(sdkCaseId);
+                        await contractInspectionCreateModel.Create(_dbContext);
+                    }
+                }
+
+                
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -120,6 +182,19 @@ namespace RentableItems.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContractInspection"));
+            }
+        }
+        private void LogEvent(string appendText)
+        {
+            try
+            {                
+                var oldColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("[DBG] " + appendText);
+                Console.ForegroundColor = oldColor;
+            }
+            catch
+            {
             }
         }
     }

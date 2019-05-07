@@ -87,7 +87,7 @@ namespace RentableItems.Pn.Services
             try
             {
 
-                await contractCreateModel.Save(_dbContext);
+                await contractCreateModel.Create(_dbContext);
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractCreated",
                     contractCreateModel.CustomerId,
                         contractCreateModel.ContractNr));

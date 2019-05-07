@@ -20,7 +20,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int RentableItemId { get; set; }
         public int ContractId { get; set; }
 
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             RentableItemContract rentableItemContract = new RentableItemContract();
 

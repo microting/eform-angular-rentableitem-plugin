@@ -99,7 +99,7 @@ namespace RentableItems.Pn.Services
                 //rentableItemPn.ModelName = rentableItemPnCreateModel.ModelName;
                 //rentableItemPn.RegistrationDate = rentableItemPnCreateModel.RegistrationDate;
 
-                await rentableItemPnCreateModel.Save(_dbContext);
+                await rentableItemPnCreateModel.Create(_dbContext);
 
                 //_dbContext.RentableItem.Add(rentableItemPn);
                 //_dbContext.SaveChanges();

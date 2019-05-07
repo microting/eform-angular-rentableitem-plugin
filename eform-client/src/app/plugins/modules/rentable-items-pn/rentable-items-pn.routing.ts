@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: RentableItemsPnLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'rentable-items',
         canActivate: [AuthGuard],
         component: RentableItemsPnPageComponent
       },

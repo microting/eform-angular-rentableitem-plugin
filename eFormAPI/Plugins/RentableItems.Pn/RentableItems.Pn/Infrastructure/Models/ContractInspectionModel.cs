@@ -28,19 +28,19 @@ namespace RentableItems.Pn.Infrastructure.Models
         private readonly IEFormCoreService _coreHelper;
 
 
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             ContractInspection contractInspection = new ContractInspection();
 
             contractInspection.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
-            contractInspection.Version = Version;
+            contractInspection.Version = 1;
             contractInspection.CreatedAt = DateTime.Now;
             contractInspection.UpdatedAt = DateTime.Now;
             contractInspection.Created_By_User_Id = CreatedByUserID;
             contractInspection.Updated_By_User_Id = UpdatedByUserID;
             contractInspection.SiteId = SiteId;
             contractInspection.ContractId = ContractId;
-            //contractInspection.SDK_Case_Id = SdkCaseId;
+            contractInspection.SDK_Case_Id = SdkCaseId;
             contractInspection.DoneAt = DoneAt;
 
             _dbContext.ContractInspection.Add(contractInspection);

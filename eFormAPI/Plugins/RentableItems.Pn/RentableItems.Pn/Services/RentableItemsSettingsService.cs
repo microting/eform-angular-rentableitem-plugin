@@ -87,6 +87,7 @@ namespace RentableItems.Pn.Services
                         settings.NumberOfWorkers = rentableItemsSettingsModel.NumberOfWorkers;
                         settings.SdkConnectionString = rentableItemsSettingsModel.SdkConnectionString;
                         settings.SdkeFormId = rentableItemsSettingsModel.SdkeFormId;
+                        settings.EnabledSiteIds = rentableItemsSettingsModel.EnabledSiteIds;
                     }, _dbContext, UserId
                 );
                 return new OperationResult(true,

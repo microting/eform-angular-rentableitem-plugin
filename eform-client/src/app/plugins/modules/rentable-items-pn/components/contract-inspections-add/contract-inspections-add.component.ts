@@ -57,6 +57,6 @@ export class ContractInspectionsAddComponent implements OnInit {
   }
   onSelectedChanged(e: any) {
     debugger;
-    this.newContractInspectionModel.siteId = e;
+    this.newContractInspectionModel.siteId = e.siteId;
   }
 }

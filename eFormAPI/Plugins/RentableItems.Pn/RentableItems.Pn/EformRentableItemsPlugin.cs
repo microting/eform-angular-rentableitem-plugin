@@ -73,12 +73,9 @@ namespace RentableItems.Pn
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
-            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
-
-            using (var context = contextFactory.CreateDbContext(new[] {connectionString}))
-            {  
-                context.Database.Migrate();
-            }
+            var contextFactory = new RentableItemsPnContextFactory();
+            var context = contextFactory.CreateDbContext(new[] {connectionString});
+            context.Database.Migrate();
 
             // Seed database
             SeedDatabase(connectionString);
@@ -100,7 +97,7 @@ namespace RentableItems.Pn
             {
                 Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
-                Link = "/plugins/rentable-items-pn"
+                Link = "/plugins/rentable-items-pn/rentable-items"
 
             };
             MenuItemModel contracts = new MenuItemModel()
