@@ -6,7 +6,9 @@ export class RentableItemPnModel {
   vinNumber: string;
   serialNumber: string;
   plateNumber: string;
-  constructor() {
+  constructor(brand?: string, modelName?: string) {
     this.registrationDate = null;
+    this.brand = brand;
+    this.modelName = modelName;
   }
 }

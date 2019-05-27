@@ -1,4 +1,27 @@
-﻿using System;
+﻿/*
+The MIT License (MIT)
+
+Copyright (c) 2007 - 2019 microting
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
@@ -35,10 +58,10 @@ namespace RentableItems.Pn
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRentableItemsService, RentableItemsService>();
-            services.AddScoped<IRentableItemsSettingsService, RentableItemsSettingsService>();
-            services.AddScoped<IContractsService, ContractService>();
-            services.AddScoped<IContractsInspectionService, ContractsInspectionService>();
+            services.AddTransient<IRentableItemsService, RentableItemsService>();
+            services.AddTransient<IRentableItemsSettingsService, RentableItemsSettingsService>();
+            services.AddTransient<IContractsService, ContractService>();
+            services.AddTransient<IContractsInspectionService, ContractsInspectionService>();
             services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
             services.AddSingleton<IRebusService, RebusService>();
 
@@ -51,13 +74,6 @@ namespace RentableItems.Pn
                 connectionString,
                 seedData,
                 contextFactory);
-        }
-        public void ConfigureOptionsServices(
-            IServiceCollection services,
-            IConfiguration configuration)
-        {
-            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
-                configuration.GetSection("RentableItemBaseSettings"));
         }
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
@@ -73,13 +89,14 @@ namespace RentableItems.Pn
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
-            var contextFactory = new RentableItemsPnContextFactory();
+            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
             var context = contextFactory.CreateDbContext(new[] {connectionString});
             context.Database.Migrate();
 
             // Seed database
             SeedDatabase(connectionString);
         }
+       
 
         public void Configure(IApplicationBuilder appBuilder)
         {
@@ -142,10 +159,18 @@ namespace RentableItems.Pn
         {
             var contextFactory = new RentableItemsPnContextFactory();
             using (var context = contextFactory.CreateDbContext(new []{connectionString}))
-                {
-                    RentableItemPluginSeed.SeedData(context);
-                }
+            {
+                RentableItemPluginSeed.SeedData(context);
+            }
         }
+        public void ConfigureOptionsServices(
+            IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
+                configuration.GetSection("RentableItemBaseSettings"));
+        }
+
        
     }
 }

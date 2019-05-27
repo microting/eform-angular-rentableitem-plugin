@@ -64,6 +64,32 @@
                   <label for="contractNumber">{{ 'Contract Number' | translate }}*</label>
                 </div>
               </div>
+              <div class="col-md-12">
+                <div class="md-form">
+                  <ng-select
+                    id="rentableItemSelector"
+                    [placeholder]="'Rentable Items'"
+                    name="rentable-Item-selector"
+                    [bindValue]="'id'"
+                    [bindLabel]="'modelName'"
+                    [clearable]="false"
+                    [items]="rentableItemsModel.rentableItems"
+                  (change)="addNewRentableItem($event)"></ng-select>
+                </div>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item"
+                    *ngFor="let rentableItem of newContractModel.rentableItems">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <a>
+                        <fa-icon icon="grip-lines" size="lg" [fixedWidth]="true"></fa-icon>
+                      </a>
+                    </div>
+                    <div>{{rentableItem.brand + ' ' + rentableItem.modelName}}</div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </form>
         </div>
@@ -79,3 +105,4 @@
 </div>
 
 <spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
+

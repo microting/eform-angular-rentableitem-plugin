@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractModel} from '../../models';
-import {ContractsService} from '../../services';
+import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../models';
+import {ContractsService, RentableItemsPnService} from '../../services';
 import {formatTimezone} from '../../../../../common/helpers';
 
 @Component({
@@ -14,9 +14,15 @@ export class ContractsAddComponent implements OnInit {
   newContractModel: ContractModel = new ContractModel();
   spinnerStatus = false;
   frameShow = true;
-  constructor(private contractService: ContractsService) { }
+  rentableItems: Array<RentableItemPnModel> = [];
+  rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
+  rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
+  constructor(private rentableItemsService: RentableItemsPnService,
+              private contractService: ContractsService) { }
 
   ngOnInit() {
+    this.getRentableItems();
+
   }
 
   show() {
@@ -34,7 +40,25 @@ export class ContractsAddComponent implements OnInit {
       } this.spinnerStatus = false;
     }));
   }
-
+  addNewRentableItem(e: any) {
+    // debugger;
+    // let item = new RentableItemPnModel();
+    // // for (let rentableItem of this.rentableItemsModel.rentableItems) {
+    // //   item = rentableItem;
+    // // }
+    // this.rentableItemsModel.rentableItems.forEach(function (rentableItem) {
+    //   item = rentableItem;
+    // });
+    this.newContractModel.rentableItems.push(e);
+  }
+  getRentableItems() {
+    this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
+      if (result && result.success) {
+        this.rentableItemsModel = result.model;
+      }
+      this.spinnerStatus = false;
+    }));
+  }
   onStartDateSelected(e: any) {
     this.newContractModel.contractStart = formatTimezone(e.value._d);
   }

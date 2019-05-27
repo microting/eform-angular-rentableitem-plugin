@@ -25,6 +25,9 @@ import { ContractInspectionsUpdateComponent } from './components/contract-inspec
 import { ContractsUpdateComponent } from './components/contracts-update/contracts-update.component';
 import { ContractsPageComponent } from './components/contracts-page/contracts-page.component';
 import { ContractInspectionsPageComponent } from './components/contract-inspections-page/contract-inspections-page.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {DragulaModule} from 'ng2-dragula';
+
 
 @NgModule({
   imports: [
@@ -39,7 +42,9 @@ import { ContractInspectionsPageComponent } from './components/contract-inspecti
     TranslateModule,
     SharedPnModule,
     NgSelectModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule,
+    DragulaModule
   ],
   declarations: [
     RentableItemsPnPageComponent,

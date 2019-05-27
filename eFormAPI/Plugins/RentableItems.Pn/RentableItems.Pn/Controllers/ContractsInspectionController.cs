@@ -18,6 +18,7 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("api/inspections")]
         public async Task<OperationDataResult<ContractInspectionsModel>> GetAllContracts([FromBody] ContractInspectionsRequestModel requestModel)
         {
@@ -25,6 +26,7 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("api/inspections/create-inspection")]
         public async Task<OperationResult> CreateContractInspection([FromBody] ContractInspectionModel contractInspectionCreateModel)
         {

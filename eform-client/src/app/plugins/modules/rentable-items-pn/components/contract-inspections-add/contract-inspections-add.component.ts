@@ -45,7 +45,6 @@ export class ContractInspectionsAddComponent implements OnInit {
   }
 
   createInspection() {
-    debugger;
     this.spinnerStatus = true;
     this.contractInspectionsService.createInspection(this.newContractInspectionModel).subscribe(((data) => {
       if (data && data.success) {
@@ -56,7 +55,6 @@ export class ContractInspectionsAddComponent implements OnInit {
     }));
   }
   onSelectedChanged(e: any) {
-    debugger;
     this.newContractInspectionModel.siteId = e.siteId;
   }
 }
