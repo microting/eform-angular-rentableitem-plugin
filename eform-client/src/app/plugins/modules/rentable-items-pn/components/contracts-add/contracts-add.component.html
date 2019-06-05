@@ -101,6 +101,9 @@
                         {{'Serial Number' | translate}}
                       </div>
                     </th>
+                    <th scope="col">
+                      {{'Actions' | translate}}
+                    </th>
                   </tr>
                   </thead>
                   <tbody id="tableBody">
@@ -116,6 +119,15 @@
                     </td>
                     <td>
                       {{rentableItem.serialNumber}}
+                    </td>
+                    <td>
+                      <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                              mdbTooltip="{{'Delete Contract' | translate}}"
+                        (click)="removeRentableItem(rentableItem)">
+                        <i class="material-icons">
+                          delete_forever
+                        </i>
+                      </button>
                     </td>
                   </tr>
                   </tbody>

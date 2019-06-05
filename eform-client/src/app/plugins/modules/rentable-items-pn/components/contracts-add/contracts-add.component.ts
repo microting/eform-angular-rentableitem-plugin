@@ -53,6 +53,10 @@ export class ContractsAddComponent implements OnInit {
       this.newContractModel.rentableItems.push(e);
     }
   }
+  removeRentableItem(rentableItem: any) {
+    const index = this.newContractModel.rentableItems.indexOf(rentableItem);
+    this.newContractModel.rentableItems.splice(index,  1);
+  }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
       if (result && result.success) {
