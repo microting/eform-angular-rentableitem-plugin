@@ -74,22 +74,53 @@
                     [bindLabel]="'modelName'"
                     [clearable]="false"
                     [items]="rentableItemsModel.rentableItems"
-                  (change)="addNewRentableItem($event)"></ng-select>
+                    (change)="addNewRentableItem($event)"></ng-select>
                 </div>
               </div>
-              <ul class="list-group">
-                <li class="list-group-item"
-                    *ngFor="let rentableItem of newContractModel.rentableItems">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <a>
-                        <fa-icon icon="grip-lines" size="lg" [fixedWidth]="true"></fa-icon>
-                      </a>
-                    </div>
-                    <div>{{rentableItem.brand + ' ' + rentableItem.modelName}}</div>
-                  </div>
-                </li>
-              </ul>
+              <div class="row p-3 table-responsive no-gutters">
+                <table class="table table-sm table-striped text-center">
+                  <thead>
+                  <tr>
+                    <th scope="col" class="table-header-sortable" id="idSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        ID
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="contractIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Model Name' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Brand' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="statusSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Serial Number' | translate}}
+                      </div>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                  <tr *ngFor="let rentableItem of newContractModel.rentableItems">
+                    <td>
+                      {{rentableItem.id}}
+                    </td>
+                    <td>
+                      {{rentableItem.modelName}}
+                    </td>
+                    <td>
+                      {{rentableItem.brand}}
+                    </td>
+                    <td>
+                      {{rentableItem.serialNumber}}
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </form>
         </div>

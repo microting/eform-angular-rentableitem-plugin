@@ -41,7 +41,7 @@ export class ContractsAddComponent implements OnInit {
     }));
   }
   addNewRentableItem(e: any) {
-    // debugger;
+    debugger;
     // let item = new RentableItemPnModel();
     // // for (let rentableItem of this.rentableItemsModel.rentableItems) {
     // //   item = rentableItem;
@@ -49,7 +49,9 @@ export class ContractsAddComponent implements OnInit {
     // this.rentableItemsModel.rentableItems.forEach(function (rentableItem) {
     //   item = rentableItem;
     // });
-    this.newContractModel.rentableItems.push(e);
+    if (!this.newContractModel.rentableItems.includes(e)) {
+      this.newContractModel.rentableItems.push(e);
+    }
   }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {

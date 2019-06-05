@@ -107,10 +107,10 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("RentableItemCreated", rentableItemPnCreateModel.Brand,
                         rentableItemPnCreateModel.ModelName));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                //Trace.TraceError(e.Message);
-                //_logger.LogError(e.Message);
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingRentableItem"));
             }
         }
