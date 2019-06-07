@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {ContractInspectionsService} from '../../../services';
+import {ContractInspectionModel, ContractModel} from '../../../models';
 
 @Component({
   selector: 'app-contract-inspections-delete',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contract-inspections-delete.component.scss']
 })
 export class ContractInspectionsDeleteComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild('frame') frame;
+  @Output() onContractInspectionDeleted: EventEmitter<void> = new EventEmitter<void>();
+  selectedContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
+  spinnerStatus = false;
+  constructor(private contractInspectionService: ContractInspectionsService) { }
 
   ngOnInit() {
   }
-
+  show(contractInspectionModel: ContractInspectionModel) {
+    this.selectedContractInspectionModel = contractInspectionModel;
+    this.frame.show();
+  }
+  deleteContractInspection() {
+    this.spinnerStatus = true;
+    this.contractInspectionService.deleteInspection(this.selectedContractInspectionModel.id).subscribe((data) => {
+      if (data && data.success) {
+        this.onContractInspectionDeleted.emit();
+        this.frame.hide();
+      } this.spinnerStatus = false;
+    });
+  }
 }

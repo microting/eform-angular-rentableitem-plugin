@@ -21,6 +21,7 @@ declare  var require: any;
 export class ContractInspectionsPageComponent implements OnInit {
   @ViewChild('createInspectionModal') createInspectionModal;
   @ViewChild('editInspectionModal') editInspectionModal;
+  @ViewChild('deleteInspectionModal') deleteInspectionModal;
 
   contractInspectionsRequestModel: ContractInspectionsRequestModel = new ContractInspectionsRequestModel();
   contractInspectionsModel: ContractInspectionsModel = new ContractInspectionsModel();
@@ -54,6 +55,9 @@ export class ContractInspectionsPageComponent implements OnInit {
 
   showEditInspectionModal(model: ContractInspectionModel) {
     this.editInspectionModal.show(model);
+  }
+  showDeleteInspectionModal(model: ContractInspectionModel) {
+    this.deleteInspectionModal.show(model);
   }
   getAllInspections() {
     // debugger;

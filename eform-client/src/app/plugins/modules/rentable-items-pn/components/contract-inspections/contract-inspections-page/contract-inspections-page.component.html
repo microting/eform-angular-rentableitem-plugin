@@ -111,7 +111,7 @@
             </button>
             <button class="btn btn-danger text-black-50 btn-icon mb-2"
                     mdbTooltip="{{'Delete Contract' | translate}}"
-            >
+                    (click)="showDeleteInspectionModal(inspection)">
               <i class="material-icons">
                 delete_forever
               </i>
@@ -131,3 +131,5 @@
 
 <app-inspections-add #createInspectionModal></app-inspections-add>
 <app-inspections-update #editInspectionModal></app-inspections-update>
+<app-contract-inspections-delete #deleteInspectionModal
+                                 (onContractInspectionDeleted)="getAllInspections()"></app-contract-inspections-delete>
