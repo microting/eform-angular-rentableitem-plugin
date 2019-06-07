@@ -152,7 +152,7 @@ namespace RentableItems.Pn.Services
                         // gemme caseid på contractInspectionCreateModel
 
                         contractInspectionCreateModel.SiteId = siteDto.SiteId;
-                        contractInspectionCreateModel.SdkCaseId = int.Parse(sdkCaseId);
+                        contractInspectionCreateModel.SdkCaseId = sdkCaseId;
                         await contractInspectionCreateModel.Create(_dbContext);
                     }
                 }

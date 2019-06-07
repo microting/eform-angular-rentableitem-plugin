@@ -22,7 +22,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CreatedByUserID { get; set; }
         public int UpdatedByUserID { get; set; }
         public int ContractId { get; set; }
-        public int SdkCaseId { get; set; }
+        public string SdkCaseId { get; set; }
         public int SiteId { get; set; }
         public DateTime? DoneAt { get; set; }
         private readonly IEFormCoreService _coreHelper;
