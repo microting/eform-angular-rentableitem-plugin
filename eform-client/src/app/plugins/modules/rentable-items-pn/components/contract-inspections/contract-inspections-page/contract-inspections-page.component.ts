@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ContractInspectionsService, ContractsService} from '../../services';
+import {ContractInspectionsService, ContractsService} from '../../../services';
 import {TranslateService} from '@ngx-translate/core';
-import {LocaleService} from '../../../../../common/services/auth';
+import {LocaleService} from '../../../../../../common/services/auth';
 import {
   ContractInspectionModel,
   ContractInspectionsModel,
   ContractInspectionsRequestModel,
   ContractsModel,
   ContractsRequestModel
-} from '../../models';
+} from '../../../models';
 
 
 declare  var require: any;
@@ -48,7 +48,7 @@ export class ContractInspectionsPageComponent implements OnInit {
   }
   setTranslation() {
     const lang = this.localeService.getCurrentUserLocale();
-    const i18n = require(`../../i18n/${lang}.json`);
+    const i18n = require(`../../../i18n/${lang}.json`);
     this.translateService.setTranslation(lang, i18n, true);
   }
 

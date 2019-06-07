@@ -41,10 +41,10 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpDelete]
-        [Route("api/inspections/delete-inspection")]
-        public async Task<OperationResult> DeleteContractInspection([FromBody] ContractInspectionModel contractinspectionDeleteModel)
+        [Route("api/inspections/delete-inspection/{id}")]
+        public async Task<OperationResult> DeleteContractInspection(int id)
         {
-            return await _contractsInspectionService.DeleteContractInspection(contractinspectionDeleteModel);
+            return await _contractsInspectionService.DeleteContractInspection(id);
         }
     }
 }

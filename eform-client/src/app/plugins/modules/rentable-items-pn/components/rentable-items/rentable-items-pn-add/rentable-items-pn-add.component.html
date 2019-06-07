@@ -40,10 +40,10 @@
                          [ngModel]="newRentableItemModel.registrationDate"
                          (dateTimeChange)="onRegistrationDateSelected($event)"
                          type="text"
-                         id="registrationDate"
+                         id="rentableItemRegistrationDate"
                          name="registrationDate"
                          class="form-control">
-                  <label for="registrationDate">{{'Registration date*' | translate}}</label>
+                  <label for="rentableItemRegistrationDate">{{'Registration date*' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
@@ -83,10 +83,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createRentableItem()">{{ 'Create' |
+        <button class="btn btn-success" id="rentableItemCreateSaveBtn" [disabled]="!newRentableItemModel.serialNumber && !newRentableItemModel.vinNumber" (click)="createRentableItem()">{{ 'Create' |
           translate }}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button class="btn btn-accent text-black-50" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

@@ -113,10 +113,13 @@ namespace RentableItems.Pn.Services
                 mainElement.Repeated = 1;
                 mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
                 mainElement.StartDate = DateTime.Now.ToUniversalTime();
+                mainElement.Label = contractInspectionCreateModel.ContractId.ToString();
+                CDataValue cDataValue = new CDataValue();
 
-                mainElement.Label = dbContract.WorkflowState;
+                cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
+                cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
+                mainElement.ElementList[0].Description = cDataValue;
                 mainElement.ElementList[0].Label = mainElement.Label;
-
                 // finde sites som eform skal sendes til
 
                 List<Site_Dto> sites = new List<Site_Dto>();
@@ -179,8 +182,13 @@ namespace RentableItems.Pn.Services
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContractInspection"));
             }
         }
-        public async Task<OperationResult> DeleteContractInspection(ContractInspectionModel contractInspectionDeleteModel)
+        public async Task<OperationResult> DeleteContractInspection(int id)
         {
+            ContractInspectionModel contractInspectionDeleteModel = new ContractInspectionModel();
+            ContractInspection dbContractInspection =
+                await _dbContext.ContractInspection.SingleOrDefaultAsync(x => x.Id == id);
+
+            contractInspectionDeleteModel.Id = dbContractInspection.Id;
             try
             {
                 await contractInspectionDeleteModel.Delete(_dbContext);

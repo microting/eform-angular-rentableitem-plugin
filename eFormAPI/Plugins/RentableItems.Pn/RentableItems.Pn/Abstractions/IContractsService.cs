@@ -12,6 +12,6 @@ namespace RentableItems.Pn.Abstractions
         Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsRequestModel);
         Task<OperationResult> CreateContract(ContractModel contractCreateModel);
         Task<OperationResult> UpdateContract(ContractModel contractUpdateModel);
-        Task<OperationResult> DeleteContract(ContractModel contractDeleteModel);
+        Task<OperationResult> DeleteContract(int id);
     }
 }

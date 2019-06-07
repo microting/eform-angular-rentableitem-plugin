@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractInspectionModel, ContractsModel, ContractsRequestModel} from '../../models';
-import {ContractInspectionsService, ContractsService} from '../../services';
-import {formatTimezone} from '../../../../../common/helpers';
+import {ContractInspectionModel, ContractsModel, ContractsRequestModel} from '../../../models';
+import {ContractInspectionsService, ContractsService} from '../../../services';
+import {formatTimezone} from '../../../../../../common/helpers';
 
 @Component({
   selector: 'app-inspections-update',

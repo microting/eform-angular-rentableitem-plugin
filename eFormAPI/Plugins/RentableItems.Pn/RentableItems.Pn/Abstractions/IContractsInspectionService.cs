@@ -10,6 +10,6 @@ namespace RentableItems.Pn.Abstractions
         Task<OperationDataResult<ContractInspectionsModel>> GetAllContractInspections(ContractInspectionsRequestModel contractsRequestModel);
         Task<OperationResult> CreateContractInspection(ContractInspectionModel contractInspectionCreateModel);
         Task<OperationResult> UpdateContractInspection(ContractInspectionModel contractInspectionUpdateModel);
-        Task<OperationResult> DeleteContractInspection(ContractInspectionModel contractInspectionDeleteModel);
+        Task<OperationResult> DeleteContractInspection(int id);
     }
 }

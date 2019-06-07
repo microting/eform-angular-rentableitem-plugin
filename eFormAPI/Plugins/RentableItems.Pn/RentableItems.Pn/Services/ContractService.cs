@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -117,8 +118,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> DeleteContract(ContractModel contractDeleteModel)
+        public async Task<OperationResult> DeleteContract(int id)
         {
+            ContractModel contractDeleteModel = new ContractModel();
+            Contract dbContract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == id);
+            contractDeleteModel.Id = dbContract.Id;
             try
             {
                 await contractDeleteModel.Delete(_dbContext);

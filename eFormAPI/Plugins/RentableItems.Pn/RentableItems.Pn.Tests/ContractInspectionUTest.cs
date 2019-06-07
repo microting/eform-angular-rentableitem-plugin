@@ -43,7 +43,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             // Act
-           await contractInspectionModel.Create(DbContext);
+           await contractInspectionModel.Save(DbContext);
 
             ContractInspection dbContractInspection = DbContext.ContractInspection.AsNoTracking().First();
             List<ContractInspection> inspectionList = DbContext.ContractInspection.AsNoTracking().ToList();

@@ -5,11 +5,13 @@ import {ToastrService} from 'ngx-toastr';
 import {BaseService} from '../../../../common/services/base.service';
 import {ContractModel, ContractsRequestModel} from '../models';
 import {Observable} from 'rxjs';
+import {OperationResult} from '../../../../common/models';
 
 const ContractMethods = {
   Contracts: 'api/contracts',
   CreateContract: 'api/contracts/create-contract',
-  UpdateContract: 'api/contracts/update-contract'
+  UpdateContract: 'api/contracts/update-contract',
+  DeleteContract: 'api/contracts/delete-contract'
 };
 
 @Injectable()
@@ -29,6 +31,10 @@ export class ContractsService extends BaseService {
 
   updateContract(model: ContractModel): Observable<any> {
     return this.post(ContractMethods.UpdateContract, model);
+  }
+
+  deleteContract(contractId: number): Observable<OperationResult> {
+    return this.delete(ContractMethods.DeleteContract + '/' + contractId);
   }
 
 }

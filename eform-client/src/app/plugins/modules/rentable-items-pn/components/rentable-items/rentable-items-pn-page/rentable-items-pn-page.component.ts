@@ -8,8 +8,8 @@ import {
   RentableItemsPnModel,
   RentableItemsPnRequestModel,
   RentableItemsPnSettingsModel
-} from '../../models';
-import {RentableItemsPnService, RentableItemsPnSettingsService} from '../../services';
+} from '../../../models';
+import {RentableItemsPnService, RentableItemsPnSettingsService} from '../../../services';
 declare var require: any;
 
 @Component({
@@ -20,6 +20,7 @@ declare var require: any;
 export class RentableItemsPnPageComponent implements OnInit {
   @ViewChild('createRentableItemModal') createRentableItemModal;
   @ViewChild('editRentableItemModal') editRentableItemModal;
+  @ViewChild('deleteRentableItemModal') deleteRentableItemModal;
 
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
@@ -42,7 +43,7 @@ export class RentableItemsPnPageComponent implements OnInit {
 
   setTranslation() {
     const lang = this.localeService.getCurrentUserLocale();
-    const i18n = require(`../../i18n/${lang}.json`);
+    const i18n = require(`../../../i18n/${lang}.json`);
     this.translateService.setTranslation(lang, i18n, true);
   }
 
@@ -54,6 +55,9 @@ export class RentableItemsPnPageComponent implements OnInit {
     this.editRentableItemModal.show(model);
   }
 
+  showDeleteRentableItemModal(model: RentableItemPnModel) {
+    this.deleteRentableItemModal.show(model);
+  }
   get currentRole(): string {
     return this.authService.currentRole;
   }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractsService} from '../../services';
-import {ContractModel} from '../../models';
-import {formatTimezone} from '../../../../../common/helpers';
+import {ContractsService} from '../../../services';
+import {ContractModel} from '../../../models';
+import {formatTimezone} from '../../../../../../common/helpers';
 
 @Component({
   selector: 'app-contracts-update',

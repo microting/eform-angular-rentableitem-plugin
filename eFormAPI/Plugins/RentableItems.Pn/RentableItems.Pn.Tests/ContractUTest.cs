@@ -28,7 +28,7 @@ namespace RentableItems.Pn.Tests
             contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             // Act
-            await contractModel.Create(DbContext);
+            await contractModel.Save(DbContext);
 
             Contract dbContract = DbContext.Contract.AsNoTracking().First();
             List<Contract> contractList = DbContext.Contract.AsNoTracking().ToList();

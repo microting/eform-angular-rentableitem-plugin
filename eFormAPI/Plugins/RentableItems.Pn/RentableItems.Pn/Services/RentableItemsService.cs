@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using eFormCore;
 using eFormData;
 using eFormShared;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -143,8 +144,12 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
             }
         }
-        public async Task<OperationResult> DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel)
+        public async Task<OperationResult> DeleteRentableItem(int id)
         {
+            RentableItem dbRentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
+            RentableItemModel rentableItemPnDeleteModel = new RentableItemModel();
+
+            rentableItemPnDeleteModel.Id = dbRentableItem.Id;
             try
             {
                 await rentableItemPnDeleteModel.Delete(_dbContext);
@@ -155,7 +160,7 @@ namespace RentableItems.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<RentableItemsModel>(true,
-                    _rentableItemsLocalizationService.GetString("ErrorWhileDeleringRentableItem"));
+                    _rentableItemsLocalizationService.GetString("ErrorWhileDeletingRentableItem"));
             }
         }
     }

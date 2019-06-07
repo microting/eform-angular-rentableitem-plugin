@@ -15,16 +15,19 @@ import {
   RentableItemsPnAddComponent,
   RentableItemsPnUpdateComponent,
   RentableItemsPnFieldsComponent,
-  RentableItemsSettingsComponent
+  RentableItemsSettingsComponent,
+  RentableItemsPnDeleteComponent,
+  ContractInspectionsAddComponent,
+  ContractInspectionsUpdateComponent,
+  ContractInspectionsPageComponent,
+  ContractInspectionsDeleteComponent,
+  ContractsAddComponent,
+  ContractsUpdateComponent,
+  ContractsPageComponent,
+  ContractsDeleteComponent
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import { ContractsAddComponent } from './components/contracts-add/contracts-add.component';
-import { ContractInspectionsAddComponent } from './components/contract-inspections-add/contract-inspections-add.component';
-import { ContractInspectionsUpdateComponent } from './components/contract-inspections-update/contract-inspections-update.component';
-import { ContractsUpdateComponent } from './components/contracts-update/contracts-update.component';
-import { ContractsPageComponent } from './components/contracts-page/contracts-page.component';
-import { ContractInspectionsPageComponent } from './components/contract-inspections-page/contract-inspections-page.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DragulaModule} from 'ng2-dragula';
 
@@ -58,7 +61,10 @@ import {DragulaModule} from 'ng2-dragula';
     ContractsPageComponent,
     ContractInspectionsPageComponent,
     RentableItemsPnFieldsComponent,
-    RentableItemsSettingsComponent
+    RentableItemsSettingsComponent,
+    RentableItemsPnDeleteComponent,
+    ContractsDeleteComponent,
+    ContractInspectionsDeleteComponent
   ],
   providers: [
     RentableItemsPnService,

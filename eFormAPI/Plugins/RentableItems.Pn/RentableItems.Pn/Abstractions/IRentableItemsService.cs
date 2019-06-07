@@ -9,6 +9,6 @@ namespace RentableItems.Pn.Abstractions
         Task<OperationDataResult<RentableItemsModel>> GetAllRentableItems(RentableItemsRequestModel pnRequestModel);
         Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel);
         Task<OperationResult> UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel);
-        Task<OperationResult> DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel);
+        Task<OperationResult> DeleteRentableItem(int Id);
     }
 }

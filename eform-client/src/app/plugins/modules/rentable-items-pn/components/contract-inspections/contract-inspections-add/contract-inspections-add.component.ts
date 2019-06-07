@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractInspectionModel, ContractModel} from '../../models';
-import {ContractInspectionsService, ContractsService} from '../../services';
-import {DeviceUserService} from '../../../../../common/services/device-users';
-import {SimpleSiteModel} from '../../../../../common/models/device-users';
+import {ContractInspectionModel, ContractModel} from '../../../models';
+import {ContractInspectionsService, ContractsService} from '../../../services';
+import {DeviceUserService} from '../../../../../../common/services/device-users';
 import {SiteDto} from 'src/app/common/models/dto';
 
 

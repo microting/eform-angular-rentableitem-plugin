@@ -53,7 +53,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.RentableItemId = rentableItemModel.Id;
             rentableItemContractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
             // Act
-           await rentableItemContractModel.Create(DbContext);
+           await rentableItemContractModel.Save(DbContext);
 
             RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
             List<RentableItemContract> rentableItemcontractList = DbContext.RentableItemContract.AsNoTracking().ToList();

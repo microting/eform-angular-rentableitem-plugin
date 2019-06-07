@@ -39,10 +39,10 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpDelete]
-        [Route("api/rentableItems-pn/delete-rentableItem")]
-        public  async Task<OperationResult> DeleteRentableItem([FromBody] RentableItemModel rentableItemDeleteModel)
+        [Route("api/rentableItems-pn/delete-rentableItem/{id}")]
+        public  async Task<OperationResult> DeleteRentableItem(int id)
         {
-            return await _rentableItemsService.DeleteRentableItem(rentableItemDeleteModel);
+            return await _rentableItemsService.DeleteRentableItem(id);
         }
     }
 }

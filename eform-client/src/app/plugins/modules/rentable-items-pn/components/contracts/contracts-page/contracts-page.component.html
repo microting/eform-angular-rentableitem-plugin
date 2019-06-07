@@ -11,7 +11,7 @@
 
 <div class="container-fluid">
   <div class="row p-3 table-responsive no-gutters">
-    <table class="table table-sm table-striped text-center">
+    <table class="table table-sm table-striped text-center z-depth-1">
       <thead>
       <tr>
         <th scope="col" class="table-header-sortable" id="idSort"
@@ -122,7 +122,7 @@
           {{contract.contractNr}}
         </td>
         <td>
-          {{contract.rentableItemId}}
+          {{contract.rentableItems}}
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
@@ -135,7 +135,7 @@
             </button>
             <button class="btn btn-danger text-black-50 btn-icon mb-2"
                     mdbTooltip="{{'Delete Contract' | translate}}"
-            >
+                    (click)="showDeleteContractModal(contract)" >
               <i class="material-icons">
                 delete_forever
               </i>
@@ -145,11 +145,11 @@
         <td>
           <div class="d-flex flex-row justify-content-center">
             <button class="btn btn-success text-black-50 btn-icon mb-2"
-            mdbTooltip="{{'Add Inspection' | translate}}"
-            (click)="showCreateInspectionModal(contract)">
+                    mdbTooltip="{{'Add Inspection' | translate}}"
+                    (click)="showCreateInspectionModal(contract)">
               <i class="material-icons">
-              add
-            </i> </button>
+                add
+              </i> </button>
           </div>
 
         </td>
@@ -163,4 +163,6 @@
                    (onContractCreated)="getAllContracts()"></app-contracts-add>
 <app-contracts-update #editContractModal
                       (onContractUpdated)="getAllContracts()"></app-contracts-update>
+<app-contract-delete #deleteContractModal
+                     (onContractDeleted)="getAllContracts()"></app-contract-delete>
 <app-inspections-add #createInspectionModal></app-inspections-add>

@@ -5,11 +5,13 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ContractInspectionModel, ContractInspectionsRequestModel} from '../models';
 import {Observable} from 'rxjs';
+import {OperationResult} from '../../../../common/models';
 
 const InspectionsMethods = {
   Inspections: 'api/inspections',
   CreateInspections: 'api/inspections/create-inspection',
-  UpdateInspection: 'api/inspections/update-inspection'
+  UpdateInspection: 'api/inspections/update-inspection',
+  DeleteInspection: 'api/inspections/delete-inspection'
 };
 
 @Injectable()
@@ -31,5 +33,8 @@ export class ContractInspectionsService extends BaseService {
   updateInspection(model: ContractInspectionModel): Observable<any> {
     // debugger;
     return this.post(InspectionsMethods.UpdateInspection, model);
+  }
+  deleteInspection(inspectionId: number): Observable<OperationResult> {
+    return this.delete(InspectionsMethods.DeleteInspection + '/' + inspectionId);
   }
 }

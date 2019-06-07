@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {LocaleService} from 'src/app/common/services/auth';
 
-import {ContractsService} from '../../services';
-import {ContractModel, ContractsModel, ContractsRequestModel} from '../../models';
+import {ContractsService} from '../../../services';
+import {ContractModel, ContractsModel, ContractsRequestModel} from '../../../models';
 declare var require: any;
 
 @Component({
@@ -14,6 +14,7 @@ declare var require: any;
 export class ContractsPageComponent implements OnInit {
   @ViewChild('createContractModal') createContractModal;
   @ViewChild('editContractModal') editContractModal;
+  @ViewChild('deleteContractModal') deleteContractModal;
   @ViewChild('createInspectionModal') createInspectionModal;
 
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
@@ -31,7 +32,7 @@ export class ContractsPageComponent implements OnInit {
 
   setTranslation() {
     const lang = this.localeService.getCurrentUserLocale();
-    const i18n = require(`../../i18n/${lang}.json`);
+    const i18n = require(`../../../i18n/${lang}.json`);
     this.translateService.setTranslation(lang, i18n, true);
   }
 
@@ -41,6 +42,9 @@ export class ContractsPageComponent implements OnInit {
 
   showEditContractModal(model: ContractModel) {
     this.editContractModal.show(model);
+  }
+  showDeleteContractModal(model: ContractModel) {
+    this.deleteContractModal.show(model);
   }
   showCreateInspectionModal(model: ContractModel) {
     this.createInspectionModal.show(model);
