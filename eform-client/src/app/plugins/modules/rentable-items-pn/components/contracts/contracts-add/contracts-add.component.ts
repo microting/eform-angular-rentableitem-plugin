@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../../models';
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
+import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
+import {CustomersPnService} from '../../../../customers-pn/services';
 
 @Component({
   selector: 'app-contracts-add',
@@ -15,14 +17,19 @@ export class ContractsAddComponent implements OnInit {
   spinnerStatus = false;
   frameShow = true;
   rentableItems: Array<RentableItemPnModel> = [];
+  customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
+  customersModel: CustomersPnModel = new CustomersPnModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
+
   constructor(private rentableItemsService: RentableItemsPnService,
-              private contractService: ContractsService) { }
+              private contractService: ContractsService,
+              private extCustomerService: CustomersPnService
+              ) { }
 
   ngOnInit() {
     this.getRentableItems();
-
+    this.getAllCustomers();
   }
 
   show() {
@@ -41,14 +48,6 @@ export class ContractsAddComponent implements OnInit {
     }));
   }
   addNewRentableItem(e: any) {
-    debugger;
-    // let item = new RentableItemPnModel();
-    // // for (let rentableItem of this.rentableItemsModel.rentableItems) {
-    // //   item = rentableItem;
-    // // }
-    // this.rentableItemsModel.rentableItems.forEach(function (rentableItem) {
-    //   item = rentableItem;
-    // });
     if (!this.newContractModel.rentableItems.includes(e)) {
       this.newContractModel.rentableItems.push(e);
     }
@@ -65,10 +64,22 @@ export class ContractsAddComponent implements OnInit {
       this.spinnerStatus = false;
     }));
   }
+  getAllCustomers() {
+    debugger;
+    this.extCustomerService.getAllCustomers(this.customersRequestModel).subscribe((result => {
+      if (result && result.success) {
+        this.customersModel = result.model;
+      }
+      this.spinnerStatus = false;
+    }));
+  }
   onStartDateSelected(e: any) {
     this.newContractModel.contractStart = formatTimezone(e.value._d);
   }
   onEndDateSelected(f: any) {
     this.newContractModel.contractEnd = formatTimezone(f.value._d);
+  }
+  onSelectedChanged(g: any) {
+    this.newContractModel.customerId = g;
   }
 }

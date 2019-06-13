@@ -169,11 +169,21 @@
       </table>
     </div>
   </div>
+  <div class="row justify-content-between mr-2 ml-2">
+
+  <div class="col-md-1">
+    <page-size-pn
+      [pageSize]="localPageSettings.pageSize"
+      (onPageSizeChanged)="localPageSettings.pageSize = $event; rentableItemsRequestModel.pageIndex = 1;
+        updateLocalPageSettings()">
+    </page-size-pn>
+  </div>
   <pagination-pn *ngIf="rentableItemsModel?.total > rentableItemsRequestModel.pageSize"
                  [limit]="rentableItemsRequestModel.pageSize"
                  [size]="rentableItemsModel.total"
                  [offset]="rentableItemsRequestModel.offset"
                  (onPageChanged)="changePage($event)"></pagination-pn>
+  </div>
 </div>
 
 <spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>

@@ -36,7 +36,6 @@ export class ContractInspectionsPageComponent implements OnInit {
 
   ngOnInit() {
     this.setTranslation();
-    debugger;
     this.getAllInspections();
     this.getAllContracts();
   }

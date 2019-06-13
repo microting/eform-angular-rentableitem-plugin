@@ -16,6 +16,7 @@ using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
 
+
 namespace RentableItems.Pn.Services
 {
     public class RentableItemsService : IRentableItemsService
@@ -85,6 +86,12 @@ namespace RentableItems.Pn.Services
             }
         }
 
+//        public async Task<OperationDataResult<CustomersModel>> GetAllCustomersNoFields(
+//            CustomersRequestModel requestModel)
+//        {
+//            
+//        }
+        
         public async Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel)
         {
             try

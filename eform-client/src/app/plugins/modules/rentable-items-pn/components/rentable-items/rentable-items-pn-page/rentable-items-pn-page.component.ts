@@ -10,6 +10,8 @@ import {
   RentableItemsPnSettingsModel
 } from '../../../models';
 import {RentableItemsPnService, RentableItemsPnSettingsService} from '../../../services';
+import {PageSettingsModel} from '../../../../../../common/models/settings';
+import {SharedPnService} from '../../../../shared/services';
 declare var require: any;
 
 @Component({
@@ -21,6 +23,7 @@ export class RentableItemsPnPageComponent implements OnInit {
   @ViewChild('createRentableItemModal') createRentableItemModal;
   @ViewChild('editRentableItemModal') editRentableItemModal;
   @ViewChild('deleteRentableItemModal') deleteRentableItemModal;
+  localPageSettings: PageSettingsModel = new PageSettingsModel();
 
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
@@ -28,7 +31,8 @@ export class RentableItemsPnPageComponent implements OnInit {
 
   settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
 
-  constructor(private rentableItemsService: RentableItemsPnService,
+  constructor(private sharedPnService: SharedPnService,
+              private rentableItemsService: RentableItemsPnService,
               private rentableItemsSettingsService: RentableItemsPnSettingsService,
               private translateService: TranslateService,
               private localeService: LocaleService,
@@ -61,7 +65,16 @@ export class RentableItemsPnPageComponent implements OnInit {
   get currentRole(): string {
     return this.authService.currentRole;
   }
-
+  getLocalPageSettings() {
+    this.localPageSettings = this.sharedPnService.getLocalPageSettings
+    ('rentableItemsPnSettings', 'RentableItems').settings;
+    this.getAllInitialData();
+  }
+  updateLocalPageSettings() {
+    this.sharedPnService.updateLocalPageSettings
+    ('rentableItemsPnSettings', this.localPageSettings, 'RentableItems');
+    this.getLocalPageSettings();
+  }
   getAllInitialData() {
     this.spinnerStatus = true;
     this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {

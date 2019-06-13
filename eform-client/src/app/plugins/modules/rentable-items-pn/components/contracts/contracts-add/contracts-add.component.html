@@ -46,12 +46,15 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
-                         class="form-control" #customerId="ngModel"
-                         type="text" [(ngModel)]="newContractModel.customerId" id="customerId"
-                         name="customerId">
-                  <label for="customerId">{{ 'Customer Id' | translate }}*</label>
+                  <ng-select
+                    id="customerSelector"
+                    [placeholder]="'Customers'"
+                    name="Customer-selector"
+                    [bindValue]="'id'"
+                    [bindLabel]="'customerName'"
+                    [clearable]="false"
+                    [items]="customersModel.customers"
+                    (change)="onSelectedChanged($event)"></ng-select>
                 </div>
               </div>
               <div class="col-md-6">
