@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+//using Customers.Pn.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -82,11 +83,15 @@ namespace RentableItems.Pn
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseMySql(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
+//                services.AddDbContext<CustomersPnDbAnySql>(p =>
+//                    p.UseMySql(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
             else
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
+//                services.AddDbContext<CustomersPnDbAnySql>(p =>
+//                    p.UseSqlServer(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();

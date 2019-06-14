@@ -37,7 +37,7 @@ export class ContractInspectionsPageComponent implements OnInit {
   ngOnInit() {
     this.setTranslation();
     this.getAllInspections();
-    this.getAllContracts();
+    // this.getAllContracts();
   }
   getAllContracts() {
     this.spinnerStatus = true;

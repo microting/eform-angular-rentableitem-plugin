@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+//using Customers.Pn.Infrastructure.Data;
+//using Customers.Pn.Infrastructure.Data.Entities;
 using eFormCore;
 using eFormData;
 using eFormShared;
@@ -15,7 +17,7 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
-
+//using Customers.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Services
 {
@@ -86,12 +88,6 @@ namespace RentableItems.Pn.Services
             }
         }
 
-//        public async Task<OperationDataResult<CustomersModel>> GetAllCustomersNoFields(
-//            CustomersRequestModel requestModel)
-//        {
-//            
-//        }
-        
         public async Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel)
         {
             try

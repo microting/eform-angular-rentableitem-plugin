@@ -3,7 +3,6 @@ import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsP
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
 import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
-import {CustomersPnService} from '../../../../customers-pn/services';
 
 @Component({
   selector: 'app-contracts-add',
@@ -24,12 +23,11 @@ export class ContractsAddComponent implements OnInit {
 
   constructor(private rentableItemsService: RentableItemsPnService,
               private contractService: ContractsService,
-              private extCustomerService: CustomersPnService
               ) { }
 
   ngOnInit() {
     this.getRentableItems();
-    this.getAllCustomers();
+    // this.getAllCustomers();
   }
 
   show() {
@@ -64,15 +62,14 @@ export class ContractsAddComponent implements OnInit {
       this.spinnerStatus = false;
     }));
   }
-  getAllCustomers() {
-    debugger;
-    this.extCustomerService.getAllCustomers(this.customersRequestModel).subscribe((result => {
-      if (result && result.success) {
-        this.customersModel = result.model;
-      }
-      this.spinnerStatus = false;
-    }));
-  }
+  // getAllCustomers() {
+  //   this.contractService.getAllCustomers(this.customersRequestModel).subscribe((result => {
+  //     if (result && result.success) {
+  //       this.customersModel = result.model;
+  //     }
+  //     this.spinnerStatus = false;
+  //   }));
+  // }
   onStartDateSelected(e: any) {
     this.newContractModel.contractStart = formatTimezone(e.value._d);
   }

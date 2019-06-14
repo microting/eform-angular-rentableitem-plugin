@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+//using Customers.Pn.Infrastructure.Models.Customer;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +46,13 @@ namespace RentableItems.Pn.Controllers
             return await _contractsService.DeleteContract(id);
         }
 
+//        [HttpPost]
+//        [AllowAnonymous]
+//        [Route("api/contracts/customers")]
+//        public async Task<OperationDataResult<CustomersModel>> GetAllCustomers(
+//            [FromBody] CustomersRequestModel requestModel)
+//        {
+//            return await _contractsService.GetAllCustomers(requestModel);
+//        }
     }
 }
