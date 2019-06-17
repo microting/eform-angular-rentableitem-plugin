@@ -17,6 +17,8 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
+using CollectionExtensions = Castle.Core.Internal.CollectionExtensions;
+
 //using Customers.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Services
@@ -44,20 +46,27 @@ namespace RentableItems.Pn.Services
             try
             {
                 RentableItemsModel rentableItemsPnModel = new RentableItemsModel();
+                
                 IQueryable<RentableItem> rentableItemsQuery = _dbContext.RentableItem.AsQueryable();
-                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
+                if (!CollectionExtensions.IsNullOrEmpty(pnRequestModel.NameFilter) && pnRequestModel.NameFilter != "")
+                {
+                    rentableItemsQuery = rentableItemsQuery.Where(x =>
+                        x.Brand.Contains(pnRequestModel.NameFilter) ||
+                        x.ModelName.Contains(pnRequestModel.NameFilter));
+                }
+                if (!string.IsNullOrEmpty(pnRequestModel.Sort))
                 {
                     if (pnRequestModel.IsSortDsc)
                     {
-                        rentableItemsQuery = rentableItemsQuery.CustomOrderByDescending(pnRequestModel.SortColumnName);
+                        rentableItemsQuery = rentableItemsQuery.CustomOrderByDescending(pnRequestModel.Sort);
                     }
                     else
                     {
-                        rentableItemsQuery = rentableItemsQuery.CustomOrderBy(pnRequestModel.SortColumnName);
+                        rentableItemsQuery = rentableItemsQuery.CustomOrderBy(pnRequestModel.Sort);
                     }
                 }
 
-                rentableItemsPnModel.Total = rentableItemsQuery.Count();
+                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.Workflow_state != eFormShared.Constants.WorkflowStates.Removed);
                 rentableItemsQuery 
                     = rentableItemsQuery
                         .Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
