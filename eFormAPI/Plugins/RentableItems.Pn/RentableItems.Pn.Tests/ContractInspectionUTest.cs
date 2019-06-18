@@ -43,7 +43,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
 
             // Act
-           await contractInspectionModel.Save(DbContext);
+           await contractInspectionModel.Create(DbContext);
 
             ContractInspection dbContractInspection = DbContext.ContractInspection.AsNoTracking().First();
             List<ContractInspection> inspectionList = DbContext.ContractInspection.AsNoTracking().ToList();
@@ -83,7 +83,7 @@ namespace RentableItems.Pn.Tests
             DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
-            contractInspection.SDK_Case_Id = rnd.Next(1, 666);
+            contractInspection.SDK_Case_Id = Guid.NewGuid().ToString();
             contractInspection.DoneAt = doneAt;
 
             DbContext.ContractInspection.Add(contractInspection);
@@ -101,7 +101,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.DoneAt = contractInspection.DoneAt;
             contractInspectionModel.Id = contractInspection.Id;
-            contractInspectionModel.SdkCaseId = 55;
+            contractInspectionModel.SdkCaseId = Guid.NewGuid().ToString();
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
             await contractInspectionModel.Update(DbContext);
@@ -145,7 +145,7 @@ namespace RentableItems.Pn.Tests
             DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
-            contractInspection.SDK_Case_Id = rnd.Next(1, 666);
+            contractInspection.SDK_Case_Id = Guid.NewGuid().ToString();
             contractInspection.DoneAt = doneAt;
             DbContext.ContractInspection.Add(contractInspection);
            await DbContext.SaveChangesAsync();

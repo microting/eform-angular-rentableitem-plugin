@@ -30,7 +30,7 @@ namespace RentableItems.Pn.Tests
         public void GetContext(string connectionStr)
         {
 
-            DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
+            DbContextOptionsBuilder<RentableItemsPnDbContext> dbContextOptionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
 
             if (ConnectionString.ToLower().Contains("convert zero datetime"))
             {

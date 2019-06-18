@@ -31,7 +31,7 @@ namespace RentableItems.Pn.Tests
 
 
             // Act
-            await rentableItemModel.Save(DbContext);
+            await rentableItemModel.Create(DbContext);
 
             RentableItem rentableItem = DbContext.RentableItem.AsNoTracking().First();
             List<RentableItem> itemList = DbContext.RentableItem.AsNoTracking().ToList();
