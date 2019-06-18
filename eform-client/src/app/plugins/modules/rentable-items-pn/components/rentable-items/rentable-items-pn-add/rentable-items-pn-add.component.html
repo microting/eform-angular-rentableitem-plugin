@@ -83,8 +83,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" id="rentableItemCreateSaveBtn" [disabled]="!newRentableItemModel.serialNumber && !newRentableItemModel.vinNumber" (click)="createRentableItem()">{{ 'Create' |
-          translate }}
+        <button class="btn btn-success" id="rentableItemCreateSaveBtn"
+                [disabled]="!newRentableItemModel.modelName || !newRentableItemModel.serialNumber && !newRentableItemModel.vinNumber"
+                (click)="createRentableItem()">
+          {{ 'Create' | translate }}
         </button>
         <button class="btn btn-accent text-black-50" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>

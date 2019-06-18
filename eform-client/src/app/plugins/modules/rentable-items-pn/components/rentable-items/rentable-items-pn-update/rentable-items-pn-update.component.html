@@ -39,10 +39,10 @@
                          [ngModel]="selectedRentableItemModel.registrationDate"
                          (dateTimeChange)="onRegistrationDateSelected($event)"
                          type="text"
-                         id="registrationDate"
+                         id="editRegistrationDate"
                          name="registrationDate"
                          class="form-control">
-                  <label for="registrationDate">{{'Registration date*' | translate}}</label>
+                  <label for="editRegistrationDate">{{'Registration date*' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
@@ -73,8 +73,8 @@
                          [mdbValidate]="false"
                          class="form-control"  #editPlateNumber="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.plateNumber"
-                         name="editPlateNumber" id="editPlateNNumber">
-                  <label for="editPlateNNumber">{{ 'Plate number' | translate }}*</label>
+                         name="editPlateNumber" id="editPlateNumber">
+                  <label for="editPlateNumber">{{ 'Plate number' | translate }}*</label>
                 </div>
               </div>
             </div>
@@ -82,8 +82,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" [disabled]="!editForm.form.valid" (click)="updateRentableItem()">{{ 'Save' | translate
-          }}
+        <button class="btn btn-success"
+                id="rentableItemEditSaveBtn"
+                [disabled]="!selectedRentableItemModel.modelName || !selectedRentableItemModel.serialNumber && !selectedRentableItemModel.vinNumber"
+                (click)="updateRentableItem()">{{ 'Save' | translate}}
         </button>
         <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>

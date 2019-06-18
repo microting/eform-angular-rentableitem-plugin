@@ -121,13 +121,13 @@ export class RentableItemsPnPageComponent implements OnInit {
   }
 
   sortByColumn(columnName: string, sortedByDsc: boolean) {
-    this.rentableItemsRequestModel.sortColumnName = columnName;
+    this.rentableItemsRequestModel.sort = columnName;
     this.rentableItemsRequestModel.isSortDsc = sortedByDsc;
     this.getAllRentableItems();
   }
 
   onSearchInputChanged(value: any) {
-    this.rentableItemsRequestModel.model = value;
+    this.rentableItemsRequestModel.nameFilter = value;
     this.getAllRentableItems();
   }
 }

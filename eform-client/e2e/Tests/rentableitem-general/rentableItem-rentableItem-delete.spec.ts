@@ -4,7 +4,7 @@ import {Guid} from 'guid-typescript';
 import myEformsPage from '../../Page objects/MyEforms.page';
 import rentableItemsPage from '../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
 import pluginsPage from '../rentableitem-settings/application-settings.plugins.page';
-import {log} from 'util';
+
 
 describe('Rentable Item Plugin - Rentable Item', function () {
   before(function () {
@@ -35,8 +35,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     browser.refresh();
   });
   it('should get btn text', function () {
-  rentableItemsPage.goToRentableItemsPage();
-  rentableItemsPage.getBtnTxt('New rentable item');
+    rentableItemsPage.goToRentableItemsPage();
+    rentableItemsPage.getBtnTxt('New rentable item');
   });
   it('should create rentable item with all parameters', function () {
     const date = Math.floor((Math.random() * 28) + 1);
@@ -53,6 +53,11 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(rentableItem.plateNumber).equal(plateNumber);
     expect(rentableItem.vinNumber).equal(vinNumber);
     expect(rentableItem.serialNumber).equal(serialNumber);
-    rentableItemsPage.cleanup();
+  });
+  it('should delete Rentable Item', function () {
+    rentableItemsPage.deleteRentableItem();
+    browser.pause(8000);
+    const rentableItem = rentableItemsPage.getFirstRowObject();
+    expect(rentableItem.id === null);
   });
 });

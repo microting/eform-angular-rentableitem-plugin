@@ -1,7 +1,10 @@
 import Page from '../Page';
 import XMLForEformRentableItems from '../../Constants/XMLForEformRentableItems';
+import {trackByHourSegment} from 'angular-calendar/modules/common/util';
+import {until} from 'selenium-webdriver';
+import titleIs = until.titleIs;
 
-export class RentableItemRentableItemPage extends Page{
+export class RentableItemRentableItemPage extends Page {
   constructor() {
     super();
   }
@@ -59,8 +62,33 @@ export class RentableItemRentableItemPage extends Page{
   public get rentableItemCreateSaveBtn() {
     return browser.element('#rentableItemCreateSaveBtn');
   }
+  public get rentableItemEditBrandBox() {
+    return browser.element('#editBrand');
+  }
+  public get rentableItemEditModelBox() {
+    return browser.element('#editRentableItemModel');
+  }
+  public rentableItemEditReistrationDate() {
+    // return browser.element(`//*[contains(@class, 'form')]//*[contains(text(), 'Registration date')]`);
+    return browser.element('#editRegistrationDate');
+  }
+  public get rentableItemEditVinNumberBox() {
+    return browser.element('#editVINNumber');
+  }
+  public get rentableItemEditSerialNumberBox() {
+    return browser.element('#editSerialNumber');
+  }
+  public get rentableItemEditPlateNumberBox() {
+    return browser.element('#editPlateNumber');
+  }
   public clickDate(date) {
     browser.element(`//*[text()="${date}"]`).click();
+  }
+  public get rentableItemDeleteBtn() {
+    return browser.element('#rentableItemDeleteDeleteBtn');
+  }
+  public get rentableItemEditSaveBtn() {
+    return browser.element('#rentableItemEditSaveBtn');
   }
   goToRentableItemsPage() {
     this.rentableItemDropdown();
@@ -89,6 +117,52 @@ export class RentableItemRentableItemPage extends Page{
     browser.pause(6000);
     browser.refresh();
     browser.pause(14000);
+  }
+  deleteRentableItem() {
+    const rentableItemForDelete = this.getFirstRowObject();
+    rentableItemForDelete.deleteBtn.click();
+    browser.pause(4000);
+    this.rentableItemDeleteBtn.click();
+    browser.pause(8000);
+    browser.refresh();
+  }
+  editRentableItem(newBrand: string, newModel: string, newSerial: string, newVin: string, newPlate: string, newDate: number) {
+    const rentableItemForEdit = this.getFirstRowObject();
+    rentableItemForEdit.editBtn.click();
+    browser.pause(8000);
+    this.rentableItemEditBrandBox.clearElement();
+    this.rentableItemEditBrandBox.addValue(newBrand);
+    browser.pause(1000);
+    this.rentableItemEditModelBox.clearElement();
+    this.rentableItemEditModelBox.addValue(newModel);
+    browser.pause(1000);
+    this.rentableItemEditSerialNumberBox.clearElement();
+    this.rentableItemEditSerialNumberBox.addValue(newSerial);
+    browser.pause(1000);
+    this.rentableItemEditVinNumberBox.clearElement();
+    this.rentableItemEditVinNumberBox.addValue(newVin);
+    browser.pause(1000);
+    this.rentableItemEditPlateNumberBox.clearElement();
+    this.rentableItemEditPlateNumberBox.addValue(newPlate);
+    browser.pause(1000);
+    this.rentableItemEditReistrationDate().click();
+    browser.pause(3000);
+    this.clickDate(newDate);
+    browser.pause(3000);
+    this.rentableItemEditSaveBtn.click();
+    browser.pause(4000);
+    browser.refresh();
+  }
+  cleanup() {
+    const rentableItem = this.getFirstRowObject();
+    if (rentableItem.deleteBtn.isVisible()) {
+      rentableItem.deleteBtn.click();
+      browser.pause(4000);
+      this.rentableItemDeleteBtn.click();
+      browser.pause(4000);
+      browser.refresh();
+      browser.pause(8000);
+    }
   }
   getFirstRowObject(): RentableItemsRowObject {
     return new RentableItemsRowObject(1);
@@ -153,6 +227,12 @@ export class RentableItemsRowObject {
       try {
         this.registrationDate = $$('#rentableItemRegistrationDate')[rowNum - 1];
       } catch (e) {}
+      try {
+        this.deleteBtn = $$('#rentableItemDeleteBtn')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.editBtn = $$('#rentableItemEditBtn')[rowNum - 1];
+      } catch (e) {}
     }
   }
   id;
@@ -162,4 +242,6 @@ export class RentableItemsRowObject {
   vinNumber;
   plateNumber;
   registrationDate;
+  deleteBtn;
+  editBtn;
 }
