@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace RentableItems.Pn.Tests
 {
@@ -24,7 +25,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.WorkflowState = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate; 
@@ -62,7 +63,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.ModelName = Guid.NewGuid().ToString();
             rentableItem.PlateNumber = Guid.NewGuid().ToString();
             rentableItem.VinNumber = Guid.NewGuid().ToString();
-            rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
@@ -137,7 +138,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.ModelName = Guid.NewGuid().ToString();
             rentableItem.PlateNumber = Guid.NewGuid().ToString();
             rentableItem.VinNumber = Guid.NewGuid().ToString();
-            rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
@@ -200,7 +201,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItem.VinNumber, dbRentableItem.VinNumber);
             Assert.AreEqual(rentableItem.SerialNumber, dbRentableItem.SerialNumber);
             Assert.AreEqual(rentableItem.RegistrationDate.ToString(), dbRentableItem.RegistrationDate.ToString());
-            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbRentableItem.Workflow_state);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItem.Workflow_state);
         }
     }
 }

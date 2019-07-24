@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using eFormCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microting.eForm.Dto;
 using Microting.eForm.Infrastructure.Constants;
+using Microting.eForm.Infrastructure.Models;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -52,7 +56,7 @@ namespace RentableItems.Pn.Services
 
                     }
                 }
-                contractInspectionsModel.Total = await contractInspectionsQuery.CountAsync(x => x.WorkflowState != eFormShared.Constants.WorkflowStates.Removed);
+                contractInspectionsModel.Total = await contractInspectionsQuery.CountAsync(x => x.WorkflowState != Constants.WorkflowStates.Removed);
                 contractInspectionsQuery
                     = contractInspectionsQuery
                         .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)

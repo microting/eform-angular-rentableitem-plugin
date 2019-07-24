@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace RentableItems.Pn.Tests
 {
@@ -24,7 +25,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -41,7 +42,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
           await DbContext.SaveChangesAsync();
             #endregion
@@ -51,7 +52,7 @@ namespace RentableItems.Pn.Tests
 
             rentableItemContractModel.ContractId = contractModel.Id;
             rentableItemContractModel.RentableItemId = rentableItemModel.Id;
-            rentableItemContractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemContractModel.WorkflowState = Constants.WorkflowStates.Created;
             // Act
            await rentableItemContractModel.Create(DbContext);
 
@@ -81,7 +82,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -99,7 +100,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contractModel);
            await DbContext.SaveChangesAsync();
@@ -161,7 +162,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -179,7 +180,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contractModel);
             await DbContext.SaveChangesAsync();
@@ -228,7 +229,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
             Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
-            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, rentableItemcontract.Workflow_state);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, rentableItemcontract.Workflow_state);
 
         }
     }

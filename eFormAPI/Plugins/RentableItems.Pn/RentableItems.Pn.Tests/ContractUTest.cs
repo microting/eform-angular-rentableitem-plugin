@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace RentableItems.Pn.Tests
 {
@@ -25,7 +26,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr =  rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
 
             // Act
             await contractModel.Create(DbContext);
@@ -60,7 +61,7 @@ namespace RentableItems.Pn.Tests
             contract.ContractNr = rnd.Next(1, 123);
             contract.ContractStart = contractStart;
             contract.CustomerId = rnd.Next(1, 99);
-            contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contract.WorkflowState = Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contract);
             await DbContext.SaveChangesAsync();
@@ -123,7 +124,7 @@ namespace RentableItems.Pn.Tests
             contract.ContractNr = rnd.Next(1, 123);
             contract.ContractStart = contractStart;
             contract.CustomerId = rnd.Next(1, 99);
-            contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contract.WorkflowState = Constants.WorkflowStates.Created;
 
             DbContext.Contract.Add(contract);
             await DbContext.SaveChangesAsync();
@@ -171,7 +172,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(contract.ContractNr, dbContract.ContractNr);
             Assert.AreEqual(contract.ContractStart.ToString(), dbContract.ContractStart.ToString());
             Assert.AreEqual(contract.CustomerId, dbContract.CustomerId);
-            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbContract.WorkflowState);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbContract.WorkflowState);
 
         }
     }

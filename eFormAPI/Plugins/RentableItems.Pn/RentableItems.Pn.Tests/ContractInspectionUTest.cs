@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace RentableItems.Pn.Tests
 {
@@ -26,7 +27,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
             await DbContext.SaveChangesAsync();
             #endregion
@@ -40,7 +41,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.CreatedByUserID = rnd.Next(1, 222);
             contractInspectionModel.DoneAt = doneAt;
             contractInspectionModel.UpdatedByUserID = rnd.Next(1, 333);
-            contractInspectionModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractInspectionModel.WorkflowState = Constants.WorkflowStates.Created;
 
             // Act
            await contractInspectionModel.Create(DbContext);
@@ -75,7 +76,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
             await DbContext.SaveChangesAsync();
             #endregion
@@ -137,7 +138,7 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = rnd.Next(1, 123);
             contractModel.ContractStart = contractStart;
             contractModel.CustomerId = rnd.Next(1, 99);
-            contractModel.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractModel.WorkflowState = Constants.WorkflowStates.Created;
             DbContext.Contract.Add(contractModel);
             await DbContext.SaveChangesAsync();
             #endregion
@@ -183,7 +184,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
             Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
             Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
-            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbContractInspection.WorkflowState);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbContractInspection.WorkflowState);
         }
     }
 }

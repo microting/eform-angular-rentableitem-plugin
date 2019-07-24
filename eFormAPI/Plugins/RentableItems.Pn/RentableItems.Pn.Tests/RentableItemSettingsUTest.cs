@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace RentableItems.Pn.Tests
 {
@@ -129,7 +130,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
             Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
             Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
-            Assert.AreEqual(eFormShared.Constants.WorkflowStates.Removed, dbRentableItemsSettings.Workflow_state);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItemsSettings.Workflow_state);
 
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
@@ -61,7 +62,7 @@ namespace RentableItems.Pn.Services
                     }
                 }
 
-                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.Workflow_state != eFormShared.Constants.WorkflowStates.Removed);
+                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.Workflow_state != Constants.WorkflowStates.Removed);
                 rentableItemsQuery 
                     = rentableItemsQuery
                         .Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)

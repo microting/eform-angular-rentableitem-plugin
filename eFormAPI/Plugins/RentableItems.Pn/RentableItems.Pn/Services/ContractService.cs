@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-//using Customers.Pn.Infrastructure.Data;
-//using Customers.Pn.Infrastructure.Data.Entities;
-//using Customers.Pn.Infrastructure.Models.Customer;
-using eFormShared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eForm.Infrastructure.Constants;
