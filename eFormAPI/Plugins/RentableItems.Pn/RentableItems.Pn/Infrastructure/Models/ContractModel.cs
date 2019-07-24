@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -30,7 +29,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             {
                 Contract contract = new Contract();
 
-                contract.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+                contract.WorkflowState = Constants.WorkflowStates.Created;
                 contract.Version = Version;
                 contract.CreatedAt = DateTime.Now;
                 contract.UpdatedAt = DateTime.Now;
@@ -86,7 +85,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find Contract with id {Id}");
             }
 
-            contract.WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
+            contract.WorkflowState = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {

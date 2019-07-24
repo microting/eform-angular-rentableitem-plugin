@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using eFormCore;
-using eFormData;
-using eFormShared;
 using Rebus.Handlers;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Messages;

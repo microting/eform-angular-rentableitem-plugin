@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -26,7 +25,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemContract.ContractId = ContractId;
             rentableItemContract.RentableItemId = RentableItemId;
-            rentableItemContract.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemContract.Workflow_state = Constants.WorkflowStates.Created;
             rentableItemContract.Created_at = DateTime.Now;
             rentableItemContract.Updated_at = DateTime.Now;
             rentableItemContract.Created_By_User_Id = CreatedByUserID;
@@ -73,7 +72,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
 
 
-            rentableItemContract.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+            rentableItemContract.Workflow_state = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {

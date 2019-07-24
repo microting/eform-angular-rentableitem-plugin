@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -42,7 +43,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.PlateNumber = PlateNumber;
             rentableItem.ModelName = ModelName;
             rentableItem.RegistrationDate = RegistrationDate;
-            rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
             rentableItem.Created_at = DateTime.Now;
             rentableItem.Updated_at = DateTime.Now;
             rentableItem.Created_By_User_Id = CreatedByUserId;
@@ -91,7 +92,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem with id {Id}");
             }
 
-            rentableItem.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+            rentableItem.Workflow_state = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {

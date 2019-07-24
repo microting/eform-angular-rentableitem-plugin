@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microting.eForm.Infrastructure.Constants;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 
@@ -23,7 +22,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 
-            rentableItemsSettings.Workflow_state = eFormShared.Constants.WorkflowStates.Created;
+            rentableItemsSettings.Workflow_state = Constants.WorkflowStates.Created;
             rentableItemsSettings.Version = Version;
             rentableItemsSettings.Created_at = DateTime.Now;
             rentableItemsSettings.Updated_at = DateTime.Now;
@@ -74,7 +73,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem Setting with id {Id}");
             }
 
-            rentableItemsSettings.Workflow_state = eFormShared.Constants.WorkflowStates.Removed;
+            rentableItemsSettings.Workflow_state = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -53,7 +54,7 @@ namespace RentableItems.Pn.Services
                 contractsModel.Total = contractsQuery.Count();
                 contractsQuery 
                     = contractsQuery
-                        .Where(x => x.WorkflowState != eFormShared.Constants.WorkflowStates.Removed)
+                        .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                         .Skip(contractsPnRequestModel.Offset)
                         .Take(contractsPnRequestModel.PageSize);
                 List<Contract> contracts = contractsQuery.ToList();

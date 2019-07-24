@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using eFormCore;
-using eFormData;
-using eFormShared;
+using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
@@ -32,7 +28,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         {
             ContractInspection contractInspection = new ContractInspection();
 
-            contractInspection.WorkflowState = eFormShared.Constants.WorkflowStates.Created;
+            contractInspection.WorkflowState = Constants.WorkflowStates.Created;
             contractInspection.Version = Version;
             contractInspection.CreatedAt = DateTime.Now;
             contractInspection.UpdatedAt = DateTime.Now;
@@ -102,7 +98,7 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find Contract Inspection with id {Id}");
             }
 
-            contractInspection.WorkflowState = eFormShared.Constants.WorkflowStates.Removed;
+            contractInspection.WorkflowState = Constants.WorkflowStates.Removed;
             
 
             if (_dbContext.ChangeTracker.HasChanges())

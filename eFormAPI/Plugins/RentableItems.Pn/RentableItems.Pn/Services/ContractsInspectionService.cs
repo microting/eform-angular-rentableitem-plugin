@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using eFormShared;
 using Microsoft.Extensions.Logging;
+using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -13,6 +12,7 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
+
 namespace RentableItems.Pn.Services
 {
     public class ContractsInspectionService : IContractsInspectionService
@@ -83,7 +83,7 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                await contractInspectionCreateModel. Save(_dbContext);
+                await contractInspectionCreateModel.Save(_dbContext);
                 return new OperationResult(true);
             }
             catch (Exception e)
