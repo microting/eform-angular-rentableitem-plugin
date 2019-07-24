@@ -10,7 +10,12 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        'e2e/Tests/rentableitem-settings/application-settings.plugins-page.spec.ts'
+        'e2e/Tests/rentableitem-settings/application-settings.plugins-page.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-delete.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-add.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-add-multi.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-edit.spec.ts',
+
     ],
     suites: {
         settings: [

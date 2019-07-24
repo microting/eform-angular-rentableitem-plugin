@@ -21,7 +21,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CustomerId { get; set; }
         public int? ContractNr { get; set; }
 
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             Contract dbContract = _dbContext.Contract.FirstOrDefault(x => x.ContractNr == ContractNr);
 

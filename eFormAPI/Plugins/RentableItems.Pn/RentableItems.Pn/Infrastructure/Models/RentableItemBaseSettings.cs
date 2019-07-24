@@ -7,6 +7,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public string SdkConnectionString { get; set; }
         public string MaxParallelism { get; set; }
         public int NumberOfWorkers { get; set; }
+        public string EnabledSiteIds { get; set; }
         public string SdkeFormId { get; set; }
 
     }

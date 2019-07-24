@@ -8,7 +8,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 {
     public interface IModel
     {
-        Task Save(RentableItemsPnDbContext _dbContext);
+        Task Create(RentableItemsPnDbContext _dbContext);
 
         Task Update(RentableItemsPnDbContext _dbContext);
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RentableItems.Pn.Infrastructure.Models
+﻿namespace RentableItems.Pn.Infrastructure.Models
 {
     public class ContractInspectionsRequestModel
     {

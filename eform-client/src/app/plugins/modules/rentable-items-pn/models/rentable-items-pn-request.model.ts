@@ -1,15 +1,15 @@
 export class RentableItemsPnRequestModel {
-  model: string;
-  sortColumnName: string;
-  pageIndex: number;
-  offset: number;
   pageSize: number;
+  nameFilter: string;
+  sort: string;
+  pageIndex: number;
   isSortDsc: boolean;
+  offset: number;
 
   constructor() {
-    this.sortColumnName = 'Id';
+    this.sort = 'Id';
     this.isSortDsc = true;
-    this.pageSize = 5;
+    this.pageSize = 10;
     this.pageIndex = 1;
     this.offset = 0;
   }

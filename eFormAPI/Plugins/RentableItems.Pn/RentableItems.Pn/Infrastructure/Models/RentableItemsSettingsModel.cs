@@ -18,7 +18,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int? eFormId { get; set; }
         
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 

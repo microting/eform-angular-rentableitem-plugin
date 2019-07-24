@@ -24,7 +24,7 @@ namespace RentableItems.Pn.Tests
             rentableItemsSettingsModel.eFormId = rnd.Next(123, 582);
 
             // Act
-            await rentableItemsSettingsModel.Save(DbContext);
+            await rentableItemsSettingsModel.Create(DbContext);
 
             RentableItemsSettings dbRentableItemsSettings = DbContext.RentableItemsSettings.AsNoTracking().First();
             List<RentableItemsSettings> settingsList = DbContext.RentableItemsSettings.AsNoTracking().ToList();

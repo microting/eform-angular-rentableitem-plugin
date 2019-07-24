@@ -28,7 +28,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
         [ForeignKey("Contract")]
         public int ContractId { get; set; }
 
-        public int SDK_Case_Id { get; set; }
+        public string SDK_Case_Id { get; set; }
 
         public int SiteId { get; set; }
 

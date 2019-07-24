@@ -2,10 +2,16 @@
 {
     public class RentableItemsRequestModel
     {
-        public string Model { get; set; }
-        public string SortColumnName { get; set; }
+        public string Sort { get; set; }
+        
+        public int PageIndex { get; set; }
+        
+        public string NameFilter { get; set; }
+        
         public int Offset { get; set; }
-        public int PageSize { get; set; }
+        
         public bool IsSortDsc { get; set; }
+        
+        public int PageSize { get; set; }
     }
 }

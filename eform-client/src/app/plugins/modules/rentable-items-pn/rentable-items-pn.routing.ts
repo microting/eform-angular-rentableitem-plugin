@@ -4,8 +4,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {AdminGuard, AuthGuard} from 'src/app/common/guards';
 import {RentableItemsPnLayoutComponent} from './layouts';
 import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent, RentableItemsSettingsComponent} from './components';
-import {ContractsPageComponent} from './components/contracts-page/contracts-page.component';
-import {ContractInspectionsPageComponent} from './components/contract-inspections-page/contract-inspections-page.component';
+import {ContractsPageComponent} from './components/contracts/contracts-page/contracts-page.component';
+import {ContractInspectionsPageComponent} from './components/contract-inspections/contract-inspections-page/contract-inspections-page.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: RentableItemsPnLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'rentable-items',
         canActivate: [AuthGuard],
         component: RentableItemsPnPageComponent
       },

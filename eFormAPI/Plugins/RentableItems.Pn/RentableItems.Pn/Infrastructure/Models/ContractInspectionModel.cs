@@ -18,13 +18,13 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CreatedByUserID { get; set; }
         public int UpdatedByUserID { get; set; }
         public int ContractId { get; set; }
-        public int SdkCaseId { get; set; }
+        public string SdkCaseId { get; set; }
         public int SiteId { get; set; }
         public DateTime? DoneAt { get; set; }
         private readonly IEFormCoreService _coreHelper;
 
 
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             ContractInspection contractInspection = new ContractInspection();
 
@@ -36,7 +36,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractInspection.Updated_By_User_Id = UpdatedByUserID;
             contractInspection.SiteId = SiteId;
             contractInspection.ContractId = ContractId;
-            //contractInspection.SDK_Case_Id = SdkCaseId;
+            contractInspection.SDK_Case_Id = SdkCaseId;
             contractInspection.DoneAt = DoneAt;
 
             _dbContext.ContractInspection.Add(contractInspection);

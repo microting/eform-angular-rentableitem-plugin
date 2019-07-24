@@ -1,0 +1,154 @@
+<div mdbModal class="modal fade" #frame="mdbModal">
+  <div class="modal-dialog modal-md" *ngIf="frameShow">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ 'New contract' | translate }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form #createForm="ngForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt1">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt1"
+                         [mdbValidate]="false"
+                         [ngModel]="newContractModel.contractStart"
+                         (dateTimeChange)="onStartDateSelected($event)"
+                         type="text"
+                         id="startDate"
+                         name="startDate"
+                         class="form-control">
+                  <label for="startDate">{{'Start date*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt1></owl-date-time>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt2">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt2"
+                         [mdbValidate]="false"
+                         [ngModel]="newContractModel.contractEnd"
+                         (dateTimeChange)="onEndDateSelected($event)"
+                         type="text"
+                         id="endDate"
+                         name="endDate"
+                         class="form-control">
+                  <label for="endDate">{{'End date*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt2></owl-date-time>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form">
+                  <ng-select
+                    id="customerSelector"
+                    [placeholder]="'Customers'"
+                    name="Customer-selector"
+                    [bindValue]="'id'"
+                    [bindLabel]="'customerName'"
+                    [clearable]="false"
+                    [items]="customersModel.customers"
+                    (change)="onSelectedChanged($event)"></ng-select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" #contractNumber="ngModel"
+                         type="text" [(ngModel)]="newContractModel.contractNr" id="contractNumber"
+                         name="contractNumber">
+                  <label for="contractNumber">{{ 'Contract Number' | translate }}*</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="md-form">
+                  <ng-select
+                    id="rentableItemSelector"
+                    [placeholder]="'Rentable Items'"
+                    name="rentable-Item-selector"
+                    [bindValue]="'id'"
+                    [bindLabel]="'modelName'"
+                    [clearable]="false"
+                    [items]="rentableItemsModel.rentableItems"
+                    (change)="addNewRentableItem($event)"></ng-select>
+                </div>
+              </div>
+              <div class="row p-3 table-responsive no-gutters">
+                <table class="table table-sm table-striped text-center">
+                  <thead>
+                  <tr>
+                    <th scope="col" class="table-header-sortable" id="idSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        ID
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="contractIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Model Name' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Brand' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="statusSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Serial Number' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col">
+                      {{'Actions' | translate}}
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                  <tr *ngFor="let rentableItem of newContractModel.rentableItems">
+                    <td>
+                      {{rentableItem.id}}
+                    </td>
+                    <td>
+                      {{rentableItem.modelName}}
+                    </td>
+                    <td>
+                      {{rentableItem.brand}}
+                    </td>
+                    <td>
+                      {{rentableItem.serialNumber}}
+                    </td>
+                    <td>
+                      <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                              mdbTooltip="{{'Delete Contract' | translate}}"
+                        (click)="removeRentableItem(rentableItem)">
+                        <i class="material-icons">
+                          delete_forever
+                        </i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createContract()">{{ 'Create' |
+          translate }}
+        </button>
+        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>
+

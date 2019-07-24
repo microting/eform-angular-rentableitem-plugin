@@ -33,7 +33,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         //    this.PlateNumber = plateNumber;
         //}
 
-        public async Task Save(RentableItemsPnDbContext _dbContext)
+        public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             
             RentableItem rentableItem = new RentableItem();

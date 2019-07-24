@@ -36,7 +36,13 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
             {
                 Name = "RentableItemBaseSettings:SdkeFormId",
                 Value = "..."
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:EnabledSiteIds",
+                Value = ""
             }
+
             
         };
     }

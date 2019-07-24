@@ -1,0 +1,96 @@
+<div mdbModal class="modal fade" #frame="mdbModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ 'Update rentable item' | translate }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form #editForm="ngForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" required #editBrand="ngModel"
+                         type="text" [(ngModel)]="selectedRentableItemModel.brand"
+                         name="editBrand" id="editBrand">
+                  <label for="editBrand">{{'Brand' | translate}}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false" class="form-control"
+                         required #editRentableItemModel="ngModel"
+                         type="text" [(ngModel)]="selectedRentableItemModel.modelName"
+                         name="editRentableItemModel" id="editRentableItemModel">
+                  <label for="editRentableItemModel">{{'Model' | translate}}*</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form" [owlDateTimeTrigger]="dt1">
+                  <i class="material-icons prefix">calendar_today</i>
+                  <input mdbInputDirective
+                         [owlDateTime]="dt1"
+                         [mdbValidate]="false"
+                         [ngModel]="selectedRentableItemModel.registrationDate"
+                         (dateTimeChange)="onRegistrationDateSelected($event)"
+                         type="text"
+                         id="editRegistrationDate"
+                         name="registrationDate"
+                         class="form-control">
+                  <label for="editRegistrationDate">{{'Registration date*' | translate}}</label>
+                  <owl-date-time
+                    [pickerType]="'calendar'" #dt1></owl-date-time>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control" #editVinNumber="ngModel"
+                         type="text" [(ngModel)]="selectedRentableItemModel.vinNumber"
+                         name="editVINNumber" id="editVINNumber">
+                  <label for="editVINNumber">{{ 'VIN number' | translate }}*</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+              <div class="md-form">
+                <input mdbInputDirective
+                       [mdbValidate]="false"
+                       class="form-control"  #editSerialNumber="ngModel"
+                       type="text" [(ngModel)]="selectedRentableItemModel.serialNumber"
+                       name="editSerialNumber" id="editSerialNumber">
+                <label for="editSerialNumber">{{ 'Serial number' | translate }}*</label>
+              </div>
+            </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <input mdbInputDirective
+                         [mdbValidate]="false"
+                         class="form-control"  #editPlateNumber="ngModel"
+                         type="text" [(ngModel)]="selectedRentableItemModel.plateNumber"
+                         name="editPlateNumber" id="editPlateNumber">
+                  <label for="editPlateNumber">{{ 'Plate number' | translate }}*</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success"
+                id="rentableItemEditSaveBtn"
+                [disabled]="!selectedRentableItemModel.modelName || !selectedRentableItemModel.serialNumber && !selectedRentableItemModel.vinNumber"
+                (click)="updateRentableItem()">{{ 'Save' | translate}}
+        </button>
+        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<spinner-pn [spinnerVisibility]="spinnerStatus"></spinner-pn>

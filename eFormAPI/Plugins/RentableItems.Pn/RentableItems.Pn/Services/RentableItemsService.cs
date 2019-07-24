@@ -12,6 +12,9 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
+using CollectionExtensions = Castle.Core.Internal.CollectionExtensions;
+
+//using Customers.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Services
 {
@@ -38,20 +41,27 @@ namespace RentableItems.Pn.Services
             try
             {
                 RentableItemsModel rentableItemsPnModel = new RentableItemsModel();
+                
                 IQueryable<RentableItem> rentableItemsQuery = _dbContext.RentableItem.AsQueryable();
-                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
+                if (!CollectionExtensions.IsNullOrEmpty(pnRequestModel.NameFilter) && pnRequestModel.NameFilter != "")
+                {
+                    rentableItemsQuery = rentableItemsQuery.Where(x =>
+                        x.Brand.Contains(pnRequestModel.NameFilter) ||
+                        x.ModelName.Contains(pnRequestModel.NameFilter));
+                }
+                if (!string.IsNullOrEmpty(pnRequestModel.Sort))
                 {
                     if (pnRequestModel.IsSortDsc)
                     {
-                        rentableItemsQuery = rentableItemsQuery.CustomOrderByDescending(pnRequestModel.SortColumnName);
+                        rentableItemsQuery = rentableItemsQuery.CustomOrderByDescending(pnRequestModel.Sort);
                     }
                     else
                     {
-                        rentableItemsQuery = rentableItemsQuery.CustomOrderBy(pnRequestModel.SortColumnName);
+                        rentableItemsQuery = rentableItemsQuery.CustomOrderBy(pnRequestModel.Sort);
                     }
                 }
 
-                rentableItemsPnModel.Total = rentableItemsQuery.Count();
+                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.Workflow_state != eFormShared.Constants.WorkflowStates.Removed);
                 rentableItemsQuery 
                     = rentableItemsQuery
                         .Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
@@ -97,7 +107,7 @@ namespace RentableItems.Pn.Services
                 //rentableItemPn.ModelName = rentableItemPnCreateModel.ModelName;
                 //rentableItemPn.RegistrationDate = rentableItemPnCreateModel.RegistrationDate;
 
-                await rentableItemPnCreateModel.Save(_dbContext);
+                await rentableItemPnCreateModel.Create(_dbContext);
 
                 //_dbContext.RentableItem.Add(rentableItemPn);
                 //_dbContext.SaveChanges();
@@ -105,10 +115,10 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("RentableItemCreated", rentableItemPnCreateModel.Brand,
                         rentableItemPnCreateModel.ModelName));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                //Trace.TraceError(e.Message);
-                //_logger.LogError(e.Message);
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingRentableItem"));
             }
         }
@@ -141,8 +151,12 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
             }
         }
-        public async Task<OperationResult> DeleteRentableItem(RentableItemModel rentableItemPnDeleteModel)
+        public async Task<OperationResult> DeleteRentableItem(int id)
         {
+            RentableItem dbRentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
+            RentableItemModel rentableItemPnDeleteModel = new RentableItemModel();
+
+            rentableItemPnDeleteModel.Id = dbRentableItem.Id;
             try
             {
                 await rentableItemPnDeleteModel.Delete(_dbContext);
@@ -153,7 +167,7 @@ namespace RentableItems.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<RentableItemsModel>(true,
-                    _rentableItemsLocalizationService.GetString("ErrorWhileDeleringRentableItem"));
+                    _rentableItemsLocalizationService.GetString("ErrorWhileDeletingRentableItem"));
             }
         }
     }
