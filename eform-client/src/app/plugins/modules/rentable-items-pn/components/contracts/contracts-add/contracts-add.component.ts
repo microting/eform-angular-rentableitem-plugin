@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../../models';
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
-import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
+// import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
 
 @Component({
   selector: 'app-contracts-add',
@@ -16,8 +16,8 @@ export class ContractsAddComponent implements OnInit {
   spinnerStatus = false;
   frameShow = true;
   rentableItems: Array<RentableItemPnModel> = [];
-  customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
-  customersModel: CustomersPnModel = new CustomersPnModel();
+  // customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
+  // customersModel: CustomersPnModel = new CustomersPnModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
 
