@@ -6,14 +6,14 @@ import {BaseService} from '../../../../common/services/base.service';
 import {ContractModel, ContractsRequestModel} from '../models';
 import {Observable} from 'rxjs';
 import {OperationResult} from '../../../../common/models';
-import {CustomersPnRequestModel} from '../../customers-pn/models/customer';
+// import {CustomersPnRequestModel} from '../../customers-pn/models/customer';
 
 const ContractMethods = {
   Contracts: 'api/contracts',
   CreateContract: 'api/contracts/create-contract',
   UpdateContract: 'api/contracts/update-contract',
   DeleteContract: 'api/contracts/delete-contract',
-  Customers: 'api/contracts/customers'
+  // Customers: 'api/contracts/customers'
 };
 
 @Injectable()
