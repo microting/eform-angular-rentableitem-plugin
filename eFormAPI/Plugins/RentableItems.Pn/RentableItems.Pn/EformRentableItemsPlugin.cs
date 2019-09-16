@@ -33,6 +33,7 @@ using Microting.eFormApi.BasePn;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
 using Microting.eFormApi.BasePn.Infrastructure.Settings;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Factories;
@@ -83,15 +84,15 @@ namespace RentableItems.Pn
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseMySql(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
-//                services.AddDbContext<CustomersPnDbAnySql>(p =>
-//                    p.UseMySql(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
+                services.AddDbContext<CustomersPnDbAnySql>(p =>
+                    p.UseMySql(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
             else
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
-//                services.AddDbContext<CustomersPnDbAnySql>(p =>
-//                    p.UseSqlServer(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
+                services.AddDbContext<CustomersPnDbAnySql>(p =>
+                    p.UseSqlServer(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();

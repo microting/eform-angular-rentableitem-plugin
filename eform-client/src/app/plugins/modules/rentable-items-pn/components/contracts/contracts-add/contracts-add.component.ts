@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../../models';
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
-// import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
+import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
 
 @Component({
   selector: 'app-contracts-add',
@@ -16,8 +16,8 @@ export class ContractsAddComponent implements OnInit {
   spinnerStatus = false;
   frameShow = true;
   rentableItems: Array<RentableItemPnModel> = [];
-  // customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
-  // customersModel: CustomersPnModel = new CustomersPnModel();
+  customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
+  customersModel: CustomersPnModel = new CustomersPnModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
 
@@ -27,7 +27,7 @@ export class ContractsAddComponent implements OnInit {
 
   ngOnInit() {
     this.getRentableItems();
-    // this.getAllCustomers();
+    this.getCustomer();
   }
 
   show() {
@@ -62,14 +62,15 @@ export class ContractsAddComponent implements OnInit {
       this.spinnerStatus = false;
     }));
   }
-  // getAllCustomers() {
-  //   this.contractService.getAllCustomers(this.customersRequestModel).subscribe((result => {
-  //     if (result && result.success) {
-  //       this.customersModel = result.model;
-  //     }
-  //     this.spinnerStatus = false;
-  //   }));
-  // }
+  getCustomer() {
+    debugger;
+    this.contractService.getCustomer(this.customersRequestModel).subscribe((result => {
+      if (result && result.success) {
+        this.customersModel = result.model;
+      }
+      this.spinnerStatus = false;
+    }));
+  }
   onStartDateSelected(e: any) {
     this.newContractModel.contractStart = formatTimezone(e.value._d);
   }
@@ -77,6 +78,6 @@ export class ContractsAddComponent implements OnInit {
     this.newContractModel.contractEnd = formatTimezone(f.value._d);
   }
   onSelectedChanged(g: any) {
-    this.newContractModel.customerId = g;
+    this.newContractModel.customerId = g.value;
   }
 }

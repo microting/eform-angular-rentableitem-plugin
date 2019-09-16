@@ -13,6 +13,9 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
+using RentableItems.Pn.Infrastructure.Models.Customer;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
 
 namespace RentableItems.Pn.Services
 {
@@ -22,21 +25,21 @@ namespace RentableItems.Pn.Services
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
         private readonly RentableItemsPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
-//        private readonly CustomersPnDbAnySql _customerDbContext;
+        private readonly CustomersPnDbAnySql _customerDbContext;
 
 
         public ContractService(RentableItemsPnDbContext dbContext,
             ILogger<ContractService> logger,
             IEFormCoreService coreHelper,
-            IRentableItemsLocalizationService rentableItemLocalizationService
-//            CustomersPnDbAnySql customerDbContext
+            IRentableItemsLocalizationService rentableItemLocalizationService,
+            CustomersPnDbAnySql customerDbContext
             )
         {
             _dbContext = dbContext;
             _logger = logger;
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
-//            _customerDbContext = customerDbContext;
+            _customerDbContext = customerDbContext;
 
         }
         public async Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsPnRequestModel)
@@ -142,62 +145,62 @@ namespace RentableItems.Pn.Services
             }
         }
         
-//        public async Task<OperationDataResult<CustomersModel>> GetAllCustomers(
-//            CustomersRequestModel pnRequestModel)
-//        {
-//            try
-//            {
-//
-//                CustomersModel customersPnModel = new CustomersModel();
-//                CustomerModel customerModel = new CustomerModel();
-//                IQueryable<Customer> customersQuery = _customerDbContext.Customers.AsQueryable();
-//                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
-//                {
-//                    if (pnRequestModel.IsSortDsc)
-//                    {
-//                        customersQuery = customersQuery
-//                            .CustomOrderByDescending(pnRequestModel.SortColumnName);
-//                    }
-//                    else
-//                    {
-//                        customersQuery = customersQuery
-//                            .CustomOrderBy(pnRequestModel.SortColumnName);
-//                    }
-//                }
-//                else
-//                {
-//                    customersQuery = _customerDbContext.Customers
-//                        .OrderBy(x => x.Id);
-//                }
-//
-//                if (!string.IsNullOrEmpty(pnRequestModel.Name))
-//                {
-//                    customersQuery = customersQuery.Where(x => x.CompanyName.Contains(pnRequestModel.Name));
-//				}
-//
-//				customersQuery =
-//					customersQuery.Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
-//                    .Skip(pnRequestModel.Offset)
-//                    .Take(pnRequestModel.PageSize);
-//
-//                List<Customer> customers = customersQuery.ToList();
-//                foreach (var customer in customers)
-//                {
-//                    customerModel.Id = customer.Id;
-//                    customersPnModel.Customers.Add(customerModel);
-//                }
-//                customersPnModel.Total = _customerDbContext.Customers.Count(x => x.Workflow_state != Constants.WorkflowStates.Removed);
-//                return new OperationDataResult<CustomersModel>(true, customersPnModel);
-//
-//            }
-//            catch (Exception e)
-//            {
-//                Trace.TraceError(e.Message);
-//                _logger.LogError(e.Message);
-//                return new OperationDataResult<CustomersModel>(true, 
-//                    _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo"));
-//            }
-//        }
+        public async Task<OperationDataResult<CustomersModel>> GetAllCustomers(
+            CustomersRequestModel pnRequestModel)
+        {
+            try
+            {
+
+                CustomersModel customersPnModel = new CustomersModel();
+                CustomerModel customerModel = new CustomerModel();
+                IQueryable<Customer> customersQuery = _customerDbContext.Customers.AsQueryable();
+                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
+                {
+                    if (pnRequestModel.IsSortDsc)
+                    {
+                        customersQuery = customersQuery
+                            .CustomOrderByDescending(pnRequestModel.SortColumnName);
+                    }
+                    else
+                    {
+                        customersQuery = customersQuery
+                            .CustomOrderBy(pnRequestModel.SortColumnName);
+                    }
+                }
+                else
+                {
+                    customersQuery = _customerDbContext.Customers
+                        .OrderBy(x => x.Id);
+                }
+
+                if (!string.IsNullOrEmpty(pnRequestModel.Name))
+                {
+                    customersQuery = customersQuery.Where(x => x.CompanyName.Contains(pnRequestModel.Name));
+				}
+
+				customersQuery =
+					customersQuery.Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
+                    .Skip(pnRequestModel.Offset)
+                    .Take(pnRequestModel.PageSize);
+
+                List<Customer> customers = customersQuery.ToList();
+                foreach (var customer in customers)
+                {
+                    customerModel.Id = customer.Id;
+                    customersPnModel.Customers.Add(customerModel);
+                }
+                customersPnModel.Total = _customerDbContext.Customers.Count(x => x.Workflow_state != Constants.WorkflowStates.Removed);
+                return new OperationDataResult<CustomersModel>(true, customersPnModel);
+
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationDataResult<CustomersModel>(true, 
+                    _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo"));
+            }
+        }
         
     }
 }
