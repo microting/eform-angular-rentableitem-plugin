@@ -179,7 +179,7 @@ namespace RentableItems.Pn.Services
 				}
 
 				customersQuery =
-					customersQuery.Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
+					customersQuery.Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                     .Skip(pnRequestModel.Offset)
                     .Take(pnRequestModel.PageSize);
 
@@ -189,7 +189,7 @@ namespace RentableItems.Pn.Services
                     customerModel.Id = customer.Id;
                     customersPnModel.Customers.Add(customerModel);
                 }
-                customersPnModel.Total = _customerDbContext.Customers.Count(x => x.Workflow_state != Constants.WorkflowStates.Removed);
+                customersPnModel.Total = _customerDbContext.Customers.Count(x => x.WorkflowState != Constants.WorkflowStates.Removed);
                 return new OperationDataResult<CustomersModel>(true, customersPnModel);
 
             }
