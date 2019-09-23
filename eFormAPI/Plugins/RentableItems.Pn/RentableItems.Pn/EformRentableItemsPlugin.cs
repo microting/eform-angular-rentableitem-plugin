@@ -80,19 +80,26 @@ namespace RentableItems.Pn
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
             _connectionString = connectionString;
+            string customersConnectionString = connectionString.Replace(
+                "eform-angular-rentableitem-plugin", 
+                "eform-angular-basecustomer-plugin");
             if (connectionString.ToLower().Contains("convert zero datetime"))
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseMySql(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
+                
                 services.AddDbContext<CustomersPnDbAnySql>(p =>
-                    p.UseMySql(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
+                    p.UseMySql(customersConnectionString, 
+                        c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
             else
             {
                 services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
+
                 services.AddDbContext<CustomersPnDbAnySql>(p =>
-                    p.UseSqlServer(connectionString, c => c.MigrationsAssembly(PluginAssembly().FullName)));
+                    p.UseSqlServer(customersConnectionString, 
+                        c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
