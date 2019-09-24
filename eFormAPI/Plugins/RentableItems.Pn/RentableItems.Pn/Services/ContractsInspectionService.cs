@@ -146,14 +146,14 @@ namespace RentableItems.Pn.Services
                 {
                     // sende eform core.caseCreate
 
-                    string sdkCaseId = _core.CaseCreate(mainElement, "", siteDto.SiteId);
+                    int? sdkCaseId = _core.CaseCreate(mainElement, "", siteDto.SiteId);
 
-                    if (!string.IsNullOrEmpty(sdkCaseId))
+                    if (sdkCaseId != null)
                     {
                         // gemme caseid på contractInspectionCreateModel
 
                         contractInspectionCreateModel.SiteId = siteDto.SiteId;
-                        contractInspectionCreateModel.SdkCaseId = sdkCaseId;
+                        contractInspectionCreateModel.SdkCaseId = sdkCaseId.ToString();
                         await contractInspectionCreateModel.Create(_dbContext);
                     }
                 }
