@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-md" *ngIf="frameShow">
+  <div class="modal-dialog modal-lg" *ngIf="frameShow">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'New contract' | translate }}</h3>
@@ -8,7 +8,7 @@
         <div class="container-fluid">
           <form #createForm="ngForm">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInputDirective
@@ -25,7 +25,7 @@
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="md-form" [owlDateTimeTrigger]="dt2">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInputDirective
@@ -42,22 +42,7 @@
                     [pickerType]="'calendar'" #dt2></owl-date-time>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="md-form">
-                  <ng-select
-                    id="customerSelector"
-                    [placeholder]="'Customers'"
-                    name="Customer-selector"
-                    [bindValue]="'id'"
-                    [bindLabel]="'customerName'"
-                    [clearable]="false"
-                    [items]="customersModel.customers"
-                    (change)="onSelectedChanged($event)"></ng-select>
-                </div>
-              </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="md-form">
                   <input mdbInputDirective
                          [mdbValidate]="false"
@@ -67,82 +52,114 @@
                   <label for="contractNumber">{{ 'Contract Number' | translate }}*</label>
                 </div>
               </div>
-              <div class="col-md-12">
+            </div>
+            <div class="row">
+              <div class="col-md-8">
                 <div class="md-form">
                   <ng-select
-                    id="rentableItemSelector"
-                    [placeholder]="'Rentable Items'"
-                    name="rentable-Item-selector"
+                    id="customerSelector"
+                    [placeholder]="'Customers'"
+                    name="Customer-selector"
                     [bindValue]="'id'"
-                    [bindLabel]="'modelName'"
+                    [bindLabel]="'companyName'"
                     [clearable]="false"
-                    [items]="rentableItemsModel.rentableItems"
-                    (change)="addNewRentableItem($event)"></ng-select>
+                    [typeahead]="typeahead"
+                    [items]="customersModel.customers"
+                    (select)="onSelectedChanged($event)"></ng-select>
                 </div>
               </div>
-              <div class="row p-3 table-responsive no-gutters">
-                <table class="table table-sm table-striped text-center">
-                  <thead>
-                  <tr>
-                    <th scope="col" class="table-header-sortable" id="idSort">
-                      <div class="d-flex align-items-center justify-content-center">
-                        ID
-                      </div>
-                    </th>
-                    <th scope="col" class="table-header-sortable" id="contractIdSort">
-                      <div class="d-flex align-items-center justify-content-center">
-                        {{'Model Name' | translate}}
-                      </div>
-                    </th>
-                    <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
-                      <div class="d-flex align-items-center justify-content-center">
-                        {{'Brand' | translate}}
-                      </div>
-                    </th>
-                    <th scope="col" class="table-header-sortable" id="statusSort">
-                      <div class="d-flex align-items-center justify-content-center">
-                        {{'Serial Number' | translate}}
-                      </div>
-                    </th>
-                    <th scope="col">
-                      {{'Actions' | translate}}
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody id="tableBody">
-                  <tr *ngFor="let rentableItem of newContractModel.rentableItems">
-                    <td>
-                      {{rentableItem.id}}
-                    </td>
-                    <td>
-                      {{rentableItem.modelName}}
-                    </td>
-                    <td>
-                      {{rentableItem.brand}}
-                    </td>
-                    <td>
-                      {{rentableItem.serialNumber}}
-                    </td>
-                    <td>
-                      <button class="btn btn-danger text-black-50 btn-icon mb-2"
-                              mdbTooltip="{{'Delete Contract' | translate}}"
-                        (click)="removeRentableItem(rentableItem)">
-                        <i class="material-icons">
-                          delete_forever
-                        </i>
-                      </button>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
+              <div class="col-md-2" *ngFor="let customer of customersModel.customers" >
+                {{'Customer Name: ' + customer.contactPerson| translate }} <br>
+                {{'Customer Number: ' + customer.customerNo| translate }} <br>
+                {{'Customer Address: ' + customer.companyAddress| translate }} <br>
+                {{'Customer Address 2: ' + customer.companyAddress2| translate }} <br>
+                {{'Customer Zip Code: ' + customer.zipCode| translate }} <br>
+                {{'Customer Created By: ' + customer.createdBy| translate }}
               </div>
+              <div class="col-md-2" *ngFor="let customer of customersModel.customers">
+                {{'Customer City Name: ' + customer.cityName | translate}} <br>
+                {{'Customer Phone: ' + customer.phone | translate}} <br>
+                {{'Customer Email: ' + customer.email | translate}} <br>
+                {{'Customer EAN Code: ' + customer.eanCode | translate}} <br>
+                {{'Customer Vat Number: ' + customer.vatNumber | translate}} <br>
+                {{'Customer Country Code: ' + customer.countryCode | translate}}
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="md-form">
+                <ng-select
+                  id="rentableItemSelector"
+                  [placeholder]="'Rentable Items'"
+                  name="rentable-Item-selector"
+                  [bindValue]="'id'"
+                  [bindLabel]="'modelName'"
+                  [clearable]="false"
+                  [items]="rentableItemsModel.rentableItems"
+                  (change)="addNewRentableItem($event)"></ng-select>
+              </div>
+            </div>
+            <div class="row p-3 table-responsive no-gutters">
+              <table class="table table-sm table-striped text-center">
+                <thead>
+                <tr>
+                  <th scope="col" class="table-header-sortable" id="idSort">
+                    <div class="d-flex align-items-center justify-content-center">
+                      ID
+                    </div>
+                  </th>
+                  <th scope="col" class="table-header-sortable" id="contractIdSort">
+                    <div class="d-flex align-items-center justify-content-center">
+                      {{'Model Name' | translate}}
+                    </div>
+                  </th>
+                  <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
+                    <div class="d-flex align-items-center justify-content-center">
+                      {{'Brand' | translate}}
+                    </div>
+                  </th>
+                  <th scope="col" class="table-header-sortable" id="statusSort">
+                    <div class="d-flex align-items-center justify-content-center">
+                      {{'Serial Number' | translate}}
+                    </div>
+                  </th>
+                  <th scope="col">
+                    {{'Actions' | translate}}
+                  </th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                <tr *ngFor="let rentableItem of newContractModel.rentableItems">
+                  <td>
+                    {{rentableItem.id}}
+                  </td>
+                  <td>
+                    {{rentableItem.modelName}}
+                  </td>
+                  <td>
+                    {{rentableItem.brand}}
+                  </td>
+                  <td>
+                    {{rentableItem.serialNumber}}
+                  </td>
+                  <td>
+                    <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                            mdbTooltip="{{'Delete Contract' | translate}}"
+                            (click)="removeRentableItem(rentableItem)">
+                      <i class="material-icons">
+                        delete_forever
+                      </i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </form>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createContract()">{{ 'Create' |
-          translate }}
+            translate }}
         </button>
         <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>

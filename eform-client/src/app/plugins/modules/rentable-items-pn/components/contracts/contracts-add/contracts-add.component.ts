@@ -1,8 +1,13 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractModel, RentableItemPnModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../../models';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {ContractModel,
+  CustomerRequestModel,
+  CustomersModel,
+  RentableItemPnModel,
+  RentableItemsPnModel,
+  RentableItemsPnRequestModel} from '../../../models';
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
-import {CustomersPnModel, CustomersPnRequestModel} from '../../../../customers-pn/models/customer';
+import {debounceTime, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-contracts-add',
@@ -16,18 +21,33 @@ export class ContractsAddComponent implements OnInit {
   spinnerStatus = false;
   frameShow = true;
   rentableItems: Array<RentableItemPnModel> = [];
-  customersRequestModel: CustomersPnRequestModel = new CustomersPnRequestModel();
-  customersModel: CustomersPnModel = new CustomersPnModel();
+  customersRequestModel: CustomerRequestModel = new CustomerRequestModel();
+  customersModel: CustomersModel = new CustomersModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
+  typeahead = new EventEmitter<string>();
 
   constructor(private rentableItemsService: RentableItemsPnService,
+              private cd: ChangeDetectorRef,
               private contractService: ContractsService,
-              ) { }
+              ) {
+    this.typeahead
+      .pipe(
+        debounceTime(200),
+        switchMap(term => {
+          this.customersRequestModel.name = term;
+          return this.contractService.getCustomer(this.customersRequestModel);
+        })
+      )
+      .subscribe(items => {
+        debugger;
+        this.customersModel = items.model;
+        this.cd.markForCheck();
+      });
+  }
 
   ngOnInit() {
     this.getRentableItems();
-    this.getCustomer();
   }
 
   show() {
@@ -54,6 +74,9 @@ export class ContractsAddComponent implements OnInit {
     const index = this.newContractModel.rentableItems.indexOf(rentableItem);
     this.newContractModel.rentableItems.splice(index,  1);
   }
+  removeCustomer(customer: any) {
+    this.newContractModel.id = 0;
+  }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
       if (result && result.success) {
@@ -63,7 +86,6 @@ export class ContractsAddComponent implements OnInit {
     }));
   }
   getCustomer() {
-    debugger;
     this.contractService.getCustomer(this.customersRequestModel).subscribe((result => {
       if (result && result.success) {
         this.customersModel = result.model;

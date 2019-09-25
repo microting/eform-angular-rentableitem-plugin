@@ -11,3 +11,6 @@ export * from './rentable-items-pn-settings.model';
 export * from './field/rentable-items-field-pn.model';
 export * from './field/rentable-items-fields-pn-update.model';
 export * from './field/rentable-items-field-pn-update.model';
+export * from './customer.model';
+export * from './customers.model';
+export * from './customer-request.model';

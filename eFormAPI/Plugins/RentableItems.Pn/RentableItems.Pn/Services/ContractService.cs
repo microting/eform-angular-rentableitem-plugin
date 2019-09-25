@@ -187,6 +187,22 @@ namespace RentableItems.Pn.Services
                 foreach (var customer in customers)
                 {
                     customerModel.Id = customer.Id;
+                    customerModel.Description = customer.Description;
+                    customerModel.Email = customer.Email;
+                    customerModel.ContactPerson = customer.ContactPerson;
+                    customerModel.CompanyName = customer.CompanyName;
+                    customerModel.Phone = customer.Phone;
+                    customerModel.CityName = customer.CityName;
+                    customerModel.CompanyAddress = customer.CompanyAddress;
+                    customerModel.CompanyAddress2 = customer.CompanyAddress2;
+                    customerModel.CountryCode = customer.CountryCode;
+                    customerModel.CreatedBy = customer.CreatedBy;
+                    customerModel.CreatedDate = customer.CreatedDate;
+                    customerModel.CustomerNo = customer.CustomerNo;
+                    customerModel.EanCode = customer.EanCode;
+                    customerModel.VatNumber = customer.VatNumber;
+                    customerModel.ZipCode = customer.ZipCode;
+                    
                     customersPnModel.Customers.Add(customerModel);
                 }
                 customersPnModel.Total = _customerDbContext.Customers.Count(x => x.WorkflowState != Constants.WorkflowStates.Removed);
