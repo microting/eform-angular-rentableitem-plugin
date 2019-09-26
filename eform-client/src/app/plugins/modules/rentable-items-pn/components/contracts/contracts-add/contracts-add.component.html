@@ -62,10 +62,10 @@
                     name="Customer-selector"
                     [bindValue]="'id'"
                     [bindLabel]="'companyName'"
-                    [clearable]="false"
+                    [clearable]="true"
                     [typeahead]="typeahead"
                     [items]="customersModel.customers"
-                    (select)="onSelectedChanged($event)"></ng-select>
+                    (change)="onSelectedChanged($event)"></ng-select>
                 </div>
               </div>
               <div class="col-md-2" *ngFor="let customer of customersModel.customers" >
@@ -158,10 +158,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createContract()">{{ 'Create' |
-            translate }}
+        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createContract()">
+          {{ 'Create' | translate }}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button class="btn btn-accent text-black-50" (click)="frame.hide().clear">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>
