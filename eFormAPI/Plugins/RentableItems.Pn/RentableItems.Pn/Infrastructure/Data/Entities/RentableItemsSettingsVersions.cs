@@ -7,21 +7,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 {
     public class RentableItemsSettingsVersions : BaseEntity
     {
-
-        public DateTime? Created_at { get; set; }
-
-        public DateTime? Updated_at { get; set; }
-
-        [StringLength(255)]
-        public string Workflow_state { get; set; }
-
-        public int Version { get; set; }
-
-        public int Created_By_User_Id { get; set; }
-
-        public int Updated_By_User_Id { get; set; }
-
-        public int Eform_Id { get; set; }
+        public int eFormId { get; set; }
 
         public int RentableItemsSettingId { get; set; }
 

@@ -7,22 +7,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Entities
 {
     public class ContractVersions : BaseEntity
     {
-    
-
-        [StringLength(255)]
-        public string WorkflowState { get; set; }
-
-        public int? Version { get; set; }
-
         public int? Status { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public int Created_By_User_Id { get; set; }
-
-        public int Updated_By_User_Id { get; set; }
 
         public DateTime? ContractStart { get; set; }
 

@@ -66,7 +66,7 @@ namespace RentableItems.Pn.Services
                         .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                         .Skip(contractsPnRequestModel.Offset)
                         .Take(contractsPnRequestModel.PageSize);
-                List<Contract> contracts = contractsQuery.ToList();
+                List<Contract> contracts = await contractsQuery.ToListAsync();
                 contracts.ForEach(contract =>
                 {
                     contractsModel.Contracts.Add(new ContractModel()

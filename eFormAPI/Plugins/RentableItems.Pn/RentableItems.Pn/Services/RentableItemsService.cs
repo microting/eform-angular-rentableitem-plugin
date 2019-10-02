@@ -62,13 +62,13 @@ namespace RentableItems.Pn.Services
                     }
                 }
 
-                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.Workflow_state != Constants.WorkflowStates.Removed);
+                rentableItemsPnModel.Total = rentableItemsQuery.Count(x => x.WorkflowState != Constants.WorkflowStates.Removed);
                 rentableItemsQuery 
                     = rentableItemsQuery
-                        .Where(x => x.Workflow_state != Constants.WorkflowStates.Removed)
+                        .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                         .Skip(pnRequestModel.Offset)
                         .Take(pnRequestModel.PageSize);
-                List<RentableItem> rentableItems = rentableItemsQuery.ToList();
+                List<RentableItem> rentableItems = await rentableItemsQuery.ToListAsync();
                 rentableItems.ForEach(rentableItem =>
                 {
                     rentableItemsPnModel.RentableItems.Add(new RentableItemModel()

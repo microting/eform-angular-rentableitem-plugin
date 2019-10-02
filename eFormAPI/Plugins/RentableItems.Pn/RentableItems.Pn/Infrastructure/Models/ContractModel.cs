@@ -30,11 +30,11 @@ namespace RentableItems.Pn.Infrastructure.Models
                 Contract contract = new Contract();
 
                 contract.WorkflowState = Constants.WorkflowStates.Created;
-                contract.Version = Version;
+                contract.Version = (int)Version;
                 contract.CreatedAt = DateTime.Now;
                 contract.UpdatedAt = DateTime.Now;
-                contract.Created_By_User_Id = CreatedByUserID;
-                contract.Updated_By_User_Id = UpdatedByUserID;
+                contract.CreatedByUserId = CreatedByUserID;
+                contract.UpdatedByUserId = UpdatedByUserID;
                 contract.ContractStart = ContractStart;
                 contract.ContractEnd = ContractEnd;
                 contract.CustomerId = CustomerId;
@@ -66,7 +66,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             if (_dbContext.ChangeTracker.HasChanges())
             {
                 contract.UpdatedAt = DateTime.Now;
-                contract.Updated_By_User_Id = UpdatedByUserID;
+                contract.UpdatedByUserId = UpdatedByUserID;
                 contract.Version += 1;
 
                 _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
@@ -90,7 +90,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             if (_dbContext.ChangeTracker.HasChanges())
             {
                 contract.UpdatedAt = DateTime.Now;
-                contract.Updated_By_User_Id = UpdatedByUserID;
+                contract.UpdatedByUserId = UpdatedByUserID;
                 contract.Version += 1;
 
                 _dbContext.ContractVersions.Add(MapContract(_dbContext, contract));
@@ -107,10 +107,10 @@ namespace RentableItems.Pn.Infrastructure.Models
             contractVer.ContractNr = contract.ContractNr;
             contractVer.ContractStart = contract.ContractStart;
             contractVer.CreatedAt = contract.CreatedAt;
-            contractVer.Created_By_User_Id = contract.Created_By_User_Id;
+            contractVer.CreatedByUserId = contract.CreatedByUserId;
             contractVer.Status = contract.Status;
             contractVer.UpdatedAt = contract.UpdatedAt;
-            contractVer.Updated_By_User_Id = contract.Updated_By_User_Id;
+            contractVer.UpdatedByUserId = contract.UpdatedByUserId;
             contractVer.Version = contract.Version;
             contractVer.WorkflowState = contract.WorkflowState;
 

@@ -43,11 +43,11 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.PlateNumber = PlateNumber;
             rentableItem.ModelName = ModelName;
             rentableItem.RegistrationDate = RegistrationDate;
-            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
-            rentableItem.Created_at = DateTime.Now;
-            rentableItem.Updated_at = DateTime.Now;
-            rentableItem.Created_By_User_Id = CreatedByUserId;
-            rentableItem.Updated_By_User_Id = UpdatedByUserId;
+            rentableItem.WorkflowState = Constants.WorkflowStates.Created;
+            rentableItem.CreatedAt = DateTime.Now;
+            rentableItem.UpdatedAt = DateTime.Now;
+            rentableItem.CreatedByUserId = CreatedByUserId;
+            rentableItem.UpdatedByUserId = UpdatedByUserId;
             _dbContext.RentableItem.Add(rentableItem);
             await _dbContext.SaveChangesAsync();
 
@@ -70,11 +70,12 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItem.VinNumber = VinNumber;
             rentableItem.SerialNumber = SerialNumber;
             rentableItem.PlateNumber = PlateNumber;
-            rentableItem.Workflow_state = rentableItem.Workflow_state;
+            rentableItem.WorkflowState = rentableItem.WorkflowState;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItem.Updated_at = DateTime.Now;
+                rentableItem.UpdatedAt = DateTime.Now;
+                rentableItem.UpdatedByUserId = UpdatedByUserId;
                 rentableItem.Version += 1;
 
                 _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
@@ -92,12 +93,12 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem with id {Id}");
             }
 
-            rentableItem.Workflow_state = Constants.WorkflowStates.Removed;
+            rentableItem.WorkflowState = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItem.Updated_at = DateTime.Now;
-                rentableItem.Updated_By_User_Id = UpdatedByUserId;
+                rentableItem.UpdatedAt = DateTime.Now;
+                rentableItem.UpdatedByUserId = UpdatedByUserId;
                 rentableItem.Version += 1;
 
                 _dbContext.RentableItemsVersion.Add(MapRentableItemVersions(_dbContext, rentableItem));
@@ -110,17 +111,17 @@ namespace RentableItems.Pn.Infrastructure.Models
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
             rentableItemVer.Brand = rentableItem.Brand;
-            rentableItemVer.Created_at = rentableItem.Created_at;
-            rentableItemVer.Created_By_User_Id = rentableItem.Created_By_User_Id;
+            rentableItemVer.CreatedAt = rentableItem.CreatedAt;
+            rentableItemVer.CreatedByUserId = rentableItem.CreatedByUserId;
             rentableItemVer.ModelName = rentableItem.ModelName;
             rentableItemVer.PlateNumber = rentableItem.PlateNumber;
             rentableItemVer.RegistrationDate = rentableItem.RegistrationDate;
             rentableItemVer.SerialNumber = rentableItem.SerialNumber;
-            rentableItemVer.Updated_at = rentableItem.Updated_at;
-            rentableItemVer.Updated_By_User_Id = rentableItem.Updated_By_User_Id;
+            rentableItemVer.UpdatedAt = rentableItem.UpdatedAt;
+            rentableItemVer.UpdatedByUserId = rentableItem.UpdatedByUserId;
             rentableItemVer.Version = rentableItem.Version;
             rentableItemVer.VinNumber = rentableItem.VinNumber;
-            rentableItemVer.Workflow_state = rentableItem.Workflow_state;
+            rentableItemVer.WorkflowState = rentableItem.WorkflowState;
 
             rentableItemVer.RentableItemId = rentableItem.Id;
 
