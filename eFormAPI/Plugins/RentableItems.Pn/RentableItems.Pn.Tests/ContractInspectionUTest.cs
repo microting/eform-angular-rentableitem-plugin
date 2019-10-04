@@ -58,9 +58,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
             //Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id); // isn't being used in the save method, will always fail.
-            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.CreatedByUserId);
             Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
-            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.UpdatedByUserId);
             Assert.AreEqual(contractInspectionModel.WorkflowState, dbContractInspection.WorkflowState);
         }
         [Test]
@@ -84,7 +84,7 @@ namespace RentableItems.Pn.Tests
             DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
-            contractInspection.SDK_Case_Id = Guid.NewGuid().ToString();
+            contractInspection.SDKCaseId = rnd.Next(1, 255);
             contractInspection.DoneAt = doneAt;
 
             DbContext.ContractInspection.Add(contractInspection);
@@ -93,7 +93,7 @@ namespace RentableItems.Pn.Tests
             ContractInspectionVersion contractInspectionVersion = new ContractInspectionVersion();
             contractInspectionVersion.ContractInspectionId = contractInspection.Id;
             contractInspectionVersion.ContractId = contractInspection.ContractId;
-            contractInspectionVersion.SDK_Case_Id = contractInspection.SDK_Case_Id;
+            contractInspectionVersion.SDKCaseId = contractInspection.SDKCaseId;
 
             DbContext.ContractInspectionVersion.Add(contractInspectionVersion);
             await DbContext.SaveChangesAsync();
@@ -102,7 +102,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.DoneAt = contractInspection.DoneAt;
             contractInspectionModel.Id = contractInspection.Id;
-            contractInspectionModel.SdkCaseId = Guid.NewGuid().ToString();
+            contractInspectionModel.SdkCaseId = rnd.Next(1, 255);
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
             await contractInspectionModel.Update(DbContext);
@@ -118,10 +118,10 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(2, versionList.Count());
 
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
-            Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
-            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDKCaseId);
+            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.CreatedByUserId);
             Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
-            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.UpdatedByUserId);
             Assert.AreEqual(contractInspectionModel.WorkflowState, dbContractInspection.WorkflowState);
 
         }
@@ -146,7 +146,7 @@ namespace RentableItems.Pn.Tests
             DateTime doneAt = DateTime.UtcNow;
             ContractInspection contractInspection = new ContractInspection();
             contractInspection.ContractId = contractModel.Id;
-            contractInspection.SDK_Case_Id = Guid.NewGuid().ToString();
+            contractInspection.SDKCaseId = rnd.Next(1, 255);
             contractInspection.DoneAt = doneAt;
             DbContext.ContractInspection.Add(contractInspection);
            await DbContext.SaveChangesAsync();
@@ -154,7 +154,7 @@ namespace RentableItems.Pn.Tests
             ContractInspectionVersion contractInspectionVersion = new ContractInspectionVersion();
             contractInspectionVersion.ContractInspectionId = contractInspection.Id;
             contractInspectionVersion.ContractId = contractInspection.ContractId;
-            contractInspectionVersion.SDK_Case_Id = contractInspection.SDK_Case_Id;
+            contractInspectionVersion.SDKCaseId = contractInspection.SDKCaseId;
 
             DbContext.ContractInspectionVersion.Add(contractInspectionVersion);
            await DbContext.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace RentableItems.Pn.Tests
             contractInspectionModel.ContractId = contractModel.Id;
             contractInspectionModel.DoneAt = contractInspection.DoneAt;
             contractInspectionModel.Id = contractInspection.Id;
-            contractInspectionModel.SdkCaseId = contractInspection.SDK_Case_Id;
+            contractInspectionModel.SdkCaseId = contractInspection.SDKCaseId;
             contractInspectionModel.WorkflowState = contractInspection.WorkflowState;
 
             await contractInspectionModel.Delete(DbContext);
@@ -180,10 +180,10 @@ namespace RentableItems.Pn.Tests
             
             
             Assert.AreEqual(contractInspectionModel.ContractId, dbContractInspection.ContractId);
-            Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDK_Case_Id);
-            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.Created_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.SdkCaseId, dbContractInspection.SDKCaseId);
+            Assert.AreEqual(contractInspectionModel.CreatedByUserID, dbContractInspection.CreatedByUserId);
             Assert.AreEqual(contractInspectionModel.DoneAt.ToString(), dbContractInspection.DoneAt.ToString());
-            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.Updated_By_User_Id);
+            Assert.AreEqual(contractInspectionModel.UpdatedByUserID, dbContractInspection.UpdatedByUserId);
             Assert.AreEqual(Constants.WorkflowStates.Removed, dbContractInspection.WorkflowState);
         }
     }

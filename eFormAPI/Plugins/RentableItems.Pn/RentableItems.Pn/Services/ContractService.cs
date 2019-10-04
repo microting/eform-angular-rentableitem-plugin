@@ -66,7 +66,7 @@ namespace RentableItems.Pn.Services
                         .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                         .Skip(contractsPnRequestModel.Offset)
                         .Take(contractsPnRequestModel.PageSize);
-                List<Contract> contracts = contractsQuery.ToList();
+                List<Contract> contracts = await contractsQuery.ToListAsync();
                 contracts.ForEach(contract =>
                 {
                     contractsModel.Contracts.Add(new ContractModel()
@@ -177,35 +177,38 @@ namespace RentableItems.Pn.Services
                 {
                     customersQuery = customersQuery.Where(x => x.CompanyName.Contains(pnRequestModel.Name));
 				}
+                else
+                {
+                    throw new NullReferenceException("No search criteria were given.");
+                }
 
 				customersQuery =
 					customersQuery.Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                     .Skip(pnRequestModel.Offset)
                     .Take(pnRequestModel.PageSize);
 
-                List<Customer> customers = customersQuery.ToList();
-                foreach (var customer in customers)
+                List<CustomerModel> customers = await customersQuery.Select(x => new CustomerModel()
                 {
-                    customerModel.Id = customer.Id;
-                    customerModel.Description = customer.Description;
-                    customerModel.Email = customer.Email;
-                    customerModel.ContactPerson = customer.ContactPerson;
-                    customerModel.CompanyName = customer.CompanyName;
-                    customerModel.Phone = customer.Phone;
-                    customerModel.CityName = customer.CityName;
-                    customerModel.CompanyAddress = customer.CompanyAddress;
-                    customerModel.CompanyAddress2 = customer.CompanyAddress2;
-                    customerModel.CountryCode = customer.CountryCode;
-                    customerModel.CreatedBy = customer.CreatedBy;
-                    customerModel.CreatedDate = customer.CreatedDate;
-                    customerModel.CustomerNo = customer.CustomerNo;
-                    customerModel.EanCode = customer.EanCode;
-                    customerModel.VatNumber = customer.VatNumber;
-                    customerModel.ZipCode = customer.ZipCode;
-                    
-                    customersPnModel.Customers.Add(customerModel);
-                }
-                customersPnModel.Total = _customerDbContext.Customers.Count(x => x.WorkflowState != Constants.WorkflowStates.Removed);
+                    Id = x.Id,
+                    Description = x.Description,
+                    Email = x.Email,
+                    ContactPerson = x.ContactPerson,
+                    CompanyName = x.CompanyName,
+                    Phone = x.Phone,
+                    CityName = x.CityName,
+                    CompanyAddress = x.CompanyAddress,
+                    CompanyAddress2 = x.CompanyAddress2,
+                    CountryCode = x.CountryCode,
+                    CreatedBy = x.CreatedBy,
+                    CreatedDate = x.CreatedDate,
+                    CustomerNo = x.CustomerNo,
+                    EanCode = x.EanCode,
+                    VatNumber = x.VatNumber,
+                    ZipCode = x.ZipCode
+
+                }).ToListAsync();
+                customersPnModel.Total = await _customerDbContext.Customers.CountAsync(x => x.WorkflowState != Constants.WorkflowStates.Removed);
+                customersPnModel.Customers = customers;
                 return new OperationDataResult<CustomersModel>(true, customersPnModel);
 
             }

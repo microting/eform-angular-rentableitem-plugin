@@ -83,10 +83,10 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = 51200;
             contractModel.ContractStart = contract.ContractStart;
             contractModel.CreatedAt = contract.CreatedAt;
-            contractModel.CreatedByUserID = contract.Created_By_User_Id;
+            contractModel.CreatedByUserID = contract.CreatedByUserId;
             contractModel.CustomerId = contract.CustomerId;
             contractModel.UpdatedAt = contract.UpdatedAt;
-            contractModel.UpdatedByUserID = contract.Updated_By_User_Id;
+            contractModel.UpdatedByUserID = contract.UpdatedByUserId;
             contractModel.Version = contract.Version;
             contractModel.WorkflowState = contract.WorkflowState;
 
@@ -146,10 +146,10 @@ namespace RentableItems.Pn.Tests
             contractModel.ContractNr = contract.ContractNr;
             contractModel.ContractStart = contract.ContractStart;
             contractModel.CreatedAt = contract.CreatedAt;
-            contractModel.CreatedByUserID = contract.Created_By_User_Id;
+            contractModel.CreatedByUserID = contract.CreatedByUserId;
             contractModel.CustomerId = contract.CustomerId;
             contractModel.UpdatedAt = contract.UpdatedAt;
-            contractModel.UpdatedByUserID = contract.Updated_By_User_Id;
+            contractModel.UpdatedByUserID = contract.UpdatedByUserId;
             contractModel.Version = contract.Version;
             contractModel.WorkflowState = contract.WorkflowState;
 

@@ -25,11 +25,11 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemContract.ContractId = ContractId;
             rentableItemContract.RentableItemId = RentableItemId;
-            rentableItemContract.Workflow_state = Constants.WorkflowStates.Created;
-            rentableItemContract.Created_at = DateTime.Now;
-            rentableItemContract.Updated_at = DateTime.Now;
-            rentableItemContract.Created_By_User_Id = CreatedByUserID;
-            rentableItemContract.Updated_By_User_Id = UpdatedByUserID;
+            rentableItemContract.WorkflowState = Constants.WorkflowStates.Created;
+            rentableItemContract.CreatedAt = DateTime.Now;
+            rentableItemContract.UpdatedAt = DateTime.Now;
+            rentableItemContract.CreatedByUserId = CreatedByUserID;
+            rentableItemContract.UpdatedByUserId = UpdatedByUserID;
 
             _dbContext.RentableItemContract.Add(rentableItemContract);
             await _dbContext.SaveChangesAsync();
@@ -49,12 +49,12 @@ namespace RentableItems.Pn.Infrastructure.Models
 
             rentableItemContract.ContractId = ContractId;
             rentableItemContract.RentableItemId = RentableItemId;
-            rentableItemContract.Workflow_state = rentableItemContract.Workflow_state;
+            rentableItemContract.WorkflowState = rentableItemContract.WorkflowState;
             
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItemContract.Updated_at = DateTime.Now;
-                rentableItemContract.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemContract.UpdatedAt = DateTime.Now;
+                rentableItemContract.UpdatedByUserId = UpdatedByUserID;
                 rentableItemContract.Version += 1;
 
                 _dbContext.RentableItemsContractVersions.Add(MapRentableItemContractVersions(_dbContext, rentableItemContract));
@@ -72,12 +72,12 @@ namespace RentableItems.Pn.Infrastructure.Models
             }
 
 
-            rentableItemContract.Workflow_state = Constants.WorkflowStates.Removed;
+            rentableItemContract.WorkflowState = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItemContract.Updated_at = DateTime.Now;
-                rentableItemContract.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemContract.UpdatedAt = DateTime.Now;
+                rentableItemContract.UpdatedByUserId = UpdatedByUserID;
                 rentableItemContract.Version += 1;
 
                 _dbContext.RentableItemsContractVersions.Add(MapRentableItemContractVersions(_dbContext, rentableItemContract));
@@ -91,13 +91,13 @@ namespace RentableItems.Pn.Infrastructure.Models
             RentableItemsContractVersions rentableItemscontractVer = new RentableItemsContractVersions();
 
             rentableItemscontractVer.ContractId = rentableItemContract.ContractId;
-            rentableItemscontractVer.Created_at = rentableItemContract.Created_at;
-            rentableItemscontractVer.Created_By_User_Id = rentableItemContract.Created_By_User_Id;
+            rentableItemscontractVer.CreatedAt = rentableItemContract.CreatedAt;
+            rentableItemscontractVer.CreatedByUserId = rentableItemContract.CreatedByUserId;
             rentableItemscontractVer.RentableItemId = rentableItemContract.RentableItemId;
-            rentableItemscontractVer.Updated_at = rentableItemContract.Updated_at;
-            rentableItemscontractVer.Updated_By_User_Id = rentableItemContract.Updated_By_User_Id;
+            rentableItemscontractVer.UpdatedAt = rentableItemContract.UpdatedAt;
+            rentableItemscontractVer.UpdatedByUserId = rentableItemContract.UpdatedByUserId;
             rentableItemscontractVer.Version = rentableItemContract.Version;
-            rentableItemscontractVer.Workflow_state = rentableItemContract.Workflow_state;
+            rentableItemscontractVer.WorkflowState = rentableItemContract.WorkflowState;
 
             rentableItemscontractVer.RentableItemContractId = rentableItemContract.Id;
 

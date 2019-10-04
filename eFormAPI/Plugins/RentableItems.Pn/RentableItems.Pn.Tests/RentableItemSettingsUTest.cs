@@ -37,9 +37,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(1, versionsList.Count());
 
-            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
+            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.CreatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.UpdatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eFormId);
 
         }
         [Test]
@@ -48,26 +48,26 @@ namespace RentableItems.Pn.Tests
             // Arrange
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
             Random rnd = new Random();
-            rentableItemsSettings.Created_By_User_Id = rnd.Next(1, 82);
-            rentableItemsSettings.eForm_Id = rnd.Next(5, 100);
-            rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
+            rentableItemsSettings.CreatedByUserId = rnd.Next(1, 82);
+            rentableItemsSettings.eFormId = rnd.Next(5, 100);
+            rentableItemsSettings.UpdatedByUserId = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
             await DbContext.SaveChangesAsync();
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
-            rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.eForm_Id.Value;
-            rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
+            rentableItemsSettingsVer.CreatedByUserId = rentableItemsSettings.CreatedByUserId;
+            rentableItemsSettingsVer.eFormId = rentableItemsSettings.eFormId.Value;
+            rentableItemsSettingsVer.UpdatedByUserId = rentableItemsSettings.UpdatedByUserId;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
             DbContext.RentableItemsSettingsVersions.Add(rentableItemsSettingsVer);
             await DbContext.SaveChangesAsync();
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
-            rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
+            rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.CreatedByUserId;
             rentableItemsSettingsModel.eFormId = 555;
-            rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
+            rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.UpdatedByUserId;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
             await rentableItemsSettingsModel.Update(DbContext);
             
@@ -81,9 +81,9 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionsList.Count());
 
-            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
+            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.CreatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.UpdatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eFormId);
 
 
         }
@@ -93,26 +93,26 @@ namespace RentableItems.Pn.Tests
             // Arrange
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
             Random rnd = new Random();
-            rentableItemsSettings.Created_By_User_Id = rnd.Next(1, 82);
-            rentableItemsSettings.eForm_Id = rnd.Next(5, 100);
-            rentableItemsSettings.Updated_By_User_Id = rnd.Next(1, 100);
+            rentableItemsSettings.CreatedByUserId = rnd.Next(1, 82);
+            rentableItemsSettings.eFormId = rnd.Next(5, 100);
+            rentableItemsSettings.UpdatedByUserId = rnd.Next(1, 100);
 
             DbContext.RentableItemsSettings.Add(rentableItemsSettings);
             await DbContext.SaveChangesAsync();
 
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
-            rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettings.eForm_Id.Value;
-            rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
+            rentableItemsSettingsVer.CreatedByUserId = rentableItemsSettings.CreatedByUserId;
+            rentableItemsSettingsVer.eFormId = rentableItemsSettings.eFormId.Value;
+            rentableItemsSettingsVer.UpdatedByUserId = rentableItemsSettings.UpdatedByUserId;
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 
             DbContext.RentableItemsSettingsVersions.Add(rentableItemsSettingsVer);
             await DbContext.SaveChangesAsync();
             // Act
             RentableItemsSettingsModel rentableItemsSettingsModel = new RentableItemsSettingsModel();
-            rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsModel.eFormId = rentableItemsSettings.eForm_Id;
-            rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.Updated_By_User_Id;
+            rentableItemsSettingsModel.CreatedByUserID = rentableItemsSettings.CreatedByUserId;
+            rentableItemsSettingsModel.eFormId = rentableItemsSettings.eFormId;
+            rentableItemsSettingsModel.UpdatedByUserID = rentableItemsSettings.UpdatedByUserId;
             rentableItemsSettingsModel.Id = rentableItemsSettings.Id;
 
             await rentableItemsSettingsModel.Delete(DbContext);
@@ -127,10 +127,10 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(2, versionsList.Count());
 
-            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.Created_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.Updated_By_User_Id);
-            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eForm_Id);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItemsSettings.Workflow_state);
+            Assert.AreEqual(rentableItemsSettingsModel.CreatedByUserID, dbRentableItemsSettings.CreatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.UpdatedByUserID, dbRentableItemsSettings.UpdatedByUserId);
+            Assert.AreEqual(rentableItemsSettingsModel.eFormId, dbRentableItemsSettings.eFormId);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItemsSettings.WorkflowState);
 
 
         }
