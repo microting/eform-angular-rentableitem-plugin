@@ -8,7 +8,7 @@ using RentableItems.Pn.Infrastructure.Models;
 namespace RentableItems.Pn.Controllers
 {
     [Authorize]
-    public class ContractsInspectionController
+    public class ContractsInspectionController : Controller
     {
         private readonly IContractsInspectionService _contractsInspectionService;
 

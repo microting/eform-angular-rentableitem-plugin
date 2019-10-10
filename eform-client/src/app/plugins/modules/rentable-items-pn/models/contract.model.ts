@@ -7,8 +7,5 @@ export class ContractModel {
   customerId: number;
   contractNr: number;
   rentableItems: Array<RentableItemPnModel> = [];
-  constructor() {
-    this.contractStart = null;
-    this.contractEnd = null;
-  }
+  rentableItemIds: Array<number> = [];
 }

@@ -112,7 +112,7 @@ namespace RentableItems.Pn.Services
                 Core _core = _coreHelper.GetCore();
                 MainElement mainElement = _core.TemplateRead(eFormId);
                 mainElement.Repeated = 1;
-                mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
+                mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();//why 14 days?
                 mainElement.StartDate = DateTime.Now.ToUniversalTime();
                 mainElement.Label = contractInspectionCreateModel.ContractId.ToString();
                 CDataValue cDataValue = new CDataValue();

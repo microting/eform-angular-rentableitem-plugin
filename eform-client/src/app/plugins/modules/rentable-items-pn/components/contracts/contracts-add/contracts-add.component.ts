@@ -35,13 +35,11 @@ export class ContractsAddComponent implements OnInit {
       .pipe(
         debounceTime(200),
         switchMap(term => {
-          debugger;
           this.customersRequestModel.name = term;
           return this.contractService.getCustomer(this.customersRequestModel);
         })
       )
       .subscribe(items => {
-        debugger;
         this.customersModel = items.model;
         this.cd.markForCheck();
       });
@@ -58,6 +56,7 @@ export class ContractsAddComponent implements OnInit {
 
   createContract() {
     this.spinnerStatus = true;
+    this.newContractModel.rentableItems = null;
     this.contractService.createContract(this.newContractModel).subscribe(((data) => {
       if (data && data.success) {
         this.newContractModel = new ContractModel();
@@ -69,6 +68,7 @@ export class ContractsAddComponent implements OnInit {
   addNewRentableItem(e: any) {
     if (!this.newContractModel.rentableItems.includes(e)) {
       this.newContractModel.rentableItems.push(e);
+      this.newContractModel.rentableItemIds.push(e.id);
     }
   }
   removeRentableItem(rentableItem: any) {
@@ -76,7 +76,8 @@ export class ContractsAddComponent implements OnInit {
     this.newContractModel.rentableItems.splice(index,  1);
   }
   removeCustomer(customer: any) {
-    this.newContractModel.id = 0;
+    const index = this.customersModel.customers.indexOf(customer);
+    this.customersModel.customers.splice(index,  1);
   }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {
@@ -101,6 +102,6 @@ export class ContractsAddComponent implements OnInit {
     this.newContractModel.contractEnd = formatTimezone(f.value._d);
   }
   onSelectedChanged(g: any) {
-    this.newContractModel.customerId = g.value;
+    this.newContractModel.customerId = g.id;
   }
 }

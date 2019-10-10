@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microting.eForm.Infrastructure.Constants;
@@ -20,7 +22,8 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? ContractEnd { get; set; }
         public int CustomerId { get; set; }
         public int? ContractNr { get; set; }
-
+        public List<int> RentableItemIds { get; set; }
+        
         public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             Contract dbContract = _dbContext.Contract.FirstOrDefault(x => x.ContractNr == ContractNr);
@@ -28,7 +31,7 @@ namespace RentableItems.Pn.Infrastructure.Models
             if (dbContract == null)
             {
                 Contract contract = new Contract();
-
+                Version = 1;
                 contract.WorkflowState = Constants.WorkflowStates.Created;
                 contract.Version = (int)Version;
                 contract.CreatedAt = DateTime.Now;

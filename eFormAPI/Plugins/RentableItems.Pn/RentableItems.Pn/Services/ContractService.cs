@@ -90,8 +90,6 @@ namespace RentableItems.Pn.Services
             }
         }
             
-            
-
         public async Task<OperationResult> CreateContract(ContractModel contractCreateModel)
         {
             try
@@ -107,7 +105,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingContract"));
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingContract"));
 
             }
         }
