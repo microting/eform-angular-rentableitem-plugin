@@ -1,5 +1,5 @@
 import Page from '../Page';
-import XMLForEformRentableItems from '../../Constants/XMLForEformRentableItems';
+import XMLForEformRentableItems from '../../Constants/XMLForEform';
 import {trackByHourSegment} from 'angular-calendar/modules/common/util';
 import {until} from 'selenium-webdriver';
 import titleIs = until.titleIs;
