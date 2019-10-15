@@ -15,6 +15,7 @@ script:
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/src/app/plugins/modules/rentable-items-pn microting/eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-settings microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-settings
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-general microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-general
+  - cp -av microting/eform-angular-rentableitem-plugin/eform-client/e2e/Page\ objects/rentableitem-general microting/eform-angular-frontend/eform-client/e2e/Page\ objects/rentableitem-general
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/wdio-headless-plugin-step2.conf.js microting/eform-angular-frontend/eform-client/wdio-headless-plugin-step2.conf.js
   - cp -av microting/eform-angular-basecustomer-plugin/eform-client/src/app/plugins/modules/customers-pn microting/eform-angular-frontend/eform-client/src/app/plugins/modules/customers-pn
   - cd microting/eform-angular-frontend
