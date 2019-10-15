@@ -24,7 +24,6 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-//using Customers.Pn.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -70,12 +69,19 @@ namespace RentableItems.Pn
         }
         public void AddPluginConfig(IConfigurationBuilder builder, string connectionString)
         {
-            var seedData = new RentableItemsConfiguraitonSeedData();
-            var contextFactory = new RentableItemsPnContextFactory();
+            RentableItemsConfiguraitonSeedData seedData = new RentableItemsConfiguraitonSeedData();
+            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
             builder.AddPluginConfiguration(
                 connectionString,
                 seedData,
                 contextFactory);
+        }
+        public void ConfigureOptionsServices(
+            IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
+                configuration.GetSection("RentableItemBaseSettings"));
         }
         public void ConfigureDbContext(IServiceCollection services, string connectionString)
         {
@@ -120,7 +126,7 @@ namespace RentableItems.Pn
 
         public MenuModel HeaderMenu(IServiceProvider serviceProvider)
         {
-            var localizationService = serviceProvider
+            IRentableItemsLocalizationService localizationService = serviceProvider
                 .GetService<IRentableItemsLocalizationService>();
 
             MenuItemModel rentableItem = new MenuItemModel()
@@ -176,14 +182,5 @@ namespace RentableItems.Pn
                 RentableItemPluginSeed.SeedData(context);
             }
         }
-        public void ConfigureOptionsServices(
-            IServiceCollection services,
-            IConfiguration configuration)
-        {
-            services.ConfigurePluginDbOptions<RentableItemBaseSettings>(
-                configuration.GetSection("RentableItemBaseSettings"));
-        }
-
-       
     }
 }

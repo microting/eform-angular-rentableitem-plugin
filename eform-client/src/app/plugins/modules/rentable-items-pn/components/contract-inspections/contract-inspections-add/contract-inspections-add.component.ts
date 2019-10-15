@@ -35,7 +35,7 @@ export class ContractInspectionsAddComponent implements OnInit {
   }
   loadAllSimpleSites() {
     this.spinnerStatus = true;
-    this.deviceUsersService.getAllSimpleSites().subscribe(operation => {
+    this.deviceUsersService.getAllDeviceUsers().subscribe(operation => {
       if (operation && operation.success) {
         this.sitesDto = operation.model;
       }

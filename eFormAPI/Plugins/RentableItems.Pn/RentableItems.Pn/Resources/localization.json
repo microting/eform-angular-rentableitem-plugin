@@ -1,0 +1,330 @@
+[
+  {
+    "Key": "Rentable Items",
+    "LocalizedValue": {
+      "da": "Lejelige ting",
+      "en-US": "Rentable Items",
+      "de-De": "Mietbare gegenstände"
+    }
+  },
+  {
+    "Key": "Contracts",
+    "LocalizedValue": {
+      "da": "Kontrakter",
+      "en-US": "Contracts",
+      "de-De": "Vertrag"
+    }
+  },
+  {
+    "Key": "Contract Inspections",
+    "LocalizedValue": {
+      "da": "Kontrakt Inspectioner",
+      "en-US": "Contract Inspections",
+      "de-De": "Vertragsinspektionen"
+    }
+  },
+  {
+    "Key": "RentableItemCreatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Lejelig ting blev oprettet korrekt",
+      "en-US": "Rentable Item Created Successfully",
+      "de-De": "Bereich {0} wurde erfolgreich erstellt"
+    }
+  },
+  {
+    "Key": "RentableItemDeletedSuccessfully",
+    "LocalizedValue": {
+      "da": "Lejelig ting blev slettet korrekt",
+      "en-US": "Rentable Item Deleted Successfully",
+      "de-De": "Bereich erfolgreich gelöscht"
+    }
+  },
+  {
+    "Key": "RentableItemUpdatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Lejelig ting blev opdateret korrekt",
+      "en-US": "Rentable Item Updated Successfully",
+      "de-DE": "Bereich erfolgreich aktualisiert"
+    }
+  },
+  {
+    "Key": "ContractCreatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt blev oprettet korrekt",
+      "en-US": "Contract Created Successfully",
+      "de-De": "Bereich {0} wurde erfolgreich erstellt"
+    }
+  },
+  {
+    "Key": "ContractDeletedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt blev slettet korrekt",
+      "en-US": "Contract Deleted Successfully",
+      "de-De": "Bereich erfolgreich gelöscht"
+    }
+  },
+  {
+    "Key": "ContractUpdatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt blev opdateret korrekt",
+      "en-US": "Contract Updated Successfully",
+      "de-DE": "Bereich erfolgreich aktualisiert"
+    }
+  },
+  {
+    "Key": "ContractInspectionCreatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt inspektion blev oprettet korrekt",
+      "en-US": "Contract inspection Created Successfully",
+      "de-De": "Bereich {0} wurde erfolgreich erstellt"
+    }
+  },
+  {
+    "Key": "ContractInspectionDeletedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt inspektion blev slettet korrekt",
+      "en-US": "Contract inspection Deleted Successfully",
+      "de-De": "Bereich erfolgreich gelöscht"
+    }
+  },
+  {
+    "Key": "ContractInspectionUpdatedSuccessfully",
+    "LocalizedValue": {
+      "da": "Kontrakt inspektion blev opdateret korrekt",
+      "en-US": "Contract inspection Updated Successfully",
+      "de-DE": "Bereich erfolgreich aktualisiert"
+    }
+  },
+  {
+    "Key": "RentableItemWithIdDoesNotExist",
+    "LocalizedValue": {
+      "da": "Lejelig ting med {0} id eksisterer ikke",
+      "en-US": "Rentable Item with {0} id does not exist",
+      "de-De": "Bereich mit der ID {0} ist nicht vorhanden"
+    }
+  },
+  {
+    "Key": "ContractWithIdDoesNotExist",
+    "LocalizedValue": {
+      "da": "Kontrakt med {0} id eksisterer ikke",
+      "en-US": "Contract with {0} id does not exist",
+      "de-De": "Bereich mit der ID {0} ist nicht vorhanden"
+    }
+  },
+  {
+    "Key": "ContractInspectionWithIdDoesNotExist",
+    "LocalizedValue": {
+      "da": "Kontrakt inspektion med {0} id eksisterer ikke",
+      "en-US": "Contract inspection with {0} id does not exist",
+      "de-De": "Bereich mit der ID {0} ist nicht vorhanden"
+    }
+  },
+  {
+    "Key": "ErrorCreatingRentableItem",
+    "LocalizedValue": {
+      "da": "Fejl under oprettelse af lejelig ting",
+      "en-US": "Error while creating rentable item",
+      "de-DE": "Fehler beim Erstellen eines Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorCreatingContract",
+    "LocalizedValue": {
+      "da": "Fejl under oprettelse af kontrakt",
+      "en-US": "Error while creating contract",
+      "de-DE": "Fehler beim Erstellen der Maschine"
+    }
+  },
+  {
+    "Key": "ErrorCreatingContractInspection",
+    "LocalizedValue": {
+      "da": "Fejl under oprettelse af kontrakt inspektion",
+      "en-US": "Error while creating contract inspection",
+      "de-DE": "Fehler beim Erstellen der Maschine"
+    }
+  },
+  {
+    "Key": "ErrorObtainRentableItem",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af lejelige ting",
+      "en-US": "Error while obtaining rentable item",
+      "de-DE": "Fehler beim Abrufen des Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorObtainContract",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af kontrakt",
+      "en-US": "Error while obtaining contract",
+      "de-DE": "Fehler beim Abrufen des Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorObtainContractInspection",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af kontrakt inspektion",
+      "en-US": "Error while obtaining contract inspection",
+      "de-DE": "Fehler beim Abrufen des Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorObtainRentableItems",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af lejelige ting",
+      "en-US": "Error while obtaining rentable items",
+      "de-DE": "Fehler beim Abrufen von Bereichen"
+    }
+  },
+  {
+    "Key": "ErrorObtainContracts",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af kontrakter",
+      "en-US": "Error while obtaining contracts",
+      "de-DE": "Fehler beim Abrufen von Bereichen"
+    }
+  },
+  {
+    "Key": "ErrorObtainContractInspections",
+    "LocalizedValue": {
+      "da": "Fejl under opnåelse af kontrakt inspektioner",
+      "en-US": "Error while obtaining contract inspections",
+      "de-DE": "Fehler beim Abrufen von Bereichen"
+    }
+  },
+  {
+    "Key": "ErrorUpdatingRentableItem",
+    "LocalizedValue": {
+      "da": "Fejl under opdatering af lejelig ting",
+      "en-US": "Error while updating rentable item",
+      "de-DE": "Fehler beim Aktualisieren des Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorUpdatingContract",
+    "LocalizedValue": {
+      "da": "Fejl under opdatering af kontrakt",
+      "en-US": "Error while updating contract",
+      "de-DE": "Fehler beim Aktualisieren der Maschine"
+    }
+  },
+  {
+    "Key": "ErrorUpdatingContractInspection",
+    "LocalizedValue": {
+      "da": "Fejl under opdatering af kontrakt inspektion",
+      "en-US": "Error while updating contract inspection",
+      "de-DE": "Fehler beim Aktualisieren der Maschine"
+    }
+  },
+  {
+    "Key": "ErrorWhileDeletingRentableItem",
+    "LocalizedValue": {
+      "da": "Fejl under sletning af lejelig ting",
+      "en-US": "Error while deleting rentable item",
+      "de-DE": "Fehler beim Löschen des Bereichs"
+    }
+  },
+  {
+    "Key": "ErrorWhileDeletingContract",
+    "LocalizedValue": {
+      "da": "Fejl under sletning af kontrakt",
+      "en-US": "Error while deleting contract",
+      "de-DE": "Fehler beim Löschen der Maschine"
+    }
+  },
+  {
+    "Key": "ErrorWhileDeletingContractInspection",
+    "LocalizedValue": {
+      "da": "Fejl under sletning af kontrakt inspektion",
+      "en-US": "Error while deleting contract inspection",
+      "de-DE": "Fehler beim Löschen der Maschine"
+    }
+  },
+  {
+    "Key": "DateFrom",
+    "LocalizedValue": {
+      "da": "Periode FRA",
+      "en-US": "Date From",
+      "de-DE": "Datum Aus"
+    }
+  },
+  {
+    "Key": "ShowDataBy",
+    "LocalizedValue": {
+      "da": "Vis data som",
+      "en-US": "Show data by",
+      "de-DE": "Daten anzeigen als"
+    }
+  },
+  {
+    "Key": "Report",
+    "LocalizedValue": {
+      "da": "Rapport",
+      "en-US": "Report",
+      "de-DE": "Bericht"
+    }
+  },
+  {
+    "Key": "Reports",
+    "LocalizedValue": {
+      "da": "Rapporter",
+      "en-US": "Reports",
+      "de-DE": "Berichte"
+    }
+  },
+  {
+    "Key": "DateTo",
+    "LocalizedValue": {
+      "da": "Periode TIL",
+      "en-US": "Date To",
+      "de-DE": "Datum Bis"
+    }
+  },
+  {
+    "Key": "Day",
+    "LocalizedValue": {
+      "da": "Dag",
+      "en-US": "Day",
+      "de-DE": "Tag"
+    }
+  },
+  {
+    "Key": "Week",
+    "LocalizedValue": {
+      "da": "Uge",
+      "en-US": "Week",
+      "de-DE": "Woche"
+    }
+  },
+  {
+    "Key": "Month",
+    "LocalizedValue": {
+      "da": "Måned",
+      "en-US": "Month",
+      "de-DE": "Monat"
+    }
+  },
+  {
+    "Key": "ErrorWhileGeneratingReportFile",
+    "LocalizedValue": {
+      "da": "Fejl under generering af rapportfil",
+      "en-US": "Error while generating report file",
+      "de-DE": "Fehler beim Generieren der Berichtsdatei"
+    }
+  },
+  {
+    "Key": "ErrorWhileGeneratingReport",
+    "LocalizedValue": {
+      "da": "Fejl under generering af rapport",
+      "en-US": "Error while generating report",
+      "de-DE": "Fehler beim Generieren des Berichts"
+    }
+  },
+  {
+    "Key": "Employee",
+    "LocalizedValue": {
+      "da": "Medarbejder",
+      "en-US": "Employee",
+      "de-DE": "Mitarbeiter"
+    }
+  }
+]

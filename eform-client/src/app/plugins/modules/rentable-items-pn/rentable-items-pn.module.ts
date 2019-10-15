@@ -30,7 +30,6 @@ import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DragulaModule} from 'ng2-dragula';
-import {CustomersPnService} from '../customers-pn/services';
 
 
 @NgModule({
@@ -72,7 +71,6 @@ import {CustomersPnService} from '../customers-pn/services';
     RentableItemsPnSettingsService,
     ContractsService,
     ContractInspectionsService,
-    CustomersPnService,
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
   ]
 })

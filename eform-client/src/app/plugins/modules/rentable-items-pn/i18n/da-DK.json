@@ -1,7 +1,7 @@
 {
-  "Vehicles": "Køretøjer",
-  "Create vehicle": "Opret køretøj",
-  "New vehicle": "Nyt køretøj",
+  "Rentable Items": "Lejelige ting",
+  "Create rentable item": "Opret lejelig ting",
+  "New rentable item": "Ny lejelig ting",
   "Contact number": "Kontakt nummer",
   "Customer name": "Kundenavn",
   "Brand": "Brand",
@@ -14,5 +14,5 @@
   "End of contract*": "Slut på kontrakt*",
   "Actions": "Handlinger",
   "Edit vehicle": "Rediger køretøj",
-  "Create": "Skab"
+  "Create": "Opret"
 }

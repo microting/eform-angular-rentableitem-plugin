@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+﻿using RentableItems.Pn.Abstractions;
 using Microsoft.Extensions.Localization;
-using RentableItems.Pn.Abstractions;
+using Microting.eFormApi.BasePn.Localization.Abstractions;
 
 namespace RentableItems.Pn.Services
 {
@@ -8,21 +8,20 @@ namespace RentableItems.Pn.Services
     {
         private readonly IStringLocalizer _localizer;
  
-        public RentableItemLocalizationService(IStringLocalizerFactory factory)
+        public RentableItemLocalizationService(IEformLocalizerFactory factory)
         {
-            _localizer = factory.Create("RentableItemsResources",
-                Assembly.GetEntryAssembly().FullName);
+            _localizer = factory.Create(typeof(EformRentableItemsPlugin));
         }
  
         public string GetString(string key)
         {
-            var str = _localizer[key];
+            LocalizedString str = _localizer[key];
             return str.Value;
         }
 
         public string GetString(string format, params object[] args)
         {
-            var message = _localizer[format];
+            LocalizedString message = _localizer[format];
             if (message?.Value == null)
             {
                 return null;
