@@ -22,13 +22,13 @@ namespace RentableItems.Pn.Infrastructure.Models
         {
             RentableItemsSettings rentableItemsSettings = new RentableItemsSettings();
 
-            rentableItemsSettings.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItemsSettings.WorkflowState = Constants.WorkflowStates.Created;
             rentableItemsSettings.Version = Version;
-            rentableItemsSettings.Created_at = DateTime.Now;
-            rentableItemsSettings.Updated_at = DateTime.Now;
-            rentableItemsSettings.Created_By_User_Id = CreatedByUserID;
-            rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
-            rentableItemsSettings.eForm_Id = eFormId;
+            rentableItemsSettings.CreatedAt = DateTime.Now;
+            rentableItemsSettings.UpdatedAt = DateTime.Now;
+            rentableItemsSettings.CreatedByUserId = CreatedByUserID;
+            rentableItemsSettings.UpdatedByUserId = UpdatedByUserID;
+            rentableItemsSettings.eFormId = eFormId;
 
             _dbContext.RentableItemsSettings.Add(rentableItemsSettings);
            await _dbContext.SaveChangesAsync();
@@ -49,13 +49,13 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem Setting with id {Id}");
             }
 
-            rentableItemsSettings.eForm_Id = eFormId;
-            rentableItemsSettings.Workflow_state = rentableItemsSettings.Workflow_state;
+            rentableItemsSettings.eFormId = eFormId;
+            rentableItemsSettings.WorkflowState = rentableItemsSettings.WorkflowState;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItemsSettings.Updated_at = DateTime.Now;
-                rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemsSettings.UpdatedAt = DateTime.Now;
+                rentableItemsSettings.UpdatedByUserId = UpdatedByUserID;
                 rentableItemsSettings.Version += 1;
 
                 _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
@@ -73,12 +73,12 @@ namespace RentableItems.Pn.Infrastructure.Models
                 throw new NullReferenceException($"Could not find RentableItem Setting with id {Id}");
             }
 
-            rentableItemsSettings.Workflow_state = Constants.WorkflowStates.Removed;
+            rentableItemsSettings.WorkflowState = Constants.WorkflowStates.Removed;
 
             if (_dbContext.ChangeTracker.HasChanges())
             {
-                rentableItemsSettings.Updated_at = DateTime.Now;
-                rentableItemsSettings.Updated_By_User_Id = UpdatedByUserID;
+                rentableItemsSettings.UpdatedAt = DateTime.Now;
+                rentableItemsSettings.UpdatedByUserId = UpdatedByUserID;
                 rentableItemsSettings.Version += 1;
 
                 _dbContext.RentableItemsSettingsVersions.Add(MapRentableItemsSettings(_dbContext, rentableItemsSettings));
@@ -90,13 +90,13 @@ namespace RentableItems.Pn.Infrastructure.Models
         {
             RentableItemsSettingsVersions rentableItemsSettingsVer = new RentableItemsSettingsVersions();
 
-            rentableItemsSettingsVer.Created_at = rentableItemsSettings.Created_at;
-            rentableItemsSettingsVer.Created_By_User_Id = rentableItemsSettings.Created_By_User_Id;
-            rentableItemsSettingsVer.Eform_Id = rentableItemsSettingsVer.Eform_Id;
-            rentableItemsSettingsVer.Updated_at = rentableItemsSettings.Updated_at;
-            rentableItemsSettingsVer.Updated_By_User_Id = rentableItemsSettings.Updated_By_User_Id;
+            rentableItemsSettingsVer.CreatedAt = rentableItemsSettings.CreatedAt;
+            rentableItemsSettingsVer.CreatedByUserId = rentableItemsSettings.CreatedByUserId;
+            rentableItemsSettingsVer.eFormId = (int)rentableItemsSettings.eFormId;
+            rentableItemsSettingsVer.UpdatedAt = rentableItemsSettings.UpdatedAt;
+            rentableItemsSettingsVer.UpdatedByUserId = rentableItemsSettings.UpdatedByUserId;
             rentableItemsSettingsVer.Version = rentableItemsSettings.Version;
-            rentableItemsSettingsVer.Workflow_state = rentableItemsSettings.Workflow_state;
+            rentableItemsSettingsVer.WorkflowState = rentableItemsSettings.WorkflowState;
 
             rentableItemsSettingsVer.RentableItemsSettingId = rentableItemsSettings.Id;
 

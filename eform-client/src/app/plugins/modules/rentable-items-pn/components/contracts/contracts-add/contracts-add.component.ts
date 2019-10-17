@@ -35,6 +35,7 @@ export class ContractsAddComponent implements OnInit {
       .pipe(
         debounceTime(200),
         switchMap(term => {
+          debugger;
           this.customersRequestModel.name = term;
           return this.contractService.getCustomer(this.customersRequestModel);
         })

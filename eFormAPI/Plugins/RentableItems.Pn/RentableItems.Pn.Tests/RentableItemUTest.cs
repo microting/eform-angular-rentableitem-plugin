@@ -50,7 +50,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItemModel.VinNumber, rentableItem.VinNumber);
             Assert.AreEqual(rentableItemModel.SerialNumber, rentableItem.SerialNumber);
             Assert.AreEqual(rentableItemModel.RegistrationDate.ToString(), rentableItem.RegistrationDate.ToString());
-            Assert.AreEqual(rentableItemModel.WorkflowState, rentableItem.Workflow_state);
+            Assert.AreEqual(rentableItemModel.WorkflowState, rentableItem.WorkflowState);
             //rentableItemsPnDbAnySql.RentableItem.
         }
 
@@ -63,7 +63,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.ModelName = Guid.NewGuid().ToString();
             rentableItem.PlateNumber = Guid.NewGuid().ToString();
             rentableItem.VinNumber = Guid.NewGuid().ToString();
-            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItem.WorkflowState = Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
@@ -74,17 +74,17 @@ namespace RentableItems.Pn.Tests
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
             rentableItemVer.Brand = rentableItem.Brand;
-            rentableItemVer.Created_at = rentableItem.Created_at;
-            rentableItemVer.Created_By_User_Id = rentableItem.Created_By_User_Id;
+            rentableItemVer.CreatedAt = rentableItem.CreatedAt;
+            rentableItemVer.CreatedByUserId = rentableItem.CreatedByUserId;
             rentableItemVer.ModelName = rentableItem.ModelName;
             rentableItemVer.PlateNumber = rentableItem.PlateNumber;
             rentableItemVer.RegistrationDate = rentableItem.RegistrationDate;
             rentableItemVer.SerialNumber = rentableItem.SerialNumber;
-            rentableItemVer.Updated_at = rentableItem.Updated_at;
-            rentableItemVer.Updated_By_User_Id = rentableItem.Updated_By_User_Id;
+            rentableItemVer.UpdatedAt = rentableItem.UpdatedAt;
+            rentableItemVer.UpdatedByUserId = rentableItem.UpdatedByUserId;
             rentableItemVer.Version = rentableItem.Version;
             rentableItemVer.VinNumber = rentableItem.VinNumber;
-            rentableItemVer.Workflow_state = rentableItem.Workflow_state;
+            rentableItemVer.WorkflowState = rentableItem.WorkflowState;
 
             rentableItemVer.RentableItemId = rentableItem.Id;
 
@@ -95,16 +95,16 @@ namespace RentableItems.Pn.Tests
             // Act
             RentableItemModel rentableItemModel = new RentableItemModel();
             rentableItemModel.Brand = rentableItem.Brand;
-            rentableItemModel.CreatedAt = rentableItem.Created_at;
-            rentableItemModel.CreatedByUserId = rentableItem.Created_By_User_Id;
+            rentableItemModel.CreatedAt = rentableItem.CreatedAt;
+            rentableItemModel.CreatedByUserId = rentableItem.CreatedByUserId;
             rentableItemModel.ModelName = rentableItem.ModelName;
             rentableItemModel.PlateNumber = rentableItem.PlateNumber;
             rentableItemModel.RegistrationDate = rentableItem.RegistrationDate;
             rentableItemModel.SerialNumber = rentableItem.SerialNumber;
-            rentableItemModel.UpdatedAt = rentableItem.Updated_at;
-            rentableItemModel.UpdatedByUserId = rentableItem.Updated_By_User_Id;
+            rentableItemModel.UpdatedAt = rentableItem.UpdatedAt;
+            rentableItemModel.UpdatedByUserId = rentableItem.UpdatedByUserId;
             rentableItemModel.VinNumber = "656565F";
-            rentableItemModel.WorkflowState = rentableItem.Workflow_state;
+            rentableItemModel.WorkflowState = rentableItem.WorkflowState;
 
             rentableItemModel.Id = rentableItem.Id;
 
@@ -126,7 +126,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItem.VinNumber, dbRentableItem.VinNumber);
             Assert.AreEqual(rentableItem.SerialNumber, dbRentableItem.SerialNumber);
             Assert.AreEqual(rentableItem.RegistrationDate.ToString(), dbRentableItem.RegistrationDate.ToString());
-            Assert.AreEqual(rentableItem.Workflow_state, dbRentableItem.Workflow_state);
+            Assert.AreEqual(rentableItem.WorkflowState, dbRentableItem.WorkflowState);
         }
 
         [Test]
@@ -138,7 +138,7 @@ namespace RentableItems.Pn.Tests
             rentableItem.ModelName = Guid.NewGuid().ToString();
             rentableItem.PlateNumber = Guid.NewGuid().ToString();
             rentableItem.VinNumber = Guid.NewGuid().ToString();
-            rentableItem.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItem.WorkflowState = Constants.WorkflowStates.Created;
             rentableItem.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItem.RegistrationDate = registrationDate;
@@ -149,33 +149,33 @@ namespace RentableItems.Pn.Tests
             // Act
             RentableItemModel rentableItemModel = new RentableItemModel();
             rentableItemModel.Brand = rentableItem.Brand;
-            rentableItemModel.CreatedAt = rentableItem.Created_at;
-            rentableItemModel.CreatedByUserId = rentableItem.Created_By_User_Id;
+            rentableItemModel.CreatedAt = rentableItem.CreatedAt;
+            rentableItemModel.CreatedByUserId = rentableItem.CreatedByUserId;
             rentableItemModel.ModelName = rentableItem.ModelName;
             rentableItemModel.PlateNumber = rentableItem.PlateNumber;
             rentableItemModel.RegistrationDate = rentableItem.RegistrationDate;
             rentableItemModel.SerialNumber = rentableItem.SerialNumber;
-            rentableItemModel.UpdatedAt = rentableItem.Updated_at;
-            rentableItemModel.UpdatedByUserId = rentableItem.Updated_By_User_Id;
+            rentableItemModel.UpdatedAt = rentableItem.UpdatedAt;
+            rentableItemModel.UpdatedByUserId = rentableItem.UpdatedByUserId;
             rentableItemModel.VinNumber = rentableItem.VinNumber;
-            rentableItemModel.WorkflowState = rentableItem.Workflow_state;
+            rentableItemModel.WorkflowState = rentableItem.WorkflowState;
 
             rentableItemModel.Id = rentableItem.Id;
 
             RentableItemsVersions rentableItemVer = new RentableItemsVersions();
 
             rentableItemVer.Brand = rentableItem.Brand;
-            rentableItemVer.Created_at = rentableItem.Created_at;
-            rentableItemVer.Created_By_User_Id = rentableItem.Created_By_User_Id;
+            rentableItemVer.CreatedAt = rentableItem.CreatedAt;
+            rentableItemVer.CreatedByUserId = rentableItem.CreatedByUserId;
             rentableItemVer.ModelName = rentableItem.ModelName;
             rentableItemVer.PlateNumber = rentableItem.PlateNumber;
             rentableItemVer.RegistrationDate = rentableItem.RegistrationDate;
             rentableItemVer.SerialNumber = rentableItem.SerialNumber;
-            rentableItemVer.Updated_at = rentableItem.Updated_at;
-            rentableItemVer.Updated_By_User_Id = rentableItem.Updated_By_User_Id;
+            rentableItemVer.UpdatedAt = rentableItem.UpdatedAt;
+            rentableItemVer.UpdatedByUserId = rentableItem.UpdatedByUserId;
             rentableItemVer.Version = rentableItem.Version;
             rentableItemVer.VinNumber = rentableItem.VinNumber;
-            rentableItemVer.Workflow_state = rentableItem.Workflow_state;
+            rentableItemVer.WorkflowState = rentableItem.WorkflowState;
 
             rentableItemVer.RentableItemId = rentableItem.Id;
 
@@ -201,7 +201,7 @@ namespace RentableItems.Pn.Tests
             Assert.AreEqual(rentableItem.VinNumber, dbRentableItem.VinNumber);
             Assert.AreEqual(rentableItem.SerialNumber, dbRentableItem.SerialNumber);
             Assert.AreEqual(rentableItem.RegistrationDate.ToString(), dbRentableItem.RegistrationDate.ToString());
-            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItem.Workflow_state);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, dbRentableItem.WorkflowState);
         }
     }
 }

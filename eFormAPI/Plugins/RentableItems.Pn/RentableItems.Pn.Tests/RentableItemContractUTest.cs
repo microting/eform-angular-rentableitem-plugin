@@ -25,7 +25,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItemModel.WorkflowState = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -68,7 +68,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
             Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
-            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.Workflow_state);
+            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.WorkflowState);
 
         }
         [Test]
@@ -82,7 +82,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItemModel.WorkflowState = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -132,7 +132,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.ContractId = 5;
             rentableItemContractModel.RentableItemId = rentableItemContract.RentableItemId;
             rentableItemContractModel.Id = rentableItemContract.Id;
-            rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
+            rentableItemContractModel.WorkflowState = rentableItemContract.WorkflowState;
             await rentableItemContractModel.Update(DbContext);
 
             RentableItemContract rentableItemcontract = DbContext.RentableItemContract.AsNoTracking().First();
@@ -148,7 +148,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
             Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
-            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.Workflow_state);
+            Assert.AreEqual(rentableItemContractModel.WorkflowState, rentableItemcontract.WorkflowState);
 
         }
         [Test]
@@ -162,7 +162,7 @@ namespace RentableItems.Pn.Tests
             rentableItemModel.ModelName = Guid.NewGuid().ToString();
             rentableItemModel.PlateNumber = Guid.NewGuid().ToString();
             rentableItemModel.VinNumber = Guid.NewGuid().ToString();
-            rentableItemModel.Workflow_state = Constants.WorkflowStates.Created;
+            rentableItemModel.WorkflowState = Constants.WorkflowStates.Created;
             rentableItemModel.SerialNumber = Guid.NewGuid().ToString();
             DateTime registrationDate = DateTime.UtcNow;
             rentableItemModel.RegistrationDate = registrationDate;
@@ -212,7 +212,7 @@ namespace RentableItems.Pn.Tests
             rentableItemContractModel.ContractId = rentableItemContract.ContractId;
             rentableItemContractModel.RentableItemId = rentableItemContract.RentableItemId;
             rentableItemContractModel.Id = rentableItemContract.Id;
-            rentableItemContractModel.WorkflowState = rentableItemContract.Workflow_state;
+            rentableItemContractModel.WorkflowState = rentableItemContract.WorkflowState;
 
             await rentableItemContractModel.Delete(DbContext);
 
@@ -229,7 +229,7 @@ namespace RentableItems.Pn.Tests
 
             Assert.AreEqual(rentableItemContractModel.ContractId, rentableItemcontract.ContractId);
             Assert.AreEqual(rentableItemContractModel.RentableItemId, rentableItemcontract.RentableItemId);
-            Assert.AreEqual(Constants.WorkflowStates.Removed, rentableItemcontract.Workflow_state);
+            Assert.AreEqual(Constants.WorkflowStates.Removed, rentableItemcontract.WorkflowState);
 
         }
     }
