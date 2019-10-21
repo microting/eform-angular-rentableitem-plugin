@@ -3,7 +3,7 @@ using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
 
 namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
 {
-    public class RentableItemsConfiguraitonSeedData : IPluginConfigurationSeedData
+    public class RentableItemsConfigurationSeedData : IPluginConfigurationSeedData
     {
         public PluginConfigurationValue[] Data => new[]
         {
@@ -42,8 +42,6 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
                 Name = "RentableItemBaseSettings:EnabledSiteIds",
                 Value = ""
             }
-
-            
         };
     }
 }

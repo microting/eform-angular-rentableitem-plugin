@@ -40,7 +40,8 @@ namespace RentableItems.Pn.Infrastructure.Data
         }
         
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
-
         public DbSet<PluginConfigurationValueVersion> PluginConfigurationValueVersions { get; set; }
+        public DbSet<PluginPermission> PluginPermissions { get; set; }
+        public DbSet<PluginGroupPermission> PluginGroupPermissions { get; set; }
     }
 }

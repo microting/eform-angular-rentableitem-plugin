@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
+using RentableItems.Pn.Infrastructure.Data.Consts;
 using RentableItems.Pn.Infrastructure.Models;
 
 namespace RentableItems.Pn.Controllers
@@ -26,6 +27,7 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/rentableItems-pn/create-rentableItem")]
+        [Authorize(Policy = RentableItemsClaims.AccessRentableItemsPlugin)]
         public async Task<OperationResult> CreateRentableItem([FromBody] RentableItemModel rentableItemCreateModel)
         {
             return await _rentableItemsService.CreateRentableItem(rentableItemCreateModel);

@@ -12,6 +12,8 @@ import {
 import {RentableItemsPnService, RentableItemsPnSettingsService} from '../../../services';
 import {PageSettingsModel} from '../../../../../../common/models/settings';
 import {SharedPnService} from '../../../../shared/services';
+import {PluginClaimsHelper} from '../../../../../../common/helpers';
+import {RentableItemsPnClaims} from '../../../enums';
 declare var require: any;
 
 @Component({
@@ -30,6 +32,14 @@ export class RentableItemsPnPageComponent implements OnInit {
   spinnerStatus = false;
 
   settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
+
+  get pluginClaimsHelper() {
+    return PluginClaimsHelper;
+  }
+
+  get rentableItemsPnClaims() {
+    return RentableItemsPnClaims;
+  }
 
   constructor(private sharedPnService: SharedPnService,
               private rentableItemsService: RentableItemsPnService,

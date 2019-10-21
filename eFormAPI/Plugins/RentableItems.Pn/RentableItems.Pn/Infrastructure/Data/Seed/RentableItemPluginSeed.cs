@@ -10,7 +10,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed
     {
         public static void SeedData(RentableItemsPnDbContext dbContext)
         {
-            var seedData = new RentableItemsConfiguraitonSeedData();
+            var seedData = new RentableItemsConfigurationSeedData();
             var configurationList = seedData.Data;
             foreach (var configurationItem in configurationList)
             {
@@ -29,6 +29,23 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed
                     dbContext.SaveChanges();
                 }
             }
+
+            // Seed plugin permissions
+            var newPermissions = RentableItemsPermissionsSeedData.Data
+                .Where(p => dbContext.PluginPermissions.All(x => x.ClaimName != p.ClaimName))
+                .Select(p => new PluginPermission
+                {
+                    PermissionName = p.PermissionName,
+                    ClaimName = p.ClaimName,
+                    CreatedAt = DateTime.UtcNow,
+                    Version = 1,
+                    WorkflowState = Constants.WorkflowStates.Created,
+                    CreatedByUserId = 1
+                }
+                );
+            dbContext.PluginPermissions.AddRange(newPermissions);
+
+            dbContext.SaveChanges();
         }
     }
 }

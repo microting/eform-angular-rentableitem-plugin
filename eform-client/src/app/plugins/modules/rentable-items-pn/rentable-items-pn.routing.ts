@@ -1,16 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {AdminGuard, AuthGuard} from 'src/app/common/guards';
+import {AdminGuard, AuthGuard, PermissionGuard} from 'src/app/common/guards';
 import {RentableItemsPnLayoutComponent} from './layouts';
-import {RentableItemsPnFieldsComponent, RentableItemsPnPageComponent, RentableItemsSettingsComponent} from './components';
-import {ContractsPageComponent} from './components/contracts/contracts-page/contracts-page.component';
-import {ContractInspectionsPageComponent} from './components/contract-inspections/contract-inspections-page/contract-inspections-page.component';
+import {RentableItemsPnPageComponent, RentableItemsSettingsComponent} from './components';
+import {ContractsPageComponent} from './components/contracts';
+import {ContractInspectionsPageComponent} from './components/contract-inspections';
+import {RentableItemsPnClaims} from './enums';
 
 export const routes: Routes = [
   {
     path: '',
     component: RentableItemsPnLayoutComponent,
+    canActivate: [PermissionGuard],
+    data: {requiredPermission: RentableItemsPnClaims.accessRentableItemsPlugin},
     children: [
       {
         path: 'rentable-items',

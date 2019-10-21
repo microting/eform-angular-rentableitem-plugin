@@ -9,6 +9,8 @@ namespace RentableItems.Pn.Infrastructure.Data.Factories
     {
         public RentableItemsPnDbContext CreateDbContext(string[] args)
         {
+            //args = new[]
+            //    {"data source=.\\sqlexpress;database=appointments-plugin;integrated security=true"};
             var optionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
             if (args.Any())
             {
