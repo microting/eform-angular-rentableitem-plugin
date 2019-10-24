@@ -1,6 +1,6 @@
 <subheader-pn [title]="'Rentable Items' | translate">
   <div class="p-3">
-    <button
+    <button *ngIf="pluginClaimsHelper.check(rentableItemsPnClaims.createRentableItems)"
       id="rentableItemCreateBtn"
       class="btn btn-success"
       mdbTooltip="{{ 'Create rentable item' | translate }}"

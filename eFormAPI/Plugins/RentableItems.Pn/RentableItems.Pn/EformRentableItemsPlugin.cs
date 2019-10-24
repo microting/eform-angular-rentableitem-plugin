@@ -30,11 +30,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Extensions;
+using Microting.eFormApi.BasePn.Infrastructure.Helpers;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
 using Microting.eFormApi.BasePn.Infrastructure.Settings;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
+using RentableItems.Pn.Infrastructure.Data.Consts;
 using RentableItems.Pn.Infrastructure.Data.Factories;
 using RentableItems.Pn.Infrastructure.Data.Seed;
 using RentableItems.Pn.Infrastructure.Data.Seed.Data;
@@ -50,6 +52,8 @@ namespace RentableItems.Pn
         public string Name => "Microting Rentable Items plugin";
         public string PluginId => "eform-angular-rentableitem-plugin";
         public string PluginPath => PluginAssembly().Location;
+        public string PluginBaseUrl => "rentable-items-pn";
+
         private string _connectionString;
 
         public Assembly PluginAssembly()
@@ -70,7 +74,7 @@ namespace RentableItems.Pn
         }
         public void AddPluginConfig(IConfigurationBuilder builder, string connectionString)
         {
-            RentableItemsConfiguraitonSeedData seedData = new RentableItemsConfiguraitonSeedData();
+            RentableItemsConfigurationSeedData seedData = new RentableItemsConfigurationSeedData();
             RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
             builder.AddPluginConfiguration(
                 connectionString,
@@ -151,26 +155,19 @@ namespace RentableItems.Pn
                 Link = "/plugins/rentable-items-pn/inspections"
 
             };
-            MenuItemModel settings = new MenuItemModel()
-            {
-                Name = localizationService.GetString("Settings"),
-                E2EId = "",
-                Link = "/plugins/rentable-items-pn/settings"
-
-            };
             List<MenuItemModel> items = new List<MenuItemModel>();
             items.Add(rentableItem);
             items.Add(contracts);
             items.Add(inspeciton);
-            items.Add(settings);
             MenuModel result = new MenuModel();
             result.LeftMenu.Add(new MenuItemModel()
             {
                 Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn",
-                MenuItems = items
-                
+                MenuItems = items,
+                Guards = new List<string>() { RentableItemsClaims.AccessRentableItemsPlugin }
+
             });
             return result;
         }
@@ -182,6 +179,14 @@ namespace RentableItems.Pn
             {
                 RentableItemPluginSeed.SeedData(context);
             }
+        }
+
+        public PluginPermissionsManager GetPermissionsManager(string connectionString)
+        {
+            var contextFactory = new RentableItemsPnContextFactory();
+            var context = contextFactory.CreateDbContext(new[] { connectionString });
+
+            return new PluginPermissionsManager(context);
         }
     }
 }
