@@ -16,6 +16,10 @@
     <None Remove="Infrastructure\Migrations\MySQL\**" />
   </ItemGroup>
   
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\localization.json" />
+  </ItemGroup>
+
     <ItemGroup>
     <PackageReference Include="McMaster.NETCore.Plugins" Version="0.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />

@@ -14,3 +14,4 @@ export * from './field/rentable-items-field-pn-update.model';
 export * from './customer.model';
 export * from './customers.model';
 export * from './customer-request.model';
+export * from './contract-rentable-item.model';

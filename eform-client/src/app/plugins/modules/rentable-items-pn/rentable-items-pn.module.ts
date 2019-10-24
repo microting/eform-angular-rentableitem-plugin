@@ -9,7 +9,13 @@ import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {RouterModule} from '@angular/router';
-import {ContractsService, ContractInspectionsService, RentableItemsPnService, RentableItemsPnSettingsService} from './services';
+import {
+  ContractsService,
+  ContractInspectionsService,
+  RentableItemsPnService,
+  RentableItemsPnSettingsService,
+  ContractRentableItemService
+} from './services';
 import {
   RentableItemsPnPageComponent,
   RentableItemsPnAddComponent,
@@ -24,7 +30,8 @@ import {
   ContractsAddComponent,
   ContractsUpdateComponent,
   ContractsPageComponent,
-  ContractsDeleteComponent
+  ContractsDeleteComponent,
+  ContractRentableItemComponent
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
@@ -64,13 +71,15 @@ import {DragulaModule} from 'ng2-dragula';
     RentableItemsSettingsComponent,
     RentableItemsPnDeleteComponent,
     ContractsDeleteComponent,
-    ContractInspectionsDeleteComponent
+    ContractInspectionsDeleteComponent,
+    ContractRentableItemComponent
   ],
   providers: [
     RentableItemsPnService,
     RentableItemsPnSettingsService,
     ContractsService,
     ContractInspectionsService,
+    ContractRentableItemService,
     {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS}
   ]
 })

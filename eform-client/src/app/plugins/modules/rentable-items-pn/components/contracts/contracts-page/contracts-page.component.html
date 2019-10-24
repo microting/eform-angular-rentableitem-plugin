@@ -122,7 +122,9 @@
           {{contract.contractNr}}
         </td>
         <td>
-          {{contract.rentableItems}}
+         <button class="btn btn-accent text-black-50 btn-icon mb-2" id="showContractRentableItem" (click)="showContractRentableItem(contract.id, contract)">
+           <fa-icon icon="list-alt" [fixedWidth]="true" size="lg"></fa-icon>
+         </button>
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
@@ -166,3 +168,4 @@
 <app-contract-delete #deleteContractModal
                      (onContractDeleted)="getAllContracts()"></app-contract-delete>
 <app-inspections-add #createInspectionModal></app-inspections-add>
+<app-contract-rentable-item #contractRentableItem></app-contract-rentable-item>

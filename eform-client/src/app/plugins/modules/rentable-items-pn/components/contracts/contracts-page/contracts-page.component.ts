@@ -16,7 +16,7 @@ export class ContractsPageComponent implements OnInit {
   @ViewChild('editContractModal') editContractModal;
   @ViewChild('deleteContractModal') deleteContractModal;
   @ViewChild('createInspectionModal') createInspectionModal;
-
+  @ViewChild('contractRentableItem') contractRentableItem;
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
   spinnerStatus = false;
@@ -48,6 +48,9 @@ export class ContractsPageComponent implements OnInit {
   }
   showCreateInspectionModal(model: ContractModel) {
     this.createInspectionModal.show(model);
+  }
+  showContractRentableItem(contractId: number, contract: ContractModel) {
+    this.contractRentableItem.show(contractId, contract);
   }
   getAllContracts() {
     this.spinnerStatus = true;

@@ -18,7 +18,6 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int UpdatedByUserID { get; set; }
         public int RentableItemId { get; set; }
         public int ContractId { get; set; }
-
         public async Task Create(RentableItemsPnDbContext _dbContext)
         {
             RentableItemContract rentableItemContract = new RentableItemContract();
@@ -30,7 +29,6 @@ namespace RentableItems.Pn.Infrastructure.Models
             rentableItemContract.UpdatedAt = DateTime.Now;
             rentableItemContract.CreatedByUserId = CreatedByUserID;
             rentableItemContract.UpdatedByUserId = UpdatedByUserID;
-
             _dbContext.RentableItemContract.Add(rentableItemContract);
             await _dbContext.SaveChangesAsync();
 

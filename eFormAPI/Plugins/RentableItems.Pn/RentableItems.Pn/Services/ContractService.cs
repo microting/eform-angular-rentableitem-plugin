@@ -94,19 +94,34 @@ namespace RentableItems.Pn.Services
         {
             try
             {
+                Contract contract =
+                    _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr && x.WorkflowState == Constants.WorkflowStates.Created);
+                if (contract == null)
+                {
+                    await contractCreateModel.Create(_dbContext);
 
-                await contractCreateModel.Create(_dbContext);
+
+                    foreach (var rentableItemId in contractCreateModel.RentableItemIds)
+                    {
+                        Contract dbContract =
+                            _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr);
+                        RentableItemContractModel rentableItemContractModel = new RentableItemContractModel();
+                        rentableItemContractModel.RentableItemId = rentableItemId;
+                        rentableItemContractModel.ContractId = dbContract.Id;
+                        
+                        await rentableItemContractModel.Create(_dbContext);
+                    }
+                }
+
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractCreated",
                     contractCreateModel.CustomerId,
                         contractCreateModel.ContractNr));
-
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingContract"));
-
             }
         }
 

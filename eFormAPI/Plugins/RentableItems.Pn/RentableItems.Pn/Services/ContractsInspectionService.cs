@@ -91,16 +91,20 @@ namespace RentableItems.Pn.Services
             {                
                 // finde eform fra settings
 
-                string lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
-
+                string lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
+                string lookupeForm = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
                 LogEvent($"lookup is {lookup}");
-
+                LogEvent($"lookupeForm is {lookupeForm}");
                 string result = _dbContext.PluginConfigurationValues.AsNoTracking()
                     .FirstOrDefault(x => 
                         x.Name == lookup)
                     ?.Value;
-                
+                string resulteForm = _dbContext.PluginConfigurationValues.AsNoTracking()
+                    .FirstOrDefault(y => 
+                        y.Name == lookupeForm)
+                    ?.Value;
                 LogEvent($"result is {result}");
+                LogEvent($"resuleForm i {resulteForm}");
                 // modificere mainelement
 
                 Contract dbContract =
@@ -108,7 +112,7 @@ namespace RentableItems.Pn.Services
                         x.Id == contractInspectionCreateModel.ContractId);
                 
                 
-                int eFormId = int.Parse(result);
+                int eFormId = int.Parse(resulteForm);
                 Core _core = _coreHelper.GetCore();
                 MainElement mainElement = _core.TemplateRead(eFormId);
                 mainElement.Repeated = 1;
@@ -157,9 +161,7 @@ namespace RentableItems.Pn.Services
                         await contractInspectionCreateModel.Create(_dbContext);
                     }
                 }
-
-                
-                return new OperationResult(true);
+                return new OperationResult(true, "Inspection Created Successfully");
             }
             catch (Exception e)
             {

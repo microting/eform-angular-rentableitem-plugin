@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-9">
                 <div class="md-form">
                   <ng-select
                     id="customerSelector"
@@ -68,19 +68,19 @@
                     (change)="onSelectedChanged($event)"></ng-select>
                 </div>
               </div>
-              <div class="col-md-2" *ngFor="let customer of customersModel.customers" >
-                {{'Customer Name: ' + customer.contactPerson| translate }}
-                {{'Customer Number: ' + customer.customerNo| translate }}
-                {{'Customer Address: ' + customer.companyAddress| translate }}
-                {{'Customer Address 2: ' + customer.companyAddress2| translate }}
-                {{'Customer Zip Code: ' + customer.zipCode| translate }}
-                {{'Customer Created By: ' + customer.createdBy| translate }}
-                {{'Customer City Name: ' + customer.cityName | translate}}
-                {{'Customer Phone: ' + customer.phone | translate}}
-                {{'Customer Email: ' + customer.email | translate}}
-                {{'Customer EAN Code: ' + customer.eanCode | translate}}
-                {{'Customer Vat Number: ' + customer.vatNumber | translate}}
-                {{'Customer Country Code: ' + customer.countryCode | translate}}
+              <div class="col-md-3" *ngFor="let customer of customersModel.customers" >
+                {{'Customer Name: ' + customer.contactPerson| translate }} <br>
+                {{'Customer Number: ' + customer.customerNo| translate }} <br>
+                {{'Customer Address: ' + customer.companyAddress| translate }} <br>
+                {{'Customer Address 2: ' + customer.companyAddress2| translate }} <br>
+                {{'Customer Zip Code: ' + customer.zipCode| translate }} <br>
+                {{'Customer Created By: ' + customer.createdBy| translate }} <br>
+                {{'Customer City Name: ' + customer.cityName | translate}} <br>
+                {{'Customer Phone: ' + customer.phone | translate}} <br>
+                {{'Customer Email: ' + customer.email | translate}} <br>
+                {{'Customer EAN Code: ' + customer.eanCode | translate}} <br>
+                {{'Customer Vat Number: ' + customer.vatNumber | translate}} <br>
+                {{'Customer Country Code: ' + customer.countryCode | translate}} <br>
                 <button class="btn btn-danger text-black-50 btn-icon mb-2"
                         mdbTooltip="delete customer"
                         (click)="removeCustomer(customer)">
@@ -93,10 +93,11 @@
                 <ng-select
                   id="rentableItemSelector"
                   [placeholder]="'Rentable Items'"
-                  name="rentable-Item-selector"
+                  name="Rentable-Item-selector"
                   [bindValue]="'id'"
                   [bindLabel]="'modelName'"
                   [clearable]="false"
+                  [typeahead]="typeahead2"
                   [items]="rentableItemsModel.rentableItems"
                   (change)="addNewRentableItem($event)"></ng-select>
               </div>
@@ -146,11 +147,9 @@
                   </td>
                   <td>
                     <button class="btn btn-danger text-black-50 btn-icon mb-2"
-                            mdbTooltip="{{'Delete Contract' | translate}}"
+                            mdbTooltip="{{'Remove Rentable Item' | translate}}"
                             (click)="removeRentableItem(rentableItem)">
-                      <i class="material-icons">
-                        delete_forever
-                      </i>
+                      <fa-icon icon="trash-alt"></fa-icon>
                     </button>
                   </td>
                 </tr>

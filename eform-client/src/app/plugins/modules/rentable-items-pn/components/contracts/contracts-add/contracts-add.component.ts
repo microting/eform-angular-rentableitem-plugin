@@ -26,6 +26,7 @@ export class ContractsAddComponent implements OnInit {
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   typeahead = new EventEmitter<string>();
+  typeahead2 = new EventEmitter<string>();
 
   constructor(private rentableItemsService: RentableItemsPnService,
               private cd: ChangeDetectorRef,
@@ -36,17 +37,28 @@ export class ContractsAddComponent implements OnInit {
         debounceTime(200),
         switchMap(term => {
           this.customersRequestModel.name = term;
-          return this.contractService.getCustomer(this.customersRequestModel);
+            return this.contractService.getCustomer(this.customersRequestModel);
         })
       )
       .subscribe(items => {
         this.customersModel = items.model;
         this.cd.markForCheck();
       });
+    this.typeahead2
+      .pipe(
+        debounceTime(200),
+        switchMap(term2 => {
+          this.rentableItemsRequestModel.nameFilter = term2;
+            return this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel);
+        })
+      )
+      .subscribe( items2 => {
+        this.rentableItemsModel = items2.model;
+        this.cd.markForCheck();
+      });
   }
 
   ngOnInit() {
-    this.getRentableItems();
   }
 
   show() {
@@ -56,10 +68,11 @@ export class ContractsAddComponent implements OnInit {
 
   createContract() {
     this.spinnerStatus = true;
-    this.newContractModel.rentableItems = null;
     this.contractService.createContract(this.newContractModel).subscribe(((data) => {
       if (data && data.success) {
         this.newContractModel = new ContractModel();
+        this.newContractModel.rentableItems = [];
+        this.customersModel.customers = [];
         this.onContractCreated.emit();
         this.frame.hide();
       } this.spinnerStatus = false;
@@ -72,8 +85,7 @@ export class ContractsAddComponent implements OnInit {
     }
   }
   removeRentableItem(rentableItem: any) {
-    const index = this.newContractModel.rentableItems.indexOf(rentableItem);
-    this.newContractModel.rentableItems.splice(index,  1);
+    this.newContractModel.rentableItems = []
   }
   removeCustomer(customer: any) {
     const index = this.customersModel.customers.indexOf(customer);
