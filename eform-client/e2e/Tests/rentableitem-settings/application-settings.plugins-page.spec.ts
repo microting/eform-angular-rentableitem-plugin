@@ -10,17 +10,17 @@ describe('Application settings page - site header section', function () {
         loginPage.open('/auth');
     });
     it('should go to plugin settings page', function () {
-       loginPage.login();
-       myEformsPage.Navbar.advancedDropdown();
-       myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+        loginPage.login();
+        myEformsPage.Navbar.advancedDropdown();
+        myEformsPage.Navbar.clickonSubMenuItem('Plugins');
         browser.waitForExist('#plugin-name', 50000);
-        browser.pause(40000);
+        browser.pause(10000);
 
-      const plugin = pluginsPage.getFirstPluginRowObj();
-      expect(plugin.id).equal(1);
-      expect(plugin.name).equal('Microting Rentable Items plugin');
-      expect(plugin.version).equal('1.0.0.0');
-      expect(plugin.status).equal('Deaktiveret');
+        const plugin = pluginsPage.getFirstPluginRowObj();
+        expect(plugin.id).equal(1);
+        expect(plugin.name).equal('Microting Rentable Items plugin');
+        expect(plugin.version).equal('1.0.0.0');
+        expect(plugin.status).equal('Deaktiveret');
     });
 
     it('should activate the plugin', function () {
