@@ -2,13 +2,14 @@ using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
 using System;
 using System.Linq;
 using Microting.eForm.Infrastructure.Constants;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Seed.Data;
 
 namespace RentableItems.Pn.Infrastructure.Data.Seed
 {
     public class RentableItemPluginSeed
     {
-        public static void SeedData(RentableItemsPnDbContext dbContext)
+        public static void SeedData(eFormRentableItemPnDbContext dbContext)
         {
             var seedData = new RentableItemsConfigurationSeedData();
             var configurationList = seedData.Data;

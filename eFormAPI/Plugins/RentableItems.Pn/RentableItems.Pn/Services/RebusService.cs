@@ -3,6 +3,7 @@ using Castle.Windsor;
 using eFormCore;
 using Microsoft.EntityFrameworkCore;
 using Microting.eFormApi.BasePn.Abstractions;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Rebus.Bus;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
@@ -34,7 +35,7 @@ namespace RentableItems.Pn.Services
             
             Core _core = _coreHelper.GetCore();
             _container.Register(Component.For<Core>().Instance(_core));
-            _container.Register(Component.For<RentableItemsPnDbContext>().Instance(GetContext()));
+            _container.Register(Component.For<eFormRentableItemPnDbContext>().Instance(GetContext()));
             _bus = _container.Resolve<IBus>();
         }
 
@@ -43,10 +44,10 @@ namespace RentableItems.Pn.Services
             return _bus;
         }
         
-        private RentableItemsPnDbContext GetContext()
+        private eFormRentableItemPnDbContext GetContext()
         {
 
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder<eFormRentableItemPnDbContext>();
 
             if (_connectionString.ToLower().Contains("convert zero datetime"))
             {
@@ -57,7 +58,7 @@ namespace RentableItems.Pn.Services
                 dbContextOptionsBuilder.UseSqlServer(_connectionString);
             }
             dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            return new RentableItemsPnDbContext(dbContextOptionsBuilder.Options);
+            return new eFormRentableItemPnDbContext(dbContextOptionsBuilder.Options);
 
         }        
     }

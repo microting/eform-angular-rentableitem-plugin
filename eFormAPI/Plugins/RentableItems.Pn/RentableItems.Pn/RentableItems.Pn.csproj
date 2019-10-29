@@ -34,9 +34,5 @@
     <PackageReference Include="Rebus.MySql" Version="1.1.1" />
   </ItemGroup>
   
-    <ItemGroup>
-      <Folder Include="Infrastructure\Data\Factories\" />
-    </ItemGroup>
-  
 
 </Project>

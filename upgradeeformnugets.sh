@@ -8,13 +8,15 @@ if (( "$GIT_STATUS" > 0 )); then
 
 	dotnet add RentableItems.Pn.csproj package Microting.eForm
 	dotnet add RentableItems.Pn.csproj package Microting.eFormApi.BasePn
-#	dotnet add TrashInspection.Pn.csproj package Microting.CaseManagementBase
+	dotnet add RentableItems.Pn.csproj package Microting.eFormBaseCustomerBase
+	dotnet add RentableItems.Pn.csproj package Microting.eFormRentableItemBase
 
 	EFORM_VERSION=`dotnet list package | grep 'Microting.eForm ' | cut -c64-71`
 	EFORM_BASEPN_VERSION=`dotnet list package | grep 'Microting.eFormApi.BasePn' | cut -c64-71`
-#	EFORM_PLUGINBASE_VERSION=`dotnet list package | grep 'Microting.CaseManagementBase' | cut -c64-71`
-#	COMMIT_MESSAGE="Updating"$'\n'"- Microting.eForm to ${EFORM_VERSION}"$'\n'"- Microting.eFormApi.BasePn to ${EFORM_BASEPN_VERSION}"$'\n'"- Microting.CaseManagementBase to ${EFORM_PLUGINBASE_VERSION}"
-	COMMIT_MESSAGE="Updating"$'\n'"- Microting.eForm to ${EFORM_VERSION}"$'\n'"- Microting.eFormApi.BasePn to ${EFORM_BASEPN_VERSION}"
+	EFORM_PLUGINBASE1_VERSION=`dotnet list package | grep 'Microting.eFormBaseCustomerBase' | cut -c64-71`
+	EFORM_PLUGINBASE1_VERSION=`dotnet list package | grep 'Microting.eFormRentableItemBase' | cut -c64-71`
+	COMMIT_MESSAGE="Updating"$'\n'"- Microting.eForm to ${EFORM_VERSION}"$'\n'"- Microting.eFormApi.BasePn to ${EFORM_BASEPN_VERSION}"$'\n'"- Microting.eFormBaseCustomerBase to ${EFORM_PLUGINBASE1_VERSION}"$'\n'"- Microting.eFormRentableItemBase to ${EFORM_PLUGINBASE2_VERSION}"
+#	COMMIT_MESSAGE="Updating"$'\n'"- Microting.eForm to ${EFORM_VERSION}"$'\n'"- Microting.eFormApi.BasePn to ${EFORM_BASEPN_VERSION}"
 
 	GIT_STATUS=`git status | grep "nothing to commit, working tree clean" | wc -l`
 
