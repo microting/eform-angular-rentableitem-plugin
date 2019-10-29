@@ -10,19 +10,17 @@ describe('Application settings page - site header section', function () {
         loginPage.open('/auth');
     });
     it('should go to plugin settings page', function () {
-       loginPage.login();
-       myEformsPage.Navbar.advancedDropdown();
-       myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+        loginPage.login();
+        myEformsPage.Navbar.advancedDropdown();
+        myEformsPage.Navbar.clickonSubMenuItem('Plugins');
         browser.waitForExist('#plugin-name', 50000);
-        browser.pause(40000);
+        browser.pause(20000);
 
-      const plugin = pluginsPage.getFirstPluginRowObj();
-      expect(plugin.id).equal(1);
-      expect(plugin.name).equal('Microting Rentable Items plugin');
-      expect(plugin.version).equal('1.0.0.0');
-      expect(plugin.status).equal('Deaktiveret');
-       // expect()
-
+        const plugin = pluginsPage.getFirstPluginRowObj();
+        expect(plugin.id).equal(1);
+        expect(plugin.name).equal('Microting Rentable Items plugin');
+        expect(plugin.version).equal('1.0.0.0');
+        expect(plugin.status).equal('Deaktiveret');
     });
 
     it('should activate the plugin', function () {
@@ -30,7 +28,7 @@ describe('Application settings page - site header section', function () {
         browser.waitForVisible('#PluginDropDown', 40000);
         pluginPage.selectValue('PluginDropDown', 'PluginDropDown', 'Aktiveret');
         pluginPage.saveBtn.click();
-        browser.pause(2000);
+        browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
         browser.refresh();
 
         // Start - This block is here because of the new plugin permission loading, requires a re-login.
@@ -50,12 +48,5 @@ describe('Application settings page - site header section', function () {
         expect(plugin.name).equal('Microting Rentable Items plugin');
         expect(plugin.version).equal('1.0.0.0');
         expect(plugin.status).equal('Aktiveret');
-        // click on plugin settings
-        // enter connectionstring for customers plugin
-        // select activate
-        // save changes
-        // see that the plugin is marked active
-        // validate that the customers menu entry is now visible
-        // validate that the customers index page is shown with all fields active in the header
     });
 });
