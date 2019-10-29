@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using eFormCore;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Rebus.Handlers;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Messages;
@@ -9,9 +10,9 @@ namespace RentableItems.Pn.Handlers
     public class ContractInspectionCreateHandler : IHandleMessages<ContractInspectionCreate>
     {
         private readonly Core _core;
-        private readonly RentableItemsPnDbContext _dbContext;
+        private readonly eFormRentableItemPnDbContext _dbContext;
 
-        public ContractInspectionCreateHandler(Core core, RentableItemsPnDbContext context)
+        public ContractInspectionCreateHandler(Core core, eFormRentableItemPnDbContext context)
         {
             _core = core;
             _dbContext = context;

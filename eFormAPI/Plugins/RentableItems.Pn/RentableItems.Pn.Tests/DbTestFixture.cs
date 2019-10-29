@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using RentableItems.Pn.Infrastructure.Data;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
 
 
 namespace RentableItems.Pn.Tests
@@ -14,7 +15,7 @@ namespace RentableItems.Pn.Tests
     public abstract class DbTestFixture
     {
 
-        protected RentableItemsPnDbContext DbContext;
+        protected eFormRentableItemPnDbContext DbContext;
         protected string ConnectionString;
 
 
@@ -30,7 +31,7 @@ namespace RentableItems.Pn.Tests
         public void GetContext(string connectionStr)
         {
 
-            DbContextOptionsBuilder<RentableItemsPnDbContext> dbContextOptionsBuilder = new DbContextOptionsBuilder<RentableItemsPnDbContext>();
+            DbContextOptionsBuilder<eFormRentableItemPnDbContext> dbContextOptionsBuilder = new DbContextOptionsBuilder<eFormRentableItemPnDbContext>();
 
             if (ConnectionString.ToLower().Contains("convert zero datetime"))
             {
@@ -41,7 +42,7 @@ namespace RentableItems.Pn.Tests
                 dbContextOptionsBuilder.UseSqlServer(connectionStr);
             }
             dbContextOptionsBuilder.UseLazyLoadingProxies(true);
-            DbContext = new RentableItemsPnDbContext(dbContextOptionsBuilder.Options);
+            DbContext = new eFormRentableItemPnDbContext(dbContextOptionsBuilder.Options);
 
             DbContext.Database.Migrate();
             DbContext.Database.EnsureCreated();

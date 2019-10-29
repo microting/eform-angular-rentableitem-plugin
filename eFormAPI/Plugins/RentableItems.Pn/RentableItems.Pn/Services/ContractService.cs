@@ -10,12 +10,12 @@ using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
-using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
 using RentableItems.Pn.Infrastructure.Models.Customer;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 
 namespace RentableItems.Pn.Services
 {
@@ -23,12 +23,12 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<ContractService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-        private readonly RentableItemsPnDbContext _dbContext;
+        private readonly eFormRentableItemPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
         private readonly CustomersPnDbAnySql _customerDbContext;
 
 
-        public ContractService(RentableItemsPnDbContext dbContext,
+        public ContractService(eFormRentableItemPnDbContext dbContext,
             ILogger<ContractService> logger,
             IEFormCoreService coreHelper,
             IRentableItemsLocalizationService rentableItemLocalizationService,
@@ -98,18 +98,25 @@ namespace RentableItems.Pn.Services
                     _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr && x.WorkflowState == Constants.WorkflowStates.Created);
                 if (contract == null)
                 {
-                    await contractCreateModel.Create(_dbContext);
+                    Contract newContract = new Contract
+                    {
+                        ContractEnd = contractCreateModel.ContractEnd,
+                        ContractNr = contractCreateModel.ContractNr,
+                        ContractStart = contractCreateModel.ContractStart,
+                        CustomerId = contractCreateModel.CustomerId,
+                    };
+                    await newContract.Create(_dbContext);
 
 
                     foreach (var rentableItemId in contractCreateModel.RentableItemIds)
                     {
                         Contract dbContract =
                             _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr);
-                        RentableItemContractModel rentableItemContractModel = new RentableItemContractModel();
-                        rentableItemContractModel.RentableItemId = rentableItemId;
-                        rentableItemContractModel.ContractId = dbContract.Id;
+                        ContractRentableItem contractRentableItem = new ContractRentableItem();
+                        contractRentableItem.RentableItemId = rentableItemId;
+                        contractRentableItem.ContractId = dbContract.Id;
                         
-                        await rentableItemContractModel.Create(_dbContext);
+                        await contractRentableItem.Create(_dbContext);
                     }
                 }
 
@@ -125,11 +132,20 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> UpdateContract(ContractModel contractUpdateModel)
+        public async Task<OperationResult> UpdateContract(ContractModel updateModel)
         {
             try
             {
-                await contractUpdateModel.Update(_dbContext);
+                Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == updateModel.Id);
+                if (contract != null)
+                {
+                    contract.ContractEnd = updateModel.ContractEnd;
+                    contract.ContractNr = updateModel.ContractNr;
+                    contract.ContractStart = updateModel.ContractStart;
+                    contract.CustomerId = updateModel.CustomerId;
+
+                    await contract.Update(_dbContext);
+                }
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -142,12 +158,13 @@ namespace RentableItems.Pn.Services
 
         public async Task<OperationResult> DeleteContract(int id)
         {
-            ContractModel contractDeleteModel = new ContractModel();
-            Contract dbContract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == id);
-            contractDeleteModel.Id = dbContract.Id;
+            Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == id);
             try
             {
-                await contractDeleteModel.Delete(_dbContext);
+                if (contract != null)
+                {
+                    await contract.Delete(_dbContext);
+                }
                 return new OperationResult(true);
             }
             catch (Exception e)

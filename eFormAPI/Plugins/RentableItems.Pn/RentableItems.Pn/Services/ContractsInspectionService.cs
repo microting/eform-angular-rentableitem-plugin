@@ -12,10 +12,11 @@ using Microting.eForm.Infrastructure.Models;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Consts;
-using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
 
 namespace RentableItems.Pn.Services
@@ -24,10 +25,10 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<ContractsInspectionService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-        private readonly RentableItemsPnDbContext _dbContext;
+        private readonly eFormRentableItemPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
 
-        public ContractsInspectionService(RentableItemsPnDbContext dbContext,
+        public ContractsInspectionService(eFormRentableItemPnDbContext dbContext,
             ILogger<ContractsInspectionService> logger,
             IEFormCoreService coreHelper,
             IRentableItemsLocalizationService rentableItemLocalizationService
@@ -154,11 +155,13 @@ namespace RentableItems.Pn.Services
 
                     if (sdkCaseId != null)
                     {
-                        // gemme caseid på contractInspectionCreateModel
-
-                        contractInspectionCreateModel.SiteId = siteDto.SiteId;
-                        contractInspectionCreateModel.SdkCaseId = (int)sdkCaseId;
-                        await contractInspectionCreateModel.Create(_dbContext);
+                        // gemme caseid på contractInspection
+                        ContractInspection contractInspection = new ContractInspection
+                        {
+                            SiteId = siteDto.SiteId,
+                            SDKCaseId = (int) sdkCaseId
+                        };
+                        await contractInspection.Create(_dbContext);
                     }
                 }
                 return new OperationResult(true, "Inspection Created Successfully");
@@ -175,7 +178,17 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                await contractInspectionUpdateModel.Update(_dbContext);
+                ContractInspection contractInspection =
+                    await _dbContext.ContractInspection.SingleOrDefaultAsync(x =>
+                        x.Id == contractInspectionUpdateModel.Id);
+                if (contractInspection != null)
+                {
+                    contractInspection.ContractId = contractInspectionUpdateModel.ContractId;
+                    contractInspection.DoneAt = contractInspectionUpdateModel.DoneAt;
+                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
+                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
+                    await contractInspection.Update(_dbContext);
+                }
                 return new OperationResult(true);
             }
             catch (Exception e)
@@ -187,14 +200,15 @@ namespace RentableItems.Pn.Services
         }
         public async Task<OperationResult> DeleteContractInspection(int id)
         {
-            ContractInspectionModel contractInspectionDeleteModel = new ContractInspectionModel();
             ContractInspection dbContractInspection =
                 await _dbContext.ContractInspection.SingleOrDefaultAsync(x => x.Id == id);
 
-            contractInspectionDeleteModel.Id = dbContractInspection.Id;
             try
             {
-                await contractInspectionDeleteModel.Delete(_dbContext);
+                if (dbContractInspection != null)
+                {
+                    await dbContractInspection.Delete(_dbContext);
+                }
                 return new OperationResult(true);
             }
             catch ( Exception e)

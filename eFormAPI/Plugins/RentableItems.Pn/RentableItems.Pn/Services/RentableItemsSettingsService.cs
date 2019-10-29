@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Helpers.PluginDbOptions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Models;
@@ -20,13 +21,13 @@ namespace RentableItems.Pn.Services
     {
         private readonly ILogger<RentableItemsSettingsService> _logger;
         private readonly IRentableItemsLocalizationService _rentablteItemsLocalizationsService;
-        private readonly RentableItemsPnDbContext _dbContext;
+        private readonly eFormRentableItemPnDbContext _dbContext;
         private readonly IEFormCoreService _coreHelper;
         private readonly IPluginDbOptions<RentableItemBaseSettings> _options;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public RentableItemsSettingsService(ILogger<RentableItemsSettingsService> logger,
-            RentableItemsPnDbContext dbContext,
+            eFormRentableItemPnDbContext dbContext,
             IEFormCoreService coreHelper,
             IPluginDbOptions<RentableItemBaseSettings> options,
             IRentableItemsLocalizationService rentableItemsLocalizationService,           

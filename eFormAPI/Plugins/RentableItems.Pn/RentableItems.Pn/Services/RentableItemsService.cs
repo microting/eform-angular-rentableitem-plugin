@@ -9,9 +9,9 @@ using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
-using RentableItems.Pn.Infrastructure.Data.Entities;
 using RentableItems.Pn.Infrastructure.Models;
 using CollectionExtensions = Castle.Core.Internal.CollectionExtensions;
 
@@ -23,10 +23,10 @@ namespace RentableItems.Pn.Services
     {
             private readonly ILogger<RentableItemsService> _logger;
             private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
-            private readonly RentableItemsPnDbContext _dbContext;
+            private readonly eFormRentableItemPnDbContext _dbContext;
             private readonly IEFormCoreService _coreHelper;
 
-            public RentableItemsService(RentableItemsPnDbContext dbContext,
+            public RentableItemsService(eFormRentableItemPnDbContext dbContext,
                 ILogger<RentableItemsService> logger, 
                 IEFormCoreService coreHelper,
                 IRentableItemsLocalizationService rentableItemLocalizationService)
@@ -97,18 +97,17 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                //RentableItemModel rentableItemModel = new RentableItemModel(rentableItemPnCreateModel.Id, rentableItemPnCreateModel.Brand,
-                //    rentableItemPnCreateModel.ModelName, rentableItemPnCreateModel.RegistrationDate, rentableItemPnCreateModel.VinNumber,
-                //    rentableItemPnCreateModel.SerialNumber, rentableItemPnCreateModel.PlateNumber);
+                RentableItem rentableItem = new RentableItem
+                {
+                    Brand = rentableItemPnCreateModel.Brand,
+                    ModelName = rentableItemPnCreateModel.ModelName,
+                    RegistrationDate = rentableItemPnCreateModel.RegistrationDate,
+                    VinNumber = rentableItemPnCreateModel.VinNumber,
+                    SerialNumber = rentableItemPnCreateModel.SerialNumber,
+                    PlateNumber = rentableItemPnCreateModel.PlateNumber
+                };
 
-                //rentableItemPn.VinNumber = rentableItemPnCreateModel.VinNumber;
-                //rentableItemPn.Brand = rentableItemPnCreateModel.Brand;
-                //rentableItemPn.SerialNumber = rentableItemPnCreateModel.SerialNumber;
-                //rentableItemPn.PlateNumber = rentableItemPnCreateModel.PlateNumber;
-                //rentableItemPn.ModelName = rentableItemPnCreateModel.ModelName;
-                //rentableItemPn.RegistrationDate = rentableItemPnCreateModel.RegistrationDate;
-
-                await rentableItemPnCreateModel.Create(_dbContext);
+                await rentableItem.Create(_dbContext);
 
                 //_dbContext.RentableItem.Add(rentableItemPn);
                 //_dbContext.SaveChanges();
@@ -128,20 +127,19 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                //    var rentableItem = _dbContext.RentableItem.FirstOrDefault(x => x.Id == rentableItemPnUpdateModel.Id);
-                //    if (rentableItem == null)
-                //    {
-                //        return new OperationResult(true, "Rentable Item not found");
-                //    }
+                RentableItem rentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == rentableItemPnUpdateModel.Id);
 
-                //    rentableItem.VinNumber = rentableItemPnUpdateModel.VinNumber;
-                //    rentableItem.Brand = rentableItemPnUpdateModel.Brand;
-                //    rentableItem.PlateNumber = rentableItemPnUpdateModel.PlateNumber;
-                //    rentableItem.SerialNumber = rentableItemPnUpdateModel.SerialNumber;
-                //    rentableItem.ModelName = rentableItemPnUpdateModel.ModelName;
-                //    rentableItem.RegistrationDate = rentableItemPnUpdateModel.RegistrationDate;
-
-                await rentableItemPnUpdateModel.Update(_dbContext);
+                if (rentableItem != null)
+                {
+                    rentableItem.Brand = rentableItemPnUpdateModel.Brand;
+                    rentableItem.ModelName = rentableItemPnUpdateModel.ModelName;
+                    rentableItem.RegistrationDate = rentableItemPnUpdateModel.RegistrationDate;
+                    rentableItem.SerialNumber = rentableItemPnUpdateModel.SerialNumber;
+                    rentableItem.VinNumber = rentableItemPnUpdateModel.VinNumber;
+                    rentableItem.PlateNumber = rentableItemPnUpdateModel.PlateNumber;
+                
+                    await rentableItem.Update(_dbContext);
+                }
                 return new OperationDataResult<RentableItemsModel>(true);
             }
             catch (Exception e)
@@ -154,13 +152,14 @@ namespace RentableItems.Pn.Services
         }
         public async Task<OperationResult> DeleteRentableItem(int id)
         {
-            RentableItem dbRentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
-            RentableItemModel rentableItemPnDeleteModel = new RentableItemModel();
+            RentableItem rentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
 
-            rentableItemPnDeleteModel.Id = dbRentableItem.Id;
             try
             {
-                await rentableItemPnDeleteModel.Delete(_dbContext);
+                if (rentableItem != null)
+                {
+                    await rentableItem.Delete(_dbContext);
+                }
                 return new OperationDataResult<RentableItemsModel>(true);
             }
             catch (Exception e)
