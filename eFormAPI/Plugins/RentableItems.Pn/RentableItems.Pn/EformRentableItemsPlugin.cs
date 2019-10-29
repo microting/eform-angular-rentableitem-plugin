@@ -34,10 +34,10 @@ using Microting.eFormApi.BasePn.Infrastructure.Helpers;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
 using Microting.eFormApi.BasePn.Infrastructure.Settings;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data.Factories;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Consts;
-using RentableItems.Pn.Infrastructure.Data.Factories;
 using RentableItems.Pn.Infrastructure.Data.Seed;
 using RentableItems.Pn.Infrastructure.Data.Seed.Data;
 using RentableItems.Pn.Infrastructure.Models;
@@ -75,7 +75,7 @@ namespace RentableItems.Pn
         public void AddPluginConfig(IConfigurationBuilder builder, string connectionString)
         {
             RentableItemsConfigurationSeedData seedData = new RentableItemsConfigurationSeedData();
-            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
+            eFormRentableItemPnDbContextFactory contextFactory = new eFormRentableItemPnDbContextFactory();
             builder.AddPluginConfiguration(
                 connectionString,
                 seedData,
@@ -96,7 +96,7 @@ namespace RentableItems.Pn
                 "eform-angular-basecustomer-plugin");
             if (connectionString.ToLower().Contains("convert zero datetime"))
             {
-                services.AddDbContext<RentableItemsPnDbContext>(o => o.UseMySql(connectionString,
+                services.AddDbContext<eFormRentableItemPnDbContext>(o => o.UseMySql(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
                 
                 services.AddDbContext<CustomersPnDbAnySql>(p =>
@@ -105,7 +105,7 @@ namespace RentableItems.Pn
             }
             else
             {
-                services.AddDbContext<RentableItemsPnDbContext>(o => o.UseSqlServer(connectionString,
+                services.AddDbContext<eFormRentableItemPnDbContext>(o => o.UseSqlServer(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
 
                 services.AddDbContext<CustomersPnDbAnySql>(p =>
@@ -113,7 +113,7 @@ namespace RentableItems.Pn
                         c => c.MigrationsAssembly(PluginAssembly().FullName)));
             }
 
-            RentableItemsPnContextFactory contextFactory = new RentableItemsPnContextFactory();
+            eFormRentableItemPnDbContextFactory contextFactory = new eFormRentableItemPnDbContextFactory();
             var context = contextFactory.CreateDbContext(new[] {connectionString});
             context.Database.Migrate();
 
@@ -174,7 +174,7 @@ namespace RentableItems.Pn
 
         public void SeedDatabase(string connectionString)
         {
-            var contextFactory = new RentableItemsPnContextFactory();
+            var contextFactory = new eFormRentableItemPnDbContextFactory();
             using (var context = contextFactory.CreateDbContext(new []{connectionString}))
             {
                 RentableItemPluginSeed.SeedData(context);
@@ -183,7 +183,7 @@ namespace RentableItems.Pn
 
         public PluginPermissionsManager GetPermissionsManager(string connectionString)
         {
-            var contextFactory = new RentableItemsPnContextFactory();
+            var contextFactory = new eFormRentableItemPnDbContextFactory();
             var context = contextFactory.CreateDbContext(new[] { connectionString });
 
             return new PluginPermissionsManager(context);
