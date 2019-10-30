@@ -37,11 +37,18 @@ namespace RentableItems.Pn.Infrastructure.Data
                 .IsUnique();
             modelBuilder.Entity<Field>()
                  .HasIndex(x => x.Name);
+
+            modelBuilder.Entity<PluginGroupPermissionVersion>()
+                .HasOne(x => x.PluginGroupPermission)
+                .WithMany()
+                .HasForeignKey("FK_PluginGroupPermissionVersions_PluginGroupPermissionId")
+                .OnDelete(DeleteBehavior.Restrict);
         }
         
         public DbSet<PluginConfigurationValue> PluginConfigurationValues { get; set; }
         public DbSet<PluginConfigurationValueVersion> PluginConfigurationValueVersions { get; set; }
         public DbSet<PluginPermission> PluginPermissions { get; set; }
         public DbSet<PluginGroupPermission> PluginGroupPermissions { get; set; }
+        public DbSet<PluginGroupPermissionVersion> PluginGroupPermissionVersions { get; set; }
     }
 }

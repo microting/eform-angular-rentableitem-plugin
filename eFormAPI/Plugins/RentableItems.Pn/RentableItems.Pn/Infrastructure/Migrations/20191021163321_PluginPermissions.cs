@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace RentableItems.Pn.Migrations
+﻿namespace RentableItems.Pn.Infrastructure.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class PluginPermissions : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
