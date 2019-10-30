@@ -10,6 +10,7 @@ describe('Application settings page - site header section', function () {
         loginPage.open('/auth');
     });
     it('should go to plugin settings page', function () {
+        browser.pause(10000);
         loginPage.login();
         myEformsPage.Navbar.advancedDropdown();
         myEformsPage.Navbar.clickonSubMenuItem('Plugins');
