@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using eFormCore;
@@ -24,7 +25,7 @@ namespace RentableItems.Pn.Services
             _coreHelper = coreHelper;
         }
 
-        public void Start(string connectionString)
+        public async Task Start(string connectionString)
         {
             _connectionString = connectionString;   
             _container = new WindsorContainer();
@@ -33,7 +34,7 @@ namespace RentableItems.Pn.Services
                 , new RebusInstaller(connectionString, 1, 1)
             );
             
-            Core _core = _coreHelper.GetCore();
+            Core _core = await _coreHelper.GetCore();
             _container.Register(Component.For<Core>().Instance(_core));
             _container.Register(Component.For<eFormRentableItemPnDbContext>().Instance(GetContext()));
             _bus = _container.Resolve<IBus>();
