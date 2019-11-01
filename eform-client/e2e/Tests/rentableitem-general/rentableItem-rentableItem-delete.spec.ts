@@ -26,10 +26,10 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(plugin.status).equal('Aktiveret');
   });
   it('should check if menu point is there', function () {
-    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Rentable Items');
+    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Lejelige ting');
     rentableItemsPage.rentableItemDropdown();
     browser.pause(4000);
-    expect(rentableItemsPage.rentableItemDropdownItemName('Rentable Items').getText()).equal('Rentable Items');
+    expect(rentableItemsPage.rentableItemDropdownItemName('Lejelige ting').getText()).equal('Lejelige ting');
     browser.pause(4000);
     rentableItemsPage.rentableItemDropdown();
     browser.refresh();

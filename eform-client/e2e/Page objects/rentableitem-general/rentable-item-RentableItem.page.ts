@@ -27,10 +27,10 @@ export class RentableItemRentableItemPage extends Page {
     return browser.element('#addTagInput');
   }
   public get rentableItemDropdownName() {
-    return browser.element(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Rentable Items')]`).element('..');
+    return browser.element(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).element('..');
   }
   public rentableItemDropdown() {
-    browser.element(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Rentable Items')]`).click();
+    browser.element(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).click();
   }
   public rentableItemDropdownItemName(name) {
     return browser.element(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
@@ -93,7 +93,7 @@ export class RentableItemRentableItemPage extends Page {
   goToRentableItemsPage() {
     this.rentableItemDropdown();
     browser.pause(2000);
-    this.rentableItemDropdownItemName('Rentable Items').click();
+    this.rentableItemDropdownItemName('Lejelige ting').click();
     browser.pause(8000);
   }
   createRentableItem(brand: string, model: string, date: number, serialNumber?: string,  VINNumber?: string, plateNumber?: string) {
