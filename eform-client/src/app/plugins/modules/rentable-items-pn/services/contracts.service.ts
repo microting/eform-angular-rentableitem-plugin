@@ -3,9 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {BaseService} from '../../../../common/services/base.service';
-import {ContractModel, ContractsRequestModel, CustomerRequestModel} from '../models';
+import {ContractModel, ContractsRequestModel, CustomerModel, CustomerRequestModel} from '../models';
 import {Observable} from 'rxjs';
-import {OperationResult} from '../../../../common/models';
+import {OperationDataResult, OperationResult} from '../../../../common/models';
 
 const ContractMethods = {
   Contracts: 'api/contracts',
@@ -39,5 +39,8 @@ export class ContractsService extends BaseService {
   }
   getCustomer(model: CustomerRequestModel): Observable<any> {
     return this.post(ContractMethods.Customers, model);
+  }
+  getSingleCustomer(customerId: number): Observable<OperationDataResult<CustomerModel>> {
+    return this.get(ContractMethods.Customers + '/' + customerId);
   }
 }

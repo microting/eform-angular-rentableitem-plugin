@@ -15,5 +15,7 @@ namespace RentableItems.Pn.Abstractions
         Task<OperationResult> UpdateContract(ContractModel contractUpdateModel);
         Task<OperationResult> DeleteContract(int id);
         Task<OperationDataResult<CustomersModel>> GetAllCustomers(CustomersRequestModel customersRequestModel);
+        Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id);
+
     }
 }

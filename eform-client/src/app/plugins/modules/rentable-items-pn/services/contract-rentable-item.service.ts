@@ -15,13 +15,13 @@ const ContractRentableItemMethods = {
 @Injectable({
   providedIn: 'root'
 })
-export class ContractRentableItemService extends BaseService{
+export class ContractRentableItemService extends BaseService {
 
   constructor(private _http: HttpClient, router: Router, toastrService: ToastrService) {
     super(_http, router, toastrService);
   }
 
   getAllRentableItemsFromContract(contractId: number): Observable<OperationDataResult<RentableItemsPnModel>> {
-    return this.get(ContractRentableItemMethods.getAll +"/" + contractId);
+    return this.get(ContractRentableItemMethods.getAll + '/' + contractId);
   }
 }

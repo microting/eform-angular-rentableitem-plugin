@@ -42,6 +42,7 @@ script:
   - cd microting/eform-angular-frontend
   - cd eform-client && npm install
   - ../../eform-angular-rentableitem-plugin/testinginstallpn.sh
+  - ../../eform-angular-basecustomer-plugin/testinginstallpn.sh
   - npm start &
   - sleep 40
   - dotnet run --project ../eFormAPI/eFormAPI.Web/eFormAPI.Web.csproj > dotnet_log 2>&1 &

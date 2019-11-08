@@ -106,19 +106,19 @@
       </thead>
       <tbody id="tableBody">
       <tr *ngFor="let contract of contractsModel?.contracts">
-        <td>
+        <td id="contractId">
           {{contract.id}}
         </td>
-        <td>
+        <td id="contractStart">
           {{contract.contractStart | date:'dd/MM/yyyy'}}
         </td>
-        <td>
+        <td id="contractEnd">
           {{contract.contractEnd | date:'dd/MM/yyyy'}}
         </td>
-        <td>
+        <td id="contractCustomerId">
           {{contract.customerId}}
         </td>
-        <td>
+        <td id="contractNr">
           {{contract.contractNr}}
         </td>
         <td>

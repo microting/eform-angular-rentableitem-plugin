@@ -66,6 +66,131 @@
                 </div>
               </div>
             </div>
+            <br>
+            <div class="row">
+              <h3>
+                {{'Customer Info : ' | translate}} <br>
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-md-3" >
+                {{'ID: ' | translate}} {{customerModel.id}}
+              </div>
+              <div class="col-md-3">
+                {{'Name: ' | translate}} {{customerModel.companyName}}
+              </div>
+              <div class="col-md-3">
+                {{'Contact Person: ' | translate}} {{customerModel.contactPerson}}
+              </div>
+              <div class="col-md-3">
+                {{'Nr. : ' | translate}} {{customerModel.customerNo}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{'Phone nr : ' | translate}}{{customerModel.phone}}
+              </div>
+              <div class="col-md-3">
+                {{'Email : ' | translate}}{{customerModel.email}}
+              </div>
+              <div class="col-md-3">
+                {{'City : ' | translate}}{{customerModel.cityName}}
+              </div>
+              <div class="col-md-3">
+                {{'Address : ' | translate}}{{customerModel.companyAddress}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{'VAT number : ' | translate}}{{customerModel.vatNumber}}
+              </div>
+              <div class="col-md-3">
+                {{'EAN code : ' | translate}}{{customerModel.eanCode}}
+              </div>
+              <div class="col-md-3">
+                {{'Zip Code : ' | translate}}{{customerModel.zipCode}}
+              </div>
+              <div class="col-md-3">
+                {{'Address 2 : ' | translate}}{{customerModel.companyAddress2}}
+              </div>
+            </div>
+            <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                    mdbTooltip="delete customer"
+                    (click)="removeCustomer(customerModel)">
+              <fa-icon icon="trash-alt" size="md" [fixedWidth]="true" ></fa-icon>
+            </button>
+            <br>
+            <div class="row">
+              <h3>
+                {{'Rentable Items : ' | translate}}
+              </h3>
+              <div class="col-md-10">
+                <ng-select
+                  id="rentableItemSelector"
+                  [placeholder]="'Rentable Items'"
+                  name="Rentable-Item-selector"
+                  [bindValue]="'id'"
+                  [bindLabel]="'modelName'"
+                  [clearable]="false"
+                  [typeahead]="typeahead"
+                  [items]="rentableItemsModel.rentableItems"
+                  (change)="addNewRentableItem($event)"></ng-select>
+              </div>
+            </div>
+            <table class="table table-sm table-striped text-center">
+              <thead>
+              <tr>
+                <th scope="col" class="table-header-sortable" id="idSort">
+                  <div class="d-flex align-items-center justify-content-center">
+                    ID
+                  </div>
+                </th>
+                <th scope="col" class="table-header-sortable" id="contractIdSort">
+                  <div class="d-flex align-items-center justify-content-center">
+                    {{'Model Name' | translate}}
+                  </div>
+                </th>
+                <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
+                  <div class="d-flex align-items-center justify-content-center">
+                    {{'Brand' | translate}}
+                  </div>
+                </th>
+                <th scope="col" class="table-header-sortable" id="statusSort">
+                  <div class="d-flex align-items-center justify-content-center">
+                    {{'Serial Number' | translate}}
+                  </div>
+                </th>
+                <th scope="col" class="table-header-sortable">
+                  <div class="d-flex align-items-center justify-content-center">
+                    {{'Actions' | translate}}
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody id="tableBody">
+              <tr *ngFor="let rentableItem of selectedContractModel.rentableItems">
+                <td>
+                  {{rentableItem.id}}
+                </td>
+                <td>
+                  {{rentableItem.modelName}}
+                </td>
+                <td>
+                  {{rentableItem.brand}}
+                </td>
+                <td>
+                  {{rentableItem.serialNumber}}
+                </td>
+                <td>
+                  <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                          mdbTooltip="{{'Remove Rentable Item' | translate}}"
+                          (click)="removeRentableItem(rentableItem)">
+                    <fa-icon icon="trash-alt" size="md" [fixedWidth]="true"></fa-icon>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </form>
         </div>
       </div>

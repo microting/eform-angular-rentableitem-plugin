@@ -76,7 +76,6 @@ namespace RentableItems.Pn.Services
                         ContractStart = contract.ContractStart,
                         CustomerId = contract.CustomerId,
                         Id = contract.Id,
-
                     });
                 });
                return new OperationDataResult<ContractsModel>(true, contractsModel);
@@ -85,8 +84,8 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<ContractsModel>(true, 
-                    _rentableItemsLocalizationService.GetString("ErrorObtainingRentableItemsInfo"));
+                return new OperationDataResult<ContractsModel>(false, 
+                    _rentableItemsLocalizationService.GetString("ErrorObtainingContracts"));
             }
         }
             
@@ -107,11 +106,10 @@ namespace RentableItems.Pn.Services
                     };
                     await newContract.Create(_dbContext);
 
-
                     foreach (var rentableItemId in contractCreateModel.RentableItemIds)
                     {
-                        Contract dbContract =
-                            _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr);
+                        Contract dbContract = await 
+                            _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == contractCreateModel.ContractNr);
                         ContractRentableItem contractRentableItem = new ContractRentableItem();
                         contractRentableItem.RentableItemId = rentableItemId;
                         contractRentableItem.ContractId = dbContract.Id;
@@ -143,16 +141,50 @@ namespace RentableItems.Pn.Services
                     contract.ContractNr = updateModel.ContractNr;
                     contract.ContractStart = updateModel.ContractStart;
                     contract.CustomerId = updateModel.CustomerId;
-
+                    
                     await contract.Update(_dbContext);
                 }
+
+                if (updateModel.RentableItemIds.Count == 0)
+                {
+                    Contract dbContract = await 
+                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
+                    ContractRentableItem deleteContractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == dbContract.Id);
+                    await deleteContractRentableItem.Delete(_dbContext);
+                }
+
+                foreach (var rentableItemId in updateModel.RentableItemIds)
+                {
+                    Contract dbContract = await 
+                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
+                    ContractRentableItem contractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == dbContract.Id);
+                    contractRentableItem.RentableItemId = rentableItemId;
+                    contractRentableItem.ContractId = dbContract.Id;
+                    ContractRentableItem checkContractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(
+                            x => x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
+                    if (checkContractRentableItem != null)
+                    {
+                        await contractRentableItem.Update(_dbContext);
+                    }
+                    else
+                    {
+                        ContractRentableItem createContractRentableItem = new ContractRentableItem();
+                        createContractRentableItem.ContractId = dbContract.Id;
+                        createContractRentableItem.RentableItemId = rentableItemId; 
+                        await createContractRentableItem.Create(_dbContext);
+                    }
+                }
+
                 return new OperationResult(true);
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContract"));
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContract"));
             }
         }
 
@@ -164,6 +196,9 @@ namespace RentableItems.Pn.Services
                 if (contract != null)
                 {
                     await contract.Delete(_dbContext);
+                    ContractRentableItem contractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == contract.Id);
+                    await contractRentableItem.Delete(_dbContext);
                 }
                 return new OperationResult(true);
             }
@@ -171,7 +206,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContract"));
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContract"));
             }
         }
         
@@ -246,10 +281,48 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<CustomersModel>(true, 
+                return new OperationDataResult<CustomersModel>(false, 
                     _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo"));
             }
         }
-        
+
+        public async Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id)
+        {
+            try
+            {
+
+                CustomerModel customer = await _customerDbContext.Customers.Select(x => new CustomerModel()
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    Phone = x.Phone,
+                    CityName = x.CityName,
+                    CustomerNo = x.CustomerNo,
+                    ZipCode = x.ZipCode,
+                    Email = x.Email,
+                    ContactPerson = x.ContactPerson,
+                    CreatedBy = x.CreatedBy,
+                    CompanyAddress = x.CompanyAddress,
+                    CompanyAddress2 = x.CompanyAddress2,
+                    CompanyName = x.CompanyName,
+                    CountryCode = x.CountryCode,
+                    EanCode = x.EanCode,
+                    VatNumber = x.VatNumber
+                }).FirstOrDefaultAsync(x => x.Id == id);
+
+                if (customer == null)
+                {
+                    return new OperationDataResult<CustomerModel>( false, "Customer not found");
+                }
+                
+                return new OperationDataResult<CustomerModel>(true, customer);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationDataResult<CustomerModel>(false, "Error obtaining customer");
+            }
+        }
     }
 }

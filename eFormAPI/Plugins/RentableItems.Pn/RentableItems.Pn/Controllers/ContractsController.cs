@@ -54,5 +54,12 @@ namespace RentableItems.Pn.Controllers
         {
             return await _contractsService.GetAllCustomers(requestModel);
         }
+
+        [HttpGet]
+        [Route("api/contracts/customers/{id}")]
+        public async Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id)
+        {
+            return await _contractsService.GetSingleCustomer(id);
+        }
     }
 }

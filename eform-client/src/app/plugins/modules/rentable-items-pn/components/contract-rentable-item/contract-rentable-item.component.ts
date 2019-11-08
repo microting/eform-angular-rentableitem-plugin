@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ContractModel, RentableItemsPnModel} from "../../models";
-import {ContractRentableItemService} from "../../services";
+import {ContractModel, RentableItemsPnModel, CustomerModel} from "../../models";
+import {ContractRentableItemService, ContractsService, RentableItemsPnService} from '../../services';
 
 @Component({
   selector: 'app-contract-rentable-item',
@@ -13,8 +13,11 @@ export class ContractRentableItemComponent implements OnInit {
   spinnerStatus = false;
   selectedContractModel: ContractModel = new ContractModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
+  customerModel: CustomerModel = new CustomerModel();
 
-  constructor(private contractRentableItemService: ContractRentableItemService) { }
+  constructor(private contractRentableItemService: ContractRentableItemService,
+              private contractService: ContractsService
+  ) { }
 
   ngOnInit() {
   }
@@ -22,6 +25,7 @@ export class ContractRentableItemComponent implements OnInit {
     this.frame.show();
     this.selectedContractModel = contract;
     this.getAllRentableItemsOnContract(contractId);
+    this.getCustomer(contract.customerId);
   }
 
   getAllRentableItemsOnContract(contractId: number) {
@@ -29,6 +33,16 @@ export class ContractRentableItemComponent implements OnInit {
     this.contractRentableItemService.getAllRentableItemsFromContract(contractId).subscribe( data => {
       if (data && data.success) {
         this.rentableItemsModel = data.model;
+      }
+    });
+    this.spinnerStatus = false;
+  }
+
+  getCustomer(customerId: number) {
+    this.spinnerStatus = true;
+    this.contractService.getSingleCustomer(customerId).subscribe( data => {
+      if (data && data.success) {
+        this.customerModel = data.model;
       }
     });
     this.spinnerStatus = false;
