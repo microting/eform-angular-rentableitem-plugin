@@ -56,13 +56,19 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
-                         [(ngModel)]="selectedContractModel.customerId"
-                         class="form-control"
-                         type="text" id="editCustomerId"
-                         name="editCustomerId">
-                  <label for="editCustomerId">{{'CustomerId' | translate}}</label>
+                  <ng-select
+                    id="customerIdSelector"
+                    [placeholder]="customerModel.companyName"
+                    name="Customer-Id-selector"
+                    [bindValue]="'id'"
+                    [bindLabel]="'companyName'"
+                    [clearable]="false"
+                    [typeahead]="typeahead2"
+                    [items]="customersModel.customers"
+                    [(ngModel)]="selectedContractModel.customerId"
+                    (change)="getCustomer(selectedContractModel.customerId)"
+                  >
+                  </ng-select>
                 </div>
               </div>
             </div>
@@ -74,13 +80,13 @@
             </div>
             <div class="row">
               <div class="col-md-3" >
-                {{'ID: ' | translate}} {{customerModel.id}}
+                {{'ID : ' | translate}} {{customerModel.id}}
               </div>
               <div class="col-md-3">
-                {{'Name: ' | translate}} {{customerModel.companyName}}
+                {{'Name : ' | translate}} {{customerModel.companyName}}
               </div>
               <div class="col-md-3">
-                {{'Contact Person: ' | translate}} {{customerModel.contactPerson}}
+                {{'Contact Person : ' | translate}} {{customerModel.contactPerson}}
               </div>
               <div class="col-md-3">
                 {{'Nr. : ' | translate}} {{customerModel.customerNo}}

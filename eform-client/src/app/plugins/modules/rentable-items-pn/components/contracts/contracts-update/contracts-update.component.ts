@@ -1,6 +1,13 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ContractRentableItemService, ContractsService, RentableItemsPnService} from '../../../services';
-import {ContractModel, CustomerModel, CustomersModel, RentableItemsPnModel, RentableItemsPnRequestModel} from '../../../models';
+import {
+  ContractModel,
+  CustomerModel,
+  CustomerRequestModel,
+  CustomersModel,
+  RentableItemsPnModel,
+  RentableItemsPnRequestModel
+} from '../../../models';
 import {formatTimezone} from '../../../../../../common/helpers';
 import {debounceTime, switchMap} from 'rxjs/operators';
 
@@ -15,9 +22,11 @@ export class ContractsUpdateComponent implements OnInit {
   selectedContractModel: ContractModel = new ContractModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
+  customersRequestModel: CustomerRequestModel = new CustomerRequestModel();
   customerModel: CustomerModel = new CustomerModel();
   customersModel: CustomersModel = new CustomersModel();
   typeahead = new EventEmitter<string>();
+  typeahead2 = new EventEmitter<string>();
 
   spinnerStatus = false;
 
@@ -37,6 +46,18 @@ export class ContractsUpdateComponent implements OnInit {
         this.rentableItemsModel = items.model;
         this.cd.markForCheck();
       });
+    this.typeahead2
+      .pipe(
+        debounceTime(200),
+        switchMap(term2 => {
+          this.customersRequestModel.name = term2;
+          return this.contractService.getCustomer(this.customersRequestModel);
+        })
+      )
+      .subscribe(items2 => {
+        this.customersModel = items2.model;
+        this.cd.markForCheck();
+      });
   }
 
   ngOnInit() {
@@ -44,6 +65,7 @@ export class ContractsUpdateComponent implements OnInit {
 
   show(contractModel: ContractModel) {
     this.selectedContractModel = contractModel;
+    this.selectedContractModel.deleteIds = [];
     this.frame.show();
     this.getAllRentableItemsOnContract(contractModel.id);
     this.getCustomer(contractModel.customerId);
@@ -70,7 +92,6 @@ export class ContractsUpdateComponent implements OnInit {
     this.spinnerStatus = false;
   }
   addNewRentableItem(e: any) {
-    debugger;
     if (!this.selectedContractModel.rentableItems.includes(e)) {
       this.selectedContractModel.rentableItems.push(e);
       this.selectedContractModel.rentableItemIds.push(e.id);
@@ -80,12 +101,15 @@ export class ContractsUpdateComponent implements OnInit {
     const index = this.selectedContractModel.rentableItems.indexOf(rentableItem);
     this.selectedContractModel.rentableItems.splice(index, 1);
     this.selectedContractModel.rentableItemIds.splice(index, 1);
+    this.selectedContractModel.deleteIds = [];
+    this.selectedContractModel.deleteIds.push(rentableItem.id);
   }
   getCustomer(customerId: number) {
     this.spinnerStatus = true;
     this.contractService.getSingleCustomer(customerId).subscribe( data => {
       if (data && data.success) {
         this.customerModel = data.model;
+        this.selectedContractModel.customerId = this.customerModel.id;
       }
     });
     this.spinnerStatus = false;

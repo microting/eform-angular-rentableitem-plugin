@@ -61,5 +61,6 @@ namespace RentableItems.Pn.Controllers
         {
             return await _contractsService.GetSingleCustomer(id);
         }
+        
     }
 }
