@@ -82,20 +82,6 @@
               expand_more</i>
           </div>
         </th>
-        <th scope="col" class="table-header-sortable" id="contractRentableItemSort"
-            (click)="sortByColumn('RentableItem',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
-          <div class="d-flex align-items-center justify-content-center">
-            Rentable Item
-            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'ContractNumber'">
-              unfold_more</i>
-            <i class="material-icons"
-               *ngIf="contractsRequestModel.sortColumnName == 'ContractNumber' && !contractsRequestModel.isSortDsc">
-              expand_less</i>
-            <i class="material-icons"
-               *ngIf="contractsRequestModel.sortColumnName == 'ContractNumber' && contractsRequestModel.isSortDsc">
-              expand_more</i>
-          </div>
-        </th>
         <th scope="col">
           {{ 'Actions' | translate }}
         </th>
@@ -120,11 +106,6 @@
         </td>
         <td id="contractNr">
           {{contract.contractNr}}
-        </td>
-        <td>
-         <button class="btn btn-accent text-black-50 btn-icon mb-2" id="showContractRentableItem" (click)="showContractRentableItem(contract.id, contract)">
-           <fa-icon icon="list-alt" [fixedWidth]="true" size="lg"></fa-icon>
-         </button>
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">

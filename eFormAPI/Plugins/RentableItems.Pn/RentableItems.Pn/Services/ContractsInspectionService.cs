@@ -159,7 +159,8 @@ namespace RentableItems.Pn.Services
                         ContractInspection contractInspection = new ContractInspection
                         {
                             SiteId = siteDto.SiteId,
-                            SDKCaseId = (int) sdkCaseId
+                            SDKCaseId = (int) sdkCaseId,
+                            ContractId = contractInspectionCreateModel.ContractId
                         };
                         await contractInspection.Create(_dbContext);
                     }

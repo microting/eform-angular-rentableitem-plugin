@@ -144,14 +144,18 @@ namespace RentableItems.Pn.Services
                     
                     await contract.Update(_dbContext);
                 }
-
-                if (updateModel.RentableItemIds.Count == 0)
+                if (updateModel.DeleteIds.Count > 0)
                 {
                     Contract dbContract = await 
                         _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
-                    ContractRentableItem deleteContractRentableItem =
-                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == dbContract.Id);
-                    await deleteContractRentableItem.Delete(_dbContext);
+
+                    foreach (var rentableItemId in updateModel.DeleteIds)
+                    {
+                        ContractRentableItem deleteContractRentableItem =
+                            await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
+                                x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
+                        await deleteContractRentableItem.Delete(_dbContext);   
+                    }
                 }
 
                 foreach (var rentableItemId in updateModel.RentableItemIds)
@@ -159,14 +163,14 @@ namespace RentableItems.Pn.Services
                     Contract dbContract = await 
                         _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
                     ContractRentableItem contractRentableItem =
-                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == dbContract.Id);
-                    contractRentableItem.RentableItemId = rentableItemId;
-                    contractRentableItem.ContractId = dbContract.Id;
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
+                            x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
                     ContractRentableItem checkContractRentableItem =
                         await _dbContext.ContractRentableItem.FirstOrDefaultAsync(
                             x => x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
                     if (checkContractRentableItem != null)
                     {
+                        contractRentableItem.WorkflowState = Constants.WorkflowStates.Created;
                         await contractRentableItem.Update(_dbContext);
                     }
                     else
@@ -178,7 +182,7 @@ namespace RentableItems.Pn.Services
                     }
                 }
 
-                return new OperationResult(true);
+                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractsUpdatedSuccessfully"));
             }
             catch (Exception e)
             {
@@ -195,10 +199,18 @@ namespace RentableItems.Pn.Services
             {
                 if (contract != null)
                 {
+                    
+                    IQueryable<ContractRentableItem> contractRentableItems =
+                       _dbContext.ContractRentableItem.AsQueryable();
+                    contractRentableItems = contractRentableItems.Where(x =>
+                        x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created);
+                    List<ContractRentableItem> list = await contractRentableItems.ToListAsync();
+                    list.ForEach(contractRentableItem =>
+                        contractRentableItem.Delete(_dbContext)
+                        );
+
                     await contract.Delete(_dbContext);
-                    ContractRentableItem contractRentableItem =
-                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x => x.ContractId == contract.Id);
-                    await contractRentableItem.Delete(_dbContext);
+                   
                 }
                 return new OperationResult(true);
             }
@@ -290,7 +302,6 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-
                 CustomerModel customer = await _customerDbContext.Customers.Select(x => new CustomerModel()
                 {
                     Id = x.Id,
