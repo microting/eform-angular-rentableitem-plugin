@@ -62,5 +62,7 @@ describe('Rentable Items - Contracts - add', function () {
     const customerName = 'Oles olie';
     contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
     const contract = contractsPage.getFirstContractObject();
+    expect(contract.contractNumber).equal(contractNr);
+    expect(contract.customerId).equal(1);
   });
 });
