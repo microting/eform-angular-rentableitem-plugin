@@ -27,10 +27,10 @@
     <PackageReference Include="Microting.eForm" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="1.2.6" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="1.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
-    <PackageReference Include="Microting.eFormApi.BasePn" Version="1.2.6" />
-    <PackageReference Include="Microting.eFormRentableItemBase" Version="1.0.8" />
+    <PackageReference Include="Microting.eFormApi.BasePn" Version="1.2.7" />
+    <PackageReference Include="Microting.eFormRentableItemBase" Version="1.0.9" />
     <PackageReference Include="Rebus.MySql" Version="1.1.1" />
   </ItemGroup>
   
