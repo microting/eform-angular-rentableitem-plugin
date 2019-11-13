@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import loginPage from '../../Page objects/Login.page';
+import loginPage from '../../../Page objects/Login.page';
 import {Guid} from 'guid-typescript';
-import myEformsPage from '../../Page objects/MyEforms.page';
-import rentableItemsPage from '../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
-import pluginsPage from '../rentableitem-settings/application-settings.plugins.page';
+import myEformsPage from '../../../Page objects/MyEforms.page';
+import rentableItemsPage from '../../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
+import pluginsPage from '../../rentableitem-settings/application-settings.plugins.page';
 import {log} from 'util';
 
 describe('Rentable Item Plugin - Rentable Item', function () {

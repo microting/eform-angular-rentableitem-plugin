@@ -81,9 +81,9 @@ export class RentableItemRentableItemPage extends Page {
   public get rentableItemEditPlateNumberBox() {
     return browser.element('#editPlateNumber');
   }
-  public clickDate(date) {
-    browser.element(`//*[text()="${date}"]`).click();
-  }
+    public clickDate(date) {
+      browser.element(`//*[text()="${date}"]`).click();
+    }
   public get rentableItemDeleteBtn() {
     return browser.element('#rentableItemDeleteDeleteBtn');
   }

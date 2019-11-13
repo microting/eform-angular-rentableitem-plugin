@@ -175,22 +175,23 @@
               </thead>
               <tbody id="tableBody">
               <tr *ngFor="let rentableItem of selectedContractModel.rentableItems">
-                <td>
+                <td id="rentableItemId">
                   {{rentableItem.id}}
                 </td>
-                <td>
+                <td id="rentableItemModelName">
                   {{rentableItem.modelName}}
                 </td>
-                <td>
+                <td id="rentableItemBrand">
                   {{rentableItem.brand}}
                 </td>
-                <td>
+                <td id="rentableItemSerialNumber">
                   {{rentableItem.serialNumber}}
                 </td>
                 <td>
                   <button class="btn btn-danger text-black-50 btn-icon mb-2"
                           mdbTooltip="{{'Remove Rentable Item' | translate}}"
-                          (click)="removeRentableItem(rentableItem)">
+                          (click)="removeRentableItem(rentableItem)"
+                          id="removeRentableItemBtn">
                     <fa-icon icon="trash-alt" size="md" [fixedWidth]="true"></fa-icon>
                   </button>
                 </td>
