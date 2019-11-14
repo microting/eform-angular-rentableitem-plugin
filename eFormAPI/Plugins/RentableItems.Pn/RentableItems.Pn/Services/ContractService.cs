@@ -199,18 +199,14 @@ namespace RentableItems.Pn.Services
             {
                 if (contract != null)
                 {
-                    
                     IQueryable<ContractRentableItem> contractRentableItems =
                        _dbContext.ContractRentableItem.AsQueryable();
                     contractRentableItems = contractRentableItems.Where(x =>
                         x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created);
-                    List<ContractRentableItem> list = await contractRentableItems.ToListAsync();
-                    list.ForEach(contractRentableItem =>
+                    await contractRentableItems.ForEachAsync(contractRentableItem =>
                         contractRentableItem.Delete(_dbContext)
                         );
-
                     await contract.Delete(_dbContext);
-                   
                 }
                 return new OperationResult(true);
             }
