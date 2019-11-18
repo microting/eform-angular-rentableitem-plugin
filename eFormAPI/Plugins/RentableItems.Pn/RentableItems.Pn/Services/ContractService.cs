@@ -203,9 +203,11 @@ namespace RentableItems.Pn.Services
                        _dbContext.ContractRentableItem.AsQueryable();
                     contractRentableItems = contractRentableItems.Where(x =>
                         x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created);
-                    await contractRentableItems.ForEachAsync(contractRentableItem =>
-                        contractRentableItem.Delete(_dbContext)
-                        );
+                    var list = await contractRentableItems.ToListAsync();
+                    foreach (var contractRentable in list)
+                    {
+                        await contractRentable.Delete(_dbContext);
+                    }
                     await contract.Delete(_dbContext);
                 }
                 return new OperationResult(true);

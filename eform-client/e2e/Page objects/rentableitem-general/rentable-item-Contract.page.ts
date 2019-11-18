@@ -9,7 +9,7 @@ export class RentableItemContractPage extends Page {
     super();
   }
   public get rowNum(): number {
-    return $$('#tableBody > tr').length;
+    return $$(`//*[@id= 'tableBody']//tr`).length;
   }
   public rentableItemDropdownItemName(name) {
     return browser.element(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
@@ -91,7 +91,29 @@ export class RentableItemContractPage extends Page {
     browser.pause(2000);
     this.contractCreateSaveBtn.click();
   }
-
+  public createContractCancel(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
+    this.newContractBtn.click();
+    browser.waitForVisible('#startDate', 20000);
+    this.startDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(startDate);
+    browser.pause(2000);
+    this.endDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(endDate);
+    browser.pause(2000);
+    this.contractNumberField.addValue(contractNumber);
+    browser.pause(2000);
+    this.customerSelector.addValue(customer);
+    browser.pause(2000);
+    this.selectOption(customer);
+    browser.pause(2000);
+    this.rentableItemSelector.addValue(rentableItem);
+    browser.pause(2000);
+    this.selectOption(rentableItem);
+    browser.pause(2000);
+    this.contractCreateCancelBtn.click();
+  }
 
 
 
@@ -99,6 +121,18 @@ export class RentableItemContractPage extends Page {
 
   public getFirstContractObject(): ContractsRowObject {
     return new ContractsRowObject(1);
+  }
+
+  public cleanup() {
+    const deleteObject = this.getFirstContractObject();
+    if (deleteObject != null) {
+      browser.pause(8000);
+      deleteObject.deleteBtn.click();
+      browser.pause(4000);
+      this.contractDeleteDeleteBtn.click();
+      browser.pause(2000);
+      browser.refresh();
+    }
   }
 }
 
@@ -121,6 +155,12 @@ export class ContractsRowObject {
       try {
         this.contractNumber = +$$('#contractNr')[rowNum - 1].getText();
       } catch (e) {}
+      try {
+        this.editBtn = $$('#contractEditBtn')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.deleteBtn = $$('#contractDeleteBtn')[rowNum - 1];
+      } catch (e) {}
     }
   }
 
@@ -130,6 +170,8 @@ export class ContractsRowObject {
   customerId;
   contractNumber;
   rentableItem;
+  deleteBtn;
+  editBtn;
 }
 
 export class RentableItemRowObject {

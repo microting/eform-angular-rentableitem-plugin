@@ -4,7 +4,7 @@
       class="btn btn-success"
       mdbTooltip="{{'Create Contract' | translate}}"
       (click)="showCreateContractModal()"
-    id="contractCreateBtn">
+      id="contractCreateBtn">
       {{'New Contract'}}
     </button>
   </div>
@@ -92,7 +92,7 @@
       </tr>
       </thead>
       <tbody id="tableBody">
-      <tr *ngFor="let contract of contractsModel?.contracts">
+      <tr *ngFor="let contract of contractsModel.contracts">
         <td id="contractId">
           {{contract.id}}
         </td>
@@ -113,7 +113,7 @@
             <button class="btn btn-accent text-black-50 btn-icon mb-2"
                     mdbTooltip="{{ 'Edit Contract' | translate }}"
                     (click)="showEditContractModal(contract)"
-            id="contractEditBtn">
+                    id="contractEditBtn">
               <i class="material-icons">
                 edit
               </i>
@@ -121,7 +121,7 @@
             <button class="btn btn-danger text-black-50 btn-icon mb-2"
                     mdbTooltip="{{'Delete Contract' | translate}}"
                     (click)="showDeleteContractModal(contract)"
-            id="contractDeleteBtn">
+                    id="contractDeleteBtn">
               <i class="material-icons">
                 delete_forever
               </i>
