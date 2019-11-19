@@ -80,6 +80,22 @@ describe('Rentable Items - Contracts - edit', function () {
     expect(contract.customerId).equal(2);
     browser.pause(4000);
     browser.refresh();
+    browser.pause(8000);
+  });
+  it('should NOT edit contract', function () {
+    const oldContract = contractsPage.getFirstContractObject();
+    const newStartDate = Math.floor((Math.random() * 14) + 1);
+    const newEndDate = Math.floor((Math.random() * 28) + 1);
+    const newContractNumber = Math.floor((Math.random() * 28) + 1);
+    const newRentableItem = 'Boremaskine';
+    const newCustomer = 'Bents bjelker';
+    contractsPage.editContractCancel(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
+    browser.refresh();
+    browser.pause(8000);
+    const contract = contractsPage.getFirstContractObject();
+    expect(oldContract.customerId).equal(contract.customerId);
+    expect(oldContract.contractNumber).equal(contract.contractNumber);
+    browser.pause(4000);
     contractsPage.cleanup();
   });
 });

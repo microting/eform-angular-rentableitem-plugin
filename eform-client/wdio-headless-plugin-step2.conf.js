@@ -17,7 +17,7 @@ exports.config = {
     	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-add-multi.spec.ts',
     	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-edit.spec.ts',
 	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-add.spec.ts',
-	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-edit.spec.ts',
+	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-edit.spec.ts'
 
     ],
     suites: {

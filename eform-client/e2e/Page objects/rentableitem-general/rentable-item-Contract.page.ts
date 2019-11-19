@@ -185,7 +185,28 @@ export class RentableItemContractPage extends Page {
     this.contractEditCancelBtn.click();
     browser.pause(4000);
   }
-
+  public deleteContract() {
+    const deleteObject = this.getFirstContractObject();
+    if (deleteObject != null) {
+      browser.pause(8000);
+      deleteObject.deleteBtn.click();
+      browser.pause(4000);
+      this.contractDeleteDeleteBtn.click();
+      browser.pause(2000);
+      browser.refresh();
+    }
+  }
+  public deleteContractCancel() {
+    const deleteObject = this.getFirstContractObject();
+    if (deleteObject != null) {
+      browser.pause(8000);
+      deleteObject.deleteBtn.click();
+      browser.pause(4000);
+      this.contractDeleteCancelBtn.click();
+      browser.pause(2000);
+      browser.refresh();
+    }
+  }
 
 
 
