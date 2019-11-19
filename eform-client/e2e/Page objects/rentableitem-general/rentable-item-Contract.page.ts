@@ -3,6 +3,7 @@ import XMLForEformRentableItems from '../../Constants/XMLForEform';
 import {trackByHourSegment} from 'angular-calendar/modules/common/util';
 import {until} from 'selenium-webdriver';
 import titleIs = until.titleIs;
+import {isBrowserEvents} from '@angular/core/src/render3/discovery_utils';
 
 export class RentableItemContractPage extends Page {
   constructor() {
@@ -23,17 +24,32 @@ export class RentableItemContractPage extends Page {
   public get startDateSelector() {
     return browser.element('#startDate');
   }
+  public get editStartDateSelector() {
+    return browser.element('#editStartDate');
+  }
   public get endDateSelector() {
     return browser.element('#endDate');
+  }
+  public get editEndDateSelector() {
+    return browser.element('#editEndDate');
   }
   public get contractNumberField() {
     return browser.element('#contractNumber');
   }
+  public get editContractNumberField() {
+    return browser.element('#editContractNr');
+  }
   public get customerSelector() {
     return browser.element(`//*[@id= 'customerSelector']//input`);
   }
+  public get editCustomerSelector() {
+    return browser.element(`//*[@id= 'editCustomerIdSelector']//input`);
+  }
   public get rentableItemSelector() {
     return browser.element(`//*[@id= 'rentableItemSelector']//input`);
+  }
+  public get editRentableItemSelector() {
+    return browser.element(`//*[@id= 'editRentableItemSelector']//input`);
   }
   public get contractCreateSaveBtn() {
     return browser.element('#contractCreateSaveBtn');
@@ -113,6 +129,61 @@ export class RentableItemContractPage extends Page {
     this.selectOption(rentableItem);
     browser.pause(2000);
     this.contractCreateCancelBtn.click();
+  }
+
+  public editContract(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
+    const contractForEdit = this.getFirstContractObject();
+    contractForEdit.editBtn.click();
+    browser.waitForVisible('#editStartDate', 20000);
+    this.editStartDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(startDate);
+    browser.pause(2000);
+    this.editEndDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(endDate);
+    browser.pause(2000);
+    this.editContractNumberField.clearElement();
+    browser.pause(1000);
+    this.editContractNumberField.addValue(contractNumber);
+    browser.pause(2000);
+    this.editCustomerSelector.addValue(newCustomer);
+    browser.pause(2000);
+    this.selectOption(newCustomer);
+    browser.pause(2000);
+    this.editRentableItemSelector.addValue(newItem);
+    browser.pause(2000);
+    this.selectOption(newItem);
+    browser.pause(2000);
+    this.contractEditSaveBtn.click();
+    browser.pause(4000);
+  }
+  public editContractCancel(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
+    const contractForEdit = this.getFirstContractObject();
+    contractForEdit.editBtn.click();
+    browser.waitForVisible('#editStartDate', 20000);
+    this.editStartDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(startDate);
+    browser.pause(2000);
+    this.editEndDateSelector.click();
+    browser.pause(2000);
+    this.clickDate(endDate);
+    browser.pause(2000);
+    this.editContractNumberField.clearElement();
+    browser.pause(1000);
+    this.editContractNumberField.addValue(contractNumber);
+    browser.pause(2000);
+    this.editCustomerSelector.addValue(newCustomer);
+    browser.pause(2000);
+    this.selectOption(newCustomer);
+    browser.pause(2000);
+    this.editRentableItemSelector.addValue(newItem);
+    browser.pause(2000);
+    this.selectOption(newItem);
+    browser.pause(2000);
+    this.contractEditCancelBtn.click();
+    browser.pause(4000);
   }
 
 

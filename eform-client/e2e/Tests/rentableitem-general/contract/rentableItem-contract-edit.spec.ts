@@ -19,24 +19,11 @@ describe('Rentable Items - Contracts - edit', function () {
   it('should create multiple customers', function () {
     customersPage.newCustomerBtn.click();
     browser.pause(6000);
-    const customerObject = {
-      createdBy: 'John Smith',
-      customerNo: '1',
-      contactPerson: 'Samantha Black',
-      companyName: 'Oles olie',
-      companyAddress: 'ABC Street 22',
-      zipCode: '021551',
-      cityName: 'Odense',
-      phone: '123124',
-      email: 'user@user.com',
-      eanCode: '2222115',
-      vatNumber: '7945641'
-    };
     const customerObject2 = {
       createdBy: 'John Smith',
       customerNo: '2',
       contactPerson: 'Jack Black',
-      companyName: 'Bents bjælker',
+      companyName: 'Bents bjelker',
       companyAddress: 'ABC Street 23',
       zipCode: '0215521',
       cityName: 'Odense',
@@ -46,26 +33,18 @@ describe('Rentable Items - Contracts - edit', function () {
       vatNumber: '79485641'
     };
     browser.pause(2000);
-    customersModalPage.createCustomer(customerObject);
     customersModalPage.createCustomer(customerObject2);
   });
   it('should go to rentable items page', function () {
     rentableItemsPage.goToRentableItemsPage();
   });
   it('should create rentable item with all parameters', function () {
-    const date = Math.floor((Math.random() * 28) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
-    const brand = 'Apple';
     const brand2 = 'Bosch';
-    const model = 'MacBook';
     const model2 = 'Boremaskine';
-    const serialNumber = Guid.create().toString();
     const serialNumber2 = Guid.create().toString();
-    const vinNumber = Guid.create().toString();
     const vinNumber2 = Guid.create().toString();
-    const plateNumber = Guid.create().toString();
     const plateNumber2 = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand, model, date, serialNumber, vinNumber, plateNumber);
     rentableItemsPage.createRentableItem(brand2, model2, date2, serialNumber2, vinNumber2, plateNumber2);
   });
   it('should go to Contracts page', function () {
@@ -89,6 +68,18 @@ describe('Rentable Items - Contracts - edit', function () {
     browser.refresh();
   });
   it('should edit contract', function () {
-
+    browser.pause(8000);
+    const newStartDate = Math.floor((Math.random() * 14) + 1);
+    const newEndDate = Math.floor((Math.random() * 28) + 1);
+    const newContractNumber = Math.floor((Math.random() * 28) + 1);
+    const newRentableItem = 'Boremaskine';
+    const newCustomer = 'Bents bjelker';
+    contractsPage.editContract(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
+    const contract = contractsPage.getFirstContractObject();
+    expect(contract.contractNumber).equal(newContractNumber);
+    expect(contract.customerId).equal(2);
+    browser.pause(4000);
+    browser.refresh();
+    contractsPage.cleanup();
   });
 });

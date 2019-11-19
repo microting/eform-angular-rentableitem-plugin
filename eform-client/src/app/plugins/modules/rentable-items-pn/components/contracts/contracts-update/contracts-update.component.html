@@ -17,10 +17,10 @@
                          [ngModel]="selectedContractModel.contractStart"
                          (dateTimeChange)="onStartDateSelected($event)"
                          type="text"
-                         id="startDate"
-                         name="startDate"
+                         id="editStartDate"
+                         name="editStartDate"
                          class="form-control">
-                  <label for="startDate">{{'Contract Start' | translate}}</label>
+                  <label for="editStartDate">{{'Contract Start' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
@@ -34,10 +34,10 @@
                          [ngModel]="selectedContractModel.contractEnd"
                          (dateTimeChange)="onEndDateSelected($event)"
                          type="text"
-                         id="endDate"
-                         name="endDate"
+                         id="editEndDate"
+                         name="editEndDate"
                          class="form-control">
-                  <label for="endDate">{{'Contract End*' | translate}}</label>
+                  <label for="editEndDate">{{'Contract End*' | translate}}</label>
                   <owl-date-time
                     [pickerType]="'calendar'" #dt2></owl-date-time>
                 </div>
@@ -57,7 +57,7 @@
               <div class="col-md-6">
                 <div class="md-form">
                   <ng-select
-                    id="customerIdSelector"
+                    id="editCustomerIdSelector"
                     [placeholder]="customerModel.companyName"
                     name="Customer-Id-selector"
                     [bindValue]="'id'"
@@ -132,7 +132,7 @@
               </h3>
               <div class="col-md-10">
                 <ng-select
-                  id="rentableItemSelector"
+                  id="editRentableItemSelector"
                   [placeholder]="'Rentable Items'"
                   name="Rentable-Item-selector"
                   [bindValue]="'id'"
@@ -202,10 +202,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!editForm.form.valid" (click)="updateContract()">
+        <button class="btn btn-success" [disabled]="!editForm.form.valid" (click)="updateContract()" id="contractEditSaveBtn">
           {{ 'Update' | translate }}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button class="btn btn-accent text-black-50" (click)="frame.hide()" id="contractEditCancelBtn">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>
