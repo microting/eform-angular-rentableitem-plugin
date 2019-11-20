@@ -12,6 +12,9 @@ export class RentableItemContractPage extends Page {
   public get rowNum(): number {
     return $$(`//*[@id= 'tableBody']//tr`).length;
   }
+  public get rentableItemListonContract(): number {
+    return $$(`//*[@id= 'tableBody']//tr//*[@id= 'rentableItemId']`).length;
+  }
   public rentableItemDropdownItemName(name) {
     return browser.element(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
   }
@@ -185,6 +188,16 @@ export class RentableItemContractPage extends Page {
     this.contractEditCancelBtn.click();
     browser.pause(4000);
   }
+  public editContractDeleteRentableItem() {
+    const contractForEdit = this.getFirstContractObject();
+    contractForEdit.editBtn.click();
+    browser.pause(2000);
+    const rentableItemToDelete = this.getFirstRentableItemObject();
+    rentableItemToDelete.deleteBtn.click();
+    browser.pause(2000);
+    this.contractEditSaveBtn.click();
+    browser.pause(4000);
+  }
   public deleteContract() {
     const deleteObject = this.getFirstContractObject();
     if (deleteObject != null) {
@@ -208,8 +221,9 @@ export class RentableItemContractPage extends Page {
     }
   }
 
-
-
+  public getFirstRentableItemObject(): RentableItemRowObject {
+      return new RentableItemRowObject(1);
+  }
 
   public getFirstContractObject(): ContractsRowObject {
     return new ContractsRowObject(1);

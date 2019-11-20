@@ -96,6 +96,17 @@ describe('Rentable Items - Contracts - edit', function () {
     expect(oldContract.customerId).equal(contract.customerId);
     expect(oldContract.contractNumber).equal(contract.contractNumber);
     browser.pause(4000);
+  });
+  it('should remove 1 rentable item', function () {
+    contractsPage.editContractDeleteRentableItem();
+    browser.refresh();
+    browser.pause(8000);
+    const contract = contractsPage.getFirstContractObject();
+    contract.editBtn.click();
+    browser.pause(2000);
+    expect(contractsPage.rentableItemListonContract).equal(1);
+    contractsPage.contractEditCancelBtn.click();
+    browser.pause(4000);
     contractsPage.cleanup();
   });
 });
