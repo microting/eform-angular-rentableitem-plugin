@@ -10,7 +10,7 @@ import rentableItemsSettingsPage from '../../../Page objects/rentableitem-genera
 import contractsPage from '../../../Page objects/rentableitem-general/rentable-item-Contract.page';
 import rentableItemsPage from '../../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
 
-describe('Rentable Itimes - Inspections', function () {
+describe('Rentable Items - Inspections', function () {
   before(function () {
     loginPage.open('/auth');
     loginPage.login();
@@ -47,9 +47,7 @@ describe('Rentable Itimes - Inspections', function () {
     rentableItemsPage.rentableItemDropdown();
     browser.pause(1000);
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();
-    browser.waitForVisible('#editInspectionBtn', 20000);
+    browser.waitForVisible('#deleteInspectionBtn', 20000);
     expect(inspectionsPage.rowNum).equal(1);
-
-
   });
 });

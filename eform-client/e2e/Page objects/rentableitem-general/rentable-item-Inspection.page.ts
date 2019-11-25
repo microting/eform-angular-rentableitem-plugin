@@ -31,6 +31,12 @@ export class RentableItemInspectionPage extends Page {
   public get contractInspectionCreateSaveBtn() {
     return browser.element('#contractInspectionCreateSaveBtn');
   }
+  public get contractInspectionDeleteDeleteBtn() {
+    return browser.element('#inspectionDeleteDeleteBtn');
+  }
+  public get contractInspectionDeleteCancelBtn() {
+    return browser.element('#inspectionDeleteCancelBtn');
+  }
 
   public rentableItemDropdownItemName(name) {
     return browser.element(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
@@ -41,7 +47,9 @@ export class RentableItemInspectionPage extends Page {
   public selectOption(name) {
     browser.element(`//*[text()="${name}"]`).click();
   }
-
+  public getFirstRowObject(): InspectionRowObject {
+    return new InspectionRowObject(1);
+  }
 
 
 
@@ -84,3 +92,31 @@ export class RentableItemInspectionPage extends Page {
 const inspectionsPage = new RentableItemInspectionPage();
 export default inspectionsPage;
 
+export class InspectionRowObject {
+  constructor(rowNum) {
+    if ($$('#inspectionId')[rowNum - 1]) {
+      this.id = $$('#inspectionId')[rowNum - 1];
+      try {
+        this.contractId = $$('#inspectionContractId')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.sdkCaseID = $$('#inspectionSDKCaseId')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.status = $$('#inspectionStatus')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.doneAt = $$('#inspectionDoneAt')[rowNum - 1];
+      } catch (e) {}
+      try {
+        this.deleteBtn = $$('#deleteInspectionBtn')[rowNum - 1];
+      } catch (e) {}
+    }
+  }
+  id;
+  contractId;
+  sdkCaseID;
+  status;
+  doneAt;
+  deleteBtn;
+}
