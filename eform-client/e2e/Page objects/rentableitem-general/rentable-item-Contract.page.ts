@@ -267,6 +267,9 @@ export class ContractsRowObject {
       try {
         this.deleteBtn = $$('#contractDeleteBtn')[rowNum - 1];
       } catch (e) {}
+      try {
+        this.inspectionBtn = $$('#createInspectionBtn')[rowNum - 1];
+      } catch (e) {}
     }
   }
 
@@ -275,7 +278,7 @@ export class ContractsRowObject {
   endDate;
   customerId;
   contractNumber;
-  rentableItem;
+  inspectionBtn;
   deleteBtn;
   editBtn;
 }

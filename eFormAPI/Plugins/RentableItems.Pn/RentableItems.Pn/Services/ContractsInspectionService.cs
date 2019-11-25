@@ -105,13 +105,12 @@ namespace RentableItems.Pn.Services
                         y.Name == lookupeForm)
                     ?.Value;
                 LogEvent($"result is {result}");
-                LogEvent($"resuleForm i {resulteForm}");
+                LogEvent($"resulteForm i {resulteForm}");
                 // modificere mainelement
 
                 Contract dbContract =
                     await _dbContext.Contract.FirstOrDefaultAsync(x =>
                         x.Id == contractInspectionCreateModel.ContractId);
-                
                 
                 int eFormId = int.Parse(resulteForm);
                 Core _core = await _coreHelper.GetCore();

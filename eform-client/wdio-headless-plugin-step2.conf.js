@@ -18,8 +18,8 @@ exports.config = {
     	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-edit.spec.ts',
 	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-add.spec.ts',
 	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-edit.spec.ts',
-	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-delete.spec.ts'
-
+	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-delete.spec.ts',
+	'e2e/Tests/rentableitem-general/inspection/rentableItem-inspection-add.spec.ts',
 
     ],
     suites: {
