@@ -12,14 +12,9 @@ import rentableItemsSettingsPage from '../../Page objects/rentableitem-general/r
 describe('Application settings page - site header section', function () {
   before(function () {
     loginPage.open('/auth');
-    loginPage.login();
-  });
-  it('should create eform', function () {
-    const label = 'Number 1';
-    inspectionsPage.createNewEform(label);
-    browser.pause(8000);
   });
   it('should go to plugin settings page', function () {
+    loginPage.login();
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     browser.waitForExist('#plugin-name', 50000);
@@ -71,6 +66,14 @@ describe('Application settings page - site header section', function () {
     expect(plugin.name).equal('Microting Rentable Items plugin');
     expect(plugin.version).equal('1.0.0.0');
     expect(plugin.status).equal('Aktiveret');
+  });
+
+
+  it('should create eform', function () {
+    loginPage.open('/');
+    const label = 'Number 1';
+    inspectionsPage.createNewEform(label);
+    browser.pause(8000);
   });
   it('should create a new device user', function () {
     myEformsPage.Navbar.goToDeviceUsersPage();
