@@ -19,6 +19,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\localization.json" />
   </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
 
     <ItemGroup>
     <PackageReference Include="McMaster.NETCore.Plugins" Version="0.2.1" />
