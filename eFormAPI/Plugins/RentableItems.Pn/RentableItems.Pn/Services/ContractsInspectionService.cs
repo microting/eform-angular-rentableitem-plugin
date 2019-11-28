@@ -105,17 +105,16 @@ namespace RentableItems.Pn.Services
                         y.Name == lookupeForm)
                     ?.Value;
                 LogEvent($"result is {result}");
-                LogEvent($"resuleForm i {resulteForm}");
+                LogEvent($"resulteForm i {resulteForm}");
                 // modificere mainelement
 
                 Contract dbContract =
                     await _dbContext.Contract.FirstOrDefaultAsync(x =>
                         x.Id == contractInspectionCreateModel.ContractId);
                 
-                
                 int eFormId = int.Parse(resulteForm);
-                Core _core = _coreHelper.GetCore();
-                MainElement mainElement = _core.TemplateRead(eFormId);
+                Core _core = await _coreHelper.GetCore();
+                MainElement mainElement = await _core.TemplateRead(eFormId);
                 mainElement.Repeated = 1;
                 mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();//why 14 days?
                 mainElement.StartDate = DateTime.Now.ToUniversalTime();
@@ -144,14 +143,14 @@ namespace RentableItems.Pn.Services
                 foreach (string siteId in sdkSiteIds.Split(","))
                 {
                     LogEvent($"found siteId {siteId}");
-                    sites.Add(_core.SiteRead(int.Parse(siteId)));
+                    sites.Add(await _core.SiteRead(int.Parse(siteId)));
                 }
 
                 foreach (Site_Dto siteDto in sites)
                 {
                     // sende eform core.caseCreate
 
-                    int? sdkCaseId = _core.CaseCreate(mainElement, "", siteDto.SiteId);
+                    int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId);
 
                     if (sdkCaseId != null)
                     {
@@ -159,7 +158,8 @@ namespace RentableItems.Pn.Services
                         ContractInspection contractInspection = new ContractInspection
                         {
                             SiteId = siteDto.SiteId,
-                            SDKCaseId = (int) sdkCaseId
+                            SDKCaseId = (int) sdkCaseId,
+                            ContractId = contractInspectionCreateModel.ContractId
                         };
                         await contractInspection.Create(_dbContext);
                     }

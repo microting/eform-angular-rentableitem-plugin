@@ -18,7 +18,7 @@
 
             <div class="row">
               <div class="col-md-6">
-                <h6>{{'Creation Date' | translate}}</h6>
+                <h6>{{'Contract Nr:' | translate}}</h6>
               </div>
               <div class="col-md-6" id="selectedContractNr">
                 <strong>{{selectedContractModel.contractNr}}</strong>
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <h6>{{'Creation Date' | translate}}</h6>
+                <h6>{{'Customer Id:' | translate}}</h6>
               </div>
               <div class="col-md-6" id="selectedContractCustomerId">
                 <strong>{{selectedContractModel.customerId}}</strong>
@@ -36,10 +36,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button id="ContractDeleteDeleteBtn" class="btn btn-danger" (click)="deleteContract()">
+        <button id="contractDeleteDeleteBtn" class="btn btn-danger" (click)="deleteContract()">
           {{ 'Delete' | translate }}
         </button>
-        <button id="ContractDeleteCancelBtn" class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button id="contractDeleteCancelBtn" class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

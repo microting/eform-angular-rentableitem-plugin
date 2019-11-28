@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import loginPage from '../../Page objects/Login.page';
+import loginPage from '../../../Page objects/Login.page';
 import {Guid} from 'guid-typescript';
-import myEformsPage from '../../Page objects/MyEforms.page';
-import rentableItemsPage from '../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
-import pluginsPage from '../rentableitem-settings/application-settings.plugins.page';
-
+import myEformsPage from '../../../Page objects/MyEforms.page';
+import rentableItemsPage from '../../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
+import pluginsPage from '../../rentableitem-settings/application-settings.plugins.page';
+import {log} from 'util';
 
 describe('Rentable Item Plugin - Rentable Item', function () {
   before(function () {
@@ -26,17 +26,17 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(plugin.status).equal('Aktiveret');
   });
   it('should check if menu point is there', function () {
-    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Rentable Items');
+    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Lejelige ting');
     rentableItemsPage.rentableItemDropdown();
     browser.pause(4000);
-    expect(rentableItemsPage.rentableItemDropdownItemName('Rentable Items').getText()).equal('Rentable Items');
+    expect(rentableItemsPage.rentableItemDropdownItemName('Lejelige ting').getText()).equal('Lejelige ting');
     browser.pause(4000);
     rentableItemsPage.rentableItemDropdown();
     browser.refresh();
   });
   it('should get btn text', function () {
-    rentableItemsPage.goToRentableItemsPage();
-    rentableItemsPage.getBtnTxt('New rentable item');
+  rentableItemsPage.goToRentableItemsPage();
+  rentableItemsPage.getBtnTxt('New rentable item');
   });
   it('should create rentable item with all parameters', function () {
     const date = Math.floor((Math.random() * 28) + 1);
@@ -53,11 +53,6 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(rentableItem.plateNumber).equal(plateNumber);
     expect(rentableItem.vinNumber).equal(vinNumber);
     expect(rentableItem.serialNumber).equal(serialNumber);
-  });
-  it('should delete Rentable Item', function () {
-    rentableItemsPage.deleteRentableItem();
-    browser.pause(8000);
-    const rentableItem = rentableItemsPage.getFirstRowObject();
-    expect(rentableItem.id === null);
+    rentableItemsPage.cleanup();
   });
 });

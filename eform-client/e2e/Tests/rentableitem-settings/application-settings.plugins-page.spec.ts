@@ -4,50 +4,97 @@ import pluginPage from '../../Page objects/Plugin.page';
 
 import {expect} from 'chai';
 import pluginsPage from './application-settings.plugins.page';
+import inspectionsPage from '../../Page objects/rentableitem-general/rentable-item-Inspection.page';
+import {Guid} from 'guid-typescript';
+import deviceUsersPage from '../../Page objects/DeviceUsers.page';
+import rentableItemsSettingsPage from '../../Page objects/rentableitem-general/rentable-item-Settings.page';
 
 describe('Application settings page - site header section', function () {
-    before(function () {
-        loginPage.open('/auth');
-    });
-    it('should go to plugin settings page', function () {
-        browser.pause(10000);
-        loginPage.login();
-        myEformsPage.Navbar.advancedDropdown();
-        myEformsPage.Navbar.clickonSubMenuItem('Plugins');
-        browser.waitForExist('#plugin-name', 50000);
-        browser.pause(10000);
+  before(function () {
+    loginPage.open('/auth');
+  });
+  it('should go to plugin settings page', function () {
+    loginPage.login();
+    myEformsPage.Navbar.advancedDropdown();
+    myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+    browser.waitForExist('#plugin-name', 50000);
+    browser.pause(20000);
 
-        const plugin = pluginsPage.getFirstPluginRowObj();
-        expect(plugin.id).equal(1);
-        expect(plugin.name).equal('Microting Rentable Items plugin');
-        expect(plugin.version).equal('1.0.0.0');
-        expect(plugin.status).equal('Deaktiveret');
+    const plugin = pluginsPage.getFirstPluginRowObj();
+    expect(plugin.id).equal(1);
+    expect(plugin.name).equal('Microting Rentable Items plugin');
+    expect(plugin.version).equal('1.0.0.0');
+  });
 
-    });
+  it('should activate the plugin', function () {
+    pluginPage.pluginSettingsBtn.click();
+    browser.waitForVisible('#pluginOKBtn', 40000);
+    pluginPage.pluginOKBtn.click();
+    browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
+    browser.refresh();
 
-    it('should activate the plugin', function () {
-        pluginPage.pluginSettingsBtn.click();
-        browser.waitForVisible('#PluginDropDown', 40000);
-        pluginPage.selectValue('PluginDropDown', 'PluginDropDown', 'Aktiveret');
-        pluginPage.saveBtn.click();
-        browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
-        browser.refresh();
-        browser.pause(8000);
-        myEformsPage.Navbar.logout();
-        browser.refresh();
-        browser.pause(10000);
+    loginPage.login();
+    myEformsPage.Navbar.advancedDropdown();
+    myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+    browser.waitForExist('#plugin-name', 50000);
+    browser.pause(10000);
 
-        loginPage.login();
-        myEformsPage.Navbar.advancedDropdown();
-        myEformsPage.Navbar.clickonSubMenuItem('Plugins');
-        browser.waitForExist('#plugin-name', 50000);
-        browser.pause(10000);
+    const plugin2 = pluginsPage.getSecondPluginRowObj();
+    expect(plugin2.id).equal(2);
+    expect(plugin2.name).equal('Microting Customers plugin');
+    expect(plugin2.version).equal('1.0.0.0');
 
-        const plugin = pluginsPage.getFirstPluginRowObj();
-        expect(plugin.id).equal(1);
-        expect(plugin.name).equal('Microting Rentable Items plugin');
-        expect(plugin.version).equal('1.0.0.0');
-        expect(plugin.status).equal('Aktiveret');
-        expect(browser.element(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).isExisting()).equal(true);
-    });
+    plugin2.settingsBtn.click();
+    browser.waitForVisible('#pluginOKBtn', 40000);
+    pluginPage.pluginOKBtn.click();
+    browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
+    browser.refresh();
+
+    loginPage.login();
+    myEformsPage.Navbar.advancedDropdown();
+    myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+    browser.waitForExist('#plugin-name', 50000);
+    browser.pause(10000);
+
+    browser.pause(20000);
+    const plugin = pluginsPage.getFirstPluginRowObj();
+    expect(plugin.id).equal(1);
+    expect(plugin.name).equal('Microting Rentable Items plugin');
+    expect(plugin.version).equal('1.0.0.0');
+  });
+
+
+  it('should create eform', function () {
+    loginPage.open('/');
+    const label = 'Number 1';
+    inspectionsPage.createNewEform(label);
+    browser.pause(8000);
+  });
+  it('should create a new device user', function () {
+    myEformsPage.Navbar.goToDeviceUsersPage();
+    browser.waitForVisible('#newDeviceUserBtn', 20000);
+    const name = 'Alice';
+    const surname = 'Springs';
+    browser.pause(2000);
+    deviceUsersPage.createNewDeviceUser(name, surname);
+  });
+  it('should add eForm and device user to settings', function () {
+    const deviceUser = deviceUsersPage.getDeviceUser(1);
+    const sdkSiteId = deviceUser.siteId.getText();
+    myEformsPage.Navbar.advancedDropdown();
+    myEformsPage.Navbar.clickonSubMenuItem('Plugins');
+    browser.waitForExist('#plugin-name', 50000);
+    browser.pause(20000);
+    const plugin = pluginsPage.getFirstPluginRowObj();
+    plugin.pluginSettingsBtn.click();
+    browser.pause(20000); // has to wait for spinner to go away
+    rentableItemsSettingsPage.sdkSiteIdField.addValue(sdkSiteId);
+    browser.pause(2000);
+    rentableItemsSettingsPage.eFormSelector.addValue('Number 1');
+    browser.pause(2000);
+    inspectionsPage.selectOption('Number 1');
+    browser.pause(2000);
+    rentableItemsSettingsPage.saveBtn.click();
+    browser.pause(4000);
+  });
 });

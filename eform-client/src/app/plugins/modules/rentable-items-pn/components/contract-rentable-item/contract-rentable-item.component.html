@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-md" *ngIf="frameShow">
+  <div class="modal-dialog modal-lg" *ngIf="frameShow">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'Rentable Items for this contract is:' | translate }}</h3>
@@ -7,11 +7,73 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row p-3 table-responsive no-gutters">
-            {{'Contract ID: ' | translate}} {{selectedContractModel.id}} <br>
-            {{'Customer ID: ' | translate}} {{selectedContractModel.customerId}} <br>
-            {{'Contract Start: ' | translate}} {{selectedContractModel.contractStart | date:'dd/MM/yyyy'}} <br>
-            {{'Contract Number: ' | translate}} {{selectedContractModel.contractNr}} <br>
-            {{'Contract End: ' | translate}} {{selectedContractModel.contractEnd | date:'dd/MM/yyyy'}} <br>
+            <h3>
+              {{'Contract Info : ' | translate}} <br>
+            </h3>
+            <div class="row">
+              <div class="col-md-3">
+                {{'Contract ID: ' | translate}} {{selectedContractModel.id}}
+              </div>
+              <div class="col-md-3">
+                {{'Contract Start: ' | translate}} {{selectedContractModel.contractStart | date:'dd/MM/yyyy'}}
+              </div>
+              <div class="col-md-3">
+                {{'Contract End: ' | translate}} {{selectedContractModel.contractEnd | date:'dd/MM/yyyy'}}
+              </div>
+              <div class="col-md-3">
+                {{'Contract Number: ' | translate}} {{selectedContractModel.contractNr}}
+              </div>
+            </div>
+            <br>
+            <h3>
+              {{'Customer Info : ' | translate}} <br>
+            </h3>
+            <div class="row">
+              <div class="col-md-3">
+                {{'ID: ' | translate}} {{customerModel.id}}
+              </div>
+              <div class="col-md-3">
+                {{'Name: ' | translate}} {{customerModel.companyName}}
+              </div>
+              <div class="col-md-3">
+                {{'Contact Person: ' | translate}} {{customerModel.contactPerson}}
+              </div>
+              <div class="col-md-3">
+                {{'Nr. : ' | translate}} {{customerModel.customerNo}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{'Phone nr : ' | translate}}{{customerModel.phone}}
+              </div>
+              <div class="col-md-3">
+                {{'Email : ' | translate}}{{customerModel.email}}
+              </div>
+              <div class="col-md-3">
+                {{'City : ' | translate}}{{customerModel.cityName}}
+              </div>
+              <div class="col-md-3">
+                {{'Address : ' | translate}}{{customerModel.companyAddress}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                {{'VAT number : ' | translate}}{{customerModel.vatNumber}}
+              </div>
+              <div class="col-md-3">
+                {{'EAN code : ' | translate}}{{customerModel.eanCode}}
+              </div>
+              <div class="col-md-3">
+                {{'Zip Code : ' | translate}}{{customerModel.zipCode}}
+              </div>
+              <div class="col-md-3">
+                {{'Address 2 : ' | translate}}{{customerModel.companyAddress2}}
+              </div>
+            </div>
+            <br>
+            <h3>
+              {{'Rentable Items : ' | translate}}
+            </h3>
             <table class="table table-sm table-striped text-center">
               <thead>
               <tr>

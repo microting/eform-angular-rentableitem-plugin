@@ -85,7 +85,8 @@ export class ContractsAddComponent implements OnInit {
     }
   }
   removeRentableItem(rentableItem: any) {
-    this.newContractModel.rentableItems = []
+    const index = this.newContractModel.rentableItems.indexOf(rentableItem);
+    this.newContractModel.rentableItems.splice(index, 1);
   }
   removeCustomer(customer: any) {
     const index = this.customersModel.customers.indexOf(customer);

@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
@@ -41,7 +43,7 @@ namespace RentableItems.Pn.Services
             {
                 RentableItemsModel rentableItemsModel = new RentableItemsModel();
                 IQueryable<ContractRentableItem> itemContractsQuery =
-                    _dbContext.ContractRentableItem.Where(x => x.ContractId == contractId);
+                    _dbContext.ContractRentableItem.Where(x => x.ContractId == contractId && x.WorkflowState == Constants.WorkflowStates.Created);
                 foreach (var rentableItemContract in itemContractsQuery)
                 {
                     RentableItemModel rentableItemModel = new RentableItemModel();
@@ -55,12 +57,14 @@ namespace RentableItems.Pn.Services
                     rentableItemModel.SerialNumber = rentableItem.SerialNumber;
                     rentableItemModel.Id = rentableItem.Id;
                     rentableItemsModel.RentableItems.Add(rentableItemModel);
+                    rentableItemsModel.RentableItemIds.Add(rentableItemContract.RentableItemId);
                 }
                 return new OperationDataResult<RentableItemsModel>(true, rentableItemsModel);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
                 return new OperationDataResult<RentableItemsModel>(false, $"Could not find any rentable items");
             }
         }

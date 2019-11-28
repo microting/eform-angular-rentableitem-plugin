@@ -11,10 +11,15 @@ exports.config = {
     //
     specs: [
         'e2e/Tests/rentableitem-settings/application-settings.plugins-page.spec.ts',
-    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-delete.spec.ts',
-    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-add.spec.ts',
-    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-add-multi.spec.ts',
-    	'e2e/Tests/rentableitem-general/rentableItem-rentableItem-edit.spec.ts',
+	'e2e/Tests/rentableitem-general/contract/customer.settings.spec.ts',
+	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-delete.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-add.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-add-multi.spec.ts',
+    	'e2e/Tests/rentableitem-general/rentableitem/rentableItem-rentableItem-edit.spec.ts',
+	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-add.spec.ts',
+	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-edit.spec.ts',
+	'e2e/Tests/rentableitem-general/contract/rentableItem-contract-delete.spec.ts',
+	'e2e/Tests/rentableitem-general/inspection/rentableItem-inspection-add.spec.ts',
 
     ],
     suites: {

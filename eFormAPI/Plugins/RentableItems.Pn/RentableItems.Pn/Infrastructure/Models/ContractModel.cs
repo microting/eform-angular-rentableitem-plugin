@@ -16,5 +16,6 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int CustomerId { get; set; }
         public int? ContractNr { get; set; }
         public List<int> RentableItemIds { get; set; }
+        public List<int> DeleteIds { get; set; }
     }
 }

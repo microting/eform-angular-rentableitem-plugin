@@ -54,8 +54,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createInspection()">{{ 'Create' |
-          translate }}
+        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createInspection()"
+                id="contractInspectionCreateSaveBtn">
+          {{ 'Create' |translate }}
         </button>
         <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>

@@ -8,4 +8,5 @@ export class ContractModel {
   contractNr: number;
   rentableItems: Array<RentableItemPnModel> = [];
   rentableItemIds: Array<number> = [];
+  deleteIds: Array<number> = [];
 }
