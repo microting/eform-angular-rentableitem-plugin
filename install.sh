@@ -17,17 +17,17 @@ echo "################## END GITVERSION ##################"
 su ubuntu -c \
 "dotnet publish eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.sln -o out /p:Version=$GITVERSION --runtime linux-x64 --configuration Release"
 
-if [ -d "/var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/trash-inspection-pn"]; then
+if [ -d "/var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn" ]; then
 	su ubuntu -c \
-	"rm -fR /var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/trash-inspection-pn"
+	"rm -fR /var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn"
 fi
 
 su ubuntu -c \
-"cp -av /var/www/microting/eform-angular-rentableitem-plugin/eform-client/src/app/plugins/modules/trash-inspection-pn /var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/trash-inspection-pn"
+"cp -av /var/www/microting/eform-angular-rentableitem-plugin/eform-client/src/app/plugins/modules/rentable-items-pn /var/www/microting/eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn"
 su ubuntu -c \
 "mkdir -p /var/www/microting/eform-angular-frontend/eFormAPI/eFormAPI.Web/out/Plugins/"
 
-if [ -d "/var/www/microting/eform-angular-frontend/eFormAPI/eFormAPI.Web/out/Plugins/RentableItems"]; then
+if [ -d "/var/www/microting/eform-angular-frontend/eFormAPI/eFormAPI.Web/out/Plugins/RentableItems" ]; then
 	su ubuntu -c \
 	"rm -fR /var/www/microting/eform-angular-frontend/eFormAPI/eFormAPI.Web/out/Plugins/RentableItems"
 fi
