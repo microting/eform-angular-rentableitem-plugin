@@ -24,14 +24,12 @@ describe('Application settings page - site header section', function () {
     expect(plugin.id).equal(1);
     expect(plugin.name).equal('Microting Rentable Items plugin');
     expect(plugin.version).equal('1.0.0.0');
-    expect(plugin.status).equal('Deaktiveret');
   });
 
   it('should activate the plugin', function () {
     pluginPage.pluginSettingsBtn.click();
-    browser.waitForVisible('#PluginDropDown', 40000);
-    pluginPage.selectValue('PluginDropDown', 'PluginDropDown', 'Aktiveret');
-    pluginPage.saveBtn.click();
+    browser.waitForVisible('#pluginOKBtn', 40000);
+    pluginPage.pluginOKBtn.click();
     browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
     browser.refresh();
 
@@ -45,12 +43,10 @@ describe('Application settings page - site header section', function () {
     expect(plugin2.id).equal(2);
     expect(plugin2.name).equal('Microting Customers plugin');
     expect(plugin2.version).equal('1.0.0.0');
-    expect(plugin2.status).equal('Deaktiveret');
 
     plugin2.settingsBtn.click();
-    browser.waitForVisible('#PluginDropDown', 40000);
-    pluginPage.selectValue('PluginDropDown', 'PluginDropDown', 'Aktiveret');
-    pluginPage.saveBtn.click();
+    browser.waitForVisible('#pluginOKBtn', 40000);
+    pluginPage.pluginOKBtn.click();
     browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
     browser.refresh();
 
@@ -65,7 +61,6 @@ describe('Application settings page - site header section', function () {
     expect(plugin.id).equal(1);
     expect(plugin.name).equal('Microting Rentable Items plugin');
     expect(plugin.version).equal('1.0.0.0');
-    expect(plugin.status).equal('Aktiveret');
   });
 
 
