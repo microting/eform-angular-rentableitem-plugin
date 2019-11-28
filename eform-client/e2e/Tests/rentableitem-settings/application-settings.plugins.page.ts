@@ -23,7 +23,6 @@ class PluginRowObject {
             this.id = +$$('#plugin-id')[rowNum - 1].getText();
             this.name = $$('#plugin-name')[rowNum - 1].getText();
             this.version = $$('#plugin-version')[rowNum - 1].getText();
-            this.status = $$('#plugin-status')[rowNum - 1].getText();
             this.settingsBtn = $$('#plugin-settings-btn')[rowNum - 1];
             this.pluginSettingsBtn = $$('#plugin-settings-link')[rowNum - 1];
         }
