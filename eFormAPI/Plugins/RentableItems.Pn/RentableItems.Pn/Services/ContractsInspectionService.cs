@@ -39,7 +39,7 @@ namespace RentableItems.Pn.Services
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
         }
-        public async Task<OperationDataResult<ContractInspectionsModel>> GetAllContractInspections(ContractInspectionsRequestModel contractInspectionsPnRequestModel)
+        public async Task<OperationDataResult<ContractInspectionsModel>> Index(ContractInspectionsRequestModel contractInspectionsPnRequestModel)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> CreateContractInspection(ContractInspectionModel contractInspectionCreateModel)
+        public async Task<OperationResult> Create(ContractInspectionModel contractInspectionCreateModel)
         {
             try
             {                
@@ -174,7 +174,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> UpdateContractInspection(ContractInspectionModel contractInspectionUpdateModel)
+        public async Task<OperationResult> Update(ContractInspectionModel contractInspectionUpdateModel)
         {
             try
             {
@@ -198,7 +198,7 @@ namespace RentableItems.Pn.Services
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContractInspection"));
             }
         }
-        public async Task<OperationResult> DeleteContractInspection(int id)
+        public async Task<OperationResult> Delete(int id)
         {
             ContractInspection dbContractInspection =
                 await _dbContext.ContractInspection.SingleOrDefaultAsync(x => x.Id == id);

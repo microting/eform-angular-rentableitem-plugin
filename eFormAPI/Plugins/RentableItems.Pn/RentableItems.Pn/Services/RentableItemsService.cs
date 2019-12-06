@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Services
                 _rentableItemsLocalizationService = rentableItemLocalizationService;
             }
 
-        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableItems(RentableItemsRequestModel pnRequestModel)
+        public async Task<OperationDataResult<RentableItemsModel>> Index(RentableItemsRequestModel pnRequestModel)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel)
+        public async Task<OperationResult> Create(RentableItemModel rentableItemPnCreateModel)
         {
             try
             {
@@ -104,7 +104,8 @@ namespace RentableItems.Pn.Services
                     RegistrationDate = rentableItemPnCreateModel.RegistrationDate,
                     VinNumber = rentableItemPnCreateModel.VinNumber,
                     SerialNumber = rentableItemPnCreateModel.SerialNumber,
-                    PlateNumber = rentableItemPnCreateModel.PlateNumber
+                    PlateNumber = rentableItemPnCreateModel.PlateNumber,
+                    eFormId = rentableItemPnCreateModel.EFormId
                 };
 
                 await rentableItem.Create(_dbContext);
@@ -123,7 +124,7 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationResult> UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel)
+        public async Task<OperationResult> Update(RentableItemModel rentableItemPnUpdateModel)
         {
             try
             {
@@ -150,7 +151,7 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
             }
         }
-        public async Task<OperationResult> DeleteRentableItem(int id)
+        public async Task<OperationResult> Delete(int id)
         {
             RentableItem rentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
 

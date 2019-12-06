@@ -10,12 +10,12 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IContractsService
     {
-        Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsRequestModel);
-        Task<OperationResult> CreateContract(ContractModel contractCreateModel);
-        Task<OperationResult> UpdateContract(ContractModel contractUpdateModel);
-        Task<OperationResult> DeleteContract(int id);
-        Task<OperationDataResult<CustomersModel>> GetAllCustomers(CustomersRequestModel customersRequestModel);
-        Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id);
+        Task<OperationDataResult<ContractsModel>> Index(ContractsRequestModel contractsRequestModel);
+        Task<OperationDataResult<CustomersModel>> IndexCustomers(CustomersRequestModel customersRequestModel);
+        Task<OperationResult> Create(ContractModel contractCreateModel);
+        Task<OperationDataResult<CustomerModel>> ReadCustomer(int id);
+        Task<OperationResult> Update(ContractModel contractUpdateModel);
+        Task<OperationResult> Delete(int id);
 
     }
 }

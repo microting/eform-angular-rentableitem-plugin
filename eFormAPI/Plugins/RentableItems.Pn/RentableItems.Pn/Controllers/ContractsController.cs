@@ -20,47 +20,48 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/contracts")]
-        public async Task<OperationDataResult<ContractsModel>> GetAllContracts([FromBody] ContractsRequestModel requestModel)
+        public async Task<OperationDataResult<ContractsModel>> Index([FromBody] ContractsRequestModel requestModel)
         {
-            return await _contractsService.GetAllContracts(requestModel);
-        }
-
-        [HttpPost]
-        [Route("api/contracts/create-contract")]
-        public async Task<OperationResult> CreateContract([FromBody] ContractModel contractCreateModel)
-        {
-            return await _contractsService.CreateContract(contractCreateModel);
-        }
-
-        [HttpPost]
-        [Route("api/contracts/update-contract")]
-        public async Task<OperationResult> UpdateContract([FromBody] ContractModel contractUpdateModel)
-        {
-            return await _contractsService.UpdateContract(contractUpdateModel);
-        }
-
-        [HttpDelete]
-        [Route("api/contracts/delete-contract/{id}")]
-        public async Task<OperationResult> DeleteContract(int id)
-        {
-            return await _contractsService.DeleteContract(id);
+            return await _contractsService.Index(requestModel);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [Route("api/contracts/customers")]
-        public async Task<OperationDataResult<CustomersModel>> GetAllCustomers(
+        public async Task<OperationDataResult<CustomersModel>> IndexCustomers(
             [FromBody] CustomersRequestModel requestModel)
         {
-            return await _contractsService.GetAllCustomers(requestModel);
+            return await _contractsService.IndexCustomers(requestModel);
         }
 
+        [HttpPost]
+        [Route("api/contracts/create-contract")]
+        public async Task<OperationResult> Create([FromBody] ContractModel contractCreateModel)
+        {
+            return await _contractsService.Create(contractCreateModel);
+        }
+        
         [HttpGet]
         [Route("api/contracts/customers/{id}")]
-        public async Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id)
+        public async Task<OperationDataResult<CustomerModel>> ReadCustomer(int id)
         {
-            return await _contractsService.GetSingleCustomer(id);
+            return await _contractsService.ReadCustomer(id);
         }
+        
+        [HttpPost]
+        [Route("api/contracts/update-contract")]
+        public async Task<OperationResult> Update([FromBody] ContractModel contractUpdateModel)
+        {
+            return await _contractsService.Update(contractUpdateModel);
+        }
+
+        [HttpDelete]
+        [Route("api/contracts/delete-contract/{id}")]
+        public async Task<OperationResult> Delete(int id)
+        {
+            return await _contractsService.Delete(id);
+        }
+
         
     }
 }

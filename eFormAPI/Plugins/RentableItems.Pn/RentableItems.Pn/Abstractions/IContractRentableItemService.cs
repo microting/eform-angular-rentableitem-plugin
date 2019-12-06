@@ -6,6 +6,6 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IContractRentableItemService
     {
-        Task<OperationDataResult<RentableItemsModel>> GetAllRentableItemsOnContract(int contractId);
+        Task<OperationDataResult<RentableItemsModel>> Index(int contractId);
     }
 }

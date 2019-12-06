@@ -6,9 +6,9 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IRentableItemsService
     {
-        Task<OperationDataResult<RentableItemsModel>> GetAllRentableItems(RentableItemsRequestModel pnRequestModel);
-        Task<OperationResult> CreateRentableItem(RentableItemModel rentableItemPnCreateModel);
-        Task<OperationResult> UpdateRentableItem(RentableItemModel rentableItemPnUpdateModel);
-        Task<OperationResult> DeleteRentableItem(int Id);
+        Task<OperationDataResult<RentableItemsModel>> Index(RentableItemsRequestModel pnRequestModel);
+        Task<OperationResult> Create(RentableItemModel rentableItemPnCreateModel);
+        Task<OperationResult> Update(RentableItemModel rentableItemPnUpdateModel);
+        Task<OperationResult> Delete(int Id);
     }
 }

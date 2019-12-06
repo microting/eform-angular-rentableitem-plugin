@@ -15,6 +15,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public string SerialNumber { get; set; }
         public string PlateNumber { get; set; }
         public string WorkflowState { get; set; }
+        public int EFormId { get; set; }
 
     }
 

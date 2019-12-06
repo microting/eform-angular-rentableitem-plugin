@@ -7,9 +7,9 @@ namespace RentableItems.Pn.Abstractions
     public interface IContractsInspectionService
     {
 
-        Task<OperationDataResult<ContractInspectionsModel>> GetAllContractInspections(ContractInspectionsRequestModel contractsRequestModel);
-        Task<OperationResult> CreateContractInspection(ContractInspectionModel contractInspectionCreateModel);
-        Task<OperationResult> UpdateContractInspection(ContractInspectionModel contractInspectionUpdateModel);
-        Task<OperationResult> DeleteContractInspection(int id);
+        Task<OperationDataResult<ContractInspectionsModel>> Index(ContractInspectionsRequestModel contractsRequestModel);
+        Task<OperationResult> Create(ContractInspectionModel contractInspectionCreateModel);
+        Task<OperationResult> Update(ContractInspectionModel contractInspectionUpdateModel);
+        Task<OperationResult> Delete(int id);
     }
 }

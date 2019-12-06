@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {RentableItemPnModel} from 'src/app/plugins/modules/rentable-items-pn/models';
 import {RentableItemsPnService} from 'src/app/plugins/modules/rentable-items-pn/services';
 import {formatTimezone} from 'src/app/common/helpers';
+import {TemplateListModel, TemplateRequestModel} from '../../../../../../common/models/eforms';
+import {EFormService} from '../../../../../../common/services/eform';
 
 @Component({
   selector: 'app-rentable-items-pn-add',
@@ -14,13 +16,17 @@ export class RentableItemsPnAddComponent implements OnInit {
   newRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
   spinnerStatus = false;
   frameShow = true;
-  constructor(private rentableItemsService: RentableItemsPnService) { }
+  templateRequestModel: TemplateRequestModel = new TemplateRequestModel();
+  templatesModel: TemplateListModel = new TemplateListModel();
+  constructor(private eFormService: EFormService,
+              private rentableItemsService: RentableItemsPnService) { }
 
   ngOnInit() {
   }
 
   show() {
     this.newRentableItemModel = new RentableItemPnModel();
+    this.eFormService.getAll(this.templateRequestModel);
     this.frame.show();
   }
 
@@ -37,5 +43,8 @@ export class RentableItemsPnAddComponent implements OnInit {
 
   onRegistrationDateSelected(e: any) {
     this.newRentableItemModel.registrationDate = formatTimezone(e.value._d);
+  }
+  onSelectedChanged(e: any) {
+    this.newRentableItemModel.eFormId = e.id;
   }
 }

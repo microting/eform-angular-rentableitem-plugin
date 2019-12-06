@@ -17,9 +17,9 @@ namespace RentableItems.Pn.Controllers
 
         [HttpGet]
         [Route("api/contract-rentable-item/{contractId}")]
-        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableItemsOnContract(int contractId)
+        public async Task<OperationDataResult<RentableItemsModel>> Index(int contractId)
         {
-            return await _contractRentableItemService.GetAllRentableItemsOnContract(contractId);
+            return await _contractRentableItemService.Index(contractId);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace RentableItems.Pn.Services
             _customerDbContext = customerDbContext;
 
         }
-        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableItemsOnContract(int contractId)
+        public async Task<OperationDataResult<RentableItemsModel>> Index(int contractId)
         {
             try
             {

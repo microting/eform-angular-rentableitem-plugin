@@ -42,7 +42,7 @@ namespace RentableItems.Pn.Services
             _customerDbContext = customerDbContext;
 
         }
-        public async Task<OperationDataResult<ContractsModel>> GetAllContracts(ContractsRequestModel contractsPnRequestModel)
+        public async Task<OperationDataResult<ContractsModel>> Index(ContractsRequestModel contractsPnRequestModel)
         {
             try
             {
@@ -88,139 +88,7 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorObtainingContracts"));
             }
         }
-            
-        public async Task<OperationResult> CreateContract(ContractModel contractCreateModel)
-        {
-            try
-            {
-                Contract contract =
-                    _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr && x.WorkflowState == Constants.WorkflowStates.Created);
-                if (contract == null)
-                {
-                    Contract newContract = new Contract
-                    {
-                        ContractEnd = contractCreateModel.ContractEnd,
-                        ContractNr = contractCreateModel.ContractNr,
-                        ContractStart = contractCreateModel.ContractStart,
-                        CustomerId = contractCreateModel.CustomerId,
-                    };
-                    await newContract.Create(_dbContext);
-
-                    foreach (var rentableItemId in contractCreateModel.RentableItemIds)
-                    {
-                        Contract dbContract = await 
-                            _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == contractCreateModel.ContractNr);
-                        ContractRentableItem contractRentableItem = new ContractRentableItem();
-                        contractRentableItem.RentableItemId = rentableItemId;
-                        contractRentableItem.ContractId = dbContract.Id;
-                        
-                        await contractRentableItem.Create(_dbContext);
-                    }
-                }
-
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractCreated",
-                    contractCreateModel.CustomerId,
-                        contractCreateModel.ContractNr));
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.Message);
-                _logger.LogError(e.Message);
-                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingContract"));
-            }
-        }
-
-        public async Task<OperationResult> UpdateContract(ContractModel updateModel)
-        {
-            try
-            {
-                Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == updateModel.Id);
-                if (contract != null)
-                {
-                    contract.ContractEnd = updateModel.ContractEnd;
-                    contract.ContractNr = updateModel.ContractNr;
-                    contract.ContractStart = updateModel.ContractStart;
-                    contract.CustomerId = updateModel.CustomerId;
-                    
-                    await contract.Update(_dbContext);
-                }
-                if (updateModel.DeleteIds.Count > 0)
-                {
-                    Contract dbContract = await 
-                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
-
-                    foreach (var rentableItemId in updateModel.DeleteIds)
-                    {
-                        ContractRentableItem deleteContractRentableItem =
-                            await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
-                                x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
-                        await deleteContractRentableItem.Delete(_dbContext);   
-                    }
-                }
-
-                foreach (var rentableItemId in updateModel.RentableItemIds)
-                {
-                    Contract dbContract = await 
-                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
-                    ContractRentableItem contractRentableItem =
-                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
-                            x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
-                    ContractRentableItem checkContractRentableItem =
-                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(
-                            x => x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
-                    if (checkContractRentableItem != null)
-                    {
-                        contractRentableItem.WorkflowState = Constants.WorkflowStates.Created;
-                        await contractRentableItem.Update(_dbContext);
-                    }
-                    else
-                    {
-                        ContractRentableItem createContractRentableItem = new ContractRentableItem();
-                        createContractRentableItem.ContractId = dbContract.Id;
-                        createContractRentableItem.RentableItemId = rentableItemId; 
-                        await createContractRentableItem.Create(_dbContext);
-                    }
-                }
-
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractsUpdatedSuccessfully"));
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.Message);
-                _logger.LogError(e.Message);
-                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContract"));
-            }
-        }
-
-        public async Task<OperationResult> DeleteContract(int id)
-        {
-            Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == id);
-            try
-            {
-                if (contract != null)
-                {
-                    IQueryable<ContractRentableItem> contractRentableItems =
-                       _dbContext.ContractRentableItem.AsQueryable();
-                    contractRentableItems = contractRentableItems.Where(x =>
-                        x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created);
-                    var list = await contractRentableItems.ToListAsync();
-                    foreach (var contractRentable in list)
-                    {
-                        await contractRentable.Delete(_dbContext);
-                    }
-                    await contract.Delete(_dbContext);
-                }
-                return new OperationResult(true);
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.Message);
-                _logger.LogError(e.Message);
-                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContract"));
-            }
-        }
-        
-        public async Task<OperationDataResult<CustomersModel>> GetAllCustomers(
+        public async Task<OperationDataResult<CustomersModel>> IndexCustomers(
             CustomersRequestModel pnRequestModel)
         {
             try
@@ -295,8 +163,48 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo"));
             }
         }
+        public async Task<OperationResult> Create(ContractModel contractCreateModel)
+        {
+            try
+            {
+                Contract contract =
+                    _dbContext.Contract.FirstOrDefault(x => x.ContractNr == contractCreateModel.ContractNr && x.WorkflowState == Constants.WorkflowStates.Created);
+                if (contract == null)
+                {
+                    Contract newContract = new Contract
+                    {
+                        ContractEnd = contractCreateModel.ContractEnd,
+                        ContractNr = contractCreateModel.ContractNr,
+                        ContractStart = contractCreateModel.ContractStart,
+                        CustomerId = contractCreateModel.CustomerId,
+                    };
+                    await newContract.Create(_dbContext);
 
-        public async Task<OperationDataResult<CustomerModel>> GetSingleCustomer(int id)
+                    foreach (var rentableItemId in contractCreateModel.RentableItemIds)
+                    {
+                        Contract dbContract = await 
+                            _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == contractCreateModel.ContractNr);
+                        ContractRentableItem contractRentableItem = new ContractRentableItem();
+                        contractRentableItem.RentableItemId = rentableItemId;
+                        contractRentableItem.ContractId = dbContract.Id;
+                        
+                        await contractRentableItem.Create(_dbContext);
+                    }
+                }
+
+                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractCreated",
+                    contractCreateModel.CustomerId,
+                        contractCreateModel.ContractNr));
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileCreatingContract"));
+            }
+        }
+
+        public async Task<OperationDataResult<CustomerModel>> ReadCustomer(int id)
         {
             try
             {
@@ -331,6 +239,96 @@ namespace RentableItems.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<CustomerModel>(false, "Error obtaining customer");
+            }
+        }
+        
+        public async Task<OperationResult> Update(ContractModel updateModel)
+        {
+            try
+            {
+                Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == updateModel.Id);
+                if (contract != null)
+                {
+                    contract.ContractEnd = updateModel.ContractEnd;
+                    contract.ContractNr = updateModel.ContractNr;
+                    contract.ContractStart = updateModel.ContractStart;
+                    contract.CustomerId = updateModel.CustomerId;
+                    
+                    await contract.Update(_dbContext);
+                }
+                if (updateModel.DeleteIds.Count > 0)
+                {
+                    Contract dbContract = await 
+                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
+
+                    foreach (var rentableItemId in updateModel.DeleteIds)
+                    {
+                        ContractRentableItem deleteContractRentableItem =
+                            await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
+                                x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
+                        await deleteContractRentableItem.Delete(_dbContext);   
+                    }
+                }
+
+                foreach (var rentableItemId in updateModel.RentableItemIds)
+                {
+                    Contract dbContract = await 
+                        _dbContext.Contract.FirstOrDefaultAsync(x => x.ContractNr == updateModel.ContractNr);
+                    ContractRentableItem contractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(x =>
+                            x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
+                    ContractRentableItem checkContractRentableItem =
+                        await _dbContext.ContractRentableItem.FirstOrDefaultAsync(
+                            x => x.ContractId == dbContract.Id && x.RentableItemId == rentableItemId);
+                    if (checkContractRentableItem != null)
+                    {
+                        contractRentableItem.WorkflowState = Constants.WorkflowStates.Created;
+                        await contractRentableItem.Update(_dbContext);
+                    }
+                    else
+                    {
+                        ContractRentableItem createContractRentableItem = new ContractRentableItem();
+                        createContractRentableItem.ContractId = dbContract.Id;
+                        createContractRentableItem.RentableItemId = rentableItemId; 
+                        await createContractRentableItem.Create(_dbContext);
+                    }
+                }
+
+                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ContractsUpdatedSuccessfully"));
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingContract"));
+            }
+        }
+
+        public async Task<OperationResult> Delete(int id)
+        {
+            Contract contract = await _dbContext.Contract.SingleOrDefaultAsync(x => x.Id == id);
+            try
+            {
+                if (contract != null)
+                {
+                    IQueryable<ContractRentableItem> contractRentableItems =
+                       _dbContext.ContractRentableItem.AsQueryable();
+                    contractRentableItems = contractRentableItems.Where(x =>
+                        x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created);
+                    var list = await contractRentableItems.ToListAsync();
+                    foreach (var contractRentable in list)
+                    {
+                        await contractRentable.Delete(_dbContext);
+                    }
+                    await contract.Delete(_dbContext);
+                }
+                return new OperationResult(true);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError(e.Message);
+                _logger.LogError(e.Message);
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContract"));
             }
         }
     }

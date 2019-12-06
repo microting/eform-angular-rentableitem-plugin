@@ -20,31 +20,31 @@ namespace RentableItems.Pn.Controllers
 
         [HttpPost]
         [Route("api/rentableItems-pn")]
-        public async Task<OperationDataResult<RentableItemsModel>> GetAllRentableIems([FromBody] RentableItemsRequestModel requestModel)
+        public async Task<OperationDataResult<RentableItemsModel>> Index([FromBody] RentableItemsRequestModel requestModel)
         {
-            return await _rentableItemsService.GetAllRentableItems(requestModel);
+            return await _rentableItemsService.Index(requestModel);
         }
 
         [HttpPost]
         [Route("api/rentableItems-pn/create-rentableItem")]
         [Authorize(Policy = RentableItemsClaims.AccessRentableItemsPlugin)]
-        public async Task<OperationResult> CreateRentableItem([FromBody] RentableItemModel rentableItemCreateModel)
+        public async Task<OperationResult> Create([FromBody] RentableItemModel rentableItemCreateModel)
         {
-            return await _rentableItemsService.CreateRentableItem(rentableItemCreateModel);
+            return await _rentableItemsService.Create(rentableItemCreateModel);
         }
 
         [HttpPost]
         [Route("api/rentableItems-pn/update-rentableItem")]
-        public async Task<OperationResult> UpdateRentableItem([FromBody] RentableItemModel rentableItemUpdateModel)
+        public async Task<OperationResult> Update([FromBody] RentableItemModel rentableItemUpdateModel)
         {
-            return await _rentableItemsService.UpdateRentableItem(rentableItemUpdateModel);
+            return await _rentableItemsService.Update(rentableItemUpdateModel);
         }
 
         [HttpDelete]
         [Route("api/rentableItems-pn/delete-rentableItem/{id}")]
-        public  async Task<OperationResult> DeleteRentableItem(int id)
+        public async Task<OperationResult> Delete(int id)
         {
-            return await _rentableItemsService.DeleteRentableItem(id);
+            return await _rentableItemsService.Delete(id);
         }
     }
 }
