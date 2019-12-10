@@ -127,7 +127,7 @@ namespace RentableItems.Pn.Services
                 mainElement.ElementList[0].Label = mainElement.Label;
                 // finde sites som eform skal sendes til
 
-                List<Site_Dto> sites = new List<Site_Dto>();
+                List<SiteDto> sites = new List<SiteDto>();
                 
 
                 lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
@@ -146,7 +146,7 @@ namespace RentableItems.Pn.Services
                     sites.Add(await _core.SiteRead(int.Parse(siteId)));
                 }
 
-                foreach (Site_Dto siteDto in sites)
+                foreach (SiteDto siteDto in sites)
                 {
                     // sende eform core.caseCreate
 
