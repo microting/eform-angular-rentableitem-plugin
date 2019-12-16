@@ -80,6 +80,7 @@ namespace RentableItems.Pn.Services
                         ModelName = rentableItem.ModelName,
                         SerialNumber = rentableItem.SerialNumber,
                         Id = rentableItem.Id,
+                        EFormId = rentableItem.eFormId
                     });
                 });
                 return new OperationDataResult<RentableItemsModel>(true, rentableItemsPnModel);
@@ -138,10 +139,12 @@ namespace RentableItems.Pn.Services
                     rentableItem.SerialNumber = rentableItemPnUpdateModel.SerialNumber;
                     rentableItem.VinNumber = rentableItemPnUpdateModel.VinNumber;
                     rentableItem.PlateNumber = rentableItemPnUpdateModel.PlateNumber;
+                    rentableItem.eFormId = rentableItemPnUpdateModel.EFormId;
                 
                     await rentableItem.Update(_dbContext);
                 }
-                return new OperationDataResult<RentableItemsModel>(true);
+                return new OperationDataResult<RentableItemsModel>(true, 
+                    _rentableItemsLocalizationService.GetString("RentableItemUpdatedSuccessfully"));
             }
             catch (Exception e)
             {

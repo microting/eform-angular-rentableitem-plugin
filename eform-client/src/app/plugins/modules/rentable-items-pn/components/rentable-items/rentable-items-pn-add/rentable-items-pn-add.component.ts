@@ -26,8 +26,18 @@ export class RentableItemsPnAddComponent implements OnInit {
 
   show() {
     this.newRentableItemModel = new RentableItemPnModel();
-    this.eFormService.getAll(this.templateRequestModel);
+    this.getAlleForms();
     this.frame.show();
+  }
+
+  getAlleForms() {
+    this.spinnerStatus = true;
+    this.eFormService.getAll(this.templateRequestModel).subscribe(data => {
+      if (data && data.success) {
+        this.templatesModel = data.model;
+      }
+      this.spinnerStatus = false;
+    });
   }
 
   createRentableItem() {
