@@ -70,10 +70,9 @@ namespace RentableItems.Pn.Services
                     {
                         ContractId = contractInspection.ContractId,
                         DoneAt = contractInspection.DoneAt,
-                        SdkCaseId = contractInspection.SDKCaseId,
-                        SiteId = contractInspection.SiteId,
                         Id = contractInspection.Id,
                     });
+                    
                 });
                 return new OperationDataResult<ContractInspectionsModel>(true, contractInspectionsModel);
             }
@@ -138,7 +137,7 @@ namespace RentableItems.Pn.Services
 
                     // finde sites som eform skal sendes til
 
-                    List<Site_Dto> sites = new List<Site_Dto>();
+                    List<SiteDto> sites = new List<SiteDto>();
 
 
                     string lookupSite =
@@ -158,7 +157,7 @@ namespace RentableItems.Pn.Services
                         sites.Add(await _core.SiteRead(int.Parse(siteId)));
                     }
 
-                    foreach (Site_Dto siteDto in sites)
+                    foreach (SiteDto siteDto in sites)
                     {
                         // sende eform core.caseCreate
 
@@ -169,11 +168,17 @@ namespace RentableItems.Pn.Services
                             // gemme caseid på contractInspection
                             ContractInspection contractInspection = new ContractInspection
                             {
-                                SiteId = siteDto.SiteId,
-                                SDKCaseId = (int) sdkCaseId,
                                 ContractId = contractInspectionCreateModel.ContractId
                             };
                             await contractInspection.Create(_dbContext);
+                            ContractInspectionItem contractInspectionItem = new ContractInspectionItem
+                            {
+                                ContractInspectionId = contractInspection.Id,
+                                RentableItemId = rentableItemId,
+                                SiteId = siteDto.SiteId,
+                                SDKCaseId = (int) sdkCaseId
+                            };
+                            await contractInspectionItem.Create(_dbContext);
                         }
                     }
                 }
@@ -199,8 +204,8 @@ namespace RentableItems.Pn.Services
                 {
                     contractInspection.ContractId = contractInspectionUpdateModel.ContractId;
                     contractInspection.DoneAt = contractInspectionUpdateModel.DoneAt;
-                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
-                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
+//                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
+//                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
                     await contractInspection.Update(_dbContext);
                 }
                 return new OperationResult(true);
