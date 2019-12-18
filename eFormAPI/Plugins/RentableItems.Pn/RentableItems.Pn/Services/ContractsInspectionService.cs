@@ -66,8 +66,15 @@ namespace RentableItems.Pn.Services
                 List<ContractInspection> contractInspections = contractInspectionsQuery.ToList();
                 contractInspections.ForEach(contractInspection =>
                 {
+                    ContractInspectionItem contractInspectionItem =
+                        _dbContext.ContractInspectionItem.FirstOrDefault(x =>
+                            x.ContractInspectionId == contractInspection.Id);
+                    RentableItem rentableItem =
+                        _dbContext.RentableItem.FirstOrDefault(y => y.Id == contractInspectionItem.RentableItemId);
                     contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
                     {
+                        SdkCaseId = contractInspectionItem.SDKCaseId,
+                        eFormId = rentableItem.eFormId,
                         ContractId = contractInspection.ContractId,
                         DoneAt = contractInspection.DoneAt,
                         Id = contractInspection.Id,
@@ -80,7 +87,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<ContractInspectionsModel>(true,
+                return new OperationDataResult<ContractInspectionsModel>(false,
                     _rentableItemsLocalizationService.GetString("ErrorObtainingContractInspectionInfo"));
             }
         }
