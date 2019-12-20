@@ -27,6 +27,9 @@ script:
   - cd ../..
   - git clone --depth=50 --branch=stable https://github.com/microting/eform-angular-frontend.git microting/eform-angular-frontend
   - git clone --depth=50 --branch=stable https://github.com/microting/eform-angular-basecustomer-plugin.git microting/eform-angular-basecustomer-plugin
+  - cd microting/eform-angular-basecustomer-plugin
+  - dotnet restore eFormAPI/Plugins/Customers.Pn/Customers.Pn.sln
+  - dotnet build eFormAPI/Plugins/Customers.Pn/Customers.Pn.sln
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/src/app/plugins/modules/rentable-items-pn microting/eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-settings microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-settings
   - cp -av microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-general microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-general
