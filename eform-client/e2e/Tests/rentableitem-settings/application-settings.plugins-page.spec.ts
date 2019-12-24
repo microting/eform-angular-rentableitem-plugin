@@ -44,7 +44,7 @@ describe('Application settings page - site header section', function () {
     expect(plugin2.name).equal('Microting Customers plugin');
     expect(plugin2.version).equal('1.0.0.0');
 
-    plugin2.settingsBtn.click();
+    plugin2.pluginSettingsBtn.click();
     browser.waitForVisible('#pluginOKBtn', 40000);
     pluginPage.pluginOKBtn.click();
     browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
@@ -80,7 +80,7 @@ describe('Application settings page - site header section', function () {
   });
   it('should add eForm and device user to settings', function () {
     const deviceUser = deviceUsersPage.getDeviceUser(1);
-    const sdkSiteId = deviceUser.siteId.getText();
+    const sdkSiteId = deviceUser.siteId;
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     browser.waitForExist('#plugin-name', 50000);
