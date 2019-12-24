@@ -14,6 +14,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int ContractId { get; set; }
         public int SdkCaseId { get; set; }
         public int SiteId { get; set; }
+        public int eFormId { get; set; }
         public DateTime? DoneAt { get; set; }
         
     }

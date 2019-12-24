@@ -66,14 +66,20 @@ namespace RentableItems.Pn.Services
                 List<ContractInspection> contractInspections = contractInspectionsQuery.ToList();
                 contractInspections.ForEach(contractInspection =>
                 {
+                    ContractInspectionItem contractInspectionItem =
+                        _dbContext.ContractInspectionItem.FirstOrDefault(x =>
+                            x.ContractInspectionId == contractInspection.Id);
+                    RentableItem rentableItem =
+                        _dbContext.RentableItem.FirstOrDefault(y => y.Id == contractInspectionItem.RentableItemId);
                     contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
                     {
+                        SdkCaseId = contractInspectionItem.SDKCaseId,
+                        eFormId = rentableItem.eFormId,
                         ContractId = contractInspection.ContractId,
                         DoneAt = contractInspection.DoneAt,
-                        SdkCaseId = contractInspection.SDKCaseId,
-                        SiteId = contractInspection.SiteId,
                         Id = contractInspection.Id,
                     });
+                    
                 });
                 return new OperationDataResult<ContractInspectionsModel>(true, contractInspectionsModel);
             }
@@ -81,7 +87,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<ContractInspectionsModel>(true,
+                return new OperationDataResult<ContractInspectionsModel>(false,
                     _rentableItemsLocalizationService.GetString("ErrorObtainingContractInspectionInfo"));
             }
         }
@@ -90,80 +96,100 @@ namespace RentableItems.Pn.Services
         {
             try
             {                
-                // finde eform fra settings
-
-                string lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
-                string lookupeForm = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
-                LogEvent($"lookup is {lookup}");
-                LogEvent($"lookupeForm is {lookupeForm}");
-                string result = _dbContext.PluginConfigurationValues.AsNoTracking()
-                    .FirstOrDefault(x => 
-                        x.Name == lookup)
-                    ?.Value;
-                string resulteForm = _dbContext.PluginConfigurationValues.AsNoTracking()
-                    .FirstOrDefault(y => 
-                        y.Name == lookupeForm)
-                    ?.Value;
-                LogEvent($"result is {result}");
-                LogEvent($"resulteForm i {resulteForm}");
-                // modificere mainelement
-
-                Contract dbContract =
-                    await _dbContext.Contract.FirstOrDefaultAsync(x =>
-                        x.Id == contractInspectionCreateModel.ContractId);
-                
-                int eFormId = int.Parse(resulteForm);
                 Core _core = await _coreHelper.GetCore();
-                MainElement mainElement = await _core.TemplateRead(eFormId);
-                mainElement.Repeated = 1;
-                mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();//why 14 days?
-                mainElement.StartDate = DateTime.Now.ToUniversalTime();
-                mainElement.Label = contractInspectionCreateModel.ContractId.ToString();
-                CDataValue cDataValue = new CDataValue();
 
-                cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
-                cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
-                mainElement.ElementList[0].Description = cDataValue;
-                mainElement.ElementList[0].Label = mainElement.Label;
-                // finde sites som eform skal sendes til
-
-                List<SiteDto> sites = new List<SiteDto>();
-                
-
-                lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
-                LogEvent($"lookup is {lookup}");
-
-                string sdkSiteIds = _dbContext.PluginConfigurationValues.AsNoTracking()
-                    .FirstOrDefault(x => 
-                        x.Name == lookup)
-                    ?.Value;
-                
-                LogEvent($"sdkSiteIds is {sdkSiteIds}");
-                
-                foreach (string siteId in sdkSiteIds.Split(","))
+                // finde eform fra settings
+                List<ContractRentableItem> contractRentableItem =
+                    await _dbContext.ContractRentableItem.Where(x =>
+                        x.ContractId == contractInspectionCreateModel.ContractId).ToListAsync();
+                foreach (var item in contractRentableItem)
                 {
-                    LogEvent($"found siteId {siteId}");
-                    sites.Add(await _core.SiteRead(int.Parse(siteId)));
-                }
+                    int rentableItemId = item.RentableItemId;
 
-                foreach (SiteDto siteDto in sites)
-                {
-                    // sende eform core.caseCreate
+                    RentableItem rentableItem =
+                        await _dbContext.RentableItem.FirstOrDefaultAsync(x => x.Id == rentableItemId);
+                    int eFormId = rentableItem.eFormId;
+                    string lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
+//                string lookupeForm = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
+                    LogEvent($"lookup is {lookup}");
+//                LogEvent($"lookupeForm is {lookupeForm}");
+                    string result = _dbContext.PluginConfigurationValues.AsNoTracking()
+                        .FirstOrDefault(x =>
+                            x.Name == lookup)
+                        ?.Value;
+//                string resulteForm = _dbContext.PluginConfigurationValues.AsNoTracking()
+//                    .FirstOrDefault(y => 
+//                        y.Name == lookupeForm)
+//                    ?.Value;
+                    LogEvent($"result is {result}");
+//                LogEvent($"resulteForm i {resulteForm}");
+                    // modificere mainelement
 
-                    int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId);
+                    Contract dbContract =
+                        await _dbContext.Contract.FirstOrDefaultAsync(x =>
+                            x.Id == contractInspectionCreateModel.ContractId);
 
-                    if (sdkCaseId != null)
+//                int eFormId = int.Parse(resulteForm);
+                    MainElement mainElement = await _core.TemplateRead(eFormId);
+                    mainElement.Repeated = 1;
+                    mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
+                    mainElement.StartDate = DateTime.Now.ToUniversalTime();
+                    mainElement.Label = contractInspectionCreateModel.ContractId.ToString();
+                    CDataValue cDataValue = new CDataValue();
+
+                    cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
+                    cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
+                    mainElement.ElementList[0].Description = cDataValue;
+                    mainElement.ElementList[0].Label = mainElement.Label;
+
+                    // finde sites som eform skal sendes til
+
+                    List<SiteDto> sites = new List<SiteDto>();
+
+
+                    string lookupSite =
+                        $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
+                    LogEvent($"lookup is {lookupSite}");
+
+                    string sdkSiteIds = _dbContext.PluginConfigurationValues.AsNoTracking()
+                        .FirstOrDefault(x =>
+                            x.Name == lookupSite)
+                        ?.Value;
+
+                    LogEvent($"sdkSiteIds is {sdkSiteIds}");
+
+                    foreach (string siteId in sdkSiteIds.Split(","))
                     {
-                        // gemme caseid på contractInspection
-                        ContractInspection contractInspection = new ContractInspection
+                        LogEvent($"found siteId {siteId}");
+                        sites.Add(await _core.SiteRead(int.Parse(siteId)));
+                    }
+
+                    foreach (SiteDto siteDto in sites)
+                    {
+                        // sende eform core.caseCreate
+
+                        int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId);
+
+                        if (sdkCaseId != null)
                         {
-                            SiteId = siteDto.SiteId,
-                            SDKCaseId = (int) sdkCaseId,
-                            ContractId = contractInspectionCreateModel.ContractId
-                        };
-                        await contractInspection.Create(_dbContext);
+                            // gemme caseid på contractInspection
+                            ContractInspection contractInspection = new ContractInspection
+                            {
+                                ContractId = contractInspectionCreateModel.ContractId
+                            };
+                            await contractInspection.Create(_dbContext);
+                            ContractInspectionItem contractInspectionItem = new ContractInspectionItem
+                            {
+                                ContractInspectionId = contractInspection.Id,
+                                RentableItemId = rentableItemId,
+                                SiteId = siteDto.SiteId,
+                                SDKCaseId = (int) sdkCaseId
+                            };
+                            await contractInspectionItem.Create(_dbContext);
+                        }
                     }
                 }
+
                 return new OperationResult(true, "Inspection Created Successfully");
             }
             catch (Exception e)
@@ -185,8 +211,8 @@ namespace RentableItems.Pn.Services
                 {
                     contractInspection.ContractId = contractInspectionUpdateModel.ContractId;
                     contractInspection.DoneAt = contractInspectionUpdateModel.DoneAt;
-                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
-                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
+//                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
+//                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
                     await contractInspection.Update(_dbContext);
                 }
                 return new OperationResult(true);
