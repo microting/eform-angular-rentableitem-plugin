@@ -23,7 +23,7 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(plugin.id).equal(1);
     expect(plugin.name).equal('Microting Rentable Items plugin');
     expect(plugin.version).equal('1.0.0.0');
-    expect(plugin.status).equal('Aktiveret');
+    expect(plugin.settingsBtn.isVisible);
   });
   it('should check if menu point is there', function () {
     expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Lejelige ting');
