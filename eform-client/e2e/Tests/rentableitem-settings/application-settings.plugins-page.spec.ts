@@ -80,7 +80,7 @@ describe('Application settings page - site header section', function () {
   });
   it('should add eForm and device user to settings', function () {
     const deviceUser = deviceUsersPage.getDeviceUser(1);
-    const sdkSiteId = deviceUser.siteId;
+    const sdkSiteId = deviceUser.siteId.getText();
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     browser.waitForExist('#plugin-name', 50000);

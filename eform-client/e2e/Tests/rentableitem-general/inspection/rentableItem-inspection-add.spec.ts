@@ -10,7 +10,7 @@ import rentableItemsSettingsPage from '../../../Page objects/rentableitem-genera
 import contractsPage from '../../../Page objects/rentableitem-general/rentable-item-Contract.page';
 import rentableItemsPage from '../../../Page objects/rentableitem-general/rentable-item-RentableItem.page';
 
-describe('Rentable Items - Inspections', function () {
+describe('Rentable Items - Inspections - Add', function () {
   before(function () {
     loginPage.open('/auth');
     loginPage.login();
@@ -41,9 +41,10 @@ describe('Rentable Items - Inspections', function () {
     browser.pause(2000);
     inspectionsPage.selectOption('Alice Springs');
     inspectionsPage.contractInspectionCreateSaveBtn.click();
-    browser.pause(4000);
+    browser.pause(10000);
   });
   it('should verify the inspection is created', function () {
+    browser.pause(10000);
     rentableItemsPage.rentableItemDropdown();
     browser.pause(1000);
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();

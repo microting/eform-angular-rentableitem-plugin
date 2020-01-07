@@ -59,6 +59,9 @@ export class RentableItemRentableItemPage extends Page {
   public get rentableItemCreatePlateNumberBox() {
     return browser.element('#createPlateNumber');
   }
+  public get eFormSelector() {
+    return browser.element(`//*[@id= 'eFormId']//input`);
+  }
   public get rentableItemCreateSaveBtn() {
     return browser.element('#rentableItemCreateSaveBtn');
   }
@@ -81,9 +84,12 @@ export class RentableItemRentableItemPage extends Page {
   public get rentableItemEditPlateNumberBox() {
     return browser.element('#editPlateNumber');
   }
-    public clickDate(date) {
-      browser.element(`//*[text()="${date}"]`).click();
-    }
+  public clickDate(date) {
+    browser.element(`//*[text()="${date}"]`).click();
+  }
+  public selectOption(name) {
+    browser.element(`//*[text()="${name}"]`).click();
+  }
   public get rentableItemDeleteBtn() {
     return browser.element('#rentableItemDeleteDeleteBtn');
   }
@@ -96,12 +102,17 @@ export class RentableItemRentableItemPage extends Page {
     this.rentableItemDropdownItemName('Lejelige ting').click();
     browser.pause(8000);
   }
-  createRentableItem(brand: string, model: string, date: number, serialNumber?: string,  VINNumber?: string, plateNumber?: string) {
+  createRentableItem(brand: string, model: string, date: number, eFormName: string, serialNumber?: string,
+                     VINNumber?: string, plateNumber?: string) {
     this.rentableItemCreateBtn.click();
     browser.pause(8000);
     this.rentableItemCreateBrandBox.addValue(brand);
     browser.pause(2000);
     this.rentableItemCreateModelBox.addValue(model);
+    browser.pause(2000);
+    this.eFormSelector.addValue(eFormName);
+    browser.pause(2000);
+    this.selectOption(eFormName);
     browser.pause(2000);
     this.rentableItemCreateSerialNumberBox.addValue(serialNumber);
     browser.pause(2000);

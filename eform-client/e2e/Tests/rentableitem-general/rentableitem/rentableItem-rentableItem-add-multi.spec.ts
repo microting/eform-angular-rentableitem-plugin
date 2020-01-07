@@ -22,7 +22,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     const serialNumber = Guid.create().toString();
     const vinNumber = Guid.create().toString();
     const plateNumber = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand, model, date, serialNumber, vinNumber, plateNumber);
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand, model, date, eForm, serialNumber, vinNumber, plateNumber);
     const rentableItem = rentableItemsPage.getFirstRowObject();
     // expect(rentableItem.registrationDate).equal(date);
     expect(rentableItem.brand).equal(brand);
@@ -38,7 +39,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     const model = Guid.create().toString();
     const serialNumber = Guid.create().toString();
     const vinNumber = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand,  model,  date,  serialNumber, vinNumber, '');
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand,  model,  date, eForm, serialNumber, vinNumber, '');
     const rentableItem = rentableItemsPage.getFirstRowObject();
     expect(rentableItem.brand).equal(brand);
     expect(rentableItem.model).equal(model);
@@ -51,7 +53,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     const brand = Guid.create().toString();
     const model = Guid.create().toString();
     const serialNumber = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand,  model,  date,  serialNumber, '', '');
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand,  model,  date, eForm,  serialNumber, '', '');
     const rentableItem = rentableItemsPage.getFirstRowObject();
     expect(rentableItem.brand).equal(brand);
     expect(rentableItem.model).equal(model);
@@ -63,7 +66,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     const brand = Guid.create().toString();
     const model = Guid.create().toString();
     const vinNumber = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand,  model,  date,  '', vinNumber, '');
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand,  model,  date, eForm,  '', vinNumber, '');
     const rentableItem = rentableItemsPage.getFirstRowObject();
     expect(rentableItem.brand).equal(brand);
     expect(rentableItem.model).equal(model);

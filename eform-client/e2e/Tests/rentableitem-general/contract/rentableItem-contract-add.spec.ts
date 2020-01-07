@@ -45,7 +45,8 @@ describe('Rentable Items - Contracts - add', function () {
     const serialNumber = Guid.create().toString();
     const vinNumber = Guid.create().toString();
     const plateNumber = Guid.create().toString();
-    rentableItemsPage.createRentableItem(brand, model, date, serialNumber, vinNumber, plateNumber);
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand, model, date, eForm, serialNumber, vinNumber, plateNumber);
   });
   it('should go to Contracts page', function () {
     contractsPage.rentableItemDropdown();
