@@ -16,6 +16,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public int SiteId { get; set; }
         public int eFormId { get; set; }
         public DateTime? DoneAt { get; set; }
+        public int? Status { get; set; }
         
     }
 }

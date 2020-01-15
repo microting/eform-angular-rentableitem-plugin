@@ -37,25 +37,27 @@ import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DragulaModule} from 'ng2-dragula';
+import {EformSharedModule} from '../../../common/modules/eform-shared/eform-shared.module';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RentableItemsPnRouting,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
-    OwlMomentDateTimeModule,
-    MDBRootModule,
-    FormsModule,
-    TranslateModule,
-    SharedPnModule,
-    NgSelectModule,
-    RouterModule,
-    FontAwesomeModule,
-    DragulaModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RentableItemsPnRouting,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule,
+        OwlMomentDateTimeModule,
+        MDBRootModule,
+        FormsModule,
+        TranslateModule,
+        SharedPnModule,
+        NgSelectModule,
+        RouterModule,
+        FontAwesomeModule,
+        DragulaModule,
+        EformSharedModule
+    ],
   declarations: [
     RentableItemsPnPageComponent,
     RentableItemsPnAddComponent,

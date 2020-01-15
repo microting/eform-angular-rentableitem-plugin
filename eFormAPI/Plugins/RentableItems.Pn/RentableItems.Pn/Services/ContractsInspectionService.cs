@@ -44,8 +44,10 @@ namespace RentableItems.Pn.Services
             try
             {
                 ContractInspectionsModel contractInspectionsModel = new ContractInspectionsModel();
+                
                 IQueryable<ContractInspection> contractInspectionsQuery = _dbContext.ContractInspection.AsQueryable();
-                if (!string.IsNullOrEmpty(contractInspectionsPnRequestModel.SortColumnName))
+                if (!string.IsNullOrEmpty(contractInspectionsPnRequestModel.SortColumnName)
+                    && contractInspectionsPnRequestModel.SortColumnName != "")
                 {
                     if (contractInspectionsPnRequestModel.IsSortDsc)
                     {
@@ -63,7 +65,7 @@ namespace RentableItems.Pn.Services
                         .Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
                         .Skip(contractInspectionsPnRequestModel.Offset)
                         .Take(contractInspectionsPnRequestModel.PageSize);
-                List<ContractInspection> contractInspections = contractInspectionsQuery.ToList();
+                List<ContractInspection> contractInspections = await contractInspectionsQuery.ToListAsync();
                 contractInspections.ForEach(contractInspection =>
                 {
                     ContractInspectionItem contractInspectionItem =
@@ -78,6 +80,7 @@ namespace RentableItems.Pn.Services
                         ContractId = contractInspection.ContractId,
                         DoneAt = contractInspection.DoneAt,
                         Id = contractInspection.Id,
+                        Status = contractInspectionItem.Status
                     });
                     
                 });

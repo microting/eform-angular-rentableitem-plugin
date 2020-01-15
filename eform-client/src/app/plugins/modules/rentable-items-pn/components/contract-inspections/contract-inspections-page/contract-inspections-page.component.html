@@ -78,7 +78,7 @@
           {{inspection.contractId}}
         </td>
         <td id="inspectionStatus">
-          {{inspection.status}}
+          <status-bar [status]="inspection.status"></status-bar>
         </td>
         <td id="inspectionDoneAt">
           {{inspection.doneAt | date:'dd/MM/yyyy'}}
