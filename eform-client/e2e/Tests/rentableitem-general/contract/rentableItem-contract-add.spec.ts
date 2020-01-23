@@ -30,7 +30,13 @@ describe('Rentable Items - Contracts - add', function () {
       phone: '123124',
       email: 'user@user.com',
       eanCode: '2222115',
-      vatNumber: '7945641'
+      vatNumber: '7945641',
+      countryCode: 'DK',
+      cadastralNumber: 'eal10230',
+      propertyNumber: 1235,
+      apartmentNumber: 52,
+      completionYear: 1960,
+      floorsWithLivingSpace: 3
     };
     browser.pause(2000);
     customersModalPage.createCustomer(customerObject);
