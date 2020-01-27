@@ -63,7 +63,7 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     const newSerial = Guid.create().toString();
     const newDate = Math.floor((Math.random() * 28) + 1);
     rentableItemsPage.editRentableItem(newBrand, newModel, newSerial, newVin, newPlate, newDate);
-    browser.pause(8000);
+    browser.pause(12000);
     const rentableItem = rentableItemsPage.getFirstRowObject();
     expect(rentableItem.brand).equals(newBrand);
     expect(rentableItem.model).equals(newModel);
