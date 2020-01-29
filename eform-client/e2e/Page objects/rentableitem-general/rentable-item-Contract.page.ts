@@ -147,7 +147,7 @@ export class RentableItemContractPage extends Page {
     this.clickDate(endDate);
     browser.pause(2000);
     this.editContractNumberField.clearElement();
-    browser.pause(1000);
+    browser.pause(2000);
     this.editContractNumberField.addValue(contractNumber);
     browser.pause(2000);
     this.editCustomerSelector.addValue(newCustomer);
@@ -159,7 +159,7 @@ export class RentableItemContractPage extends Page {
     this.selectOption(newItem);
     browser.pause(2000);
     this.contractEditSaveBtn.click();
-    browser.pause(4000);
+    browser.pause(8000);
   }
   public editContractCancel(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
     const contractForEdit = this.getFirstContractObject();
@@ -174,7 +174,7 @@ export class RentableItemContractPage extends Page {
     this.clickDate(endDate);
     browser.pause(2000);
     this.editContractNumberField.clearElement();
-    browser.pause(1000);
+    browser.pause(2000);
     this.editContractNumberField.addValue(contractNumber);
     browser.pause(2000);
     this.editCustomerSelector.addValue(newCustomer);

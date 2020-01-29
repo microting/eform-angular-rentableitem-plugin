@@ -32,7 +32,15 @@ describe('Customers plugin page', function () {
       zipCode: '021551',
       cityName: 'Odense',
       phone: '123124',
-      email: 'user@user.com'
+      email: 'user@user.com',
+      eanCode: '22221185',
+      vatNumber: '79485641',
+      countryCode: 'DK',
+      cadastralNumber: 'eal230',
+      propertyNumber: 12355,
+      apartmentNumber: 5,
+      completionYear: 19,
+      floorsWithLivingSpace: 852
     };
     const rowCountBeforeCreation = customersPage.rowNum();
     browser.pause(2000);

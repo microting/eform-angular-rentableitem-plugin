@@ -61,9 +61,9 @@ describe('Rentable Items - Contracts - edit', function () {
     browser.waitForVisible('#contractCreateBtn', 20000);
   });
   it('should create contract', function () {
-    browser.pause(8000);
+    browser.pause(10000);
     const date1 = Math.floor((Math.random() * 14) + 1);
-    const date2 = Math.floor((Math.random() * 28) + 1);
+    const date2 = Math.floor((Math.random() * 26) + 1);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';
@@ -75,9 +75,9 @@ describe('Rentable Items - Contracts - edit', function () {
     browser.refresh();
   });
   it('should edit contract', function () {
-    browser.pause(8000);
+    browser.pause(10000);
     const newStartDate = Math.floor((Math.random() * 14) + 1);
-    const newEndDate = Math.floor((Math.random() * 28) + 1);
+    const newEndDate = Math.floor((Math.random() * 26) + 1);
     const newContractNumber = Math.floor((Math.random() * 28) + 1);
     const newRentableItem = 'Boremaskine';
     const newCustomer = 'Bents bjelker';
