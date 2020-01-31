@@ -68,6 +68,7 @@ namespace RentableItems.Pn
             services.AddTransient<IContractsService, ContractService>();
             services.AddTransient<IContractsInspectionService, ContractsInspectionService>();
             services.AddTransient<IContractRentableItemService, ContractRentableItemService>();
+            services.AddTransient<IImportsService, ImportsService>();
             services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
             services.AddSingleton<IRebusService, RebusService>();
 
@@ -155,10 +156,17 @@ namespace RentableItems.Pn
                 Link = "/plugins/rentable-items-pn/inspections"
 
             };
+            MenuItemModel importer = new MenuItemModel()
+            {
+                Name = localizationService.GetString("Importer"),
+                E2EId = "RentableItemsPluginImporter",
+                Link = "/plugins/rentable-items-pn/import"
+            };
             List<MenuItemModel> items = new List<MenuItemModel>();
             items.Add(rentableItem);
             items.Add(contracts);
             items.Add(inspeciton);
+            items.Add(importer);
             MenuModel result = new MenuModel();
             result.LeftMenu.Add(new MenuItemModel()
             {

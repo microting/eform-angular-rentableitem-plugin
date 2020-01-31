@@ -31,7 +31,8 @@ import {
   ContractsUpdateComponent,
   ContractsPageComponent,
   ContractsDeleteComponent,
-  ContractRentableItemComponent
+  ContractRentableItemComponent,
+  ImporterComponent
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
 import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
@@ -74,7 +75,8 @@ import {EformSharedModule} from '../../../common/modules/eform-shared/eform-shar
     RentableItemsPnDeleteComponent,
     ContractsDeleteComponent,
     ContractInspectionsDeleteComponent,
-    ContractRentableItemComponent
+    ContractRentableItemComponent,
+    ImporterComponent
   ],
   providers: [
     RentableItemsPnService,

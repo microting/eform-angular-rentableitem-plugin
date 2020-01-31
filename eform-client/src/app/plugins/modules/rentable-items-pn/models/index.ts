@@ -15,3 +15,4 @@ export * from './customer.model';
 export * from './customers.model';
 export * from './customer-request.model';
 export * from './contract-rentable-item.model';
+export * from './import.model';

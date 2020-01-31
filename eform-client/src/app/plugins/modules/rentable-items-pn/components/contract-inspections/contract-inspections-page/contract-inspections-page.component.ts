@@ -62,6 +62,7 @@ export class ContractInspectionsPageComponent implements OnInit {
     // debugger;
     this.spinnerStatus = true;
     this.contractInspectionsService.getAllInspections(this.contractInspectionsRequestModel).subscribe((data => {
+      debugger;
       this.contractInspectionsModel = data.model;
       this.spinnerStatus = false;
     }));

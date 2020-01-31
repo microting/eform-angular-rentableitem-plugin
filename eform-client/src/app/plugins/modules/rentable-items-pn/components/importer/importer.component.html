@@ -1,0 +1,44 @@
+<subheader-pn [heandingSizeRem]="1">
+  {{'Import' | translate}}
+</subheader-pn>
+<div class="p-3">
+  <input type="file" class="form-control" id="files" accept="text/csv" (change)="csv2Array($event)">
+  <ng-select
+    [items]="templatesModel.templates"
+    bindLabel="label"
+    bindValue="id"
+    id="eFormId"
+    (change)="onSelectedChanged($event)"
+  >
+  </ng-select>
+  <div class="row p-1 table-responsive-lg no-gutters">
+    <table class="table mh-100 table-striped text-center z-depth-1" *ngIf="tableData">
+      <thead>
+      <tr>
+        <th scope="row" class="table-header-sortable th-lg" *ngFor="let cols of tableData[0]; let i = index" [attr.data-index]="i">
+          {{cols}}
+        </th>
+      </tr>
+      </thead>
+      <tbody id="customersToImport">
+      <tr *ngFor="let rows of tableData; let i = index" [attr.data-index]="i">
+        <td *ngFor="let cells of rows; let i = index" [attr.data-index]="i">
+          {{cells}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="btn btn-danger"
+          routerLink="/plugins/rentable-items-pn/rentable-items"
+          id="cancelImportBtn"
+          mdbTooltip="{{'Cancel' | translate}}">
+    <fa-icon icon="times-circle" [fixedWidth]="true" size="lg"></fa-icon>
+  </button>
+  <button class="btn btn-success"
+          (click)="import()"
+          routerLink="/plugins/rentable-items-pn/rentable-items"
+          id="continueImportBtn"
+          mdbTooltip="{{'Import the customer' | translate}}">Continue Import
+  </button>
+</div>
