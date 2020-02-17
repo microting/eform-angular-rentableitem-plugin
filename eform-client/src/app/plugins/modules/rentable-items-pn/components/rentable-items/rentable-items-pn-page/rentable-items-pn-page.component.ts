@@ -110,6 +110,11 @@ export class RentableItemsPnPageComponent implements OnInit {
   //   this.spinnerStatus = false;
   // }
 
+  getEmail() {
+
+    this.rentableItemsService.getEmail().subscribe();
+  }
+
   getAllRentableItems() {
     this.spinnerStatus = true;
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((data => {

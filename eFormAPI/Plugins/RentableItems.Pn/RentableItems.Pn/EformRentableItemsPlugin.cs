@@ -69,6 +69,7 @@ namespace RentableItems.Pn
             services.AddTransient<IContractsInspectionService, ContractsInspectionService>();
             services.AddTransient<IContractRentableItemService, ContractRentableItemService>();
             services.AddTransient<IImportsService, ImportsService>();
+            services.AddTransient<IMailService, MailService>();
             services.AddSingleton<IRentableItemsLocalizationService, RentableItemLocalizationService>();
             services.AddSingleton<IRebusService, RebusService>();
 

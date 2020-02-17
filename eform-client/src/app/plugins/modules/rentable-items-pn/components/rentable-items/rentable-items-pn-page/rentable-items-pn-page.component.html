@@ -1,5 +1,12 @@
 <subheader-pn [title]="'Rentable Items' | translate">
   <div class="p-3">
+    <button
+    id="emailRetrieveBtn"
+    class="btn btn-success"
+    (click)="getEmail()"
+    >
+    {{'Get email' | translate}}
+    </button>
     <button *ngIf="pluginClaimsHelper.check(rentableItemsPnClaims.createRentableItems)"
       id="rentableItemCreateBtn"
       class="btn btn-success"

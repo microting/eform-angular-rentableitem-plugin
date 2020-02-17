@@ -65,7 +65,6 @@ export class ImporterComponent implements OnInit {
           this.rentableItemImportModel.headerList.push(this.rentableItemsHeadersModel);
           this.headerValue += 1;
         });
-        debugger;
         this.rentableItemImportModel.importList = JSON.stringify(this.tableData);
       }
     });

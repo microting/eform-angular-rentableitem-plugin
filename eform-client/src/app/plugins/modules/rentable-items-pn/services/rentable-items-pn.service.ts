@@ -11,7 +11,8 @@ const RentableItemsMethods = {
   RentableItemPn: 'api/rentableItems-pn',
   CreateRentableItemPn: 'api/rentableItems-pn/create-rentableItem',
   UpdateRentableItemPn: 'api/rentableItems-pn/update-rentableItem',
-  DeleteRentableItem: 'api/rentableItems-pn/delete-rentableItem'
+  DeleteRentableItem: 'api/rentableItems-pn/delete-rentableItem',
+  GetEmail: 'api/mail/get'
 };
 
 @Injectable()
@@ -40,4 +41,7 @@ export class RentableItemsPnService extends BaseService {
     return this.post(RentableItemsMethods.RentableItemPn + '/import', model);
   }
 
+  getEmail(): Observable<OperationResult> {
+    return this.post(RentableItemsMethods.GetEmail, '');
+  }
 }
