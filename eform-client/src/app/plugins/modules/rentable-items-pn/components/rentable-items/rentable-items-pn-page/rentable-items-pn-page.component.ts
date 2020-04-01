@@ -22,9 +22,9 @@ declare var require: any;
   styleUrls: ['./rentable-items-pn-page.component.scss']
 })
 export class RentableItemsPnPageComponent implements OnInit {
-  @ViewChild('createRentableItemModal') createRentableItemModal;
-  @ViewChild('editRentableItemModal') editRentableItemModal;
-  @ViewChild('deleteRentableItemModal') deleteRentableItemModal;
+  @ViewChild('createRentableItemModal', {static: false}) createRentableItemModal;
+  @ViewChild('editRentableItemModal', {static: false}) editRentableItemModal;
+  @ViewChild('deleteRentableItemModal', {static: false}) deleteRentableItemModal;
   localPageSettings: PageSettingsModel = new PageSettingsModel();
 
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();

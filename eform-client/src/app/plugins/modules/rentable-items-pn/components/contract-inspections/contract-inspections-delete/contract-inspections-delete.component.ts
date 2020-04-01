@@ -8,7 +8,7 @@ import {ContractInspectionModel, ContractModel} from '../../../models';
   styleUrls: ['./contract-inspections-delete.component.scss']
 })
 export class ContractInspectionsDeleteComponent implements OnInit {
-  @ViewChild('frame') frame;
+  @ViewChild('frame', {static: false}) frame;
   @Output() onContractInspectionDeleted: EventEmitter<void> = new EventEmitter<void>();
   selectedContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
   spinnerStatus = false;

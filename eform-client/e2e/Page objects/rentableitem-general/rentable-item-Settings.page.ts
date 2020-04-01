@@ -1,21 +1,25 @@
 import Page from '../Page';
 
 export class RentableItemSettingsPage extends Page {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  public get eFormSelector() {
-    return browser.element(`//*[@id= 'eFormId']//input`);
-  }
+    public get eFormSelector() {
+        return $(`//*[@id= 'eFormId']//input`);
+    }
 
-  public get sdkSiteIdField() {
-    return browser.element('#sdkSiteIds');
-  }
+    public get sdkSiteIdField() {
+        $('#sdkSiteIds').waitForDisplayed(20000);
+        $('#sdkSiteIds').waitForClickable({timeout: 20000});
+        return $('#sdkSiteIds');
+    }
 
-  public get saveBtn() {
-    return browser.element('#saveBtn');
-  }
+    public get saveBtn() {
+        $('#saveBtn').waitForDisplayed(20000);
+        $('#saveBtn').waitForClickable({timeout: 20000});
+        return $('#saveBtn');
+    }
 }
 
 const rentableItemsSettingsPage = new RentableItemSettingsPage();

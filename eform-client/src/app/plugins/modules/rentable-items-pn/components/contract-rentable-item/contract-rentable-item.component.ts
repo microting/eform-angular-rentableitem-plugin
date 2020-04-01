@@ -8,7 +8,7 @@ import {ContractRentableItemService, ContractsService, RentableItemsPnService} f
   styleUrls: ['./contract-rentable-item.component.scss']
 })
 export class ContractRentableItemComponent implements OnInit {
-  @ViewChild('frame') frame;
+  @ViewChild('frame', {static: false}) frame;
   frameShow = true;
   spinnerStatus = false;
   selectedContractModel: ContractModel = new ContractModel();

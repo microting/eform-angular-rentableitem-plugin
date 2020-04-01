@@ -15,7 +15,7 @@ import {debounceTime, switchMap} from 'rxjs/operators';
   styleUrls: ['./contracts-add.component.scss']
 })
 export class ContractsAddComponent implements OnInit {
-  @ViewChild('frame') frame;
+  @ViewChild('frame', {static: false}) frame;
   @Output() onContractCreated: EventEmitter<void> = new EventEmitter<void>();
   newContractModel: ContractModel = new ContractModel();
   spinnerStatus = false;

@@ -8,7 +8,7 @@ import {RentableItemsPnService} from '../../../services';
   styleUrls: ['./rentable-items-pn-delete.component.scss']
 })
 export class RentableItemsPnDeleteComponent implements OnInit {
-  @ViewChild('frame') frame;
+  @ViewChild('frame', {static: false}) frame;
   @Output() onRentableItemDeleted: EventEmitter<void> = new EventEmitter<void>();
   selectedRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
   spinnerStatus = false;
