@@ -1,7 +1,6 @@
 #!/bin/bash
-sed '/\/\/ INSERT ROUTES HERE/i {' src/app/plugins/plugins.routing.ts -i
-sed '/\/\/ INSERT ROUTES HERE/i path: "rentable-items-pn",' src/app/plugins/plugins.routing.ts -i
-sed '/\/\/ INSERT ROUTES HERE/i canActivate: [AuthGuard],' src/app/plugins/plugins.routing.ts -i
-sed '/\/\/ INSERT ROUTES HERE/i loadChildren: "./modules/rentable-items-pn/rentable-items-pn.module#RentableItemsPnModule"' src/app/plugins/plugins.routing.ts -i
-sed '/\/\/ INSERT ROUTES HERE/i },' src/app/plugins/plugins.routing.ts -i
-
+perl -pi -e '$_.="  },\n" if /INSERT ROUTES HERE/' src/app/plugins/plugins.routing.ts
+perl -pi -e '$_.="  loadChildren: '\''./modules/rentable-items-pn/rentable-items-pn.module#RentableItemsPnModule"'\''\n" if /INSERT ROUTES HERE/' src/app/plugins/plugins.routing.ts
+perl -pi -e '$_.="  canActivate: [AuthGuard],\n" if /INSERT ROUTES HERE/' src/app/plugins/plugins.routing.ts
+perl -pi -e '$_.="  path: '\''rentable-items-pn'\'',\n" if /INSERT ROUTES HERE/' src/app/plugins/plugins.routing.ts
+perl -pi -e '$_.="  {\n" if /INSERT ROUTES HERE/' src/app/plugins/plugins.routing.ts
