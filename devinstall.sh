@@ -8,7 +8,7 @@ cp -a Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-clie
 
 rm -fR Documents/workspace/microting/eform-angular-frontend/eFormAPI/Plugins/RentableItems.Pn
 
-cp -a Documents/workspace/microting/eform-angular-monitoring-plugin/eFormAPI/Plugins/RentableItems.Pn Documents/workspace/microting/eform-angular-frontend/eFormAPI/Plugins/RentableItems.Pn
+cp -a Documents/workspace/microting/eform-angular-rentableitem-plugin/eFormAPI/Plugins/RentableItems.Pn Documents/workspace/microting/eform-angular-frontend/eFormAPI/Plugins/RentableItems.Pn
 
 # Test files rm
 rm -fR Documents/workspace/microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-settings
