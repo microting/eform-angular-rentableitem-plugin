@@ -58,7 +58,7 @@ export class RentableItemInspectionPage extends Page {
     return $(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
   }
   public rentableItemDropdown() {
-    $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).click();
+    $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`).click();
   }
   public selectOption(name) {
     $(`//*[text()="${name}"]`).click();

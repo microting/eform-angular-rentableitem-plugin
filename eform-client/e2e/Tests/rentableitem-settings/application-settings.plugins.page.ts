@@ -9,6 +9,7 @@ class ApplicationSettingsPluginsPage extends PageWithNavbarPage {
     browser.pause(500);
     return new PluginRowObject(1);
   }
+
   getSecondPluginRowObj(): PluginRowObject {
     browser.pause(500);
     return new PluginRowObject(2);
@@ -25,8 +26,9 @@ class PluginRowObject {
       this.id = +$$('#plugin-id')[rowNum - 1].getText();
       this.name = $$('#plugin-name')[rowNum - 1].getText();
       this.version = $$('#plugin-version')[rowNum - 1].getText();
-      this.settingsBtn = $$('#plugin-settings-link')[rowNum - 1];
-      this.pluginSettingsBtn = $$(`//*[@id= 'plugin-status']//button`)[rowNum - 1];
+      this.status = $$('#plugin-status')[rowNum - 1].getText();
+      this.settingsBtn = $$('#plugin-settings-btn')[rowNum - 1];
+      this.activateBtn = $$(`//*[@id= 'plugin-status']//button`)[rowNum - 1];
     }
   }
 
@@ -35,5 +37,5 @@ class PluginRowObject {
   version;
   status;
   settingsBtn;
-  pluginSettingsBtn;
+  activateBtn;
 }

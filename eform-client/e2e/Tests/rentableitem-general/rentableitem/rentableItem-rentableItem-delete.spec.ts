@@ -11,25 +11,12 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     loginPage.open('/auth');
     loginPage.login();
   });
-  // it('should create eForm', function () {
-  //   const  neweFormLabel = 'Number 1';
-  //   rentableItemsPage.createNewEform(neweFormLabel);
-  // });
-  it('should check if activated', function () {
-    myEformsPage.Navbar.advancedDropdown();
-    myEformsPage.Navbar.clickonSubMenuItem('Plugins');
-    $('#spinner-animation').waitForDisplayed(90000, true);
-    const plugin = pluginsPage.getFirstPluginRowObj();
-    expect(plugin.id).equal(1);
-    expect(plugin.name).equal('Microting Rentable Items plugin');
-    expect(plugin.version).equal('1.0.0.0');
-    expect(plugin.settingsBtn.isVisible);
-  });
   it('should check if menu point is there', function () {
-    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Lejelige ting');
+    browser.pause(500);
+    expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Udlejning');
     rentableItemsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
-    expect(rentableItemsPage.rentableItemDropdownItemName('Lejelige ting').getText()).equal('Lejelige ting');
+    expect(rentableItemsPage.rentableItemDropdownItemName('Udlejning').getText()).equal('Udlejning');
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdown();
   });

@@ -18,7 +18,7 @@ describe('Rentable Items - Contracts - edit', function () {
   });
   it('should create multiple customers', function () {
     customersPage.newCustomerBtn.click();
-    browser.pause(6000);
+    $('#spinner-animation').waitForDisplayed(90000, true);
     const customerObject2 = {
       createdBy: 'John Smith',
       customerNo: '2',

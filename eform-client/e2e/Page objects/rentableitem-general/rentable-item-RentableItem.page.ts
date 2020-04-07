@@ -36,13 +36,22 @@ export class RentableItemRentableItemPage extends Page {
     return $('#addTagInput');
   }
   public get rentableItemDropdownName() {
-    return $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).$('..');
+    const ele = $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`).$('..');
+    ele.waitForDisplayed(20000);
+    ele.waitForClickable({timeout: 20000});
+    return ele;
   }
   public rentableItemDropdown() {
-    $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).click();
+    const ele = $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`);
+    ele.waitForDisplayed(20000);
+    ele.waitForClickable({timeout: 20000});
+    ele.click();
   }
   public rentableItemDropdownItemName(name) {
-    return $(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
+    const ele = $(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
+    ele.waitForDisplayed(20000);
+    ele.waitForClickable({timeout: 20000});
+    return ele;
   }
   public get rentableItemCreateBtn() {
     $('#rentableItemCreateBtn').waitForDisplayed(20000);
@@ -67,17 +76,17 @@ export class RentableItemRentableItemPage extends Page {
   }
   public get rentableItemCreateVinNumberBox() {
     $('#createVINNumber').waitForDisplayed(20000);
-    $('#createVINNumber').waitForClickable({timeout: 20000});
+    //$('#createVINNumber').waitForClickable({timeout: 20000});
     return $('#createVINNumber');
   }
   public get rentableItemCreateSerialNumberBox() {
     $('#createSerialNumber').waitForDisplayed(20000);
-    $('#createSerialNumber').waitForClickable({timeout: 20000});
+    //$('#createSerialNumber').waitForClickable({timeout: 20000});
     return $('#createSerialNumber');
   }
   public get rentableItemCreatePlateNumberBox() {
     $('#createPlateNumber').waitForDisplayed(20000);
-    $('#createPlateNumber').waitForClickable({timeout: 20000});
+    //$('#createPlateNumber').waitForClickable({timeout: 20000});
     return $('#createPlateNumber');
   }
   public get eFormSelector() {
@@ -120,7 +129,10 @@ export class RentableItemRentableItemPage extends Page {
     return $('#editPlateNumber');
   }
   public clickDate(date) {
-    $(`//*[text()="${date}"]`).click();
+    const ele = $(`//*[text()=" ${date} "]/..`);
+    ele.waitForDisplayed(20000);
+    ele.waitForClickable({timeout: 20000});
+    ele.click();
   }
   public selectOption(name) {
     $(`//*[text()="${name}"]`).click();
@@ -138,7 +150,7 @@ export class RentableItemRentableItemPage extends Page {
   goToRentableItemsPage() {
     this.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemDropdownItemName('Lejelige ting').click();
+    this.rentableItemDropdownItemName('Udlejning').click();
     $('#spinner-animation').waitForDisplayed(90000, true);
   }
   createRentableItem(brand: string, model: string, date: number, eFormName: string, serialNumber?: string,
@@ -146,19 +158,20 @@ export class RentableItemRentableItemPage extends Page {
     this.rentableItemCreateBtn.click();
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.rentableItemCreateBrandBox.addValue(brand);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.rentableItemCreateModelBox.addValue(model);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.eFormSelector.addValue(eFormName);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.selectOption(eFormName);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
+    //console.log(serialNumber);
     this.rentableItemCreateSerialNumberBox.addValue(serialNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.rentableItemCreateVinNumberBox.addValue(VINNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.rentableItemCreatePlateNumberBox.addValue(plateNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    //browser.pause(500);
     this.rentableItemCreateReistrationDate().click();
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.clickDate(date);

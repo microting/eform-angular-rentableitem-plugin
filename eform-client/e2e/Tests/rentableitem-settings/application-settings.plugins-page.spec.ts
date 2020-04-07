@@ -18,21 +18,29 @@ describe('Application settings page - site header section', function () {
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     $('#plugin-name').waitForDisplayed(50000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed(10000, true);
 
     const plugin = pluginsPage.getFirstPluginRowObj();
-    expect(plugin.id).equal(1);
-    expect(plugin.name).equal('Microting Rentable Items plugin');
+
+    if (plugin.name === 'Microting Rentable Items Plugin') {
+      expect(plugin.name).equal('Microting Rentable Items Plugin');
+    } else {
+      expect(plugin.name).equal('Microting Customers Plugin');
+    }
     expect(plugin.version).equal('1.0.0.0');
+
+    const pluginTwo = pluginsPage.getSecondPluginRowObj();
+    if (pluginTwo.name === 'Microting Rentable Items Plugin') {
+      expect(pluginTwo.name).equal('Microting Rentable Items Plugin');
+    } else {
+      expect(pluginTwo.name).equal('Microting Customers Plugin');
+    }
+    expect(pluginTwo.version).equal('1.0.0.0');
+
   });
-
-  it('should activate the plugin', function () {
+  it('should activate the customer plugin', function () {
     const plugin = pluginsPage.getFirstPluginRowObj();
-    expect(plugin.id).equal(1);
-    expect(plugin.name).equal('Microting Rentable Items plugin');
-    expect(plugin.version).equal('1.0.0.0');
-
-    plugin.pluginSettingsBtn.click();
+    plugin.activateBtn.click();
     $('#pluginOKBtn').waitForDisplayed(40000);
     pluginPage.pluginOKBtn.click();
     browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
@@ -42,14 +50,13 @@ describe('Application settings page - site header section', function () {
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     $('#plugin-name').waitForDisplayed(50000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed(10000, true);
 
-    const plugin2 = pluginsPage.getSecondPluginRowObj();
-    expect(plugin2.id).equal(2);
-    expect(plugin2.name).equal('Microting Customers Plugin');
-    expect(plugin2.version).equal('1.0.0.0');
+    const secondPlugin = pluginsPage.getSecondPluginRowObj();
+    expect(secondPlugin.version).equal('1.0.0.0');
 
-    plugin2.pluginSettingsBtn.click();
+    // pluginPage.pluginSettingsBtn.click();
+    secondPlugin.activateBtn.click();
     $('#pluginOKBtn').waitForDisplayed(40000);
     pluginPage.pluginOKBtn.click();
     browser.pause(50000); // We need to wait 50 seconds for the plugin to create db etc.
@@ -59,9 +66,13 @@ describe('Application settings page - site header section', function () {
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     $('#plugin-name').waitForDisplayed(50000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
-  });
+    $('#spinner-animation').waitForDisplayed(10000, true);
 
+    const pluginToFind = pluginsPage.getFirstPluginRowObj();
+    expect(pluginToFind.version).equal('1.0.0.0');
+    $(`//*[contains(text(), 'Udlejning')]`).waitForDisplayed(20000);
+    $(`//*[contains(text(), 'Kunder')]`).waitForDisplayed(20000);
+  });
 
   it('should create eform', function () {
     loginPage.open('/');
