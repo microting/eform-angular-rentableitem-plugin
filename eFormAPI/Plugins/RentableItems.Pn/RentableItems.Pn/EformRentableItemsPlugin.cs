@@ -49,7 +49,7 @@ namespace RentableItems.Pn
     public class EformRentableItemsPlugin : IEformPlugin
     {
         private string _pluginPath;
-        public string Name => "Microting Rentable Items plugin";
+        public string Name => "Microting Rentable Items Plugin";
         public string PluginId => "eform-angular-rentableitem-plugin";
         public string PluginPath => PluginAssembly().Location;
         public string PluginBaseUrl => "rentable-items-pn";
