@@ -9,39 +9,39 @@ import customersPage from '../../../Page objects/Customers/Customers.page';
 import customersModalPage from '../../../Page objects/Customers/CustomersModal.page';
 
 describe('Rentable Items - Contracts - Delete', function () {
-    before(function () {
-        loginPage.open('/auth');
-        loginPage.login();
-    });
-    it('should go to Contracts page', function () {
-        contractsPage.rentableItemDropdown();
-        $('#spinner-animation').waitForDisplayed(90000, true);
-        contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-        $('#contractCreateBtn').waitForDisplayed(20000);
-    });
-    it('should create contract', function () {
-        $('#spinner-animation').waitForDisplayed(90000, true);
-        const date1 = Math.floor((Math.random() * 14) + 1);
-        const date2 = Math.floor((Math.random() * 28) + 1);
-        const contractNr = Math.floor((Math.random() * 100) + 1);
-        const rentableItemName = 'MacBook';
-        const customerName = 'Oles olie';
-        contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
-        const contract = contractsPage.getFirstContractObject();
-        expect(contract.contractNumber).equal(contractNr);
-        expect(contract.customerId).equal(1);
-        $('#spinner-animation').waitForDisplayed(90000, true);
-    });
-    it('should NOT delete contract', function () {
-        contractsPage.deleteContractCancel();
-        $('#spinner-animation').waitForDisplayed(90000, true);
-        const contract = contractsPage.getFirstContractObject();
-        expect(contract != null);
-        $('#spinner-animation').waitForDisplayed(90000, true);
-    });
-    it('should delete contract', function () {
-        contractsPage.deleteContract();
-        $('#spinner-animation').waitForDisplayed(90000, true);
-        expect(contractsPage.rowNum).equal(0);
-    });
+  before(function () {
+    loginPage.open('/auth');
+    loginPage.login();
+  });
+  it('should go to Contracts page', function () {
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
+  });
+  it('should create contract', function () {
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    const date1 = Math.floor((Math.random() * 14) + 1);
+    const date2 = Math.floor((Math.random() * 28) + 1);
+    const contractNr = Math.floor((Math.random() * 100) + 1);
+    const rentableItemName = 'MacBook';
+    const customerName = 'Oles olie';
+    contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
+    const contract = contractsPage.getFirstContractObject();
+    expect(contract.contractNumber).equal(contractNr);
+    expect(contract.customerId).equal(1);
+    $('#spinner-animation').waitForDisplayed(90000, true);
+  });
+  it('should NOT delete contract', function () {
+    contractsPage.deleteContractCancel();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    const contract = contractsPage.getFirstContractObject();
+    expect(contract != null);
+    $('#spinner-animation').waitForDisplayed(90000, true);
+  });
+  it('should delete contract', function () {
+    contractsPage.deleteContract();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    expect(contractsPage.rowNum).equal(0);
+  });
 });

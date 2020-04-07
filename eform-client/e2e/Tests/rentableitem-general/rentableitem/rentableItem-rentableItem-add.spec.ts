@@ -7,30 +7,30 @@ import pluginsPage from '../../rentableitem-settings/application-settings.plugin
 import {log} from 'util';
 
 describe('Rentable Item Plugin - Rentable Item', function () {
-    before(function () {
-        loginPage.open('/auth');
-        loginPage.login();
-    });
-    it('should get btn text', function () {
-        rentableItemsPage.goToRentableItemsPage();
-        rentableItemsPage.getBtnTxt('New rentable item');
-    });
-    it('should create rentable item with all parameters', function () {
-        const date = Math.floor((Math.random() * 28) + 1);
-        const brand = Guid.create().toString();
-        const model = Guid.create().toString();
-        const serialNumber = Guid.create().toString();
-        const vinNumber = Guid.create().toString();
-        const plateNumber = Guid.create().toString();
-        const eForm = 'Number 1';
-        rentableItemsPage.createRentableItem(brand, model, date, eForm, serialNumber, vinNumber, plateNumber);
-        const rentableItem = rentableItemsPage.getFirstRowObject();
-        // expect(rentableItem.registrationDate).equal(date);
-        expect(rentableItem.brand).equal(brand);
-        expect(rentableItem.model).equal(model);
-        expect(rentableItem.plateNumber).equal(plateNumber);
-        expect(rentableItem.vinNumber).equal(vinNumber);
-        expect(rentableItem.serialNumber).equal(serialNumber);
-        rentableItemsPage.cleanup();
-    });
+  before(function () {
+    loginPage.open('/auth');
+    loginPage.login();
+  });
+  it('should get btn text', function () {
+    rentableItemsPage.goToRentableItemsPage();
+    rentableItemsPage.getBtnTxt('New rentable item');
+  });
+  it('should create rentable item with all parameters', function () {
+    const date = Math.floor((Math.random() * 28) + 1);
+    const brand = Guid.create().toString();
+    const model = Guid.create().toString();
+    const serialNumber = Guid.create().toString();
+    const vinNumber = Guid.create().toString();
+    const plateNumber = Guid.create().toString();
+    const eForm = 'Number 1';
+    rentableItemsPage.createRentableItem(brand, model, date, eForm, serialNumber, vinNumber, plateNumber);
+    const rentableItem = rentableItemsPage.getFirstRowObject();
+    // expect(rentableItem.registrationDate).equal(date);
+    expect(rentableItem.brand).equal(brand);
+    expect(rentableItem.model).equal(model);
+    expect(rentableItem.plateNumber).equal(plateNumber);
+    expect(rentableItem.vinNumber).equal(vinNumber);
+    expect(rentableItem.serialNumber).equal(serialNumber);
+    rentableItemsPage.cleanup();
+  });
 });
