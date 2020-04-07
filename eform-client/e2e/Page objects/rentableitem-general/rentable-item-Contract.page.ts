@@ -1,14 +1,13 @@
 import Page from '../Page';
 import XMLForEformRentableItems from '../../Constants/XMLForEform';
 import {trackByHourSegment} from 'angular-calendar/modules/common/util';
-import titleIs = until.titleIs;
-import {isBrowserEvents} from '@angular/core/src/render3/discovery_utils';
 
 export class RentableItemContractPage extends Page {
   constructor() {
     super();
   }
   public get rowNum(): number {
+    browser.pause(500);
     return $$(`//*[@id= 'tableBody']//tr`).length;
   }
   public get rentableItemListonContract(): number {
@@ -177,7 +176,7 @@ export class RentableItemContractPage extends Page {
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.clickDate(endDate);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.editContractNumberField.clearElement();
+    this.editContractNumberField.clearValue();
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.addValue(contractNumber);
     $('#spinner-animation').waitForDisplayed(90000, true);
@@ -204,7 +203,7 @@ export class RentableItemContractPage extends Page {
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.clickDate(endDate);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.editContractNumberField.clearElement();
+    this.editContractNumberField.clearValue();
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.addValue(contractNumber);
     $('#spinner-animation').waitForDisplayed(90000, true);

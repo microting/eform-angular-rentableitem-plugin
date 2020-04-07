@@ -1,7 +1,6 @@
 import Page from '../Page';
 import XMLForEformRentableItems from '../../Constants/XMLForEform';
 import {trackByHourSegment} from 'angular-calendar/modules/common/util';
-import titleIs = until.titleIs;
 
 export class RentableItemRentableItemPage extends Page {
   constructor() {
@@ -37,7 +36,7 @@ export class RentableItemRentableItemPage extends Page {
     return $('#addTagInput');
   }
   public get rentableItemDropdownName() {
-    return $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).element('..');
+    return $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).$('..');
   }
   public rentableItemDropdown() {
     $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Lejelige ting')]`).click();
@@ -178,19 +177,19 @@ export class RentableItemRentableItemPage extends Page {
     const rentableItemForEdit = this.getFirstRowObject();
     rentableItemForEdit.editBtn.click();
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemEditBrandBox.clearElement();
+    this.rentableItemEditBrandBox.clearValue();
     this.rentableItemEditBrandBox.addValue(newBrand);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemEditModelBox.clearElement();
+    this.rentableItemEditModelBox.clearValue();
     this.rentableItemEditModelBox.addValue(newModel);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemEditSerialNumberBox.clearElement();
+    this.rentableItemEditSerialNumberBox.clearValue();
     this.rentableItemEditSerialNumberBox.addValue(newSerial);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemEditVinNumberBox.clearElement();
+    this.rentableItemEditVinNumberBox.clearValue();
     this.rentableItemEditVinNumberBox.addValue(newVin);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    this.rentableItemEditPlateNumberBox.clearElement();
+    this.rentableItemEditPlateNumberBox.clearValue();
     this.rentableItemEditPlateNumberBox.addValue(newPlate);
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.rentableItemEditReistrationDate().click();
