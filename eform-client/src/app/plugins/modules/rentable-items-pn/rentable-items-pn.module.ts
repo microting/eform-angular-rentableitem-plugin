@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
-import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
+import {OwlMomentDateTimeModule} from 'ng-pick-datetime-ex';
 import {MDBRootModule} from 'port/angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
 import {RentableItemsPnLayoutComponent} from './layouts';
@@ -35,7 +35,7 @@ import {
   ImporterComponent
 } from './components';
 import {RentableItemsPnRouting} from './rentable-items-pn.routing';
-import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime-ex';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DragulaModule} from 'ng2-dragula';
 import {EformSharedModule} from '../../../common/modules/eform-shared/eform-shared.module';
