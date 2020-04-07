@@ -11,10 +11,10 @@ rm -fR Documents/workspace/microting/eform-angular-rentableitem-plugin/eFormAPI/
 cp -a Documents/workspace/microting/eform-angular-frontend/eFormAPI/Plugins/RentableItems.Pn Documents/workspace/microting/eform-angular-rentableitem-plugin/eFormAPI/Plugins/RentableItems.Pn
 
 # Test files rm
-rm -fR Documents/workspace/microting/eform-angular-rentable-items-plugin/eform-client/e2e/Tests/rentableitem-settings/
-rm -fR Documents/workspace/microting/eform-angular-rentable-items-plugin/eform-client/e2e/Tests/rentableitem-general/
-rm -fR Documents/workspace/microting/eform-angular-rentable-items-plugin/eform-client/e2e/Page\ objects/Monitoring/
-rm -fR Documents/workspace/microting/eform-angular-rentable-items-plugin/eform-client/wdio-headless-plugin-step2.conf.js
+rm -fR Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-settings/
+rm -fR Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-general/
+rm -fR Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-client/e2e/Page\ objects/rentableitem-general
+rm -fR Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-client/wdio-headless-plugin-step2.conf.js
 
 # Test files cp
 cp -a Documents/workspace/microting/eform-angular-frontend/eform-client/e2e/Tests/rentableitem-settings Documents/workspace/microting/eform-angular-rentableitem-plugin/eform-client/e2e/Tests/rentableitem-settings
