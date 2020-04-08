@@ -1,13 +1,16 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ContractModel,
+import {
+  ContractModel, CustomerModel,
   CustomerRequestModel,
   CustomersModel,
   RentableItemPnModel,
   RentableItemsPnModel,
-  RentableItemsPnRequestModel} from '../../../models';
+  RentableItemsPnRequestModel
+} from '../../../models';
 import {ContractsService, RentableItemsPnService} from '../../../services';
 import {formatTimezone} from '../../../../../../common/helpers';
-import {debounceTime, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, switchMap, tap, map} from 'rxjs/operators';
+import {concat, Observable, of, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-contracts-add',
@@ -20,6 +23,9 @@ export class ContractsAddComponent implements OnInit {
   newContractModel: ContractModel = new ContractModel();
   spinnerStatus = false;
   frameShow = true;
+  peopleInput$ = new Subject<string>();
+  peopleLoading = false;
+  people$: Observable<CustomerModel[]>;
   rentableItems: Array<RentableItemPnModel> = [];
   customersRequestModel: CustomerRequestModel = new CustomerRequestModel();
   customersModel: CustomersModel = new CustomersModel();
@@ -32,18 +38,20 @@ export class ContractsAddComponent implements OnInit {
               private cd: ChangeDetectorRef,
               private contractService: ContractsService,
               ) {
-    this.typeahead
-      .pipe(
-        debounceTime(500),
-        switchMap(term => {
-          this.customersRequestModel.name = term;
-            return this.contractService.getCustomer(this.customersRequestModel);
-        })
-      )
-      .subscribe(items => {
-        this.customersModel = items.model;
-        this.cd.markForCheck();
-      });
+    // this.typeahead
+    //   .pipe(
+    //     debounceTime(500),
+    //     switchMap(term => {
+    //       if (term !== null) {
+    //         this.customersRequestModel.name = term;
+    //         return this.contractService.getCustomer(this.customersRequestModel);
+    //       }
+    //     })
+    //   )
+    //   .subscribe(items => {
+    //     this.customersModel = items.model;
+    //     this.cd.markForCheck();
+    //   });
     this.typeahead2
       .pipe(
         debounceTime(500),
@@ -59,11 +67,42 @@ export class ContractsAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadPeople();
   }
 
   show() {
     this.newContractModel = new ContractModel();
     this.frame.show();
+  }
+
+
+  trackByFn(item: CustomerModel) {
+    return item.id;
+  }
+
+  private loadPeople() {
+    this.people$ = concat(
+      of([]), // default items
+      this.peopleInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.peopleLoading = true),
+        switchMap(term => term !== null ? this.getAllRentableItems(term).pipe(map(val => val.model.customers),
+          catchError(() => of([])), // empty list on error
+          tap(() => this.peopleLoading = false)
+        ) : this.returnValue() )
+      )
+    );
+  }
+
+  private getAllRentableItems(term: string = null): Observable<any> {
+     this.customersRequestModel.name = term;
+     console.log('called');
+     return this.contractService.getCustomer(this.customersRequestModel);
+  }
+
+  private returnValue(): Observable<any> {
+    this.peopleLoading = false;
+    return new Observable<any>();
   }
 
   createContract() {

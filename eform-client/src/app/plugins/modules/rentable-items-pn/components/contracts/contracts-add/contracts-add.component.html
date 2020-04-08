@@ -63,7 +63,7 @@
                     [typeahead]="typeahead"
                     (change)="onSelectedChanged($event)"
                     [items]="rentableItemsModel.rentableItems"></ng-select>-->
-                  <ng-select
+                  <!--<ng-select
                     id="customerSelector"
                     [placeholder]="'Customers'"
                     name="Customer-selector"
@@ -72,28 +72,43 @@
                     [clearable]="false"
                     [typeahead]="typeahead"
                     [items]="customersModel.customers"
-                    (change)="onSelectedChanged($event)"></ng-select>
+                    (change)="onSelectedChanged($event)"></ng-select>-->
+                  <ng-select [items]="people$ | async"
+                             id="customerSelector"
+                             bindLabel="companyName"
+                             [addTag]="false"
+                             [trackByFn]="trackByFn"
+                             [multiple]="false"
+                             [hideSelected]="true"
+                             [clearable]="false"
+                             [minTermLength]="2"
+                             [loading]="peopleLoading"
+                             typeToSearchText="Please enter 2 or more characters"
+                             [typeahead]="peopleInput$"
+                             [(ngModel)]="newContractModel.customerId"
+                             name="blabla">
+                  </ng-select>
                 </div>
               </div>
-<!--              <div class="col-md-3" *ngFor="let customer of customersModel.customers" >-->
-<!--                {{'Customer Name: ' + customer.contactPerson| translate }} <br>-->
-<!--                {{'Customer Number: ' + customer.customerNo| translate }} <br>-->
-<!--                {{'Customer Address: ' + customer.companyAddress| translate }} <br>-->
-<!--                {{'Customer Address 2: ' + customer.companyAddress2| translate }} <br>-->
-<!--                {{'Customer Zip Code: ' + customer.zipCode| translate }} <br>-->
-<!--                {{'Customer Created By: ' + customer.createdBy| translate }} <br>-->
-<!--                {{'Customer City Name: ' + customer.cityName | translate}} <br>-->
-<!--                {{'Customer Phone: ' + customer.phone | translate}} <br>-->
-<!--                {{'Customer Email: ' + customer.email | translate}} <br>-->
-<!--                {{'Customer EAN Code: ' + customer.eanCode | translate}} <br>-->
-<!--                {{'Customer Vat Number: ' + customer.vatNumber | translate}} <br>-->
-<!--                {{'Customer Country Code: ' + customer.countryCode | translate}} <br>-->
-<!--                <button class="btn btn-danger text-black-50 btn-icon mb-2"-->
-<!--                        mdbTooltip="delete customer"-->
-<!--                        (click)="removeCustomer(customer)">-->
-<!--                  <fa-icon icon="trash-alt"></fa-icon>-->
-<!--                </button>-->
-<!--              </div>-->
+              <div class="col-md-3" *ngIf="newContractModel.customerId">
+                <strong>{{'Name:' | translate }}</strong> {{newContractModel.customerId.contactPerson}}<br>
+                <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customerId.customerNo}}<br>
+                <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customerId.companyAddress}}<br>
+                <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customerId.companyAddress2}}<br>
+                <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customerId.zipCode}}<br>
+                <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customerId.createdBy}}<br>
+                <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customerId.cityName }}<br>
+                <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customerId.phone }}<br>
+                <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customerId.email }}<br>
+                <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customerId.eanCode }}<br>
+                <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customerId.vatNumber }}<br>
+                <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customerId.countryCode }}<br>
+                <!--<button class="btn btn-danger text-black-50 btn-icon mb-2"
+                        mdbTooltip="delete customer"
+                        (click)="removeCustomer(customer)">
+                  <fa-icon icon="trash-alt"></fa-icon>
+                </button>-->
+              </div>
             </div>
             <div class="col-md-12">
               <div class="md-form">

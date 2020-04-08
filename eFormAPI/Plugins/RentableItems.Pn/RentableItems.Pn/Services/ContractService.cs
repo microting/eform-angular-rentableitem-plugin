@@ -118,11 +118,18 @@ namespace RentableItems.Pn.Services
 
                 if (!string.IsNullOrEmpty(pnRequestModel.Name))
                 {
-                    customersQuery = customersQuery.Where(x => x.CompanyName.Contains(pnRequestModel.Name));
+                    customersQuery = customersQuery.Where(x => 
+                        x.CompanyName.ToLower().Contains(pnRequestModel.Name.ToLower()) || 
+                        x.ContactPerson.ToLower().Contains(pnRequestModel.Name.ToLower()) ||
+                        x.Phone.Contains(pnRequestModel.Name) ||
+                        x.VatNumber.Contains(pnRequestModel.Name) ||
+                        x.Email.Contains(pnRequestModel.Name));
 				}
                 else
                 {
-                    throw new NullReferenceException("No search criteria were given.");
+                    customersPnModel.Total = 0;
+                    customersPnModel.Customers = new List<CustomerModel>();
+                    return new OperationDataResult<CustomersModel>(true, customersPnModel);
                 }
 
 				customersQuery =
