@@ -12,9 +12,10 @@ import rentableItemsSettingsPage from '../../Page objects/rentableitem-general/r
 describe('Application settings page - site header section', function () {
   before(function () {
     loginPage.open('/auth');
+    loginPage.login();
   });
   it('should go to plugin settings page', function () {
-    loginPage.login();
+
     myEformsPage.Navbar.advancedDropdown();
     myEformsPage.Navbar.clickonSubMenuItem('Plugins');
     $('#plugin-name').waitForDisplayed(50000);
@@ -90,6 +91,7 @@ describe('Application settings page - site header section', function () {
     deviceUsersPage.createNewDeviceUser(name, surname);
   });
   it('should add eForm and device user to settings', function () {
+    myEformsPage.Navbar.goToDeviceUsersPage();
     const deviceUser = deviceUsersPage.getDeviceUser(1);
     const sdkSiteId = deviceUser.siteId.getText();
     myEformsPage.Navbar.advancedDropdown();
@@ -97,7 +99,12 @@ describe('Application settings page - site header section', function () {
     $('#plugin-name').waitForDisplayed(50000);
     $('#spinner-animation').waitForDisplayed(90000, true);
     const plugin = pluginsPage.getFirstPluginRowObj();
-    plugin.settingsBtn.click();
+    const pluginTwo = pluginsPage.getSecondPluginRowObj();
+    if (plugin.name === 'Microting Rentable Items Plugin') {
+     plugin.settingsBtn.click();
+    } else {
+     pluginTwo.settingsBtn.click();
+    }
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsSettingsPage.sdkSiteIdField.addValue(sdkSiteId);
     $('#spinner-animation').waitForDisplayed(90000, true);
