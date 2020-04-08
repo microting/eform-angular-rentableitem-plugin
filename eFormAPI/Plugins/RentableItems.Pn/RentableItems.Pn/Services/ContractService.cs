@@ -160,7 +160,7 @@ namespace RentableItems.Pn.Services
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
                 return new OperationDataResult<CustomersModel>(false, 
-                    _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo"));
+                    _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo") + e.Message);
             }
         }
         public async Task<OperationResult> Create(ContractModel contractCreateModel)

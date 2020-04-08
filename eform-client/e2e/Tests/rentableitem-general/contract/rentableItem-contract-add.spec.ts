@@ -13,38 +13,36 @@ describe('Rentable Items - Contracts - add', function () {
     loginPage.open('/auth');
     loginPage.login();
   });
-  it('should go to customers page', function () {
-    customersPage.goToCustomersPage();
-  });
-  it('should create a customer', function () {
-    customersPage.newCustomerBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
-    const customerObject = {
-      createdBy: 'John Smith',
-      customerNo: '1',
-      contactPerson: 'Samantha Black',
-      companyName: 'Oles olie',
-      companyAddress: 'ABC Street 22',
-      zipCode: '021551',
-      cityName: 'Odense',
-      phone: '123124',
-      email: 'user@user.com',
-      eanCode: '2222115',
-      vatNumber: '7945641',
-      countryCode: 'DK',
-      cadastralNumber: 'eal10230',
-      propertyNumber: 1235,
-      apartmentNumber: 52,
-      completionYear: 1960,
-      floorsWithLivingSpace: 3
-    };
-    $('#spinner-animation').waitForDisplayed(90000, true);
-    customersModalPage.createCustomer(customerObject);
-  });
-  it('should go to rentable items page', function () {
-    rentableItemsPage.goToRentableItemsPage();
-  });
+  // it('should go to customers page', function () {
+  //   customersPage.goToCustomersPage();
+  // });
+  // it('should create a customer', function () {
+  //   customersPage.newCustomerBtn.click();
+  //   $('#spinner-animation').waitForDisplayed(90000, true);
+  //   const customerObject = {
+  //     createdBy: 'John Smith',
+  //     customerNo: '1',
+  //     contactPerson: 'Samantha Black',
+  //     companyName: 'Oles olie',
+  //     companyAddress: 'ABC Street 22',
+  //     zipCode: '021551',
+  //     cityName: 'Odense',
+  //     phone: '123124',
+  //     email: 'user@user.com',
+  //     eanCode: '2222115',
+  //     vatNumber: '7945641',
+  //     countryCode: 'DK',
+  //     cadastralNumber: 'eal10230',
+  //     propertyNumber: 1235,
+  //     apartmentNumber: 52,
+  //     completionYear: 1960,
+  //     floorsWithLivingSpace: 3
+  //   };
+  //   $('#spinner-animation').waitForDisplayed(90000, true);
+  //   customersModalPage.createCustomer(customerObject);
+  // });
   it('should create rentable item with all parameters', function () {
+    rentableItemsPage.goToRentableItemsPage();
     const date = Math.floor((Math.random() * 28) + 1);
     const brand = 'Apple';
     const model = 'MacBook';

@@ -112,55 +112,45 @@ export class RentableItemContractPage extends Page {
     return $('#contractDeleteCancelBtn');
   }
   public clickDate(date) {
-    $(`//*[text()="${date}"]`).click();
+    const ele = $(`//*[text()=" ${date} "]/..`);
+    ele.waitForDisplayed(20000);
+    ele.click();
   }
   public selectOption(name) {
-    $(`//*[text()="${name}"]`).click();
+    const ele = $(`//*[text()="${name}"]/..`);
+    ele.waitForDisplayed(20000);
+    ele.click();
   }
   public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
     this.newContractBtn.click();
     $('#startDate').waitForDisplayed(20000);
     this.startDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(startDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.endDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(endDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractNumberField.addValue(contractNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.customerSelector.addValue(customer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(customer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.rentableItemSelector.addValue(rentableItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(rentableItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractCreateSaveBtn.click();
   }
   public createContractCancel(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
     this.newContractBtn.click();
     $('#startDate').waitForDisplayed(20000);
     this.startDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(startDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.endDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(endDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractNumberField.addValue(contractNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.customerSelector.addValue(customer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(customer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.rentableItemSelector.addValue(rentableItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(rentableItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractCreateCancelBtn.click();
   }
 

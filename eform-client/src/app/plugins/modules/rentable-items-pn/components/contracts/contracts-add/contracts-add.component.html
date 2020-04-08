@@ -56,6 +56,13 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="md-form">
+                  <!--<ng-select
+                    bindValue="id"
+                    bindLabel="text"
+                    [placeholder]="'Customers'"
+                    [typeahead]="typeahead"
+                    (change)="onSelectedChanged($event)"
+                    [items]="rentableItemsModel.rentableItems"></ng-select>-->
                   <ng-select
                     id="customerSelector"
                     [placeholder]="'Customers'"
@@ -68,25 +75,25 @@
                     (change)="onSelectedChanged($event)"></ng-select>
                 </div>
               </div>
-              <div class="col-md-3" *ngFor="let customer of customersModel.customers" >
-                {{'Customer Name: ' + customer.contactPerson| translate }} <br>
-                {{'Customer Number: ' + customer.customerNo| translate }} <br>
-                {{'Customer Address: ' + customer.companyAddress| translate }} <br>
-                {{'Customer Address 2: ' + customer.companyAddress2| translate }} <br>
-                {{'Customer Zip Code: ' + customer.zipCode| translate }} <br>
-                {{'Customer Created By: ' + customer.createdBy| translate }} <br>
-                {{'Customer City Name: ' + customer.cityName | translate}} <br>
-                {{'Customer Phone: ' + customer.phone | translate}} <br>
-                {{'Customer Email: ' + customer.email | translate}} <br>
-                {{'Customer EAN Code: ' + customer.eanCode | translate}} <br>
-                {{'Customer Vat Number: ' + customer.vatNumber | translate}} <br>
-                {{'Customer Country Code: ' + customer.countryCode | translate}} <br>
-                <button class="btn btn-danger text-black-50 btn-icon mb-2"
-                        mdbTooltip="delete customer"
-                        (click)="removeCustomer(customer)">
-                  <fa-icon icon="trash-alt"></fa-icon>
-                </button>
-              </div>
+<!--              <div class="col-md-3" *ngFor="let customer of customersModel.customers" >-->
+<!--                {{'Customer Name: ' + customer.contactPerson| translate }} <br>-->
+<!--                {{'Customer Number: ' + customer.customerNo| translate }} <br>-->
+<!--                {{'Customer Address: ' + customer.companyAddress| translate }} <br>-->
+<!--                {{'Customer Address 2: ' + customer.companyAddress2| translate }} <br>-->
+<!--                {{'Customer Zip Code: ' + customer.zipCode| translate }} <br>-->
+<!--                {{'Customer Created By: ' + customer.createdBy| translate }} <br>-->
+<!--                {{'Customer City Name: ' + customer.cityName | translate}} <br>-->
+<!--                {{'Customer Phone: ' + customer.phone | translate}} <br>-->
+<!--                {{'Customer Email: ' + customer.email | translate}} <br>-->
+<!--                {{'Customer EAN Code: ' + customer.eanCode | translate}} <br>-->
+<!--                {{'Customer Vat Number: ' + customer.vatNumber | translate}} <br>-->
+<!--                {{'Customer Country Code: ' + customer.countryCode | translate}} <br>-->
+<!--                <button class="btn btn-danger text-black-50 btn-icon mb-2"-->
+<!--                        mdbTooltip="delete customer"-->
+<!--                        (click)="removeCustomer(customer)">-->
+<!--                  <fa-icon icon="trash-alt"></fa-icon>-->
+<!--                </button>-->
+<!--              </div>-->
             </div>
             <div class="col-md-12">
               <div class="md-form">

@@ -34,6 +34,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     rentableItemsPage.cleanup();
   });
   it('should create rentable item with only 5 parameters', function () {
+    loginPage.open('/');
+    rentableItemsPage.goToRentableItemsPage();
     const date = Math.floor((Math.random() * 28) + 1);
     const brand = Guid.create().toString();
     const model = Guid.create().toString();
@@ -49,6 +51,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     rentableItemsPage.cleanup();
   });
   it('should create rentable item with only 4 parameters, using serialNumber', function () {
+    loginPage.open('/');
+    rentableItemsPage.goToRentableItemsPage();
     const date = Math.floor((Math.random() * 28) + 1);
     const brand = Guid.create().toString();
     const model = Guid.create().toString();
@@ -62,6 +66,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     rentableItemsPage.cleanup();
   });
   it('should create rentable item with only 4 parameters, using VINnumber', function () {
+    loginPage.open('/');
+    rentableItemsPage.goToRentableItemsPage();
     const date = Math.floor((Math.random() * 28) + 1);
     const brand = Guid.create().toString();
     const model = Guid.create().toString();

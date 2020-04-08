@@ -34,7 +34,7 @@ export class ContractsAddComponent implements OnInit {
               ) {
     this.typeahead
       .pipe(
-        debounceTime(200),
+        debounceTime(500),
         switchMap(term => {
           this.customersRequestModel.name = term;
             return this.contractService.getCustomer(this.customersRequestModel);
@@ -46,7 +46,7 @@ export class ContractsAddComponent implements OnInit {
       });
     this.typeahead2
       .pipe(
-        debounceTime(200),
+        debounceTime(500),
         switchMap(term2 => {
           this.rentableItemsRequestModel.nameFilter = term2;
             return this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel);

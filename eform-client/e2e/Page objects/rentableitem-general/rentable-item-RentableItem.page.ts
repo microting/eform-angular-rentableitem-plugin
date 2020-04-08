@@ -131,11 +131,12 @@ export class RentableItemRentableItemPage extends Page {
   public clickDate(date) {
     const ele = $(`//*[text()=" ${date} "]/..`);
     ele.waitForDisplayed(20000);
-    ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public selectOption(name) {
-    $(`//*[text()="${name}"]`).click();
+    const ele = $(`//*[text()="${name}"]/..`);
+    ele.waitForDisplayed(20000);
+    ele.click();
   }
   public get rentableItemDeleteBtn() {
     $('#rentableItemDeleteDeleteBtn').waitForDisplayed(20000);
@@ -162,7 +163,6 @@ export class RentableItemRentableItemPage extends Page {
     this.rentableItemCreateModelBox.addValue(model);
     //browser.pause(500);
     this.eFormSelector.addValue(eFormName);
-    //browser.pause(500);
     this.selectOption(eFormName);
     //browser.pause(500);
     //console.log(serialNumber);
@@ -174,6 +174,7 @@ export class RentableItemRentableItemPage extends Page {
     //browser.pause(500);
     this.rentableItemCreateReistrationDate().click();
     $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(date);
     $('#spinner-animation').waitForDisplayed(90000, true);
     this.rentableItemCreateSaveBtn.click();
@@ -214,7 +215,7 @@ export class RentableItemRentableItemPage extends Page {
   }
   cleanup() {
     const rentableItem = this.getFirstRowObject();
-    if (rentableItem.deleteBtn.isVisible()) {
+    if (rentableItem.deleteBtn.waitForDisplayed(20000)) {
       rentableItem.deleteBtn.click();
       $('#spinner-animation').waitForDisplayed(90000, true);
       this.rentableItemDeleteBtn.click();
@@ -222,6 +223,7 @@ export class RentableItemRentableItemPage extends Page {
     }
   }
   getFirstRowObject(): RentableItemsRowObject {
+    browser.pause(500);
     return new RentableItemsRowObject(1);
   }
   createNewEform(eFormLabel, newTagsList = [], tagAddedNum = 0) {
