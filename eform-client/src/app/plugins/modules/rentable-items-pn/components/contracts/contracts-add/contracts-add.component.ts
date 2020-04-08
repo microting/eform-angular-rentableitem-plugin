@@ -88,7 +88,7 @@ export class ContractsAddComponent implements OnInit {
         tap(() => this.peopleLoading = true),
         switchMap(term => term !== null ? this.getAllRentableItems(term).pipe(map(val => val.model.customers),
           catchError(() => of([])), // empty list on error
-          tap(() => this.peopleLoading = false)
+          tap(() => this.peopleLoading = false )
         ) : this.returnValue() )
       )
     );
@@ -96,7 +96,6 @@ export class ContractsAddComponent implements OnInit {
 
   private getAllRentableItems(term: string = null): Observable<any> {
      this.customersRequestModel.name = term;
-     console.log('called');
      return this.contractService.getCustomer(this.customersRequestModel);
   }
 
@@ -107,6 +106,7 @@ export class ContractsAddComponent implements OnInit {
 
   createContract() {
     this.spinnerStatus = true;
+    this.newContractModel.customerId = this.newContractModel.customer.id;
     this.contractService.createContract(this.newContractModel).subscribe(((data) => {
       if (data && data.success) {
         this.newContractModel = new ContractModel();
@@ -128,8 +128,7 @@ export class ContractsAddComponent implements OnInit {
     this.newContractModel.rentableItems.splice(index, 1);
   }
   removeCustomer(customer: any) {
-    const index = this.customersModel.customers.indexOf(customer);
-    this.customersModel.customers.splice(index,  1);
+    this.newContractModel.customer = null;
   }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {

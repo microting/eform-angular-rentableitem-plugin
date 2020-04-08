@@ -85,29 +85,29 @@
                              [loading]="peopleLoading"
                              typeToSearchText="Please enter 2 or more characters"
                              [typeahead]="peopleInput$"
-                             [(ngModel)]="newContractModel.customerId"
+                             [(ngModel)]="newContractModel.customer"
                              name="blabla">
                   </ng-select>
                 </div>
               </div>
-              <div class="col-md-3" *ngIf="newContractModel.customerId">
-                <strong>{{'Name:' | translate }}</strong> {{newContractModel.customerId.contactPerson}}<br>
-                <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customerId.customerNo}}<br>
-                <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customerId.companyAddress}}<br>
-                <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customerId.companyAddress2}}<br>
-                <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customerId.zipCode}}<br>
-                <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customerId.createdBy}}<br>
-                <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customerId.cityName }}<br>
-                <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customerId.phone }}<br>
-                <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customerId.email }}<br>
-                <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customerId.eanCode }}<br>
-                <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customerId.vatNumber }}<br>
-                <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customerId.countryCode }}<br>
-                <!--<button class="btn btn-danger text-black-50 btn-icon mb-2"
+              <div class="col-md-3" *ngIf="newContractModel.customer">
+                <strong>{{'Name:' | translate }}</strong> {{newContractModel.customer.contactPerson}}<br>
+                <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customer.customerNo}}<br>
+                <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customer.companyAddress}}<br>
+                <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customer.companyAddress2}}<br>
+                <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customer.zipCode}}<br>
+                <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customer.createdBy}}<br>
+                <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customer.cityName }}<br>
+                <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customer.phone }}<br>
+                <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customer.email }}<br>
+                <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customer.eanCode }}<br>
+                <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customer.vatNumber }}<br>
+                <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customer.countryCode }}<br>
+                <button class="btn btn-danger text-black-50 btn-icon mb-2"
                         mdbTooltip="delete customer"
-                        (click)="removeCustomer(customer)">
+                        (click)="removeCustomer(newContractModel.customerId)">
                   <fa-icon icon="trash-alt"></fa-icon>
-                </button>-->
+                </button>
               </div>
             </div>
             <div class="col-md-12">
