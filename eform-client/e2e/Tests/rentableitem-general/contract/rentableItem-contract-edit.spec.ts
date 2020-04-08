@@ -54,13 +54,18 @@ describe('Rentable Items - Contracts - edit', function () {
     const eForm = 'Number 1';
     rentableItemsPage.createRentableItem(brand2, model2, date2, eForm, serialNumber2, vinNumber2, plateNumber2);
   });
-  it('should go to Contracts page', function () {
+  // it('should go to Contracts page', function () {
+  //   contractsPage.rentableItemDropdown();
+  //   $('#spinner-animation').waitForDisplayed(90000, true);
+  //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+  //   $('#contractCreateBtn').waitForDisplayed(20000);
+  // });
+  it('should create contract', function () {
+    //loginPage.open('/');
     contractsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed(20000);
-  });
-  it('should create contract', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 26) + 1);
@@ -74,6 +79,11 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should edit contract', function () {
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     $('#spinner-animation').waitForDisplayed(90000, true);
     const newStartDate = Math.floor((Math.random() * 14) + 1);
     const newEndDate = Math.floor((Math.random() * 26) + 1);
@@ -87,6 +97,11 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should NOT edit contract', function () {
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     const oldContract = contractsPage.getFirstContractObject();
     const newStartDate = Math.floor((Math.random() * 14) + 1);
     const newEndDate = Math.floor((Math.random() * 28) + 1);
@@ -101,6 +116,11 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should remove 1 rentable item', function () {
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     contractsPage.editContractDeleteRentableItem();
     $('#spinner-animation').waitForDisplayed(90000, true);
     const contract = contractsPage.getFirstContractObject();

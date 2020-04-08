@@ -13,13 +13,18 @@ describe('Rentable Items - Contracts - Delete', function () {
     loginPage.open('/auth');
     loginPage.login();
   });
-  it('should go to Contracts page', function () {
+  // it('should go to Contracts page', function () {
+  //   contractsPage.rentableItemDropdown();
+  //   $('#spinner-animation').waitForDisplayed(90000, true);
+  //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+  //   $('#contractCreateBtn').waitForDisplayed(20000);
+  // });
+  it('should create contract', function () {
+    //loginPage.open('/');
     contractsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed(20000);
-  });
-  it('should create contract', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
@@ -33,6 +38,11 @@ describe('Rentable Items - Contracts - Delete', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should NOT delete contract', function () {
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     contractsPage.deleteContractCancel();
     $('#spinner-animation').waitForDisplayed(90000, true);
     const contract = contractsPage.getFirstContractObject();
@@ -40,6 +50,11 @@ describe('Rentable Items - Contracts - Delete', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should delete contract', function () {
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     contractsPage.deleteContract();
     $('#spinner-animation').waitForDisplayed(90000, true);
     expect(contractsPage.rowNum).equal(0);

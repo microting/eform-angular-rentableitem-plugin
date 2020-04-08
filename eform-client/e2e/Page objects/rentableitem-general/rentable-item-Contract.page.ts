@@ -1,6 +1,7 @@
 import Page from '../Page';
 import XMLForEformRentableItems from '../../Constants/XMLForEform';
 import {trackByHourSegment} from 'angular-calendar/modules/common/util';
+import {timeout} from 'rxjs/operators';
 
 export class RentableItemContractPage extends Page {
   constructor() {
@@ -117,8 +118,9 @@ export class RentableItemContractPage extends Page {
     ele.click();
   }
   public selectOption(name) {
-    const ele = $(`//*[text()="${name}"]/..`);
-    ele.waitForDisplayed(20000);
+    const ele = $(`//span[text()="${name}"]/..`);
+    browser.pause(500);
+    ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
@@ -240,10 +242,12 @@ export class RentableItemContractPage extends Page {
   }
 
   public getFirstRentableItemObject(): RentableItemRowObject {
+    browser.pause(500);
     return new RentableItemRowObject(1);
   }
 
   public getFirstContractObject(): ContractsRowObject {
+    browser.pause(500);
     return new ContractsRowObject(1);
   }
 
