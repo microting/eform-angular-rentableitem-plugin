@@ -118,8 +118,8 @@ export class RentableItemContractPage extends Page {
     ele.click();
   }
   public selectOption(name) {
-    const ele = $(`//span[text()="${name}"]/..`);
     browser.pause(500);
+    const ele = $(`//span[text()="${name}"]/..`);
     ele.waitForClickable({timeout: 20000});
     ele.click();
   }
@@ -154,6 +154,7 @@ export class RentableItemContractPage extends Page {
     this.rentableItemSelector.addValue(rentableItem);
     this.selectOption(rentableItem);
     this.contractCreateCancelBtn.click();
+    $('#spinner-animation').waitForDisplayed(90000, true);
   }
 
   public editContract(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
@@ -161,25 +162,17 @@ export class RentableItemContractPage extends Page {
     contractForEdit.editBtn.click();
     $('#editStartDate').waitForDisplayed(20000);
     this.editStartDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(startDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editEndDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(endDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.clearValue();
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.addValue(contractNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editCustomerSelector.addValue(newCustomer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(newCustomer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editRentableItemSelector.addValue(newItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(newItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractEditSaveBtn.click();
     $('#spinner-animation').waitForDisplayed(90000, true);
   }
@@ -188,25 +181,17 @@ export class RentableItemContractPage extends Page {
     contractForEdit.editBtn.click();
     $('#editStartDate').waitForDisplayed(20000);
     this.editStartDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(startDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editEndDateSelector.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    browser.pause(500);
     this.clickDate(endDate);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.clearValue();
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editContractNumberField.addValue(contractNumber);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editCustomerSelector.addValue(newCustomer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(newCustomer);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.editRentableItemSelector.addValue(newItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.selectOption(newItem);
-    $('#spinner-animation').waitForDisplayed(90000, true);
     this.contractEditCancelBtn.click();
     $('#spinner-animation').waitForDisplayed(90000, true);
   }

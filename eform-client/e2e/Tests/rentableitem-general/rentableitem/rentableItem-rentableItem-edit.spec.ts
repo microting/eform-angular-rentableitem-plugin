@@ -11,34 +11,9 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     loginPage.open('/auth');
     loginPage.login();
   });
-  // it('should create eForm', function () {
-  //   const  neweFormLabel = 'Number 1';
-  //   rentableItemsPage.createNewEform(neweFormLabel);
-  // });
-  // it('should check if activated', function () {
-  //   myEformsPage.Navbar.advancedDropdown();
-  //   myEformsPage.Navbar.clickonSubMenuItem('Plugins');
-  //   $('#spinner-animation').waitForDisplayed(90000, true);
-  //   const plugin = pluginsPage.getFirstPluginRowObj();
-  //   expect(plugin.id).equal(1);
-  //   expect(plugin.name).equal('Microting Rentable Items plugin');
-  //   expect(plugin.version).equal('1.0.0.0');
-  //   expect(plugin.status).equal('Aktiveret');
-  // });
-  // it('should check if menu point is there', function () {
-  //   expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Rentable Items');
-  //   rentableItemsPage.rentableItemDropdown();
-  //   $('#spinner-animation').waitForDisplayed(90000, true);
-  //   expect(rentableItemsPage.rentableItemDropdownItemName('Rentable Items').getText()).equal('Rentable Items');
-  //   $('#spinner-animation').waitForDisplayed(90000, true);
-  //   rentableItemsPage.rentableItemDropdown();
-  //   browser.refresh();
-  // });
-  it('should get btn text', function () {
+  it('should create rentable item with all parameters', function () {
     rentableItemsPage.goToRentableItemsPage();
     rentableItemsPage.getBtnTxt('New rentable item');
-  });
-  it('should create rentable item with all parameters', function () {
     const date = Math.floor((Math.random() * 28) + 1);
     const brand = Guid.create().toString();
     const model = Guid.create().toString();
@@ -56,6 +31,8 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     expect(rentableItem.serialNumber).equal(serialNumber);
   });
   it('should edit Rentable Item', function () {
+    loginPage.open('/');
+    rentableItemsPage.goToRentableItemsPage();
     const newBrand = Guid.create().toString();
     const newModel = Guid.create().toString();
     const newPlate = Guid.create().toString();

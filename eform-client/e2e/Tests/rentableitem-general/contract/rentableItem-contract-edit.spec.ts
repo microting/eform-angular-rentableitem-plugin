@@ -41,10 +41,11 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
     customersModalPage.createCustomer(customerObject2);
   });
-  it('should go to rentable items page', function () {
-    rentableItemsPage.goToRentableItemsPage();
-  });
+  // it('should go to rentable items page', function () {
+  //   rentableItemsPage.goToRentableItemsPage();
+  // });
   it('should create rentable item with all parameters', function () {
+    rentableItemsPage.goToRentableItemsPage();
     const date2 = Math.floor((Math.random() * 28) + 1);
     const brand2 = 'Bosch';
     const model2 = 'Boremaskine';
@@ -61,7 +62,7 @@ describe('Rentable Items - Contracts - edit', function () {
   //   $('#contractCreateBtn').waitForDisplayed(20000);
   // });
   it('should create contract', function () {
-    //loginPage.open('/');
+    loginPage.open('/');
     contractsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
