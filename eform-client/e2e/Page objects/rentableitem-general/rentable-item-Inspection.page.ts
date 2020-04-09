@@ -36,7 +36,10 @@ export class RentableItemInspectionPage extends Page {
     return $('#addTagInput');
   }
   public get siteSelectorBox() {
-    return $(`//*[@id = 'siteSelector']//input`);
+    const ele = $(`//*[@id = 'siteSelector']//input`);
+    ele.waitForDisplayed(20000);
+    ele.waitForClickable({timeout: 20000});
+    return ele;
   }
   public get contractInspectionCreateSaveBtn() {
     $('#contractInspectionCreateSaveBtn').waitForDisplayed(20000);

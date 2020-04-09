@@ -49,8 +49,10 @@ describe('Rentable Items - Inspections - Add', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
   });
   it('should verify the inspection is created', function () {
+    loginPage.open('/');
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdown();
+    browser.pause(500);
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();
     $('#spinner-animation').waitForDisplayed(90000, true);
