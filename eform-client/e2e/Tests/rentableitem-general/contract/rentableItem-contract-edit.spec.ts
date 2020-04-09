@@ -41,9 +41,9 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed(90000, true);
     customersModalPage.createCustomer(customerObject2);
   });
-  // it('should go to rentable items page', function () {
-  //   rentableItemsPage.goToRentableItemsPage();
-  // });
+  it('should go to rentable items page', function () {
+    rentableItemsPage.goToRentableItemsPage();
+  });
   it('should create rentable item with all parameters', function () {
     rentableItemsPage.goToRentableItemsPage();
     const date2 = Math.floor((Math.random() * 28) + 1);
@@ -55,12 +55,12 @@ describe('Rentable Items - Contracts - edit', function () {
     const eForm = 'Number 1';
     rentableItemsPage.createRentableItem(brand2, model2, date2, eForm, serialNumber2, vinNumber2, plateNumber2);
   });
-  // it('should go to Contracts page', function () {
-  //   contractsPage.rentableItemDropdown();
-  //   $('#spinner-animation').waitForDisplayed(90000, true);
-  //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-  //   $('#contractCreateBtn').waitForDisplayed(20000);
-  // });
+  it('should go to Contracts page', function () {
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
+  });
   it('should create contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
@@ -68,8 +68,8 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed(20000);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    const date1 = Math.floor((Math.random() * 14) + 1);
-    const date2 = Math.floor((Math.random() * 26) + 1);
+    const date1 = loginPage.randomInt(12, 25);
+    const date2 = loginPage.randomInt(12, 25);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';
@@ -86,9 +86,9 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed(20000);
     $('#spinner-animation').waitForDisplayed(90000, true);
-    const newStartDate = Math.floor((Math.random() * 14) + 1);
-    const newEndDate = Math.floor((Math.random() * 26) + 1);
-    const newContractNumber = Math.floor((Math.random() * 28) + 1);
+    const newStartDate = loginPage.randomInt(12, 25);
+    const newEndDate = loginPage.randomInt(12, 25);
+    const newContractNumber = Math.floor((Math.random() * 28) + 3);
     const newRentableItem = 'Boremaskine';
     const newCustomer = 'Bents bjelker';
     contractsPage.editContract(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
@@ -104,13 +104,18 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed(20000);
     const oldContract = contractsPage.getFirstContractObject();
-    const newStartDate = Math.floor((Math.random() * 14) + 1);
-    const newEndDate = Math.floor((Math.random() * 28) + 1);
-    const newContractNumber = Math.floor((Math.random() * 28) + 1);
+    const newStartDate = loginPage.randomInt(12, 25);
+    const newEndDate = loginPage.randomInt(12, 25);
+    const newContractNumber = Math.floor((Math.random() * 28) + 3);
     const newRentableItem = 'Boremaskine';
-    const newCustomer = 'Bents bjelker';
+    const newCustomer = 'Oles olie';
     contractsPage.editContractCancel(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
     $('#spinner-animation').waitForDisplayed(90000, true);
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed(90000, true);
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed(20000);
     const contract = contractsPage.getFirstContractObject();
     expect(oldContract.customerId).equal(contract.customerId);
     expect(oldContract.contractNumber).equal(contract.contractNumber);

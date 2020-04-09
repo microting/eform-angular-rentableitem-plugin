@@ -57,6 +57,8 @@ describe('Rentable Items - Contracts - Delete', function () {
     $('#contractCreateBtn').waitForDisplayed(20000);
     contractsPage.deleteContract();
     $('#spinner-animation').waitForDisplayed(90000, true);
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
     expect(contractsPage.rowNum).equal(0);
   });
 });
