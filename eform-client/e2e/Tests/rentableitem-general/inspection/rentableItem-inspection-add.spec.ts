@@ -35,8 +35,8 @@ describe('Rentable Items - Inspections - Add', function () {
     loginPage.open('/');
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
-    rentableItemsPage.rentableItemDropdownItemName('Contracts').click();
+    browser.pause(500);
+    rentableItemsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#spinner-animation').waitForDisplayed(90000, true);
     $('#contractCreateBtn').waitForDisplayed(20000);
     const contract = contractsPage.getFirstContractObject();
