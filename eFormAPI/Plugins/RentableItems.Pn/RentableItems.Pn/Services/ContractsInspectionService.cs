@@ -112,27 +112,11 @@ namespace RentableItems.Pn.Services
                     RentableItem rentableItem =
                         await _dbContext.RentableItem.FirstOrDefaultAsync(x => x.Id == rentableItemId);
                     int eFormId = rentableItem.eFormId;
-                    string lookup = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
-//                string lookupeForm = $"RentableItemBaseSettings:{RentableItemsSettingsEnum.SdkeFormId.ToString()}";
-                    LogEvent($"lookup is {lookup}");
-//                LogEvent($"lookupeForm is {lookupeForm}");
-                    string result = _dbContext.PluginConfigurationValues.AsNoTracking()
-                        .FirstOrDefault(x =>
-                            x.Name == lookup)
-                        ?.Value;
-//                string resulteForm = _dbContext.PluginConfigurationValues.AsNoTracking()
-//                    .FirstOrDefault(y => 
-//                        y.Name == lookupeForm)
-//                    ?.Value;
-                    LogEvent($"result is {result}");
-//                LogEvent($"resulteForm i {resulteForm}");
-                    // modificere mainelement
-
+                    
                     Contract dbContract =
                         await _dbContext.Contract.FirstOrDefaultAsync(x =>
                             x.Id == contractInspectionCreateModel.ContractId);
 
-//                int eFormId = int.Parse(resulteForm);
                     MainElement mainElement = await _core.TemplateRead(eFormId);
                     mainElement.Repeated = 1;
                     mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
@@ -144,38 +128,19 @@ namespace RentableItems.Pn.Services
                     cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
                     mainElement.ElementList[0].Description = cDataValue;
                     mainElement.ElementList[0].Label = mainElement.Label;
-
-                    // finde sites som eform skal sendes til
-
+                    
                     List<SiteDto> sites = new List<SiteDto>();
 
-
-                    string lookupSite =
-                        $"RentableItemBaseSettings:{RentableItemsSettingsEnum.EnabledSiteIds.ToString()}";
-                    LogEvent($"lookup is {lookupSite}");
-
-                    string sdkSiteIds = _dbContext.PluginConfigurationValues.AsNoTracking()
-                        .FirstOrDefault(x =>
-                            x.Name == lookupSite)
-                        ?.Value;
-
-                    LogEvent($"sdkSiteIds is {sdkSiteIds}");
-
-                    foreach (string siteId in sdkSiteIds.Split(","))
-                    {
-                        LogEvent($"found siteId {siteId}");
-                        sites.Add(await _core.SiteRead(int.Parse(siteId)));
-                    }
+                    LogEvent($"found siteId {contractInspectionCreateModel.SiteId}");
+                    sites.Add(await _core.SiteRead(contractInspectionCreateModel.SiteId));
 
                     foreach (SiteDto siteDto in sites)
                     {
-                        // sende eform core.caseCreate
 
                         int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId);
 
                         if (sdkCaseId != null)
                         {
-                            // gemme caseid på contractInspection
                             ContractInspection contractInspection = new ContractInspection
                             {
                                 ContractId = contractInspectionCreateModel.ContractId
@@ -214,8 +179,6 @@ namespace RentableItems.Pn.Services
                 {
                     contractInspection.ContractId = contractInspectionUpdateModel.ContractId;
                     contractInspection.DoneAt = contractInspectionUpdateModel.DoneAt;
-//                    contractInspection.SiteId = contractInspectionUpdateModel.SiteId;
-//                    contractInspection.SDKCaseId = contractInspectionUpdateModel.SdkCaseId;
                     await contractInspection.Update(_dbContext);
                 }
                 return new OperationResult(true);
