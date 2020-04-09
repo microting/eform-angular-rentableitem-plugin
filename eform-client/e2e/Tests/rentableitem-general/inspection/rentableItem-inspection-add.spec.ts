@@ -37,6 +37,7 @@ describe('Rentable Items - Inspections - Add', function () {
     rentableItemsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();
+    $('#spinner-animation').waitForDisplayed(90000, true);
     $('#deleteInspectionBtn').waitForDisplayed(20000);
     const contract = contractsPage.getFirstContractObject();
     contract.inspectionBtn.click();
@@ -52,6 +53,7 @@ describe('Rentable Items - Inspections - Add', function () {
     rentableItemsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed(90000, true);
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();
+    $('#spinner-animation').waitForDisplayed(90000, true);
     $('#deleteInspectionBtn').waitForDisplayed(20000);
     expect(inspectionsPage.rowNum).equal(1);
   });
