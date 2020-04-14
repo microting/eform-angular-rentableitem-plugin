@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-ex';
-import {MDBRootModule} from 'port/angular-bootstrap-md';
+import {MDBRootModule} from 'angular-bootstrap-md';
 import {MY_MOMENT_FORMATS} from 'src/app/common/helpers';
 import {RentableItemsPnLayoutComponent} from './layouts';
 import {SharedPnModule} from '../shared/shared-pn.module';
