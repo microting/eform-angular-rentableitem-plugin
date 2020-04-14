@@ -9,7 +9,7 @@ import {formatTimezone} from '../../../../../../common/helpers';
   styleUrls: ['./contract-inspections-update.component.scss']
 })
 export class ContractInspectionsUpdateComponent implements OnInit {
-  @ViewChild('frame', {static: false}) frame;
+  @ViewChild('frame') frame;
   @Output() onInspectionUpdated: EventEmitter<void> = new EventEmitter<void>();
   selectedContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
   spinnerStatus = false;

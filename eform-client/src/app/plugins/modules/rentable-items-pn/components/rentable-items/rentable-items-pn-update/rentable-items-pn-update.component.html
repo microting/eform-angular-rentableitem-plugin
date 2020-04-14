@@ -10,8 +10,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" required #editBrand="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.brand"
                          name="editBrand" id="editBrand">
@@ -20,8 +20,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false" class="form-control"
+                  <input mdbInput
+                          class="form-control"
                          required #editRentableItemModel="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.modelName"
                          name="editRentableItemModel" id="editRentableItemModel">
@@ -33,9 +33,9 @@
               <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
-                  <input mdbInputDirective
+                  <input mdbInput
                          [owlDateTime]="dt1"
-                         [mdbValidate]="false"
+
                          [ngModel]="selectedRentableItemModel.registrationDate"
                          (dateTimeChange)="onRegistrationDateSelected($event)"
                          type="text"
@@ -49,8 +49,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #editVinNumber="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.vinNumber"
                          name="editVINNumber" id="editVINNumber">
@@ -59,8 +59,8 @@
               </div>
               <div class="col-md-6">
               <div class="md-form">
-                <input mdbInputDirective
-                       [mdbValidate]="false"
+                <input mdbInput
+
                        class="form-control"  #editSerialNumber="ngModel"
                        type="text" [(ngModel)]="selectedRentableItemModel.serialNumber"
                        name="editSerialNumber" id="editSerialNumber">
@@ -69,8 +69,8 @@
             </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control"  #editPlateNumber="ngModel"
                          type="text" [(ngModel)]="selectedRentableItemModel.plateNumber"
                          name="editPlateNumber" id="editPlateNumber">
@@ -94,12 +94,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success"
+        <button mdbBtn class="btn-success"
                 id="rentableItemEditSaveBtn"
                 [disabled]="!selectedRentableItemModel.modelName || !selectedRentableItemModel.serialNumber && !selectedRentableItemModel.vinNumber"
                 (click)="updateRentableItem()">{{ 'Save' | translate}}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button mdbBtn class="btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

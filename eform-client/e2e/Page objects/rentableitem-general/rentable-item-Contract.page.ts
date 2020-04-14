@@ -21,37 +21,37 @@ export class RentableItemContractPage extends Page {
     $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`).click();
   }
   public get newContractBtn() {
-    $('#contractCreateBtn').waitForDisplayed(20000);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     $('#contractCreateBtn').waitForClickable({timeout: 20000});
     return $('#contractCreateBtn');
   }
   public get startDateSelector() {
-    $('#startDate').waitForDisplayed(20000);
+    $('#startDate').waitForDisplayed({timeout: 20000});
     $('#startDate').waitForClickable({timeout: 20000});
     return $('#startDate');
   }
   public get editStartDateSelector() {
-    $('#editStartDate').waitForDisplayed(20000);
+    $('#editStartDate').waitForDisplayed({timeout: 20000});
     $('#editStartDate').waitForClickable({timeout: 20000});
     return $('#editStartDate');
   }
   public get endDateSelector() {
-    $('#endDate').waitForDisplayed(20000);
+    $('#endDate').waitForDisplayed({timeout: 20000});
     $('#endDate').waitForClickable({timeout: 20000});
     return $('#endDate');
   }
   public get editEndDateSelector() {
-    $('#editEndDate').waitForDisplayed(20000);
+    $('#editEndDate').waitForDisplayed({timeout: 20000});
     $('#editEndDate').waitForClickable({timeout: 20000});
     return $('#editEndDate');
   }
   public get contractNumberField() {
-    $('#contractNumber').waitForDisplayed(20000);
+    $('#contractNumber').waitForDisplayed({timeout: 20000});
     $('#contractNumber').waitForClickable({timeout: 20000});
     return $('#contractNumber');
   }
   public get editContractNumberField() {
-    $('#editContractNr').waitForDisplayed(20000);
+    $('#editContractNr').waitForDisplayed({timeout: 20000});
     $('#editContractNr').waitForClickable({timeout: 20000});
     return $('#editContractNr');
   }
@@ -68,53 +68,53 @@ export class RentableItemContractPage extends Page {
     return $(`//*[@id= 'editRentableItemSelector']//input`);
   }
   public get contractCreateSaveBtn() {
-    $('#contractCreateSaveBtn').waitForDisplayed(20000);
+    $('#contractCreateSaveBtn').waitForDisplayed({timeout: 20000});
     $('#contractCreateSaveBtn').waitForClickable({timeout: 20000});
     return $('#contractCreateSaveBtn');
   }
   public get contractCreateCancelBtn() {
-    $('#contractCreateDeleteBtn').waitForDisplayed(20000);
+    $('#contractCreateDeleteBtn').waitForDisplayed({timeout: 20000});
     $('#contractCreateDeleteBtn').waitForClickable({timeout: 20000});
     return $('#contractCreateDeleteBtn');
   }
   public get contractEditSaveBtn() {
-    $('#contractEditSaveBtn').waitForDisplayed(20000);
+    $('#contractEditSaveBtn').waitForDisplayed({timeout: 20000});
     $('#contractEditSaveBtn').waitForClickable({timeout: 20000});
     return $('#contractEditSaveBtn');
   }
   public get contractEditCancelBtn() {
-    $('#contractEditCancelBtn').waitForDisplayed(20000);
+    $('#contractEditCancelBtn').waitForDisplayed({timeout: 20000});
     $('#contractEditCancelBtn').waitForClickable({timeout: 20000});
     return $('#contractEditCancelBtn');
   }
   public get selectedContractId() {
-    $('#selectedContractId').waitForDisplayed(20000);
+    $('#selectedContractId').waitForDisplayed({timeout: 20000});
     $('#selectedContractId').waitForClickable({timeout: 20000});
     return $('#selectedContractId');
   }
   public get selectedContractNumber() {
-    $('#selectedContractNr').waitForDisplayed(20000);
+    $('#selectedContractNr').waitForDisplayed({timeout: 20000});
     $('#selectedContractNr').waitForClickable({timeout: 20000});
     return $('#selectedContractNr');
   }
   public get selectedContractCustomerId() {
-    $('#selectedContractCustomerId').waitForDisplayed(20000);
+    $('#selectedContractCustomerId').waitForDisplayed({timeout: 20000});
     $('#selectedContractCustomerId').waitForClickable({timeout: 20000});
     return $('#selectedContractCustomerId');
   }
   public get contractDeleteDeleteBtn() {
-    $('#contractDeleteDeleteBtn').waitForDisplayed(20000);
+    $('#contractDeleteDeleteBtn').waitForDisplayed({timeout: 20000});
     $('#contractDeleteDeleteBtn').waitForClickable({timeout: 20000});
     return $('#contractDeleteDeleteBtn');
   }
   public get contractDeleteCancelBtn() {
-    $('#contractDeleteCancelBtn').waitForDisplayed(20000);
+    $('#contractDeleteCancelBtn').waitForDisplayed({timeout: 20000});
     $('#contractDeleteCancelBtn').waitForClickable({timeout: 20000});
     return $('#contractDeleteCancelBtn');
   }
   public clickDate(date) {
     const ele = $(`//*[text()=" ${date} "]/..`);
-    ele.waitForDisplayed(20000);
+    ele.waitForDisplayed({timeout: 20000});
     ele.click();
   }
   public selectOption(name) {
@@ -125,7 +125,7 @@ export class RentableItemContractPage extends Page {
   }
   public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
     this.newContractBtn.click();
-    $('#startDate').waitForDisplayed(20000);
+    $('#startDate').waitForDisplayed({timeout: 20000});
     this.startDateSelector.click();
     browser.pause(500);
     this.clickDate(startDate);
@@ -141,7 +141,7 @@ export class RentableItemContractPage extends Page {
   }
   public createContractCancel(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
     this.newContractBtn.click();
-    $('#startDate').waitForDisplayed(20000);
+    $('#startDate').waitForDisplayed({timeout: 20000});
     this.startDateSelector.click();
     browser.pause(500);
     this.clickDate(startDate);
@@ -154,13 +154,13 @@ export class RentableItemContractPage extends Page {
     this.rentableItemSelector.addValue(rentableItem);
     this.selectOption(rentableItem);
     this.contractCreateCancelBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
 
   public editContract(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
     const contractForEdit = this.getFirstContractObject();
     contractForEdit.editBtn.click();
-    $('#editStartDate').waitForDisplayed(20000);
+    $('#editStartDate').waitForDisplayed({timeout: 20000});
     this.editStartDateSelector.click();
     browser.pause(500);
     this.clickDate(startDate);
@@ -174,12 +174,12 @@ export class RentableItemContractPage extends Page {
     this.editRentableItemSelector.addValue(newItem);
     this.selectOption(newItem);
     this.contractEditSaveBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
   public editContractCancel(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
     const contractForEdit = this.getFirstContractObject();
     contractForEdit.editBtn.click();
-    $('#editStartDate').waitForDisplayed(20000);
+    $('#editStartDate').waitForDisplayed({timeout: 20000});
     this.editStartDateSelector.click();
     browser.pause(500);
     this.clickDate(startDate);
@@ -193,36 +193,36 @@ export class RentableItemContractPage extends Page {
     this.editRentableItemSelector.addValue(newItem);
     this.selectOption(newItem);
     this.contractEditCancelBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
   public editContractDeleteRentableItem() {
     const contractForEdit = this.getFirstContractObject();
     contractForEdit.editBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const rentableItemToDelete = this.getFirstRentableItemObject();
     rentableItemToDelete.deleteBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     this.contractEditSaveBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
   public deleteContract() {
     const deleteObject = this.getFirstContractObject();
     if (deleteObject != null) {
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       deleteObject.deleteBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       this.contractDeleteDeleteBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     }
   }
   public deleteContractCancel() {
     const deleteObject = this.getFirstContractObject();
     if (deleteObject != null) {
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       deleteObject.deleteBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       this.contractDeleteCancelBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     }
   }
 
@@ -239,11 +239,11 @@ export class RentableItemContractPage extends Page {
   public cleanup() {
     const deleteObject = this.getFirstContractObject();
     if (deleteObject != null) {
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       deleteObject.deleteBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
       this.contractDeleteDeleteBtn.click();
-      $('#spinner-animation').waitForDisplayed(90000, true);
+      $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     }
   }
 }

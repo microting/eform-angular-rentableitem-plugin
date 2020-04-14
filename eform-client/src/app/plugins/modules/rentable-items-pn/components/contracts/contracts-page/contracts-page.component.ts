@@ -12,11 +12,11 @@ declare var require: any;
   styleUrls: ['./contracts-page.component.scss']
 })
 export class ContractsPageComponent implements OnInit {
-  @ViewChild('createContractModal', {static: false}) createContractModal;
-  @ViewChild('editContractModal', {static: false}) editContractModal;
-  @ViewChild('deleteContractModal', {static: false}) deleteContractModal;
-  @ViewChild('createInspectionModal', {static: false}) createInspectionModal;
-  @ViewChild('contractRentableItem', {static: false}) contractRentableItem;
+  @ViewChild('createContractModal') createContractModal;
+  @ViewChild('editContractModal') editContractModal;
+  @ViewChild('deleteContractModal') deleteContractModal;
+  @ViewChild('createInspectionModal') createInspectionModal;
+  @ViewChild('contractRentableItem') contractRentableItem;
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
   spinnerStatus = false;

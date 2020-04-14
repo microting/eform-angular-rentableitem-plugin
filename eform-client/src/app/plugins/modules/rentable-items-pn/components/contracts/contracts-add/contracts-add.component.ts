@@ -18,7 +18,7 @@ import {concat, Observable, of, Subject} from 'rxjs';
   styleUrls: ['./contracts-add.component.scss']
 })
 export class ContractsAddComponent implements OnInit {
-  @ViewChild('frame', {static: false}) frame;
+  @ViewChild('frame') frame;
   @Output() onContractCreated: EventEmitter<void> = new EventEmitter<void>();
   newContractModel: ContractModel = new ContractModel();
   spinnerStatus = false;

@@ -19,9 +19,9 @@ declare  var require: any;
   styleUrls: ['./contract-inspections-page.component.scss']
 })
 export class ContractInspectionsPageComponent implements OnInit {
-  @ViewChild('createInspectionModal', {static: false}) createInspectionModal;
-  @ViewChild('editInspectionModal', {static: false}) editInspectionModal;
-  @ViewChild('deleteInspectionModal', {static: false}) deleteInspectionModal;
+  @ViewChild('createInspectionModal') createInspectionModal;
+  @ViewChild('editInspectionModal') editInspectionModal;
+  @ViewChild('deleteInspectionModal') deleteInspectionModal;
 
   contractInspectionsRequestModel: ContractInspectionsRequestModel = new ContractInspectionsRequestModel();
   contractInspectionsModel: ContractInspectionsModel = new ContractInspectionsModel();

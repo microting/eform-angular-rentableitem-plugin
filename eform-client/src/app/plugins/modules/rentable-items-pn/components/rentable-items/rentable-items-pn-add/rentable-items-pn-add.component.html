@@ -10,8 +10,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" required #createBrand="ngModel"
                          type="text" [(ngModel)]="newRentableItemModel.brand" id="createBrand"
                          class="form-control"
@@ -21,8 +21,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          required [(ngModel)]="newRentableItemModel.modelName"
                          type="text" #createRentableItemModel="ngModel" class="form-control"
                          name="createRentableItemModel" id="createRentableItemModel">
@@ -34,9 +34,9 @@
               <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
-                  <input mdbInputDirective
+                  <input mdbInput
                          [owlDateTime]="dt1"
-                         [mdbValidate]="false"
+
                          [ngModel]="newRentableItemModel.registrationDate"
                          (dateTimeChange)="onRegistrationDateSelected($event)"
                          type="text"
@@ -50,8 +50,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #createWINNumber="ngModel"
                          type="text" [(ngModel)]="newRentableItemModel.vinNumber" id="createVINNumber"
                          name="createVINNumber">
@@ -60,8 +60,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #createSerialNumber="ngModel"
                          type="text" [(ngModel)]="newRentableItemModel.serialNumber" id="createSerialNumber"
                          name="createSerialNumber">
@@ -70,8 +70,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #createPlateNumber="ngModel"
                          type="text" [(ngModel)]="newRentableItemModel.plateNumber" id="createPlateNumber"
                          name="createPlateNumber">
@@ -94,12 +94,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" id="rentableItemCreateSaveBtn"
+        <button mdbBtn class="btn-success" id="rentableItemCreateSaveBtn"
                 [disabled]="!newRentableItemModel.modelName || !newRentableItemModel.serialNumber && !newRentableItemModel.vinNumber"
                 (click)="createRentableItem()">
           {{ 'Create' | translate }}
         </button>
-        <button class="btn btn-accent text-black-50" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button mdbBtn class="btn-accent text-black-50" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

@@ -10,8 +10,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" required #editContractId="ngModel"
                          type="text" [(ngModel)]="selectedContractInspectionModel.contractId"
                          name="editContractId" id="editContractId">
@@ -21,9 +21,9 @@
               <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
-                  <input mdbInputDirective
+                  <input mdbInput
                          [owlDateTime]="dt1"
-                         [mdbValidate]="false"
+
                          [ngModel]="selectedContractInspectionModel.doneAt"
                          (dateTimeChange)="onDoneAtSelected($event)"
                          type="text"
@@ -39,8 +39,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #editSdkCaseId="ngModel"
                          type="text" [(ngModel)]="selectedContractInspectionModel.sdkCaseId"
                          name="editSdkCaseId" id="editSdkCaseId">
@@ -49,8 +49,8 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control"  #editStatus="ngModel"
                          type="text" [(ngModel)]="selectedContractInspectionModel.status"
                          name="editStatus" id="editStatus">
@@ -62,10 +62,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!editForm.form.valid" (click)="updateInspection()">{{ 'Save' | translate
+        <button mdbBtn class="btn-success" [disabled]="!editForm.form.valid" (click)="updateInspection()">{{ 'Save' | translate
           }}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button mdbBtn class="btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

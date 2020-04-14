@@ -17,7 +17,7 @@ import {debounceTime, switchMap} from 'rxjs/operators';
   styleUrls: ['./contracts-update.component.scss']
 })
 export class ContractsUpdateComponent implements OnInit {
-  @ViewChild('frame', {static: false}) frame;
+  @ViewChild('frame') frame;
   @Output() onContractUpdated: EventEmitter<void> = new EventEmitter<void>();
   selectedContractModel: ContractModel = new ContractModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();

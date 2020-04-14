@@ -110,7 +110,7 @@
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
-            <button class="btn btn-accent text-black-50 btn-icon mb-2"
+            <button mdbBtn class="btn-accent text-black-50 btn-icon mb-2"
                     mdbTooltip="{{ 'Edit Contract' | translate }}"
                     (click)="showEditContractModal(contract)"
                     id="contractEditBtn">
@@ -118,7 +118,7 @@
                 edit
               </i>
             </button>
-            <button class="btn btn-danger text-black-50 btn-icon mb-2"
+            <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
                     mdbTooltip="{{'Delete Contract' | translate}}"
                     (click)="showDeleteContractModal(contract)"
                     id="contractDeleteBtn">
@@ -130,7 +130,7 @@
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
-            <button class="btn btn-success text-black-50 btn-icon mb-2"
+            <button mdbBtn class="btn-success text-black-50 btn-icon mb-2"
                     mdbTooltip="{{'Add Inspection' | translate}}"
                     (click)="showCreateInspectionModal(contract)"
                     id="createInspectionBtn">

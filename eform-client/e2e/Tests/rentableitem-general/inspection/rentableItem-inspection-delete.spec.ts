@@ -11,24 +11,24 @@ describe('Rentable Items - Inspections - Delete', function () {
   });
   it('should go to inspection page', function () {
     rentableItemsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     rentableItemsPage.rentableItemDropdownItemName('Inspections').click();
-    $('#deleteInspectionBtn').waitForDisplayed(20000);
+    $('#deleteInspectionBtn').waitForDisplayed({timeout: 20000});
   });
   it('should NOT delete inspection', function () {
     const inspection = inspectionsPage.getFirstRowObject();
     inspection.deleteBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     inspectionsPage.contractInspectionDeleteCancelBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     expect(inspectionsPage.rowNum === 1);
   });
   it('should delete inspection', function () {
     const inspection = inspectionsPage.getFirstRowObject();
     inspection.deleteBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     inspectionsPage.contractInspectionDeleteDeleteBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     expect(inspectionsPage.rowNum === 0);
   });
 });

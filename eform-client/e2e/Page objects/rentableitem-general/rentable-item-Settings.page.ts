@@ -10,13 +10,13 @@ export class RentableItemSettingsPage extends Page {
   }
 
   public get sdkSiteIdField() {
-    $('#sdkSiteIds').waitForDisplayed(20000);
+    $('#sdkSiteIds').waitForDisplayed({timeout: 20000});
     $('#sdkSiteIds').waitForClickable({timeout: 20000});
     return $('#sdkSiteIds');
   }
 
   public get saveBtn() {
-    $('#saveBtn').waitForDisplayed(20000);
+    $('#saveBtn').waitForDisplayed({timeout: 20000});
     $('#saveBtn').waitForClickable({timeout: 20000});
     return $('#saveBtn');
   }

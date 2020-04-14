@@ -15,9 +15,9 @@ describe('Rentable Item Plugin - Rentable Item', function () {
     browser.pause(500);
     expect(rentableItemsPage.rentableItemDropdownName.getText()).equal('Udlejning');
     rentableItemsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     expect(rentableItemsPage.rentableItemDropdownItemName('Udlejning').getText()).equal('Udlejning');
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     rentableItemsPage.rentableItemDropdown();
   });
   it('should get btn text', function () {
@@ -43,7 +43,7 @@ describe('Rentable Item Plugin - Rentable Item', function () {
   });
   it('should delete Rentable Item', function () {
     rentableItemsPage.deleteRentableItem();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const rentableItem = rentableItemsPage.getFirstRowObject();
     expect(rentableItem.id === null);
   });

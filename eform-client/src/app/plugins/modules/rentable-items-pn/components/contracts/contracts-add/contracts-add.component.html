@@ -11,9 +11,9 @@
               <div class="col-md-4">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
-                  <input mdbInputDirective
+                  <input mdbInput
                          [owlDateTime]="dt1"
-                         [mdbValidate]="false"
+
                          [ngModel]="newContractModel.contractStart"
                          (dateTimeChange)="onStartDateSelected($event)"
                          type="text"
@@ -28,9 +28,9 @@
               <div class="col-md-4">
                 <div class="md-form" [owlDateTimeTrigger]="dt2">
                   <i class="material-icons prefix">calendar_today</i>
-                  <input mdbInputDirective
+                  <input mdbInput
                          [owlDateTime]="dt2"
-                         [mdbValidate]="false"
+
                          [ngModel]="newContractModel.contractEnd"
                          (dateTimeChange)="onEndDateSelected($event)"
                          type="text"
@@ -44,8 +44,8 @@
               </div>
               <div class="col-md-4">
                 <div class="md-form">
-                  <input mdbInputDirective
-                         [mdbValidate]="false"
+                  <input mdbInput
+
                          class="form-control" #contractNumber="ngModel"
                          type="text" [(ngModel)]="newContractModel.contractNr" id="contractNumber"
                          name="contractNumber">
@@ -103,7 +103,7 @@
                 <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customer.eanCode }}<br>
                 <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customer.vatNumber }}<br>
                 <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customer.countryCode }}<br>
-                <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
                         mdbTooltip="delete customer"
                         (click)="removeCustomer(newContractModel.customerId)">
                   <fa-icon icon="trash-alt"></fa-icon>
@@ -168,7 +168,7 @@
                     {{rentableItem.serialNumber}}
                   </td>
                   <td>
-                    <button class="btn btn-danger text-black-50 btn-icon mb-2"
+                    <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
                             mdbTooltip="{{'Remove Rentable Item' | translate}}"
                             (click)="removeRentableItem(rentableItem)"
                             id="removeRentableItemBtn">
@@ -183,10 +183,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" [disabled]="!createForm.form.valid" (click)="createContract()" id="contractCreateSaveBtn">
+        <button mdbBtn class="btn-success" [disabled]="!createForm.form.valid" (click)="createContract()" id="contractCreateSaveBtn">
           {{ 'Create' | translate }}
         </button>
-        <button class="btn btn-accent text-black-50" (click)="frame.hide(); " id="contractCreateDeleteBtn">{{'Cancel' | translate}}</button>
+        <button mdbBtn class="btn-accent text-black-50" (click)="frame.hide(); " id="contractCreateDeleteBtn">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

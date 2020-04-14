@@ -15,17 +15,17 @@ describe('Rentable Items - Contracts - Delete', function () {
   });
   // it('should go to Contracts page', function () {
   //   contractsPage.rentableItemDropdown();
-  //   $('#spinner-animation').waitForDisplayed(90000, true);
+  //   $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-  //   $('#contractCreateBtn').waitForDisplayed(20000);
+  //   $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
   // });
   it('should create contract', function () {
     //loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
     const contractNr = Math.floor((Math.random() * 100) + 1);
@@ -35,28 +35,28 @@ describe('Rentable Items - Contracts - Delete', function () {
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
     expect(contract.customerId).equal(1);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
   it('should NOT delete contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     contractsPage.deleteContractCancel();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const contract = contractsPage.getFirstContractObject();
     expect(contract != null);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
   it('should delete contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     contractsPage.deleteContract();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
     expect(contractsPage.rowNum).equal(0);

@@ -18,7 +18,7 @@ describe('Rentable Items - Contracts - add', function () {
   });
   it('should create a customer', function () {
     customersPage.newCustomerBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const customerObject = {
       createdBy: 'John Smith',
       customerNo: '1',
@@ -38,7 +38,7 @@ describe('Rentable Items - Contracts - add', function () {
       completionYear: 1960,
       floorsWithLivingSpace: 3
     };
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     customersModalPage.createCustomer(customerObject);
   });
   it('should create rentable item with all parameters', function () {
@@ -54,17 +54,17 @@ describe('Rentable Items - Contracts - add', function () {
   });
   /*it('should go to Contracts page', function () {
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
   });*/
   it('should create contract', function () {
     //loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
     const contractNr = Math.floor((Math.random() * 100) + 1);
@@ -74,28 +74,28 @@ describe('Rentable Items - Contracts - add', function () {
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
     expect(contract.customerId).equal(1);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.cleanup();
   });
   it('should NOT create contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';
     contractsPage.createContractCancel(date1, date2, contractNr, customerName, rentableItemName);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed(20000);
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     expect(contractsPage.rowNum).equal(0);
   });
 });

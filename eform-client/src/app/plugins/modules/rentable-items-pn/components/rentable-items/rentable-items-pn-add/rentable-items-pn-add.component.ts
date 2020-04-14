@@ -11,7 +11,7 @@ import {EFormService} from '../../../../../../common/services/eform';
   styleUrls: ['./rentable-items-pn-add.component.scss']
 })
 export class RentableItemsPnAddComponent implements OnInit {
-  @ViewChild('frame', {static: false}) frame;
+  @ViewChild('frame') frame;
   @Output() onRentableItemCreated: EventEmitter<void> = new EventEmitter<void>();
   newRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
   spinnerStatus = false;

@@ -11,7 +11,7 @@ import {SiteDto} from 'src/app/common/models/dto';
   styleUrls: ['./contract-inspections-add.component.scss']
 })
 export class ContractInspectionsAddComponent implements OnInit {
-  @ViewChild('frame', {static: false}) frame;
+  @ViewChild('frame') frame;
   @Output() onInspectionCreated: EventEmitter<void> = new EventEmitter<void>();
   newContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
   spinnerStatus = false;

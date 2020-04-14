@@ -11,18 +11,18 @@ describe('Customers plugin page', function () {
     customersPage.goToCustomersPage();
   });
   it('should add new customer with all empty fields', function () {
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const rowCountBeforeCreation = browser.$$('#mainTableBody > tr').length;
     customersPage.newCustomerBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     customersModalPage.createEmptyCustomer();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const rowCountAfterCreation = browser.$$('#mainTableBody > tr').length;
     expect(rowCountAfterCreation, 'Number of rows hasn\'t changed after creating new customer').equal(rowCountBeforeCreation + 1);
   });
   it('should add new customer with all fields', function () {
     customersPage.newCustomerBtn.click();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const customerObject = {
       createdBy: 'John Smith',
       customerNo: '1',
@@ -43,10 +43,10 @@ describe('Customers plugin page', function () {
       floorsWithLivingSpace: 852
     };
     const rowCountBeforeCreation = customersPage.rowNum();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     customersModalPage.createCustomer(customerObject);
     const rowCountAfterCreation = customersPage.rowNum();
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     expect(rowCountAfterCreation, 'Number of rows hasn\'t changed after creating new user').equal(rowCountBeforeCreation + 1);
     const lastCustomer: CustomersRowObject = customersPage.getCustomer(customersPage.rowNum());
     expect(lastCustomer.createdBy, 'Created by of created customer is incorrect').equal(customerObject.createdBy);
@@ -58,6 +58,6 @@ describe('Customers plugin page', function () {
     expect(lastCustomer.cityName, 'City name of created customer is incorrect').equal(customerObject.cityName);
     expect(lastCustomer.phone, 'Phone of created customer is incorrect').equal(customerObject.phone);
     expect(lastCustomer.email, 'Email of created customer is incorrect').equal(customerObject.email);
-    $('#spinner-animation').waitForDisplayed(90000, true);
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
 });
