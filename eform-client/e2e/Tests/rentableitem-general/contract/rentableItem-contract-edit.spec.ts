@@ -41,9 +41,9 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     customersModalPage.createCustomer(customerObject2);
   });
-  it('should go to rentable items page', function () {
-    rentableItemsPage.goToRentableItemsPage();
-  });
+  // it('should go to rentable items page', function () {
+  //   rentableItemsPage.goToRentableItemsPage();
+  // });
   it('should create rentable item with all parameters', function () {
     rentableItemsPage.goToRentableItemsPage();
     const date2 = Math.floor((Math.random() * 28) + 1);
@@ -55,12 +55,12 @@ describe('Rentable Items - Contracts - edit', function () {
     const eForm = 'Number 1';
     rentableItemsPage.createRentableItem(brand2, model2, date2, eForm, serialNumber2, vinNumber2, plateNumber2);
   });
-  it('should go to Contracts page', function () {
-    contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
-  });
+  // it('should go to Contracts page', function () {
+  //   contractsPage.rentableItemDropdown();
+  //   $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
+  //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+  //   $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
+  // });
   it('should create contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();

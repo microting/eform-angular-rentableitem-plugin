@@ -150,7 +150,7 @@ export class RentableItemRentableItemPage extends Page {
   }
   goToRentableItemsPage() {
     this.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
+    //$('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     this.rentableItemDropdownItemName('Udlejning').click();
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
