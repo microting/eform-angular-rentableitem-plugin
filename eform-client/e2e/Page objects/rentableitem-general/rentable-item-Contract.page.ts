@@ -47,12 +47,12 @@ export class RentableItemContractPage extends Page {
   }
   public get contractNumberField() {
     $('#contractNumber').waitForDisplayed({timeout: 20000});
-    $('#contractNumber').waitForClickable({timeout: 20000});
+    //$('#contractNumber').waitForClickable({timeout: 20000});
     return $('#contractNumber');
   }
   public get editContractNumberField() {
     $('#editContractNr').waitForDisplayed({timeout: 20000});
-    $('#editContractNr').waitForClickable({timeout: 20000});
+    //$('#editContractNr').waitForClickable({timeout: 20000});
     return $('#editContractNr');
   }
   public get customerSelector() {
