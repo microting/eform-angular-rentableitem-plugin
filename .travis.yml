@@ -3,6 +3,9 @@ language: csharp
 solution: RentableItems.Pn.sln
 mono: none
 dotnet: 2.2
+branches:
+  except:
+    - /^v[0-9]/
 addons:
   chrome: stable
 services:
@@ -17,10 +20,10 @@ install:
   - sudo apt-get install rabbitmq-server
   - sudo systemctl enable rabbitmq-server
   - sudo systemctl start rabbitmq-server
-  - sudo rabbitmqctl add_user admin password 
+  - sudo rabbitmqctl add_user admin password
   - sudo rabbitmqctl set_user_tags admin administrator
   - sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
-  - sudo rabbitmq-plugins enable rabbitmq_management	
+  - sudo rabbitmq-plugins enable rabbitmq_management
   - wget http://localhost:15672/cli/rabbitmqadmin
   - chmod +x rabbitmqadmin
   - ./rabbitmqadmin declare queue name=eformsdk-input durable=true
