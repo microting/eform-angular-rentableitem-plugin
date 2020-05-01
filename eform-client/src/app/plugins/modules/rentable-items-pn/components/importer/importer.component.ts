@@ -74,7 +74,6 @@ export class ImporterComponent implements OnInit {
   import() {
     this.spinnerStatus = true;
     // this.customerImportModel.importList = this.tableData;
-    debugger;
     this.rentableItemImportModel.headers = JSON.stringify(this.rentableItemImportModel.headerList);
     // debugger;
     return this.rentableItemsService.import(this.rentableItemImportModel).subscribe(((data) => {

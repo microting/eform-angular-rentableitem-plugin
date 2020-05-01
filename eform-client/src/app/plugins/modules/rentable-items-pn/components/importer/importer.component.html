@@ -1,8 +1,7 @@
 <subheader-pn [title]="'Import' | translate">
 </subheader-pn>
 <div class="p-3">
-    <input #fileUploader id="fileUploaded" type="file" class="form-control" id="files" accept="text/csv" (change)="csv2Array($event)" style="display: none">
-
+  <input #fileUploader id="fileUploaded" type="file" class="form-control" id="files" accept="text/csv" (change)="csv2Array($event)" style="display: none">
   <button mdbBtn (click)="fileUploader.click()">
     {{'Select file' | translate}}
   </button>
