@@ -91,13 +91,11 @@
                     mdbTooltip="{{ 'Edit Case' | translate }}">
               <fa-icon icon="pen" size="lg" [fixedWidth]="true"></fa-icon>
             </button>
-            <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
+            <button mdbBtn class="btn-danger btn-icon mb-2"
                     mdbTooltip="{{'Delete Inspection' | translate}}"
                     (click)="showDeleteInspectionModal(inspection)"
                     id="deleteInspectionBtn">
-              <i class="material-icons">
-                delete_forever
-              </i>
+              <fa-icon icon="trash-alt" [fixedWidth]="true" size="lg"></fa-icon>
             </button>
           </div>
         </td>

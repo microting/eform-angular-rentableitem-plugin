@@ -29,7 +29,7 @@
   </div>
   <div class="container-fluid">
     <div class="row p-1 mt-4 table-responsive no-gutters">
-      <table class="table table-sm table-striped text-center z-depth-1">
+      <table mdbTable striped="true" hover="true" small="true" class="z-depth-1 text-center">
         <thead>
         <tr>
           <th scope="col" class="table-header-sortable" id="idSort"
@@ -151,17 +151,13 @@
                       mdbTooltip="{{ 'Edit rentable item' | translate }}"
                       id="rentableItemEditBtn"
                       (click)="showEditRentableItemModal(rentableItem)">
-                <i class="material-icons">
-                  edit
-                </i>
+                <fa-icon icon="table" [fixedWidth]="true" size="lg"></fa-icon>
               </button>
-              <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
+              <button mdbBtn class="btn-danger btn-icon mb-2"
                       mdbTooltip="{{'Delete rentable Item ' | translate}}"
                       id="rentableItemDeleteBtn"
                       (click)="showDeleteRentableItemModal(rentableItem)" >
-                <i class="material-icons">
-                  delete_forever
-                </i>
+                <fa-icon icon="trash-alt" [fixedWidth]="true" size="lg"></fa-icon>
               </button>
             </div>
           </td>
