@@ -12,7 +12,6 @@ import {RentableItemsPnSettingsService} from '../../services';
   styleUrls: ['./rentable-items-settings.component.scss']
 })
 export class RentableItemsSettingsComponent implements OnInit {
-  spinnerStatus = false;
   typeahead = new EventEmitter<string>();
   settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
   templateRequestModel: TemplateRequestModel = new TemplateRequestModel();
@@ -40,21 +39,19 @@ export class RentableItemsSettingsComponent implements OnInit {
   }
 
   getSettings() {
-    this.spinnerStatus = true;
     this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
       if (data && data.success) {
         this.settingsModel = data.model;
         console.log(data);
-      } this.spinnerStatus = false;
+      }
     });
   }
 
   updateSettings() {
-    this.spinnerStatus = true;
     this.rentableItemsSettingsService.updateSettings(this.settingsModel)
       .subscribe((data) => {
       if (data && data.success) {
-      } this.spinnerStatus = false;
+      }
     });
   }
 

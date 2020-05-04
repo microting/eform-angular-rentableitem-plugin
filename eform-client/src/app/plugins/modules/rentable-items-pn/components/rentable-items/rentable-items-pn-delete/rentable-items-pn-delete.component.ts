@@ -11,7 +11,6 @@ export class RentableItemsPnDeleteComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onRentableItemDeleted: EventEmitter<void> = new EventEmitter<void>();
   selectedRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
-  spinnerStatus = false;
 
   constructor(private rentableItemsService: RentableItemsPnService) { }
 
@@ -23,12 +22,11 @@ export class RentableItemsPnDeleteComponent implements OnInit {
     this.frame.show();
   }
   deleteRentableItem() {
-    this.spinnerStatus = true;
     this.rentableItemsService.deleteRentableItem(this.selectedRentableItemModel.id).subscribe((data) => {
       if (data && data.success) {
         this.onRentableItemDeleted.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     });
   }
 }

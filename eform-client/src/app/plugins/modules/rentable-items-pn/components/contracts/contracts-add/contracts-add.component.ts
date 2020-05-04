@@ -21,7 +21,6 @@ export class ContractsAddComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onContractCreated: EventEmitter<void> = new EventEmitter<void>();
   newContractModel: ContractModel = new ContractModel();
-  spinnerStatus = false;
   frameShow = true;
   peopleInput$ = new Subject<string>();
   peopleLoading = false;
@@ -105,7 +104,6 @@ export class ContractsAddComponent implements OnInit {
   }
 
   createContract() {
-    this.spinnerStatus = true;
     this.newContractModel.customerId = this.newContractModel.customer.id;
     this.contractService.createContract(this.newContractModel).subscribe(((data) => {
       if (data && data.success) {
@@ -114,7 +112,7 @@ export class ContractsAddComponent implements OnInit {
         this.customersModel.customers = [];
         this.onContractCreated.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     }));
   }
   addNewRentableItem(e: any) {
@@ -135,7 +133,7 @@ export class ContractsAddComponent implements OnInit {
       if (result && result.success) {
         this.rentableItemsModel = result.model;
       }
-      this.spinnerStatus = false;
+
     }));
   }
   getCustomer() {
@@ -143,7 +141,7 @@ export class ContractsAddComponent implements OnInit {
       if (result && result.success) {
         this.customersModel = result.model;
       }
-      this.spinnerStatus = false;
+
     }));
   }
   onStartDateSelected(e: any) {

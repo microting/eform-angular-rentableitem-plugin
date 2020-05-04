@@ -29,7 +29,6 @@ export class RentableItemsPnPageComponent implements OnInit {
 
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
-  spinnerStatus = false;
 
   settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
 
@@ -86,7 +85,6 @@ export class RentableItemsPnPageComponent implements OnInit {
     this.getLocalPageSettings();
   }
   getAllInitialData() {
-    this.spinnerStatus = true;
     this.rentableItemsSettingsService.getAllSettings().subscribe((data) => {
       if (data && data.success) {
         this.settingsModel = data.model;
@@ -94,9 +92,9 @@ export class RentableItemsPnPageComponent implements OnInit {
           if (result && result.success) {
             this.rentableItemsModel = result.model;
           }
-          this.spinnerStatus = false;
+
         }));
-      } this.spinnerStatus = false;
+      }
     });
   }
   //
@@ -107,7 +105,7 @@ export class RentableItemsPnPageComponent implements OnInit {
   //       this.settingsModel = data.model;
   //     }
   //   });
-  //   this.spinnerStatus = false;
+  //
   // }
 
   getEmail() {
@@ -116,10 +114,9 @@ export class RentableItemsPnPageComponent implements OnInit {
   }
 
   getAllRentableItems() {
-    this.spinnerStatus = true;
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((data => {
       this.rentableItemsModel = data.model;
-      this.spinnerStatus = false;
+
     }));
   }
 

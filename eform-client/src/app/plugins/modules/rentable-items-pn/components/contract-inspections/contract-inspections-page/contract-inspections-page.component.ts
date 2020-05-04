@@ -27,7 +27,6 @@ export class ContractInspectionsPageComponent implements OnInit {
   contractInspectionsModel: ContractInspectionsModel = new ContractInspectionsModel();
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
-  spinnerStatus = false;
 
   constructor(private contractService: ContractsService,
               private contractInspectionsService: ContractInspectionsService,
@@ -40,10 +39,9 @@ export class ContractInspectionsPageComponent implements OnInit {
     // this.getAllContracts();
   }
   getAllContracts() {
-    this.spinnerStatus = true;
     this.contractService.getAllContracts(this.contractsRequestModel).subscribe((data => {
       this.contractsModel = data.model;
-      this.spinnerStatus = false;
+
     }));
   }
   setTranslation() {
@@ -60,10 +58,9 @@ export class ContractInspectionsPageComponent implements OnInit {
   }
   getAllInspections() {
     // debugger;
-    this.spinnerStatus = true;
     this.contractInspectionsService.getAllInspections(this.contractInspectionsRequestModel).subscribe((data => {
       this.contractInspectionsModel = data.model;
-      this.spinnerStatus = false;
+
     }));
   }
 

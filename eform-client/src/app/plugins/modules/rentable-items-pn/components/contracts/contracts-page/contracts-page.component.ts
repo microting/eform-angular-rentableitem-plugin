@@ -19,7 +19,6 @@ export class ContractsPageComponent implements OnInit {
   @ViewChild('contractRentableItem') contractRentableItem;
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
-  spinnerStatus = false;
 
   constructor(private contractsService: ContractsService,
               private translateService: TranslateService,
@@ -53,10 +52,9 @@ export class ContractsPageComponent implements OnInit {
     this.contractRentableItem.show(contractId, contract);
   }
   getAllContracts() {
-    this.spinnerStatus = true;
     this.contractsService.getAllContracts(this.contractsRequestModel).subscribe((data => {
       this.contractsModel = data.model;
-      this.spinnerStatus = false;
+
     }));
   }
 

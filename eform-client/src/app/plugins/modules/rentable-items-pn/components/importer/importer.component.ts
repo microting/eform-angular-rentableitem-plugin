@@ -17,7 +17,6 @@ export class ImporterComponent implements OnInit {
   tableData: any = null;
   public data: any = [];
   uploader: FileUploader;
-  spinnerStatus = false;
   totalColumns: number;
   totalRows: number;
   papa: Papa = new Papa();
@@ -72,24 +71,22 @@ export class ImporterComponent implements OnInit {
   }
 
   import() {
-    this.spinnerStatus = true;
     // this.customerImportModel.importList = this.tableData;
     this.rentableItemImportModel.headers = JSON.stringify(this.rentableItemImportModel.headerList);
     // debugger;
     return this.rentableItemsService.import(this.rentableItemImportModel).subscribe(((data) => {
       if (data && data.success) {
         this.rentableItemImportModel = new RentableItemsImportModel();
-      } this.spinnerStatus = false;
+      }
     }));
   }
 
   getAlleForms() {
-    this.spinnerStatus = true;
     this.eFormService.getAll(this.templateRequestModel).subscribe(data => {
       if (data && data.success) {
         this.templatesModel = data.model;
       }
-      this.spinnerStatus = false;
+
     });
   }
 

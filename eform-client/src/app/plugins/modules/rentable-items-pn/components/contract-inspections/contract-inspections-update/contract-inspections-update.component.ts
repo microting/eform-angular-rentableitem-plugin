@@ -12,7 +12,6 @@ export class ContractInspectionsUpdateComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onInspectionUpdated: EventEmitter<void> = new EventEmitter<void>();
   selectedContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
-  spinnerStatus = false;
 
   constructor(private contractInspectionsService: ContractInspectionsService) {
   }
@@ -24,13 +23,12 @@ export class ContractInspectionsUpdateComponent implements OnInit {
     this.frame.show();
   }
   updateInspection() {
-    this.spinnerStatus = true;
     this.contractInspectionsService.updateInspection(this.selectedContractInspectionModel).subscribe(((data) => {
       if (data && data.success) {
         this.onInspectionUpdated.emit();
         this.frame.hide();
       }
-      this.spinnerStatus = false;
+
     }));
   }
 

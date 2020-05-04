@@ -14,7 +14,6 @@ import {RentableItemsPnFieldsService, RentableItemsPnSettingsService} from '../.
 })
 export class RentableItemsPnFieldsComponent implements OnInit {
   isChecked = false;
-  spinnerStatus = false;
   rentableItemsFieldsUpdateModel: RentableItemsFieldsPnUpdateModel = new RentableItemsFieldsPnUpdateModel();
   rentableItemsPnSettingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
   advEntitySearchableGroupListModel: AdvEntitySearchableGroupListModel = new AdvEntitySearchableGroupListModel();
@@ -50,11 +49,10 @@ export class RentableItemsPnFieldsComponent implements OnInit {
   }
 
   getAllFields() {
-    this.spinnerStatus = true;
     this.rentableItemsFieldsService.getAllFields().subscribe((data) => {
       if (data && data.success) {
         this.rentableItemsFieldsUpdateModel = data.model;
-      } this.spinnerStatus = false;
+      }
     });
   }
   
@@ -67,16 +65,14 @@ export class RentableItemsPnFieldsComponent implements OnInit {
   }
 
   updateSettings() {
-    this.spinnerStatus = true;
     this.rentableItemsSettingsService.updateSettings(this.rentableItemsPnSettingsModel).subscribe((data) => {
       if (data && data.success) {
-        this.spinnerStatus = true;
         this.rentableItemsFieldsService.updateFields(this.rentableItemsFieldsUpdateModel).subscribe((data) => {
           if (data && data.success) {
             this.router.navigate(['/plugins/customers-pn']).then();
-          } this.spinnerStatus = false;
+          }
         });
-      } this.spinnerStatus = false;
+      }
     });
   }
 

@@ -14,7 +14,6 @@ export class ContractInspectionsAddComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onInspectionCreated: EventEmitter<void> = new EventEmitter<void>();
   newContractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
-  spinnerStatus = false;
   sitesDto: Array<SiteDto> = [];
   selectedContractModel: ContractModel = new ContractModel();
   frameShow = true;
@@ -34,23 +33,21 @@ export class ContractInspectionsAddComponent implements OnInit {
     this.frame.show();
   }
   loadAllSimpleSites() {
-    this.spinnerStatus = true;
     this.deviceUsersService.getAllDeviceUsers().subscribe(operation => {
       if (operation && operation.success) {
         this.sitesDto = operation.model;
       }
-      this.spinnerStatus = false;
+
     });
   }
 
   createInspection() {
-    this.spinnerStatus = true;
     this.contractInspectionsService.createInspection(this.newContractInspectionModel).subscribe(((data) => {
       if (data && data.success) {
         this.newContractInspectionModel = new ContractInspectionModel();
         this.onInspectionCreated.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     }));
   }
   onSelectedChanged(e: any) {

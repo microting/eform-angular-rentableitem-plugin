@@ -10,7 +10,6 @@ import {ContractRentableItemService, ContractsService, RentableItemsPnService} f
 export class ContractRentableItemComponent implements OnInit {
   @ViewChild('frame') frame;
   frameShow = true;
-  spinnerStatus = false;
   selectedContractModel: ContractModel = new ContractModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   customerModel: CustomerModel = new CustomerModel();
@@ -29,23 +28,21 @@ export class ContractRentableItemComponent implements OnInit {
   }
 
   getAllRentableItemsOnContract(contractId: number) {
-    this.spinnerStatus = true;
     this.contractRentableItemService.getAllRentableItemsFromContract(contractId).subscribe( data => {
       if (data && data.success) {
         this.rentableItemsModel = data.model;
       }
     });
-    this.spinnerStatus = false;
+
   }
 
   getCustomer(customerId: number) {
-    this.spinnerStatus = true;
     this.contractService.getSingleCustomer(customerId).subscribe( data => {
       if (data && data.success) {
         this.customerModel = data.model;
       }
     });
-    this.spinnerStatus = false;
+
   }
 
 }

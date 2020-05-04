@@ -28,8 +28,6 @@ export class ContractsUpdateComponent implements OnInit {
   typeahead = new EventEmitter<string>();
   typeahead2 = new EventEmitter<string>();
 
-  spinnerStatus = false;
-
   constructor(private contractRentableItemService: ContractRentableItemService,
               private contractService: ContractsService,
               private cd: ChangeDetectorRef,
@@ -72,16 +70,14 @@ export class ContractsUpdateComponent implements OnInit {
   }
 
   updateContract() {
-    this.spinnerStatus = true;
     this.contractService.updateContract(this.selectedContractModel).subscribe(((data) => {
       if (data && data.success) {
         this.onContractUpdated.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     }));
   }
   getAllRentableItemsOnContract(contractId: number) {
-    this.spinnerStatus = true;
     this.contractRentableItemService.getAllRentableItemsFromContract(contractId).subscribe( data => {
       if (data && data.success) {
         this.rentableItemsModel = data.model;
@@ -89,7 +85,7 @@ export class ContractsUpdateComponent implements OnInit {
         this.selectedContractModel.rentableItemIds = this.rentableItemsModel.rentableItemIds;
       }
     });
-    this.spinnerStatus = false;
+
   }
   addNewRentableItem(e: any) {
     if (!this.selectedContractModel.rentableItems.includes(e)) {
@@ -105,14 +101,13 @@ export class ContractsUpdateComponent implements OnInit {
     this.selectedContractModel.deleteIds.push(rentableItem.id);
   }
   getCustomer(customerId: number) {
-    this.spinnerStatus = true;
     this.contractService.getSingleCustomer(customerId).subscribe( data => {
       if (data && data.success) {
         this.customerModel = data.model;
         this.selectedContractModel.customerId = this.customerModel.id;
       }
     });
-    this.spinnerStatus = false;
+
   }
   removeCustomer(customer: any) {
     const index = this.customersModel.customers.indexOf(customer);

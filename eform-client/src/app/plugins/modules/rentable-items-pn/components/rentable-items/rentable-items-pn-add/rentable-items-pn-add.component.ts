@@ -14,7 +14,6 @@ export class RentableItemsPnAddComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onRentableItemCreated: EventEmitter<void> = new EventEmitter<void>();
   newRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
-  spinnerStatus = false;
   frameShow = true;
   templateRequestModel: TemplateRequestModel = new TemplateRequestModel();
   templatesModel: TemplateListModel = new TemplateListModel();
@@ -31,23 +30,21 @@ export class RentableItemsPnAddComponent implements OnInit {
   }
 
   getAlleForms() {
-    this.spinnerStatus = true;
     this.eFormService.getAll(this.templateRequestModel).subscribe(data => {
       if (data && data.success) {
         this.templatesModel = data.model;
       }
-      this.spinnerStatus = false;
+
     });
   }
 
   createRentableItem() {
-    this.spinnerStatus = true;
     this.rentableItemsService.createRentableItem(this.newRentableItemModel).subscribe(((data) => {
       if (data && data.success) {
         this.newRentableItemModel = new RentableItemPnModel();
         this.onRentableItemCreated.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     }));
   }
 

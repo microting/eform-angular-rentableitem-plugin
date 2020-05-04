@@ -11,7 +11,6 @@ export class ContractsDeleteComponent implements OnInit {
   @ViewChild('frame') frame;
   @Output() onContractDeleted: EventEmitter<void> = new EventEmitter<void>();
   selectedContractModel: ContractModel = new ContractModel();
-  spinnerStatus = false;
   constructor(private contractsService: ContractsService) { }
 
   ngOnInit() {
@@ -21,12 +20,11 @@ export class ContractsDeleteComponent implements OnInit {
     this.frame.show();
   }
   deleteContract() {
-    this.spinnerStatus = true;
     this.contractsService.deleteContract(this.selectedContractModel.id).subscribe((data) => {
       if (data && data.success) {
         this.onContractDeleted.emit();
         this.frame.hide();
-      } this.spinnerStatus = false;
+      }
     });
   }
 }
