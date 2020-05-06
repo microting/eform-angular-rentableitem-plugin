@@ -29,17 +29,17 @@ namespace RentableItems.Pn.Services
 
 
         public ContractService(eFormRentableItemPnDbContext dbContext,
+            CustomersPnDbAnySql customerDbContext,
             ILogger<ContractService> logger,
             IEFormCoreService coreHelper,
-            IRentableItemsLocalizationService rentableItemLocalizationService,
-            CustomersPnDbAnySql customerDbContext
+            IRentableItemsLocalizationService rentableItemLocalizationService
             )
         {
             _dbContext = dbContext;
+            _customerDbContext = customerDbContext;
             _logger = logger;
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
-            _customerDbContext = customerDbContext;
 
         }
         public async Task<OperationDataResult<ContractsModel>> Index(ContractsRequestModel contractsPnRequestModel)

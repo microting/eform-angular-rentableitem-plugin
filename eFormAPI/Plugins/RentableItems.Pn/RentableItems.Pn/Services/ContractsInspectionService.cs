@@ -20,6 +20,7 @@ using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Consts;
 using RentableItems.Pn.Infrastructure.Models;
+using RentableItems.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Services
 {
@@ -30,8 +31,10 @@ namespace RentableItems.Pn.Services
         private readonly eFormRentableItemPnDbContext _dbContext;
         private readonly CustomersPnDbAnySql _customersPnDbContext;
         private readonly IEFormCoreService _coreHelper;
+        private readonly CustomersPnDbAnySql _customerDbContext;
 
         public ContractsInspectionService(eFormRentableItemPnDbContext dbContext,
+            CustomersPnDbAnySql customerDbContext,
             CustomersPnDbAnySql customersPnDbContext,
             ILogger<ContractsInspectionService> logger,
             IEFormCoreService coreHelper,
@@ -39,6 +42,7 @@ namespace RentableItems.Pn.Services
             )
         {
             _dbContext = dbContext;
+            _customerDbContext = customerDbContext;
             _customersPnDbContext = customersPnDbContext;
             _logger = logger;
             _coreHelper = coreHelper;
@@ -76,18 +80,58 @@ namespace RentableItems.Pn.Services
                     ContractInspectionItem contractInspectionItem =
                         _dbContext.ContractInspectionItem.FirstOrDefault(x =>
                             x.ContractInspectionId == contractInspection.Id);
-                    RentableItem rentableItem =
-                        _dbContext.RentableItem.FirstOrDefault(y => y.Id == contractInspectionItem.RentableItemId);
+
+                    Contract contract = _dbContext.Contract.Single(x => x.Id == contractInspection.ContractId);
+
+                    Customer customer =
+                        _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
+                    CustomerModel customerModel = new CustomerModel()
+                    {
+                        Id = customer.Id,
+                        CustomerNo = customer.CustomerNo,
+                        CompanyName = customer.CompanyName,
+                        ContactPerson = customer.ContactPerson,
+                        CompanyAddress = customer.CompanyAddress,
+                        CompanyAddress2 = customer.CompanyAddress2,
+                        CityName = customer.CityName,
+                        ZipCode = customer.ZipCode,
+                        CountryCode = customer.CountryCode,
+                        EanCode = customer.EanCode,
+                        VatNumber = customer.VatNumber,
+                        Email = customer.Email,
+                        Phone = customer.Phone,
+                        Description = customer.Description
+                    };
+                    List<RentableItemModel> rentableItemModels = new List<RentableItemModel>();
+                    foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem.Where(x => x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
+                    {
+                        RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
+                        RentableItemModel rentableItemModel = new RentableItemModel()
+                        {
+                            Id = rentableItem.Id,
+                            Brand = rentableItem.Brand,
+                            ModelName = rentableItem.ModelName,
+                            PlateNumber = rentableItem.PlateNumber,
+                            VinNumber = rentableItem.VinNumber,
+                            SerialNumber = rentableItem.SerialNumber,
+                            RegistrationDate = rentableItem.RegistrationDate
+                        };
+                        rentableItemModels.Add(rentableItemModel);
+                    }
+
                     contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
                     {
                         SdkCaseId = contractInspectionItem.SDKCaseId,
-                        eFormId = rentableItem.eFormId,
+                        eFormId = rentableItemModels.First().EFormId,
                         ContractId = contractInspection.ContractId,
+                        ContractStart = contract.ContractStart,
+                        ContractEnd = contract.ContractEnd,
                         DoneAt = contractInspection.DoneAt,
                         Id = contractInspection.Id,
-                        Status = contractInspectionItem.Status
+                        Status = contractInspectionItem.Status,
+                        Customer = customerModel,
+                        RentableItems = rentableItemModels
                     });
-                    
                 });
                 return new OperationDataResult<ContractInspectionsModel>(true, contractInspectionsModel);
             }
@@ -172,7 +216,8 @@ namespace RentableItems.Pn.Services
                                 ContractInspectionId = contractInspection.Id,
                                 RentableItemId = rentableItemId,
                                 SiteId = siteDto.SiteId,
-                                SDKCaseId = (int) sdkCaseId
+                                SDKCaseId = (int) sdkCaseId,
+                                Status = 33
                             };
                             await contractInspectionItem.Create(_dbContext);
                         }

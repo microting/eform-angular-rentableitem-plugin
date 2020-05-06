@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using RentableItems.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Infrastructure.Models
 {
@@ -11,12 +13,16 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? UpdatedAt { get; set; }
         public int CreatedByUserID { get; set; }
         public int UpdatedByUserID { get; set; }
+        public DateTime? ContractStart { get; set; }
+        public DateTime? ContractEnd { get; set; }
         public int ContractId { get; set; }
         public int SdkCaseId { get; set; }
         public int SiteId { get; set; }
         public int eFormId { get; set; }
         public DateTime? DoneAt { get; set; }
         public int? Status { get; set; }
+        public List<RentableItemModel> RentableItems { get; set; }
+        public CustomerModel Customer { get; set; }
         
     }
 }

@@ -22,31 +22,115 @@
               expand_more</i>
           </div>
         </th>
-        <th scope="col" class="table-header-sortable" id="contractIdSort"
-            (click)="sortByColumn('contractId', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
+        <th scope="col" class="table-header-sortable" id="contractNumberSort"
+            (click)="sortByColumn('ContractNumber',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
-            Contract Id
-            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'contractId'">
+            {{'Contract Number' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'ContractNumber'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="contractInspectionsRequestModel.sortColumnName == 'contractId' && !contractInspectionsRequestModel.isSortDsc">
+               *ngIf="contractsRequestModel.sortColumnName == 'ContractNumber' && !contractsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="contractInspectionsRequestModel.sortColumnName == 'contractId' && contractInspectionsRequestModel.isSortDsc">
+               *ngIf="contractsRequestModel.sortColumnName == 'ContractNumber' && contractsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
-        <th scope="col" class="table-header-sortable" id="statusSort"
-            (click)="sortByColumn('Status', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
+        <th scope="col" class="table-header-sortable" id="customerIdSort"
+            (click)="sortByColumn('CustomerId',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
           <div class="d-flex align-items-center justify-content-center">
-            Status
-            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'Status'">
+            {{'Customer' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'CustomerId'">
               unfold_more</i>
             <i class="material-icons"
-               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && !contractInspectionsRequestModel.isSortDsc">
+               *ngIf="contractsRequestModel.sortColumnName == 'CustomerId' && !contractsRequestModel.isSortDsc">
               expand_less</i>
             <i class="material-icons"
-               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && contractInspectionsRequestModel.isSortDsc">
+               *ngIf="contractsRequestModel.sortColumnName == 'CustomerId' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="brandSort"
+            (click)="sortByColumn('Brand',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'Brand' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'Brand'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'Brand' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'Brand' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="modelSort"
+            (click)="sortByColumn('ModelName',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'Model' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'ModelName'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'ModelName' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'ModelName' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="regDateSort"
+            (click)="sortByColumn('RegistrationDate',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'Reg. date' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'RegistrationDate'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'RegistrationDate' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'RegistrationDate' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="vinNumberSort"
+            (click)="sortByColumn('VinNumber',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'Vin no.' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'VinNumber'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'VinNumber' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'VinNumber' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="startDateSort"
+            (click)="sortByColumn('StartDate',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'Start date' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'StartDate'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'StartDate' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'StartDate' && contractsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
+        <th scope="col" class="table-header-sortable" id="endDateSort"
+            (click)="sortByColumn('EndDate',contractsRequestModel.isSortDsc = !contractsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            {{'End date' | translate}}
+            <i class="material-icons text-black-50" *ngIf="contractsRequestModel.sortColumnName != 'EndDate'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'EndDate' && !contractsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractsRequestModel.sortColumnName == 'EndDate' && contractsRequestModel.isSortDsc">
               expand_more</i>
           </div>
         </th>
@@ -64,6 +148,20 @@
               expand_more</i>
           </div>
         </th>
+        <th scope="col" class="table-header-sortable" id="statusSort"
+            (click)="sortByColumn('Status', contractInspectionsRequestModel.isSortDsc = !contractInspectionsRequestModel.isSortDsc)">
+          <div class="d-flex align-items-center justify-content-center">
+            Status
+            <i class="material-icons text-black-50" *ngIf="contractInspectionsRequestModel.sortColumnName != 'Status'">
+              unfold_more</i>
+            <i class="material-icons"
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && !contractInspectionsRequestModel.isSortDsc">
+              expand_less</i>
+            <i class="material-icons"
+               *ngIf="contractInspectionsRequestModel.sortColumnName == 'Status' && contractInspectionsRequestModel.isSortDsc">
+              expand_more</i>
+          </div>
+        </th>
         <th scope="col">
           {{ 'Actions' | translate }}
         </th>
@@ -77,11 +175,42 @@
         <td id="inspectionContractId">
           {{inspection.contractId}}
         </td>
-        <td id="inspectionStatus">
-          <status-bar [status]="inspection.status"></status-bar>
+        <td id="contractCustomer">
+          {{inspection.customer.companyName}}
+          <br *ngIf="inspection.customer.contactPerson !== null">
+          {{inspection.customer.contactPerson}}
+        </td>
+        <td id="brand">
+          <div *ngFor="let rentableItem of inspection.rentableItems">
+            {{rentableItem.brand}}
+          </div>
+        </td>
+        <td id="model">
+          <div *ngFor="let rentableItem of inspection.rentableItems">
+            {{rentableItem.modelName}}
+          </div>
+        </td>
+        <td id="regdate">
+          <div *ngFor="let rentableItem of inspection.rentableItems">
+            {{rentableItem.registrationDate | date:'dd/MM/yyyy'}}
+          </div>
+        </td>
+        <td id="vinNo">
+          <div *ngFor="let rentableItem of inspection.rentableItems">
+            {{rentableItem.vinNumber}}
+          </div>
+        </td>
+        <td id="contractStart">
+          {{inspection.contractStart | date:'dd/MM/yyyy'}}
+        </td>
+        <td id="contractEnd">
+          {{inspection.contractEnd | date:'dd/MM/yyyy'}}
         </td>
         <td id="inspectionDoneAt">
           {{inspection.doneAt | date:'dd/MM/yyyy'}}
+        </td>
+        <td id="inspectionStatus">
+          <status-bar [status]="inspection.status"></status-bar>
         </td>
         <td>
           <div class="d-flex flex-row justify-content-center">
