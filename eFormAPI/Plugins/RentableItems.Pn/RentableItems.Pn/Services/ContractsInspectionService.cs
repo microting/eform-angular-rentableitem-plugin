@@ -12,6 +12,8 @@ using Microting.eForm.Infrastructure.Models;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
@@ -26,15 +28,18 @@ namespace RentableItems.Pn.Services
         private readonly ILogger<ContractsInspectionService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
         private readonly eFormRentableItemPnDbContext _dbContext;
+        private readonly CustomersPnDbAnySql _customersPnDbContext;
         private readonly IEFormCoreService _coreHelper;
 
         public ContractsInspectionService(eFormRentableItemPnDbContext dbContext,
+            CustomersPnDbAnySql customersPnDbContext,
             ILogger<ContractsInspectionService> logger,
             IEFormCoreService coreHelper,
             IRentableItemsLocalizationService rentableItemLocalizationService
             )
         {
             _dbContext = dbContext;
+            _customersPnDbContext = customersPnDbContext;
             _logger = logger;
             _coreHelper = coreHelper;
             _rentableItemsLocalizationService = rentableItemLocalizationService;
@@ -116,18 +121,34 @@ namespace RentableItems.Pn.Services
                     Contract dbContract =
                         await _dbContext.Contract.FirstOrDefaultAsync(x =>
                             x.Id == contractInspectionCreateModel.ContractId);
+                    Customer dbCustomer =
+                        await _customersPnDbContext.Customers.SingleOrDefaultAsync(x => x.Id == dbContract.CustomerId);
 
                     MainElement mainElement = await _core.TemplateRead(eFormId);
                     mainElement.Repeated = 1;
                     mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
                     mainElement.StartDate = DateTime.Now.ToUniversalTime();
-                    mainElement.Label = contractInspectionCreateModel.ContractId.ToString();
                     CDataValue cDataValue = new CDataValue();
+                    mainElement.Label = "";
+                    mainElement.Label += string.IsNullOrEmpty(rentableItem.SerialNumber)
+                        ? ""
+                        : $"{rentableItem.SerialNumber}";
+                    mainElement.Label += string.IsNullOrEmpty(rentableItem.VinNumber)
+                        ? ""
+                        : $"{rentableItem.VinNumber}";
+                    mainElement.Label += string.IsNullOrEmpty(rentableItem.Brand)
+                        ? ""
+                        : $"<br>{rentableItem.Brand}";
+                    mainElement.Label += string.IsNullOrEmpty(rentableItem.ModelName)
+                        ? ""
+                        : $"<br>{rentableItem.ModelName}";
+                    mainElement.Label += string.IsNullOrEmpty(dbCustomer.ContactPerson)
+                        ? ""
+                        : $"<br>{dbCustomer.ContactPerson}";
 
+                    cDataValue = new CDataValue();
                     cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
                     cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
-                    mainElement.ElementList[0].Description = cDataValue;
-                    mainElement.ElementList[0].Label = mainElement.Label;
                     
                     List<SiteDto> sites = new List<SiteDto>();
 
