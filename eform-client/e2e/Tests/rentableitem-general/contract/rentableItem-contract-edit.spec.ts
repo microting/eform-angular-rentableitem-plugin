@@ -117,7 +117,7 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     const contract = contractsPage.getFirstContractObject();
-    expect($('#contractCustomer').getText()).equal('Oles olie\nSamantha Black');
+    expect($('#contractCustomer').getText()).equal('Bents bjelker\nJack Black');
     expect(oldContract.contractNumber).equal(contract.contractNumber);
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
