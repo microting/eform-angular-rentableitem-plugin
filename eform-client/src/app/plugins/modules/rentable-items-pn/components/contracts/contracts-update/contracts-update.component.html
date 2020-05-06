@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'Edit contract' | translate }}</h3>
@@ -42,7 +42,8 @@
                     [pickerType]="'calendar'" #dt2></owl-date-time>
                 </div>
               </div>
-
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="md-form">
                   <input mdbInput
@@ -125,7 +126,7 @@
                     <button mdbBtn class="btn-danger btn-icon mb-2"
                             mdbTooltip="delete customer"
                             (click)="removeCustomer(customerModel)">
-                      <fa-icon icon="trash-alt" size="md" [fixedWidth]="true" ></fa-icon>
+                      <fa-icon icon="trash-alt" size="lg" [fixedWidth]="true" ></fa-icon>
                     </button>
                     </div>
                   </div>
@@ -198,7 +199,7 @@
                                 mdbTooltip="{{'Remove Rentable Item' | translate}}"
                                 (click)="removeRentableItem(rentableItem)"
                                 id="removeRentableItemBtn">
-                          <fa-icon icon="trash-alt" size="md" [fixedWidth]="true"></fa-icon>
+                          <fa-icon icon="trash-alt" size="lg" [fixedWidth]="true" ></fa-icon>
                         </button>
                       </td>
                     </tr>

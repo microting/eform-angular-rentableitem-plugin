@@ -268,10 +268,10 @@ export class ContractsRowObject {
         this.endDate = +$$('#contractEndData')[rowNum - 1];
       } catch (e) {}
       try {
-        this.customerId = +$$('#contractCustomerId')[rowNum - 1].getText();
+        this.contractCustomer = +$$('#contractCustomer')[rowNum - 1].getText();
       } catch (e) {}
       try {
-        this.contractNumber = +$$('#contractNr')[rowNum - 1].getText();
+        this.contractNumber = +$$('#contractNumber')[rowNum - 1].getText();
       } catch (e) {}
       try {
         this.editBtn = $$('#contractEditBtn')[rowNum - 1];
@@ -288,7 +288,7 @@ export class ContractsRowObject {
   id;
   startDate;
   endDate;
-  customerId;
+  contractCustomer;
   contractNumber;
   inspectionBtn;
   deleteBtn;

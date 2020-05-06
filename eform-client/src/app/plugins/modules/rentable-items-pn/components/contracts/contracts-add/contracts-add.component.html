@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-lg" *ngIf="frameShow">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" *ngIf="frameShow">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'New contract' | translate }}</h3>
@@ -8,7 +8,7 @@
         <div class="container-fluid">
           <form #createForm="ngForm">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt1">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInput
@@ -25,7 +25,7 @@
                     [pickerType]="'calendar'" #dt1></owl-date-time>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <div class="md-form" [owlDateTimeTrigger]="dt2">
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInput
@@ -42,7 +42,9 @@
                     [pickerType]="'calendar'" #dt2></owl-date-time>
                 </div>
               </div>
-              <div class="col-md-4">
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <div class="md-form">
                   <input mdbInput
 
@@ -52,9 +54,7 @@
                   <label for="contractNumber">{{ 'Contract Number' | translate }}*</label>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-9">
+              <div class="col-md-6">
                 <div class="md-form">
                   <!--<ng-select
                     bindValue="id"
@@ -90,94 +90,145 @@
                   </ng-select>
                 </div>
               </div>
-              <div class="col-md-3" *ngIf="newContractModel.customer">
-                <strong>{{'Name:' | translate }}</strong> {{newContractModel.customer.contactPerson}}<br>
-                <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customer.customerNo}}<br>
-                <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customer.companyAddress}}<br>
-                <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customer.companyAddress2}}<br>
-                <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customer.zipCode}}<br>
-                <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customer.createdBy}}<br>
-                <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customer.cityName }}<br>
-                <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customer.phone }}<br>
-                <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customer.email }}<br>
-                <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customer.eanCode }}<br>
-                <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customer.vatNumber }}<br>
-                <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customer.countryCode }}<br>
-                <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
-                        mdbTooltip="delete customer"
-                        (click)="removeCustomer(newContractModel.customerId)">
-                  <fa-icon icon="trash-alt"></fa-icon>
-                </button>
-              </div>
             </div>
-            <div class="col-md-12">
-              <div class="md-form">
-                <ng-select
-                  id="rentableItemSelector"
-                  [placeholder]="'Rentable Items'"
-                  name="Rentable-Item-selector"
-                  [bindValue]="'id'"
-                  [bindLabel]="'modelName'"
-                  [clearable]="false"
-                  [typeahead]="typeahead2"
-                  [items]="rentableItemsModel.rentableItems"
-                  (change)="addNewRentableItem($event)"></ng-select>
-              </div>
+            <br>
+            <mdb-card *ngIf="newContractModel.customer">
+              <mdb-card-header>
+                {{'Customer' | translate}}
+              </mdb-card-header>
+              <mdb-card-body>
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>{{'Name:' | translate }}</strong> {{newContractModel.customer.contactPerson}}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customer.customerNo}}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customer.companyAddress}}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customer.companyAddress2}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customer.zipCode}}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customer.createdBy}}
+                  </div>
+                  <div class="col-md-3"><strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customer.cityName }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customer.phone }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customer.email }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customer.eanCode }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customer.vatNumber }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customer.countryCode }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-1 offset-md-11">
+                    <button mdbBtn class="btn-danger btn-icon mb-2"
+                            mdbTooltip="delete customer"
+                            (click)="removeCustomer(newContractModel.customerId)">
+                      <fa-icon icon="trash-alt" size="lg" [fixedWidth]="true" ></fa-icon>
+                    </button>
+                  </div>
+                </div>
+              </mdb-card-body>
+            </mdb-card>
+            <br>
+            <mdb-card>
+              <mdb-card-header>
+                {{'Rentable Items' | translate}}
+              </mdb-card-header>
+              <mdb-card-body>
+                <div class="col-md-12">
+                  <div class="md-form">
+                    <ng-select
+                      id="rentableItemSelector"
+                      [placeholder]="'Rentable Items'"
+                      name="Rentable-Item-selector"
+                      [bindValue]="'id'"
+                      [bindLabel]="'modelName'"
+                      [clearable]="false"
+                      [typeahead]="typeahead2"
+                      [items]="rentableItemsModel.rentableItems"
+                      (change)="addNewRentableItem($event)"></ng-select>
+                  </div>
+                </div>
+                <table class="table table-sm table-striped text-center">
+                  <thead>
+                  <tr>
+                    <th scope="col" class="table-header-sortable" id="idSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        ID
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="contractIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Model Name' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Brand' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col" class="table-header-sortable" id="statusSort">
+                      <div class="d-flex align-items-center justify-content-center">
+                        {{'Serial Number' | translate}}
+                      </div>
+                    </th>
+                    <th scope="col">
+                      {{'Actions' | translate}}
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                  <tr *ngFor="let rentableItem of newContractModel.rentableItems">
+                    <td id="rentableItemId">
+                      {{rentableItem.id}}
+                    </td>
+                    <td id="rentableItemModelName">
+                      {{rentableItem.modelName}}
+                    </td>
+                    <td id="rentableItemBrand">
+                      {{rentableItem.brand}}
+                    </td>
+                    <td id="rentableItemSerialNumber">
+                      {{rentableItem.serialNumber}}
+                    </td>
+                    <td>
+                      <button mdbBtn class="btn-danger btn-icon mb-2"
+                              mdbTooltip="{{'Remove Rentable Item' | translate}}"
+                              (click)="removeRentableItem(rentableItem)"
+                              id="removeRentableItemBtn">
+                        <fa-icon icon="trash-alt" size="lg" [fixedWidth]="true" ></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </mdb-card-body>
+            </mdb-card>
+            <div class="row">
+
             </div>
             <div class="row p-3 table-responsive no-gutters">
-              <table class="table table-sm table-striped text-center">
-                <thead>
-                <tr>
-                  <th scope="col" class="table-header-sortable" id="idSort">
-                    <div class="d-flex align-items-center justify-content-center">
-                      ID
-                    </div>
-                  </th>
-                  <th scope="col" class="table-header-sortable" id="contractIdSort">
-                    <div class="d-flex align-items-center justify-content-center">
-                      {{'Model Name' | translate}}
-                    </div>
-                  </th>
-                  <th scope="col" class="table-header-sortable" id="sdkCaseIdSort">
-                    <div class="d-flex align-items-center justify-content-center">
-                      {{'Brand' | translate}}
-                    </div>
-                  </th>
-                  <th scope="col" class="table-header-sortable" id="statusSort">
-                    <div class="d-flex align-items-center justify-content-center">
-                      {{'Serial Number' | translate}}
-                    </div>
-                  </th>
-                  <th scope="col">
-                    {{'Actions' | translate}}
-                  </th>
-                </tr>
-                </thead>
-                <tbody id="tableBody">
-                <tr *ngFor="let rentableItem of newContractModel.rentableItems">
-                  <td id="rentableItemId">
-                    {{rentableItem.id}}
-                  </td>
-                  <td id="rentableItemModelName">
-                    {{rentableItem.modelName}}
-                  </td>
-                  <td id="rentableItemBrand">
-                    {{rentableItem.brand}}
-                  </td>
-                  <td id="rentableItemSerialNumber">
-                    {{rentableItem.serialNumber}}
-                  </td>
-                  <td>
-                    <button mdbBtn class="btn-danger text-black-50 btn-icon mb-2"
-                            mdbTooltip="{{'Remove Rentable Item' | translate}}"
-                            (click)="removeRentableItem(rentableItem)"
-                            id="removeRentableItemBtn">
-                      <fa-icon icon="trash-alt"></fa-icon>
-                    </button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+
             </div>
           </form>
         </div>

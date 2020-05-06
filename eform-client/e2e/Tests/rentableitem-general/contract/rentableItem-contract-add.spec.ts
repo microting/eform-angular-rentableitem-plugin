@@ -73,7 +73,7 @@ describe('Rentable Items - Contracts - add', function () {
     contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
-    expect(contract.customerId).equal(1);
+    expect($('#contractCustomer').getText()).equal('Oles olie\nSamantha Black');
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.cleanup();
   });

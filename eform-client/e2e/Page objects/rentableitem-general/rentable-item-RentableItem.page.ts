@@ -44,7 +44,7 @@ export class RentableItemRentableItemPage extends Page {
   public rentableItemDropdown() {
     const ele = $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`);
     ele.waitForDisplayed({timeout: 20000});
-    ele.waitForClickable({timeout: 20000});
+    //ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public rentableItemDropdownItemName(name) {
