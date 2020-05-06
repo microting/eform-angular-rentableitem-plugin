@@ -69,12 +69,51 @@ namespace RentableItems.Pn.Services
                 List<Contract> contracts = await contractsQuery.ToListAsync();
                 contracts.ForEach(contract =>
                 {
+                    var customer =
+                         _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
+                    CustomerModel customerModel = new CustomerModel()
+                    {
+                        Id = customer.Id,
+                        CustomerNo = customer.CustomerNo,
+                        CompanyName = customer.CompanyName,
+                        ContactPerson = customer.ContactPerson,
+                        CompanyAddress = customer.CompanyAddress,
+                        CompanyAddress2 = customer.CompanyAddress2,
+                        CityName = customer.CityName,
+                        ZipCode = customer.ZipCode,
+                        CountryCode = customer.CountryCode,
+                        EanCode = customer.EanCode,
+                        VatNumber = customer.VatNumber,
+                        Email = customer.Email,
+                        Phone = customer.Phone,
+                        Description = customer.Description
+                    };
+
+                    List<RentableItemModel> rentableItemModels = new List<RentableItemModel>();
+                    foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem.Where(x => x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
+                    {
+                        RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
+                        RentableItemModel rentableItemModel = new RentableItemModel()
+                        {
+                            Id = rentableItem.Id,
+                            Brand = rentableItem.Brand,
+                            ModelName = rentableItem.ModelName,
+                            PlateNumber = rentableItem.PlateNumber,
+                            VinNumber = rentableItem.VinNumber,
+                            SerialNumber = rentableItem.SerialNumber,
+                            RegistrationDate = rentableItem.RegistrationDate
+                        };
+                        rentableItemModels.Add(rentableItemModel);
+                    }
+
                     contractsModel.Contracts.Add(new ContractModel()
                     {
                         ContractEnd = contract.ContractEnd,
                         ContractNr = contract.ContractNr,
                         ContractStart = contract.ContractStart,
                         CustomerId = contract.CustomerId,
+                        Customer = customerModel,
+                        RentableItems = rentableItemModels,
                         Id = contract.Id,
                     });
                 });

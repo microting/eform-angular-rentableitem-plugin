@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using RentableItems.Pn.Infrastructure.Models.Customer;
+
 namespace RentableItems.Pn.Infrastructure.Models
 {
     public class ContractModel
@@ -14,8 +16,10 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? ContractStart { get; set; }
         public DateTime? ContractEnd { get; set; }
         public int CustomerId { get; set; }
+        public CustomerModel Customer { get; set; }
         public int? ContractNr { get; set; }
         public List<int> RentableItemIds { get; set; }
+        public List<RentableItemModel> RentableItems { get; set; }
         public List<int> DeleteIds { get; set; }
     }
 }
