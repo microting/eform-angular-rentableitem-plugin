@@ -145,14 +145,27 @@
       </tr>
       </thead>
       <tbody id="tableBody">
-      <tr *ngFor="let contract of contractsModel.contracts">
+      <tr *ngFor="let contract of contractsModel.contracts; let i = index">
         <td id="contractId">
           {{contract.id}}
         </td>
         <td id="contractNumber">
           {{contract.contractNr}}
         </td>
-        <td id="contractCustomer">
+        <ng-template #popTemplate>
+          <div>{{contract.customer.customerNo}}</div>
+          <div><strong>{{'Address: ' | translate }}</strong> {{contract.customer.companyAddress}}</div>
+          <div><strong>{{'Address 2: ' | translate }}</strong> {{contract.customer.companyAddress2}}</div>
+          <div><strong>{{'City Name: ' | translate}}</strong> {{contract.customer.cityName}}</div>
+          <div><strong>{{'Zip Code: ' | translate }}</strong> {{contract.customer.zipCode}}</div>
+          <div><strong>{{'Phone: ' | translate}}</strong> {{contract.customer.phone}}</div>
+          <div><strong>{{'Email: ' | translate}}</strong> {{contract.customer.email}}</div>
+          <div><strong>{{'EAN Code: ' | translate}}</strong> {{contract.customer.eanCode}}</div>
+          <div><strong>{{'Vat Number: ' | translate}}</strong> {{contract.customer.vatNumber}}</div>
+          <div><strong>{{'Country Code: ' | translate}}</strong> {{contract.customer.countryCode}}</div>
+        </ng-template>
+        <td id="contractCustomer" [mdbPopover]="popTemplate"
+            placement="right"  mdbPopoverHeader="{{'Customer' | translate }}" triggers="mouseenter:mouseleave">
           {{contract.customer.companyName}}
           <br *ngIf="contract.customer.contactPerson !== null">
           {{contract.customer.contactPerson}}
