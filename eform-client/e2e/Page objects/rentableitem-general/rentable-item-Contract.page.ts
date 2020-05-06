@@ -15,10 +15,16 @@ export class RentableItemContractPage extends Page {
     return $$(`//*[@id= 'tableBody']//tr//*[@id= 'rentableItemId']`).length;
   }
   public rentableItemDropdownItemName(name) {
-    return $(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
+    const ele = $(`//*[contains(@class, 'dropdown')]//div//*[contains(text(), "${name}")]`);
+    ele.waitForDisplayed({timeout: 20000});
+    ele.waitForClickable({timeout: 20000});
+    return ele;
   }
   public rentableItemDropdown() {
-    $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`).click();
+    const ele = $(`//*[contains(@class, 'dropdown')]//*[contains(text(), 'Udlejning')]`);
+    ele.waitForDisplayed({timeout: 20000});
+    ele.waitForClickable({timeout: 20000});
+    ele.click();
   }
   public get newContractBtn() {
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});

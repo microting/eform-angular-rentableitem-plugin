@@ -59,7 +59,7 @@ describe('Rentable Items - Contracts - add', function () {
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
   });*/
   it('should create contract', function () {
-    //loginPage.open('/');
+    loginPage.open('/');
     contractsPage.rentableItemDropdown();
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
