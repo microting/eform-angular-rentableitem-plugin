@@ -76,7 +76,7 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
-    expect(contract.customerId).equal(1);
+    expect($('#contractCustomer').getText()).equal('Oles olie\nSamantha Black');
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
   it('should edit contract', function () {
@@ -94,7 +94,7 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.editContract(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(newContractNumber);
-    expect(contract.customerId).equal(2);
+    expect($('#contractCustomer').getText()).equal('Bents bjelker\nJack Black');
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
   it('should NOT edit contract', function () {
@@ -117,7 +117,7 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     const contract = contractsPage.getFirstContractObject();
-    expect(oldContract.customerId).equal(contract.customerId);
+    expect($('#contractCustomer').getText()).equal('Oles olie\nSamantha Black');
     expect(oldContract.contractNumber).equal(contract.contractNumber);
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
