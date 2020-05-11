@@ -258,6 +258,8 @@ namespace RentableItems.Pn.Services
         }
         public async Task<OperationResult> Delete(int id)
         {
+            Core _core = await _coreHelper.GetCore();
+
             ContractInspection dbContractInspection =
                 await _dbContext.ContractInspection.SingleOrDefaultAsync(x => x.Id == id);
 
@@ -266,6 +268,14 @@ namespace RentableItems.Pn.Services
                 if (dbContractInspection != null)
                 {
                     await dbContractInspection.Delete(_dbContext);
+                    ContractInspectionItem contractInspectionItem =
+                        await _dbContext.ContractInspectionItem.SingleOrDefaultAsync(x =>
+                            x.ContractInspectionId == dbContractInspection.Id);
+                    CaseDto caseDto = await _core.CaseLookupMUId(contractInspectionItem.SDKCaseId);
+                    if (caseDto.MicrotingUId != null)
+                    {
+                        await _core.CaseDelete((int) caseDto.MicrotingUId);
+                    }
                 }
                 return new OperationResult(true);
             }
