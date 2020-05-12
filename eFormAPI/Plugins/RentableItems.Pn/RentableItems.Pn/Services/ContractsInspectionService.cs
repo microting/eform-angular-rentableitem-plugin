@@ -114,7 +114,8 @@ namespace RentableItems.Pn.Services
                             PlateNumber = rentableItem.PlateNumber,
                             VinNumber = rentableItem.VinNumber,
                             SerialNumber = rentableItem.SerialNumber,
-                            RegistrationDate = rentableItem.RegistrationDate
+                            RegistrationDate = rentableItem.RegistrationDate,
+                            EFormId = rentableItem.eFormId
                         };
                         rentableItemModels.Add(rentableItemModel);
                     }
@@ -153,7 +154,7 @@ namespace RentableItems.Pn.Services
                 // finde eform fra settings
                 List<ContractRentableItem> contractRentableItem =
                     await _dbContext.ContractRentableItem.Where(x =>
-                        x.ContractId == contractInspectionCreateModel.ContractId).ToListAsync();
+                        x.ContractId == contractInspectionCreateModel.ContractId && x.WorkflowState != Constants.WorkflowStates.Removed).ToListAsync();
                 foreach (var item in contractRentableItem)
                 {
                     int rentableItemId = item.RentableItemId;
@@ -172,7 +173,6 @@ namespace RentableItems.Pn.Services
                     mainElement.Repeated = 1;
                     mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
                     mainElement.StartDate = DateTime.Now.ToUniversalTime();
-                    CDataValue cDataValue = new CDataValue();
                     mainElement.Label = "";
                     mainElement.Label += string.IsNullOrEmpty(rentableItem.SerialNumber)
                         ? ""
@@ -190,7 +190,7 @@ namespace RentableItems.Pn.Services
                         ? ""
                         : $"<br>{dbCustomer.ContactPerson}";
 
-                    cDataValue = new CDataValue();
+                    CDataValue cDataValue = new CDataValue();
                     cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
                     cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
                     

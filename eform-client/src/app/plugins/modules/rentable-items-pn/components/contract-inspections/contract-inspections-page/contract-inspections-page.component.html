@@ -220,7 +220,7 @@
           {{inspection.contractEnd | date:'dd/MM/yyyy'}}
         </td>
         <td id="inspectionDoneAt">
-          {{inspection.doneAt | date:'dd/MM/yyyy'}}
+          {{inspection.doneAt | date:'dd/MM/yyyy hh:mm:ss:'}}
         </td>
         <td id="inspectionStatus">
           <status-bar [status]="inspection.status"></status-bar>
