@@ -76,6 +76,16 @@ export class ContractInspectionsPageComponent implements OnInit {
     }
   }
 
+  downloadPDF(inspection: any) {
+    window.open('/api/rentable-items-pn/inspection-results/' +
+      inspection.id + '?token=none&fileType=pdf', '_blank');
+  }
+
+  downloadDocx(inspection: any) {
+    window.open('/api/rentable-items-pn/inspection-results/' +
+      inspection.id + '?token=none&fileType=docx', '_blank');
+  }
+
   sortByColumn(columnName: string, sortedByDsc: boolean) {
     this.contractInspectionsRequestModel.sortColumnName = columnName;
     this.contractInspectionsRequestModel.isSortDsc = sortedByDsc;

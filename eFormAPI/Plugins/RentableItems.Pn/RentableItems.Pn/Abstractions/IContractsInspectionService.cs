@@ -11,5 +11,6 @@ namespace RentableItems.Pn.Abstractions
         Task<OperationResult> Create(ContractInspectionModel contractInspectionCreateModel);
         Task<OperationResult> Update(ContractInspectionModel contractInspectionUpdateModel);
         Task<OperationResult> Delete(int id);
+        Task<string> DownloadEFormPdf(int inspectionId, string token, string fileType);
     }
 }

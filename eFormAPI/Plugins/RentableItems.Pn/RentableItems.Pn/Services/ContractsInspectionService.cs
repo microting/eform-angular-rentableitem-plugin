@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 using eFormCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -103,7 +106,8 @@ namespace RentableItems.Pn.Services
                         Description = customer.Description
                     };
                     List<RentableItemModel> rentableItemModels = new List<RentableItemModel>();
-                    foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem.Where(x => x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
+                    foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem.Where(x =>
+                        x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
                     {
                         RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
                         RentableItemModel rentableItemModel = new RentableItemModel()
@@ -286,6 +290,79 @@ namespace RentableItems.Pn.Services
                 return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContractInspection"));
             }
         }
+
+        public async Task<string> DownloadEFormPdf(int id, string token, string fileType)
+        {
+            Core core = await _coreHelper.GetCore();
+            string microtingUId;
+            string microtingCheckUId;
+            int caseId = 0;
+            int eFormId = 0;
+
+            ContractInspection contractInspection =
+                await _dbContext.ContractInspection.SingleOrDefaultAsync(x => x.Id == id);
+
+            Contract contract = _dbContext.Contract.Single(x => x.Id == contractInspection.ContractId);
+
+            int i = 0;
+            XElement xmlContent = new XElement("ContractInspection");
+            foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem
+                .Where(x => x.ContractId == contract.Id
+                            && x.WorkflowState == Constants.WorkflowStates.Created)
+                .ToList())
+            {
+                RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
+                xmlContent.Add(new XElement($"Brand_{i}", rentableItem.Brand));
+                xmlContent.Add(new XElement($"ModelName_{i}", rentableItem.ModelName));
+                xmlContent.Add(new XElement($"Serial_{i}", rentableItem.SerialNumber));
+                xmlContent.Add(new XElement($"RegistrationDate_{i}", rentableItem.RegistrationDate));
+                xmlContent.Add(new XElement($"vinNumber_{i}", rentableItem.VinNumber));
+                xmlContent.Add(new XElement($"PlateNumber_{i}", rentableItem.PlateNumber));
+                i += 1;
+            }
+
+            Customer customer =
+                _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
+            xmlContent.Add(new XElement("CustomerCustomerNo", customer.CustomerNo));
+            xmlContent.Add(new XElement("CustomerCompanyName", customer.CompanyName));
+            xmlContent.Add(new XElement("CustomerContactPerson", customer.ContactPerson));
+            xmlContent.Add(new XElement("CustomerCompanyAddress", customer.CompanyAddress));
+            xmlContent.Add(new XElement("CustomerCompanyAddress2", customer.CompanyAddress2));
+            xmlContent.Add(new XElement("CustomerCityName", customer.CityName));
+            xmlContent.Add(new XElement("CustomerZipCode", customer.ZipCode));
+            xmlContent.Add(new XElement("CustomerCountryCode", customer.CountryCode));
+            xmlContent.Add(new XElement("CustomerEanCode", customer.EanCode));
+            xmlContent.Add(new XElement("CustomerVatNumber", customer.VatNumber));
+            xmlContent.Add(new XElement("CustomerEmail", customer.Email));
+            xmlContent.Add(new XElement("CustomerPhone", customer.Phone));
+            xmlContent.Add(new XElement("CustomerDescription", customer.Description));
+
+            _coreHelper.LogEvent($"DownloadEFormPdf: xmlContent is {xmlContent}");
+            ContractInspectionItem contractInspectionItem =
+                _dbContext.ContractInspectionItem.FirstOrDefault(x =>
+                    x.ContractInspectionId == contractInspection.Id);
+
+            CaseDto caseDto = await core.CaseLookupMUId(contractInspectionItem.SDKCaseId);
+            caseId = (int)caseDto.CaseId;
+            eFormId = caseDto.CheckListId;
+
+            if (caseId != 0 && eFormId != 0)
+            {
+                _coreHelper.LogEvent($"DownloadEFormPdf: caseId is {caseId}, eFormId is {eFormId}");
+                var filePath = await core.CaseToPdf(caseId, eFormId.ToString(),
+                    DateTime.Now.ToString("yyyyMMddHHmmssffff"),
+                    $"{await core.GetSdkSetting(Settings.httpServerAddress)}/" + "api/template-files/get-image/", fileType, xmlContent.ToString());
+                if (!System.IO.File.Exists(filePath))
+                {
+                    throw new FileNotFoundException();
+                }
+
+                return filePath;
+            }
+
+            throw new Exception("could not find case of eform!");
+        }
+
         private void LogEvent(string appendText)
         {
             try
