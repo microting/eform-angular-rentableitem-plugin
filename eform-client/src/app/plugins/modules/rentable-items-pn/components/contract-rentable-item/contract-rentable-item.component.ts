@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ContractModel, RentableItemsPnModel, CustomerModel} from "../../models";
+import {ContractModel, RentableItemsPnModel, RentableItemCustomerModel} from "../../models";
 import {ContractRentableItemService, ContractsService, RentableItemsPnService} from '../../services';
 
 @Component({
@@ -12,7 +12,7 @@ export class ContractRentableItemComponent implements OnInit {
   frameShow = true;
   selectedContractModel: ContractModel = new ContractModel();
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
-  customerModel: CustomerModel = new CustomerModel();
+  customerModel: RentableItemCustomerModel = new RentableItemCustomerModel();
 
   constructor(private contractRentableItemService: ContractRentableItemService,
               private contractService: ContractsService

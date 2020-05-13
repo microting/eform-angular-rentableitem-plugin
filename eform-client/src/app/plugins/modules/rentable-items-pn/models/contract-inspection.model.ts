@@ -1,4 +1,4 @@
-import {CustomerModel} from 'src/app/plugins/modules/rentable-items-pn/models/customer.model';
+import {RentableItemCustomerModel} from 'src/app/plugins/modules/rentable-items-pn/models/rentableItemCustomerModel';
 import {RentableItemPnModel} from 'src/app/plugins/modules/rentable-items-pn/models/rentable-item-pn.model';
 
 export class ContractInspectionModel {
@@ -11,7 +11,7 @@ export class ContractInspectionModel {
   status: number;
   doneAt: Date;
   siteId: number;
-  customer: CustomerModel;
+  rentableItemCustomer: RentableItemCustomerModel;
   rentableItems: Array<RentableItemPnModel> = [];
   constructor() {
     this.doneAt = null;

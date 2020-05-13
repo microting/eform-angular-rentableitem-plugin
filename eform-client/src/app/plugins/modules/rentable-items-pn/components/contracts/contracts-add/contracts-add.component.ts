@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {
-  ContractModel, CustomerModel,
+  ContractModel, RentableItemCustomerModel,
   CustomerRequestModel,
   CustomersModel,
   RentableItemPnModel,
@@ -24,7 +24,7 @@ export class ContractsAddComponent implements OnInit {
   frameShow = true;
   peopleInput$ = new Subject<string>();
   peopleLoading = false;
-  people$: Observable<CustomerModel[]>;
+  people$: Observable<RentableItemCustomerModel[]>;
   rentableItems: Array<RentableItemPnModel> = [];
   customersRequestModel: CustomerRequestModel = new CustomerRequestModel();
   customersModel: CustomersModel = new CustomersModel();
@@ -75,7 +75,7 @@ export class ContractsAddComponent implements OnInit {
   }
 
 
-  trackByFn(item: CustomerModel) {
+  trackByFn(item: RentableItemCustomerModel) {
     return item.id;
   }
 
@@ -104,7 +104,7 @@ export class ContractsAddComponent implements OnInit {
   }
 
   createContract() {
-    this.newContractModel.customerId = this.newContractModel.customer.id;
+    this.newContractModel.customerId = this.newContractModel.rentableItemCustomer.id;
     this.contractService.createContract(this.newContractModel).subscribe(((data) => {
       if (data && data.success) {
         this.newContractModel = new ContractModel();
@@ -126,7 +126,7 @@ export class ContractsAddComponent implements OnInit {
     this.newContractModel.rentableItems.splice(index, 1);
   }
   removeCustomer(customer: any) {
-    this.newContractModel.customer = null;
+    this.newContractModel.rentableItemCustomer = null;
   }
   getRentableItems() {
     this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel).subscribe((result => {

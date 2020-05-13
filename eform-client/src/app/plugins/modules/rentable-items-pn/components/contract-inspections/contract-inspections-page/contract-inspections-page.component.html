@@ -176,22 +176,24 @@
           {{inspection.contractId}}
         </td>
         <ng-template #popTemplate>
-          <div>{{inspection.customer.customerNo}}</div>
-          <div><strong>{{'Address: ' | translate }}</strong> {{inspection.customer.companyAddress}}</div>
-          <div><strong>{{'Address 2: ' | translate }}</strong> {{inspection.customer.companyAddress2}}</div>
-          <div><strong>{{'City Name: ' | translate}}</strong> {{inspection.customer.cityName}}</div>
-          <div><strong>{{'Zip Code: ' | translate }}</strong> {{inspection.customer.zipCode}}</div>
-          <div><strong>{{'Phone: ' | translate}}</strong> {{inspection.customer.phone}}</div>
-          <div><strong>{{'Email: ' | translate}}</strong> {{inspection.customer.email}}</div>
-          <div><strong>{{'EAN Code: ' | translate}}</strong> {{inspection.customer.eanCode}}</div>
-          <div><strong>{{'Vat Number: ' | translate}}</strong> {{inspection.customer.vatNumber}}</div>
-          <div><strong>{{'Country Code: ' | translate}}</strong> {{inspection.customer.countryCode}}</div>
+          <div>{{inspection.rentableItemCustomer.customerNo}}</div>
+          <div><strong>{{'Address: ' | translate }}</strong> {{inspection.rentableItemCustomer.companyAddress}}</div>
+          <div><strong>{{'Address 2: ' | translate }}</strong> {{inspection.rentableItemCustomer.companyAddress2}}</div>
+          <div><strong>{{'City Name: ' | translate}}</strong> {{inspection.rentableItemCustomer.cityName}}</div>
+          <div><strong>{{'Zip Code: ' | translate }}</strong> {{inspection.rentableItemCustomer.zipCode}}</div>
+          <div><strong>{{'Phone: ' | translate}}</strong> {{inspection.rentableItemCustomer.phone}}</div>
+          <div><strong>{{'Email: ' | translate}}</strong> {{inspection.rentableItemCustomer.email}}</div>
+          <div><strong>{{'EAN Code: ' | translate}}</strong> {{inspection.rentableItemCustomer.eanCode}}</div>
+          <div><strong>{{'Vat Number: ' | translate}}</strong> {{inspection.rentableItemCustomer.vatNumber}}</div>
+          <div><strong>{{'Country Code: ' | translate}}</strong> {{inspection.rentableItemCustomer.countryCode}}</div>
         </ng-template>
         <td id="contractCustomer" [mdbPopover]="popTemplate"
             placement="right"  mdbPopoverHeader="{{'Customer' | translate }}" triggers="mouseenter:mouseleave">
-          {{inspection.customer.companyName}}
-          <br *ngIf="inspection.customer.contactPerson !== null">
-          {{inspection.customer.contactPerson}}
+          <span *ngIf="inspection.rentableItemCustomer != undefined">
+            {{inspection.rentableItemCustomer.companyName}}
+            <br *ngIf="inspection.rentableItemCustomer.contactPerson !== null">
+            {{inspection.rentableItemCustomer.contactPerson}}
+          </span>
         </td>
         <td id="brand">
           <div *ngFor="let rentableItem of inspection.rentableItems">

@@ -153,22 +153,24 @@
           {{contract.contractNr}}
         </td>
         <ng-template #popTemplate>
-          <div>{{contract.customer.customerNo}}</div>
-          <div><strong>{{'Address: ' | translate }}</strong> {{contract.customer.companyAddress}}</div>
-          <div><strong>{{'Address 2: ' | translate }}</strong> {{contract.customer.companyAddress2}}</div>
-          <div><strong>{{'City Name: ' | translate}}</strong> {{contract.customer.cityName}}</div>
-          <div><strong>{{'Zip Code: ' | translate }}</strong> {{contract.customer.zipCode}}</div>
-          <div><strong>{{'Phone: ' | translate}}</strong> {{contract.customer.phone}}</div>
-          <div><strong>{{'Email: ' | translate}}</strong> {{contract.customer.email}}</div>
-          <div><strong>{{'EAN Code: ' | translate}}</strong> {{contract.customer.eanCode}}</div>
-          <div><strong>{{'Vat Number: ' | translate}}</strong> {{contract.customer.vatNumber}}</div>
-          <div><strong>{{'Country Code: ' | translate}}</strong> {{contract.customer.countryCode}}</div>
+          <div>{{contract.rentableItemCustomer.customerNo}}</div>
+          <div><strong>{{'Address: ' | translate }}</strong> {{contract.rentableItemCustomer.companyAddress}}</div>
+          <div><strong>{{'Address 2: ' | translate }}</strong> {{contract.rentableItemCustomer.companyAddress2}}</div>
+          <div><strong>{{'City Name: ' | translate}}</strong> {{contract.rentableItemCustomer.cityName}}</div>
+          <div><strong>{{'Zip Code: ' | translate }}</strong> {{contract.rentableItemCustomer.zipCode}}</div>
+          <div><strong>{{'Phone: ' | translate}}</strong> {{contract.rentableItemCustomer.phone}}</div>
+          <div><strong>{{'Email: ' | translate}}</strong> {{contract.rentableItemCustomer.email}}</div>
+          <div><strong>{{'EAN Code: ' | translate}}</strong> {{contract.rentableItemCustomer.eanCode}}</div>
+          <div><strong>{{'Vat Number: ' | translate}}</strong> {{contract.rentableItemCustomer.vatNumber}}</div>
+          <div><strong>{{'Country Code: ' | translate}}</strong> {{contract.rentableItemCustomer.countryCode}}</div>
         </ng-template>
         <td id="contractCustomer" [mdbPopover]="popTemplate"
             placement="right"  mdbPopoverHeader="{{'Customer' | translate }}" triggers="mouseenter:mouseleave">
-          {{contract.customer.companyName}}
-          <br *ngIf="contract.customer.contactPerson !== null">
-          {{contract.customer.contactPerson}}
+          <span *ngIf="contract.rentableItemCustomer != undefined">
+            {{contract.rentableItemCustomer.companyName}}
+            <br *ngIf="contract.rentableItemCustomer.contactPerson !== null">
+            {{contract.rentableItemCustomer.contactPerson}}
+          </span>
         </td>
         <td id="brand">
           <div *ngFor="let rentableItem of contract.rentableItems">

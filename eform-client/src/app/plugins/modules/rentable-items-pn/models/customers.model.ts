@@ -1,6 +1,6 @@
-import {CustomerModel} from './customer.model';
+import {RentableItemCustomerModel} from './rentableItemCustomerModel';
 
 export class CustomersModel {
   total: number;
-  customers: Array<CustomerModel> = [];
+  customers: Array<RentableItemCustomerModel> = [];
 }

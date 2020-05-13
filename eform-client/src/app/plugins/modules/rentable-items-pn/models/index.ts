@@ -8,7 +8,7 @@ export * from './contract-inspection.model';
 export * from './contract-inspections.model';
 export * from './contract-inspections-request.model';
 export * from './rentable-items-pn-settings.model';
-export * from './customer.model';
+export * from './rentableItemCustomerModel';
 export * from './customers.model';
 export * from './customer-request.model';
 export * from './contract-rentable-item.model';

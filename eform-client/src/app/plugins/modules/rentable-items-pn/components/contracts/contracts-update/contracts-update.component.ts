@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} f
 import {ContractRentableItemService, ContractsService, RentableItemsPnService} from '../../../services';
 import {
   ContractModel,
-  CustomerModel,
+  RentableItemCustomerModel,
   CustomerRequestModel,
   CustomersModel,
   RentableItemsPnModel,
@@ -23,7 +23,7 @@ export class ContractsUpdateComponent implements OnInit {
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
   rentableItemsRequestModel: RentableItemsPnRequestModel = new RentableItemsPnRequestModel();
   customersRequestModel: CustomerRequestModel = new CustomerRequestModel();
-  customerModel: CustomerModel = new CustomerModel();
+  customerModel: RentableItemCustomerModel = new RentableItemCustomerModel();
   customersModel: CustomersModel = new CustomersModel();
   typeahead = new EventEmitter<string>();
   typeahead2 = new EventEmitter<string>();

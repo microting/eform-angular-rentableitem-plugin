@@ -1,4 +1,4 @@
-export class CustomerModel {
+export class RentableItemCustomerModel {
   id: number;
   customerNo: number;
   companyName: string;
