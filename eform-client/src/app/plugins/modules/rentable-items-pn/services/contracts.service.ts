@@ -38,7 +38,7 @@ export class ContractsService extends BaseService {
     return this.delete(ContractMethods.DeleteContract + '/' + contractId);
   }
   getCustomer(model: CustomerRequestModel): Observable<any> {
-    return this.post(ContractMethods.Customers, model);
+    return this.get(ContractMethods.Customers, model);
   }
   getSingleCustomer(customerId: number): Observable<OperationDataResult<RentableItemCustomerModel>> {
     return this.get(ContractMethods.Customers + '/' + customerId);

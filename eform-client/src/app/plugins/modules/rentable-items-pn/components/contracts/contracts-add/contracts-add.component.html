@@ -85,58 +85,58 @@
                              [loading]="peopleLoading"
                              typeToSearchText="Please enter 2 or more characters"
                              [typeahead]="peopleInput$"
-                             [(ngModel)]="newContractModel.customer"
+                             [(ngModel)]="newContractModel.rentableItemCustomer"
                              name="blabla">
                   </ng-select>
                 </div>
               </div>
             </div>
             <br>
-            <mdb-card *ngIf="newContractModel.customer">
+            <mdb-card *ngIf="newContractModel.rentableItemCustomer">
               <mdb-card-header>
                 {{'Customer' | translate}}
               </mdb-card-header>
               <mdb-card-body>
                 <div class="row">
                   <div class="col-md-3">
-                    <strong>{{'Name:' | translate }}</strong> {{newContractModel.customer.contactPerson}}
+                    <strong>{{'Name:' | translate }}</strong> {{newContractModel.rentableItemCustomer.contactPerson}}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'Number: ' | translate }}</strong> {{newContractModel.customer.customerNo}}
+                    <strong>{{'Number: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.customerNo}}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'Address: ' | translate }}</strong> {{newContractModel.customer.companyAddress}}
+                    <strong>{{'Address: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.companyAddress}}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.customer.companyAddress2}}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3">
-                    <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.customer.zipCode}}
-                  </div>
-                  <div class="col-md-3">
-                    <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.customer.createdBy}}
-                  </div>
-                  <div class="col-md-3">
-                    <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.customer.cityName }}
-                  </div>
-                  <div class="col-md-3">
-                    <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.customer.phone }}
+                    <strong>{{'Address 2: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.companyAddress2}}
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-3">
-                    <strong>{{'Email: ' | translate}}</strong> {{newContractModel.customer.email }}
+                    <strong>{{'Zip Code: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.zipCode}}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.customer.eanCode }}
+                    <strong>{{'Created By: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.createdBy}}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.customer.vatNumber }}
+                    <strong>{{'City Name: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.cityName }}
                   </div>
                   <div class="col-md-3">
-                    <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.customer.countryCode }}
+                    <strong>{{'Phone: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.phone }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>{{'Email: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.email }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'EAN Code: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.eanCode }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Vat Number: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.vatNumber }}
+                  </div>
+                  <div class="col-md-3">
+                    <strong>{{'Country Code: ' | translate}}</strong> {{newContractModel.rentableItemCustomer.countryCode }}
                   </div>
                 </div>
                 <div class="row">
