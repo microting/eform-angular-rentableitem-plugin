@@ -5,11 +5,11 @@ namespace RentableItems.Pn.Infrastructure.Models.Customer
     public class CustomersModel
     {
         public int Total { get; set; }
-        public List<CustomerModel> Customers { get; set; }
+        public List<RentableItemCustomerModel> Customers { get; set; }
 
         public CustomersModel()
         {
-            Customers = new List<CustomerModel>();
+            Customers = new List<RentableItemCustomerModel>();
         }
     }
 }

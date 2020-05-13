@@ -8,7 +8,7 @@ import {OperationDataResult} from "../../../../common/models";
 import {RentableItemsPnModel} from "../models";
 
 const ContractRentableItemMethods = {
-  getAll: 'api/contract-rentable-item'
+  getAll: '/api/rentable-items-pn/contract-rentable-items'
 };
 
 

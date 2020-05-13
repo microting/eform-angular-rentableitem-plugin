@@ -71,7 +71,7 @@ namespace RentableItems.Pn.Services
                 {
                     var customer =
                          _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
-                    CustomerModel customerModel = new CustomerModel()
+                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel()
                     {
                         Id = customer.Id,
                         CustomerNo = customer.CustomerNo,
@@ -112,7 +112,7 @@ namespace RentableItems.Pn.Services
                         ContractNr = contract.ContractNr,
                         ContractStart = contract.ContractStart,
                         CustomerId = contract.CustomerId,
-                        Customer = customerModel,
+                        RentableItemCustomer = rentableItemCustomerModel,
                         RentableItems = rentableItemModels,
                         Id = contract.Id,
                     });
@@ -127,88 +127,88 @@ namespace RentableItems.Pn.Services
                     _rentableItemsLocalizationService.GetString("ErrorObtainingContracts"));
             }
         }
-        public async Task<OperationDataResult<CustomersModel>> IndexCustomers(
-            CustomersRequestModel pnRequestModel)
-        {
-            try
-            {
-
-                CustomersModel customersPnModel = new CustomersModel();
-                CustomerModel customerModel = new CustomerModel();
-                IQueryable<Customer> customersQuery = _customerDbContext.Customers.AsQueryable();
-                if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
-                {
-                    if (pnRequestModel.IsSortDsc)
-                    {
-                        customersQuery = customersQuery
-                            .CustomOrderByDescending(pnRequestModel.SortColumnName);
-                    }
-                    else
-                    {
-                        customersQuery = customersQuery
-                            .CustomOrderBy(pnRequestModel.SortColumnName);
-                    }
-                }
-                else
-                {
-                    customersQuery = _customerDbContext.Customers
-                        .OrderBy(x => x.Id);
-                }
-
-                if (!string.IsNullOrEmpty(pnRequestModel.Name))
-                {
-                    customersQuery = customersQuery.Where(x => 
-                        x.CompanyName.ToLower().Contains(pnRequestModel.Name.ToLower()) || 
-                        x.ContactPerson.ToLower().Contains(pnRequestModel.Name.ToLower()) ||
-                        x.Phone.Contains(pnRequestModel.Name) ||
-                        x.VatNumber.Contains(pnRequestModel.Name) ||
-                        x.Email.Contains(pnRequestModel.Name));
-				}
-                else
-                {
-                    customersPnModel.Total = 0;
-                    customersPnModel.Customers = new List<CustomerModel>();
-                    return new OperationDataResult<CustomersModel>(true, customersPnModel);
-                }
-
-				customersQuery =
-					customersQuery.Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
-                    .Skip(pnRequestModel.Offset)
-                    .Take(pnRequestModel.PageSize);
-
-                List<CustomerModel> customers = await customersQuery.Select(x => new CustomerModel()
-                {
-                    Id = x.Id,
-                    Description = x.Description,
-                    Email = x.Email,
-                    ContactPerson = x.ContactPerson,
-                    CompanyName = x.CompanyName,
-                    Phone = x.Phone,
-                    CityName = x.CityName,
-                    CompanyAddress = x.CompanyAddress,
-                    CompanyAddress2 = x.CompanyAddress2,
-                    CountryCode = x.CountryCode,
-                    CreatedBy = x.CreatedBy,
-                    CreatedDate = x.CreatedDate,
-                    CustomerNo = x.CustomerNo,
-                    EanCode = x.EanCode,
-                    VatNumber = x.VatNumber,
-                    ZipCode = x.ZipCode
-
-                }).ToListAsync();
-                customersPnModel.Total = await _customerDbContext.Customers.CountAsync(x => x.WorkflowState != Constants.WorkflowStates.Removed);
-                customersPnModel.Customers = customers;
-                return new OperationDataResult<CustomersModel>(true, customersPnModel);
-
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.Message);
-                _logger.LogError(e.Message);
-                return new OperationDataResult<CustomersModel>(false, 
-                    _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo") + e.Message);
-            }
-        }
+    //     public async Task<OperationDataResult<CustomersModel>> IndexCustomers(
+    //         CustomersRequestModel pnRequestModel)
+    //     {
+    //         try
+    //         {
+    //
+    //             CustomersModel customersPnModel = new CustomersModel();
+    //             CustomerModel customerModel = new CustomerModel();
+    //             IQueryable<Customer> customersQuery = _customerDbContext.Customers.AsQueryable();
+    //             if (!string.IsNullOrEmpty(pnRequestModel.SortColumnName))
+    //             {
+    //                 if (pnRequestModel.IsSortDsc)
+    //                 {
+    //                     customersQuery = customersQuery
+    //                         .CustomOrderByDescending(pnRequestModel.SortColumnName);
+    //                 }
+    //                 else
+    //                 {
+    //                     customersQuery = customersQuery
+    //                         .CustomOrderBy(pnRequestModel.SortColumnName);
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 customersQuery = _customerDbContext.Customers
+    //                     .OrderBy(x => x.Id);
+    //             }
+    //
+    //             if (!string.IsNullOrEmpty(pnRequestModel.Name))
+    //             {
+    //                 customersQuery = customersQuery.Where(x => 
+    //                     x.CompanyName.ToLower().Contains(pnRequestModel.Name.ToLower()) || 
+    //                     x.ContactPerson.ToLower().Contains(pnRequestModel.Name.ToLower()) ||
+    //                     x.Phone.Contains(pnRequestModel.Name) ||
+    //                     x.VatNumber.Contains(pnRequestModel.Name) ||
+    //                     x.Email.Contains(pnRequestModel.Name));
+				// }
+    //             else
+    //             {
+    //                 customersPnModel.Total = 0;
+    //                 customersPnModel.Customers = new List<CustomerModel>();
+    //                 return new OperationDataResult<CustomersModel>(true, customersPnModel);
+    //             }
+    //
+				// customersQuery =
+				// 	customersQuery.Where(x => x.WorkflowState != Constants.WorkflowStates.Removed)
+    //                 .Skip(pnRequestModel.Offset)
+    //                 .Take(pnRequestModel.PageSize);
+    //
+    //             List<CustomerModel> customers = await customersQuery.Select(x => new CustomerModel()
+    //             {
+    //                 Id = x.Id,
+    //                 Description = x.Description,
+    //                 Email = x.Email,
+    //                 ContactPerson = x.ContactPerson,
+    //                 CompanyName = x.CompanyName,
+    //                 Phone = x.Phone,
+    //                 CityName = x.CityName,
+    //                 CompanyAddress = x.CompanyAddress,
+    //                 CompanyAddress2 = x.CompanyAddress2,
+    //                 CountryCode = x.CountryCode,
+    //                 CreatedBy = x.CreatedBy,
+    //                 CreatedDate = x.CreatedDate,
+    //                 CustomerNo = x.CustomerNo,
+    //                 EanCode = x.EanCode,
+    //                 VatNumber = x.VatNumber,
+    //                 ZipCode = x.ZipCode
+    //
+    //             }).ToListAsync();
+    //             customersPnModel.Total = await _customerDbContext.Customers.CountAsync(x => x.WorkflowState != Constants.WorkflowStates.Removed);
+    //             customersPnModel.Customers = customers;
+    //             return new OperationDataResult<CustomersModel>(true, customersPnModel);
+    //
+    //         }
+    //         catch (Exception e)
+    //         {
+    //             Trace.TraceError(e.Message);
+    //             _logger.LogError(e.Message);
+    //             return new OperationDataResult<CustomersModel>(false, 
+    //                 _rentableItemsLocalizationService.GetString("ErrorObtainingCustomersInfo") + e.Message);
+    //         }
+    //     }
         public async Task<OperationResult> Create(ContractModel contractCreateModel)
         {
             try
@@ -250,11 +250,11 @@ namespace RentableItems.Pn.Services
             }
         }
 
-        public async Task<OperationDataResult<CustomerModel>> ReadCustomer(int id)
+        public async Task<OperationDataResult<RentableItemCustomerModel>> ReadCustomer(int id)
         {
             try
             {
-                CustomerModel customer = await _customerDbContext.Customers.Select(x => new CustomerModel()
+                RentableItemCustomerModel rentableItemCustomer = await _customerDbContext.Customers.Select(x => new RentableItemCustomerModel()
                 {
                     Id = x.Id,
                     Description = x.Description,
@@ -273,18 +273,18 @@ namespace RentableItems.Pn.Services
                     VatNumber = x.VatNumber
                 }).FirstOrDefaultAsync(x => x.Id == id);
 
-                if (customer == null)
+                if (rentableItemCustomer == null)
                 {
-                    return new OperationDataResult<CustomerModel>( false, "Customer not found");
+                    return new OperationDataResult<RentableItemCustomerModel>( false, "Customer not found");
                 }
                 
-                return new OperationDataResult<CustomerModel>(true, customer);
+                return new OperationDataResult<RentableItemCustomerModel>(true, rentableItemCustomer);
             }
             catch (Exception e)
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<CustomerModel>(false, "Error obtaining customer");
+                return new OperationDataResult<RentableItemCustomerModel>(false, "Error obtaining customer");
             }
         }
         

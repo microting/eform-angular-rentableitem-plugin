@@ -88,7 +88,7 @@ namespace RentableItems.Pn.Services
 
                     Customer customer =
                         _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
-                    CustomerModel customerModel = new CustomerModel()
+                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel()
                     {
                         Id = customer.Id,
                         CustomerNo = customer.CustomerNo,
@@ -134,7 +134,7 @@ namespace RentableItems.Pn.Services
                         DoneAt = contractInspection.DoneAt,
                         Id = contractInspection.Id,
                         Status = contractInspectionItem.Status,
-                        Customer = customerModel,
+                        RentableItemCustomer = rentableItemCustomerModel,
                         RentableItems = rentableItemModels
                     });
                 });
@@ -287,7 +287,19 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationResult(true, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContractInspection"));
+                return new OperationResult(false, _rentableItemsLocalizationService.GetString("ErrorWhileDeletingContractInspection"));
+            }
+        }
+
+        public async Task<OperationDataResult<ContractInspectionModel>> Get(int id)
+        {
+            try
+            {
+                return new OperationDataResult<ContractInspectionModel>(true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<ContractInspectionModel>(false, _rentableItemsLocalizationService.GetString("ErrorGettingContractInspection"));
             }
         }
 

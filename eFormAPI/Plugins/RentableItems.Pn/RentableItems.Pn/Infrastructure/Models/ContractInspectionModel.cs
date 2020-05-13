@@ -22,7 +22,7 @@ namespace RentableItems.Pn.Infrastructure.Models
         public DateTime? DoneAt { get; set; }
         public int? Status { get; set; }
         public List<RentableItemModel> RentableItems { get; set; }
-        public CustomerModel Customer { get; set; }
+        public RentableItemCustomerModel RentableItemCustomer { get; set; }
         
     }
 }

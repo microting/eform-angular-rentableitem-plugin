@@ -39,7 +39,12 @@ export const routes: Routes = [
         path: 'import',
         canActivate: [AuthGuard],
         component: ImporterComponent
-      }
+      },
+      // {
+      //   path: 'case',
+      //   loadChildren: () => import('./components/contract-inspection-case/contract-inspection-case.module')
+      //     .then(m => m.ContractInspectionCaseModule)
+      // },
     ]
   }
 ];

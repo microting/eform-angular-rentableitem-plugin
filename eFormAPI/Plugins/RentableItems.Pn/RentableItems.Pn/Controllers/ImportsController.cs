@@ -8,6 +8,7 @@ using RentableItems.Pn.Infrastructure.Models;
 namespace RentableItems.Pn.Controllers
 {
     [Authorize]
+    [Route("api/rentable-items-pn/import")]
     public class ImportsController : Controller
     {
         private readonly IImportsService _importsService;
@@ -18,7 +19,7 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpPost]
-        [Route("api/rentableItems-pn/import")]
+        [Route("")]
         public async Task<OperationResult> Import([FromBody] ImportModel importModel)
         {
             return await _importsService.Import(importModel);

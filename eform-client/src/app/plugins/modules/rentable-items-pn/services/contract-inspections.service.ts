@@ -5,13 +5,14 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ContractInspectionModel, ContractInspectionsRequestModel} from '../models';
 import {Observable} from 'rxjs';
-import {OperationResult} from '../../../../common/models';
+import {OperationDataResult, OperationResult} from '../../../../common/models';
 
 const InspectionsMethods = {
-  Inspections: 'api/inspections',
-  CreateInspections: 'api/inspections/create-inspection',
-  UpdateInspection: 'api/inspections/update-inspection',
-  DeleteInspection: 'api/inspections/delete-inspection'
+  Inspections: 'api/rentable-items-pn/inspections',
+  ReadInspection: 'api/rentable-items-pn/inspections',
+  CreateInspections: 'api/rentable-items-pn/inspections',
+  UpdateInspection: 'api/rentable-items-pn/inspections',
+  DeleteInspection: 'api/rentable-items-pn/inspections'
 };
 
 @Injectable()
@@ -23,7 +24,11 @@ export class ContractInspectionsService extends BaseService {
   }
 
   getAllInspections(model: ContractInspectionsRequestModel): Observable<any> {
-    return this.post(InspectionsMethods.Inspections, model);
+    return this.get(InspectionsMethods.Inspections, model);
+  }
+
+  getInspection(inspectionId: number): Observable<OperationDataResult<any>> {
+    return this.get(InspectionsMethods.ReadInspection + '/' + inspectionId);
   }
 
   createInspection(model: ContractInspectionModel): Observable<any> {

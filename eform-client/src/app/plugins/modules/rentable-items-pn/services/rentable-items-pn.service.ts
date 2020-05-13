@@ -8,11 +8,11 @@ import {RentableItemPnModel, RentableItemsImportModel, RentableItemsPnRequestMod
 import {OperationResult} from '../../../../common/models';
 
 const RentableItemsMethods = {
-  RentableItemPn: 'api/rentableItems-pn',
-  CreateRentableItemPn: 'api/rentableItems-pn/create-rentableItem',
-  UpdateRentableItemPn: 'api/rentableItems-pn/update-rentableItem',
-  DeleteRentableItem: 'api/rentableItems-pn/delete-rentableItem',
-  GetEmail: 'api/mail/get'
+  RentableItemPn: '/api/rentable-items-pn/rentable-items',
+  CreateRentableItemPn: '/api/rentable-items-pn/rentable-items',
+  UpdateRentableItemPn: '/api/rentable-items-pn/rentable-items',
+  DeleteRentableItem: '/api/rentable-items-pn/rentable-items',
+  GetEmail: '/api/rentable-items-pn/mail'
 };
 
 @Injectable()
@@ -22,7 +22,7 @@ export class RentableItemsPnService extends BaseService {
   }
 
   getAllRentableItems(model: RentableItemsPnRequestModel): Observable<any> {
-    return this.post(RentableItemsMethods.RentableItemPn, model);
+    return this.get(RentableItemsMethods.RentableItemPn, model);
   }
 
   createRentableItem(model: RentableItemPnModel): Observable<any> {
@@ -42,6 +42,6 @@ export class RentableItemsPnService extends BaseService {
   }
 
   getEmail(): Observable<OperationResult> {
-    return this.post(RentableItemsMethods.GetEmail, '');
+    return this.get(RentableItemsMethods.GetEmail, '');
   }
 }

@@ -8,11 +8,11 @@ import {Observable} from 'rxjs';
 import {OperationDataResult, OperationResult} from '../../../../common/models';
 
 const ContractMethods = {
-  Contracts: 'api/contracts',
-  CreateContract: 'api/contracts/create-contract',
-  UpdateContract: 'api/contracts/update-contract',
-  DeleteContract: 'api/contracts/delete-contract',
-  Customers: 'api/contracts/customers'
+  Contracts: '/api/rentable-items-pn/contracts',
+  CreateContract: '/api/rentable-items-pn/contracts',
+  UpdateContract: '/api/rentable-items-pn/contracts',
+  DeleteContract: '/api/rentable-items-pn/contracts',
+  Customers: 'api/customers-pn/customers'
 };
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ContractsService extends BaseService {
   }
 
   getAllContracts(model: ContractsRequestModel): Observable<any> {
-    return this.post(ContractMethods.Contracts, model);
+    return this.get(ContractMethods.Contracts, model);
   }
 
   createContract(model: ContractModel): Observable<any> {

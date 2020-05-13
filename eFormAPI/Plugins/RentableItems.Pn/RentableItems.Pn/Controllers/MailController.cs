@@ -5,6 +5,7 @@ using RentableItems.Pn.Abstractions;
 
 namespace RentableItems.Pn.Controllers
 {
+    [Route("/api/rentable-items-pn/mail")]
     public class MailController : Controller
     {
         private readonly IMailService _mailService;
@@ -14,8 +15,8 @@ namespace RentableItems.Pn.Controllers
             _mailService = mailService;
         }
 
-        [HttpPost]
-        [Route("api/mail/get")]
+        [HttpGet]
+        [Route("")]
         public async Task<OperationResult> Read(string body)
         {
             return await _mailService.Read();

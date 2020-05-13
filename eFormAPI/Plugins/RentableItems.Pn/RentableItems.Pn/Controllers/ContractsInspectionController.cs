@@ -10,48 +10,52 @@ using RentableItems.Pn.Infrastructure.Models;
 namespace RentableItems.Pn.Controllers
 {
     [Authorize]
+    [Route("api/rentable-items-pn/inspections")]
     public class ContractsInspectionController : Controller
     {
         private readonly IContractsInspectionService _contractsInspectionService;
-
         public ContractsInspectionController(IContractsInspectionService contractsInspectionService)
         {
             _contractsInspectionService = contractsInspectionService;
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("api/inspections")]
-        public async Task<OperationDataResult<ContractInspectionsModel>> Index([FromBody] ContractInspectionsRequestModel requestModel)
+        [HttpGet]
+        public Task<OperationDataResult<ContractInspectionsModel>> Index(ContractInspectionsRequestModel requestModel)
         {
-            return await _contractsInspectionService.Index(requestModel);
+            return _contractsInspectionService.Index(requestModel);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("api/inspections/create-inspection")]
-        public async Task<OperationResult> Create([FromBody] ContractInspectionModel contractInspectionCreateModel)
+        public Task<OperationResult> Create([FromBody] ContractInspectionModel contractInspectionCreateModel)
         {
-            return await _contractsInspectionService.Create(contractInspectionCreateModel);
+            return _contractsInspectionService.Create(contractInspectionCreateModel);
         }
 
-        [HttpPost]
-        [Route("api/inspections/update-inspection")]
-        public async Task<OperationResult> Update([FromBody] ContractInspectionModel contractInspectionUpdateModel)
+        [HttpGet]
+        [Route("{id}")]
+        public Task<OperationDataResult<ContractInspectionModel>> Read(int id)
         {
-            return await _contractsInspectionService.Update(contractInspectionUpdateModel);
+            return _contractsInspectionService.Get(id);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public Task<OperationResult> Update([FromBody] ContractInspectionModel contractInspectionUpdateModel)
+        {
+            return _contractsInspectionService.Update(contractInspectionUpdateModel);
         }
 
         [HttpDelete]
-        [Route("api/inspections/delete-inspection/{id}")]
-        public async Task<OperationResult> Delete(int id)
+        [Route("{id}")]
+        public Task<OperationResult> Delete(int id)
         {
-            return await _contractsInspectionService.Delete(id);
+            return _contractsInspectionService.Delete(id);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("api/rentable-items-pn/inspection-results/{inspectionId}")]
+        [Route("reports/{inspectionId}")]
         public async Task<IActionResult> DownloadEFormPdf(int inspectionId, string token, string fileType)
         {
             try

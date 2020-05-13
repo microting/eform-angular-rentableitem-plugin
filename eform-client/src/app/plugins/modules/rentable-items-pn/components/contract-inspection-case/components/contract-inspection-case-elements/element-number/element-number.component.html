@@ -1,0 +1,7 @@
+<div class="md-form md-form-case-elem">
+  <input mdbInput type="text"
+         [(ngModel)]="fieldValueObj.value"
+         (keypress)="validateInput($event)"
+         id="numberElement{{fieldValueObj.fieldId}}" name="numberElement" class="form-control">
+  <label for="numberElement{{fieldValueObj.fieldId}}">{{'Value' | translate}}</label>
+</div>
