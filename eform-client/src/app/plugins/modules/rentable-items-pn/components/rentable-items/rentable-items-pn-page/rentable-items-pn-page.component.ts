@@ -14,6 +14,8 @@ import {PageSettingsModel} from '../../../../../../common/models/settings';
 import {SharedPnService} from '../../../../shared/services';
 import {PluginClaimsHelper} from '../../../../../../common/helpers';
 import {RentableItemsPnClaims} from '../../../enums';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 declare var require: any;
 
 @Component({
@@ -31,6 +33,7 @@ export class RentableItemsPnPageComponent implements OnInit {
   rentableItemsModel: RentableItemsPnModel = new RentableItemsPnModel();
 
   settingsModel: RentableItemsPnSettingsModel = new RentableItemsPnSettingsModel();
+  searchSubject = new Subject();
 
   get pluginClaimsHelper() {
     return PluginClaimsHelper;
@@ -46,7 +49,12 @@ export class RentableItemsPnPageComponent implements OnInit {
               private translateService: TranslateService,
               private localeService: LocaleService,
               private authService: AuthService) {
-
+    this.searchSubject.pipe(
+      debounceTime(500)
+    ).subscribe(val => {
+      this.rentableItemsRequestModel.nameFilter = val.toString();
+      this.getAllRentableItems();
+    });
   }
 
   ngOnInit() {
@@ -139,7 +147,6 @@ export class RentableItemsPnPageComponent implements OnInit {
   }
 
   onSearchInputChanged(value: any) {
-    this.rentableItemsRequestModel.nameFilter = value;
-    this.getAllRentableItems();
+    this.searchSubject.next(value);
   }
 }

@@ -47,8 +47,11 @@ namespace RentableItems.Pn.Services
                 if (!CollectionExtensions.IsNullOrEmpty(pnRequestModel.NameFilter) && pnRequestModel.NameFilter != "")
                 {
                     rentableItemsQuery = rentableItemsQuery.Where(x =>
-                        x.Brand.Contains(pnRequestModel.NameFilter) ||
-                        x.ModelName.Contains(pnRequestModel.NameFilter));
+                        x.Brand.ToLower().Contains(pnRequestModel.NameFilter.ToLower()) ||
+                        x.VinNumber.ToLower().Contains(pnRequestModel.NameFilter.ToLower()) ||
+                        x.SerialNumber.ToLower().Contains(pnRequestModel.NameFilter.ToLower()) ||
+                        x.PlateNumber.ToLower().Contains(pnRequestModel.NameFilter.ToLower()) ||
+                        x.ModelName.ToLower().Contains(pnRequestModel.NameFilter.ToLower()));
                 }
                 if (!string.IsNullOrEmpty(pnRequestModel.Sort))
                 {
