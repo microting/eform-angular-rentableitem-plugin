@@ -4,7 +4,17 @@
 </subheader-pn>
 
 <div class="container-fluid">
-  <div class="row p-3 table-responsive no-gutters">
+  <div class="row pl-1">
+    <div class="col-md-2">
+      <div class="md-form">
+        <!--        <input mdbInput-->
+        <!--               type="text" (input)="onSearchInputChanged($event.target.value)"-->
+        <!--               class="form-control input-sm" id="searchInput">-->
+        <!--        <label for="searchInput">{{'Search' | translate}}</label>-->
+      </div>
+    </div>
+  </div>
+  <div class="row p-1 table-responsive no-gutters">
     <table mdbTable striped="true" hover="true" small="true" class="z-depth-1 text-center">
       <thead>
       <tr>
@@ -259,11 +269,23 @@
       </tbody>
     </table>
   </div>
-  <pagination-pn *ngIf="contractInspectionsModel?.total > contractInspectionsRequestModel.pageSize"
-                 [limit]="contractInspectionsRequestModel.pageSize"
-                 [size]="contractInspectionsModel.total"
-                 [offset]="contractInspectionsRequestModel.offset"
-                 (onPageChanged)="changePage($event)"></pagination-pn>
+
+  <div class="row justify-content-between mr-2 ml-2">
+    <div class="col-md-1">
+      <page-size-pn
+        [pageSize]="localPageSettings.pageSize"
+        (onPageSizeChanged)="localPageSettings.pageSize = $event; contractInspectionsRequestModel.pageIndex = 1;
+      updateLocalPageSettings()">
+      </page-size-pn>
+    </div>
+    <div class="col-md-4 ml-auto d-flex justify-content-end p-2">
+      <pagination-pn *ngIf="contractsModel.total > contractInspectionsRequestModel.pageSize"
+                     [limit]="contractInspectionsRequestModel.pageSize"
+                     [size]="contractsModel.total"
+                     [offset]="contractInspectionsRequestModel.offset"
+                     (onPageChanged)="changePage($event)"></pagination-pn>
+    </div>
+  </div>
 </div>
 
 <app-inspections-add #createInspectionModal></app-inspections-add>

@@ -1,4 +1,5 @@
 export class ContractInspectionsRequestModel {
+  name: string;
   sortColumnName: string;
   pageIndex: number;
   offset: number;

@@ -1,6 +1,7 @@
 <subheader-pn [title]="'Rentable Items Plugin settings' | translate">
   <div class="p-3">
     <button
+      mdbBtn
       class="btn btn-success" (click)="updateSettings()" id="saveBtn">{{ 'Save' | translate }}
     </button>
   </div>
@@ -12,15 +13,6 @@
       </subheader-pn>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-            <div class="md-form input-group">
-              <input mdbInput
-                      [(ngModel)]="settingsModel.sdkConnectionString"
-                     type="text" name="sdkconnectionstring" #sdkconnectionstring="ngModel"
-                     id="sdkconnectionstring" class="form-control">
-              <label for="sdkconnectionstring">{{'SDK connection string' | translate}}</label>
-            </div>
-          </div>
           <div class="col-md-12">
             <div class="md-form input-group">
               <input mdbInput

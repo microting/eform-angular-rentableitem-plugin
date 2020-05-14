@@ -6,7 +6,7 @@ namespace RentableItems.Pn.Infrastructure.Models
 {
     public class ContractsRequestModel
     {
-        public string ContractNr { get; set; }
+        public string Name { get; set; }
         public string SortColumnName { get; set; }
         public int Offset { get; set; }
         public int PageSize { get; set; }

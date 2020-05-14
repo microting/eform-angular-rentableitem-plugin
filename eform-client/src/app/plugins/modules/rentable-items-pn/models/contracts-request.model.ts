@@ -1,4 +1,5 @@
 export class ContractsRequestModel {
+  name: string;
   sortColumnName: string;
   pageIndex: number;
   offset: number;
@@ -8,7 +9,7 @@ export class ContractsRequestModel {
   constructor() {
     this.sortColumnName = 'Id';
     this.isSortDsc = true;
-    this.pageSize = 5;
+    this.pageSize = 10;
     this.pageIndex = 1;
     this.offset = 0;
   }

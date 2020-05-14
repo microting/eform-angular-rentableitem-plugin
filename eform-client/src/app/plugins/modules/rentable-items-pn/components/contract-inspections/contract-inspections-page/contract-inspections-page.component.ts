@@ -9,6 +9,10 @@ import {
   ContractsModel,
   ContractsRequestModel
 } from '../../../models';
+import {Subject} from 'rxjs';
+import {PageSettingsModel} from 'src/app/common/models';
+import {SharedPnService} from 'src/app/plugins/modules/shared/services';
+import {debounceTime} from 'rxjs/operators';
 
 
 declare  var require: any;
@@ -27,23 +31,41 @@ export class ContractInspectionsPageComponent implements OnInit {
   contractInspectionsModel: ContractInspectionsModel = new ContractInspectionsModel();
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
+  localPageSettings: PageSettingsModel = new PageSettingsModel();
+  searchSubject = new Subject();
 
   constructor(private contractService: ContractsService,
               private contractInspectionsService: ContractInspectionsService,
               private translateService: TranslateService,
-              private localeService: LocaleService) { }
+              private localeService: LocaleService,
+              private sharedPnService: SharedPnService) {
+    this.searchSubject.pipe(
+      debounceTime(500)
+    ).subscribe(val => {
+      this.contractInspectionsRequestModel.name = val.toString();
+      this.getAllInspections();
+    });
+  }
 
   ngOnInit() {
     this.setTranslation();
-    this.getAllInspections();
+    this.getLocalPageSettings();
     // this.getAllContracts();
   }
-  getAllContracts() {
-    this.contractService.getAllContracts(this.contractsRequestModel).subscribe((data => {
-      this.contractsModel = data.model;
 
-    }));
+  getLocalPageSettings() {
+    // debugger;
+    this.localPageSettings = this.sharedPnService.getLocalPageSettings
+    ('rentableItemsPnContractInspections').settings;
+    this.getAllInspections();
   }
+
+  updateLocalPageSettings() {
+    this.sharedPnService.updateLocalPageSettings
+    ('rentableItemsPnContractInspections', this.localPageSettings);
+    this.getAllInspections();
+  }
+
   setTranslation() {
     const lang = this.localeService.getCurrentUserLocale();
     const i18n = require(`../../../i18n/${lang}.json`);
@@ -57,7 +79,9 @@ export class ContractInspectionsPageComponent implements OnInit {
     this.deleteInspectionModal.show(model);
   }
   getAllInspections() {
-    // debugger;
+    this.contractInspectionsRequestModel.isSortDsc = this.localPageSettings.isSortDsc;
+    this.contractInspectionsRequestModel.sortColumnName = this.localPageSettings.sort;
+    this.contractInspectionsRequestModel.pageSize = this.localPageSettings.pageSize;
     this.contractInspectionsService.getAllInspections(this.contractInspectionsRequestModel).subscribe((data => {
       this.contractInspectionsModel = data.model;
 
@@ -90,5 +114,9 @@ export class ContractInspectionsPageComponent implements OnInit {
     this.contractInspectionsRequestModel.sortColumnName = columnName;
     this.contractInspectionsRequestModel.isSortDsc = sortedByDsc;
     this.getAllInspections();
+  }
+
+  onSearchInputChanged(value: any) {
+    this.searchSubject.next(value);
   }
 }

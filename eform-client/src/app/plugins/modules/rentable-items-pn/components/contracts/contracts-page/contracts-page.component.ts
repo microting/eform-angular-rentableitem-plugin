@@ -1,9 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {LocaleService} from 'src/app/common/services/auth';
+import {AuthService, LocaleService} from 'src/app/common/services/auth';
 
 import {ContractsService} from '../../../services';
 import {ContractModel, ContractsModel, ContractsRequestModel} from '../../../models';
+import {PageSettingsModel} from 'src/app/common/models';
+import {SharedPnService} from 'src/app/plugins/modules/shared/services';
+import {Subject} from 'rxjs';
+import {debounce, debounceTime} from 'rxjs/operators';
 declare var require: any;
 
 @Component({
@@ -19,14 +23,38 @@ export class ContractsPageComponent implements OnInit {
   @ViewChild('contractRentableItem') contractRentableItem;
   contractsRequestModel: ContractsRequestModel = new ContractsRequestModel();
   contractsModel: ContractsModel = new ContractsModel();
+  localPageSettings: PageSettingsModel = new PageSettingsModel();
+  searchSubject = new Subject();
 
   constructor(private contractsService: ContractsService,
               private translateService: TranslateService,
-              private localeService: LocaleService) { }
+              private localeService: LocaleService,
+              private sharedPnService: SharedPnService) {
+    this.searchSubject.pipe(
+      debounceTime(500)
+    ).subscribe(val => {
+      this.contractsRequestModel.name = val.toString();
+      this.getAllContracts();
+    });
+  }
 
   ngOnInit() {
-   this.setTranslation();
-   this.getAllContracts();
+    this.getLocalPageSettings();
+    this.setTranslation();
+    //this.getAllContracts();
+  }
+
+  getLocalPageSettings() {
+    // debugger;
+    this.localPageSettings = this.sharedPnService.getLocalPageSettings
+    ('rentableItemsPnContracts').settings;
+    this.getAllContracts();
+  }
+
+  updateLocalPageSettings() {
+    this.sharedPnService.updateLocalPageSettings
+    ('rentableItemsPnContracts', this.localPageSettings);
+    this.getAllContracts();
   }
 
   setTranslation() {
@@ -52,6 +80,9 @@ export class ContractsPageComponent implements OnInit {
     this.contractRentableItem.show(contractId, contract);
   }
   getAllContracts() {
+    this.contractsRequestModel.isSortDsc = this.localPageSettings.isSortDsc;
+    this.contractsRequestModel.sortColumnName = this.localPageSettings.sort;
+    this.contractsRequestModel.pageSize = this.localPageSettings.pageSize;
     this.contractsService.getAllContracts(this.contractsRequestModel).subscribe((data => {
       this.contractsModel = data.model;
 
@@ -74,5 +105,9 @@ export class ContractsPageComponent implements OnInit {
     this.contractsRequestModel.sortColumnName = columnName;
     this.contractsRequestModel.isSortDsc = sortedByDsc;
     this.getAllContracts();
+  }
+
+  onSearchInputChanged(value: any) {
+    this.searchSubject.next(value);
   }
 }

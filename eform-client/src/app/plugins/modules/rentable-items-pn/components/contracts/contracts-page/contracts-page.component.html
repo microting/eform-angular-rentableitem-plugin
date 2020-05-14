@@ -1,6 +1,7 @@
 <subheader-pn [title]="'Contracts' | translate">
   <div class="p-3">
     <button
+      mdbBtn
       class="btn btn-success"
       mdbTooltip="{{'Create Contract' | translate}}"
       (click)="showCreateContractModal()"
@@ -11,7 +12,17 @@
 </subheader-pn>
 
 <div class="container-fluid">
-  <div class="row p-3 table-responsive no-gutters">
+  <div class="row pl-1">
+    <div class="col-md-2">
+      <div class="md-form">
+<!--        <input mdbInput-->
+<!--               type="text" (input)="onSearchInputChanged($event.target.value)"-->
+<!--               class="form-control input-sm" id="searchInput">-->
+<!--        <label for="searchInput">{{'Search' | translate}}</label>-->
+      </div>
+    </div>
+  </div>
+  <div class="row p-1 table-responsive no-gutters">
     <table mdbTable striped="true" hover="true" small="true" class="z-depth-1 text-center">
       <thead>
       <tr>
@@ -223,6 +234,22 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div class="row justify-content-between mr-2 ml-2">
+    <div class="col-md-1">
+      <page-size-pn
+        [pageSize]="localPageSettings.pageSize"
+        (onPageSizeChanged)="localPageSettings.pageSize = $event; contractsRequestModel.pageIndex = 1;
+      updateLocalPageSettings()">
+      </page-size-pn>
+    </div>
+    <div class="col-md-4 ml-auto d-flex justify-content-end p-2">
+      <pagination-pn *ngIf="contractsModel.total > contractsRequestModel.pageSize"
+                     [limit]="contractsRequestModel.pageSize"
+                     [size]="contractsModel.total"
+                     [offset]="contractsRequestModel.offset"
+                     (onPageChanged)="changePage($event)"></pagination-pn>
+    </div>
   </div>
 </div>
 
