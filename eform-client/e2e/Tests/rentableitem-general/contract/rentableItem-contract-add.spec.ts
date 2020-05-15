@@ -65,8 +65,8 @@ describe('Rentable Items - Contracts - add', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    const date1 = Math.floor((Math.random() * 14) + 1);
-    const date2 = Math.floor((Math.random() * 28) + 1);
+    const date1 = loginPage.randomInt(12, 24);
+    const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';
@@ -84,8 +84,8 @@ describe('Rentable Items - Contracts - add', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    const date1 = Math.floor((Math.random() * 14) + 1);
-    const date2 = Math.floor((Math.random() * 28) + 1);
+    const date1 = loginPage.randomInt(12, 24);
+    const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';

@@ -126,7 +126,7 @@ export class RentableItemContractPage extends Page {
   public selectOption(name) {
     browser.pause(500);
     const ele = $(`//span[text()="${name}"]/..`);
-    ele.waitForClickable({timeout: 20000});
+    ele.waitForDisplayed({timeout: 20000});
     ele.click();
   }
   public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {

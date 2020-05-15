@@ -41,9 +41,6 @@ describe('Rentable Items - Contracts - edit', function () {
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     customersModalPage.createCustomer(customerObject2);
   });
-  // it('should go to rentable items page', function () {
-  //   rentableItemsPage.goToRentableItemsPage();
-  // });
   it('should create rentable item with all parameters', function () {
     rentableItemsPage.goToRentableItemsPage();
     const date2 = Math.floor((Math.random() * 28) + 1);
@@ -68,8 +65,8 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    const date1 = loginPage.randomInt(12, 25);
-    const date2 = loginPage.randomInt(12, 25);
+    const date1 = loginPage.randomInt(12, 24);
+    const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
     const rentableItemName = 'MacBook';
     const customerName = 'Oles olie';
@@ -86,8 +83,8 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    const newStartDate = loginPage.randomInt(12, 25);
-    const newEndDate = loginPage.randomInt(12, 25);
+    const newStartDate = loginPage.randomInt(12, 24);
+    const newEndDate = loginPage.randomInt(12, 24);
     const newContractNumber = Math.floor((Math.random() * 28) + 3);
     const newRentableItem = 'Boremaskine';
     const newCustomer = 'Bents bjelker';
@@ -104,8 +101,8 @@ describe('Rentable Items - Contracts - edit', function () {
     contractsPage.rentableItemDropdownItemName('Kontrakter').click();
     $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
     const oldContract = contractsPage.getFirstContractObject();
-    const newStartDate = loginPage.randomInt(12, 25);
-    const newEndDate = loginPage.randomInt(12, 25);
+    const newStartDate = loginPage.randomInt(12, 24);
+    const newEndDate = loginPage.randomInt(12, 24);
     const newContractNumber = Math.floor((Math.random() * 28) + 3);
     const newRentableItem = 'Boremaskine';
     const newCustomer = 'Oles olie';
