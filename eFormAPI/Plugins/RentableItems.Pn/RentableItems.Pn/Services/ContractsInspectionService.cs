@@ -206,7 +206,7 @@ namespace RentableItems.Pn.Services
                     foreach (SiteDto siteDto in sites)
                     {
 
-                        int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId);
+                        int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId, null);
 
                         if (sdkCaseId != null)
                         {
