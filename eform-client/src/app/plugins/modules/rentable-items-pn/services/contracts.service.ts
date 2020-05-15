@@ -31,7 +31,7 @@ export class ContractsService extends BaseService {
   }
 
   updateContract(model: ContractModel): Observable<any> {
-    return this.post(ContractMethods.UpdateContract, model);
+    return this.put(ContractMethods.UpdateContract, model);
   }
 
   deleteContract(contractId: number): Observable<OperationResult> {
