@@ -47,7 +47,8 @@ namespace RentableItems.Pn.Services
             try
             {
                 ContractsModel contractsModel = new ContractsModel();
-                IQueryable<Contract> contractsQuery = _dbContext.Contract.AsQueryable();
+                IQueryable<Contract> contractsQuery = _dbContext.Contract.
+                    Where(x=> x.WorkflowState != Constants.WorkflowStates.Removed).AsQueryable();
                 if (!string.IsNullOrEmpty(contractsPnRequestModel.SortColumnName))
                 {
                     if (contractsPnRequestModel.IsSortDsc)

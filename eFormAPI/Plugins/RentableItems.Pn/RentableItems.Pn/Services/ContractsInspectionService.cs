@@ -57,7 +57,8 @@ namespace RentableItems.Pn.Services
             {
                 ContractInspectionsModel contractInspectionsModel = new ContractInspectionsModel();
                 
-                IQueryable<ContractInspection> contractInspectionsQuery = _dbContext.ContractInspection.AsQueryable();
+                IQueryable<ContractInspection> contractInspectionsQuery = _dbContext.ContractInspection.
+                    Where(x => x.WorkflowState != Constants.WorkflowStates.Removed).AsQueryable();
                 if (!string.IsNullOrEmpty(contractInspectionsPnRequestModel.SortColumnName)
                     && contractInspectionsPnRequestModel.SortColumnName != "")
                 {

@@ -43,7 +43,8 @@ namespace RentableItems.Pn.Services
             {
                 RentableItemsModel rentableItemsPnModel = new RentableItemsModel();
                 
-                IQueryable<RentableItem> rentableItemsQuery = _dbContext.RentableItem.AsQueryable();
+                IQueryable<RentableItem> rentableItemsQuery = _dbContext.RentableItem.
+                    Where(x => x.WorkflowState != Constants.WorkflowStates.Removed).AsQueryable();
                 if (!CollectionExtensions.IsNullOrEmpty(pnRequestModel.NameFilter) && pnRequestModel.NameFilter != "")
                 {
                     rentableItemsQuery = rentableItemsQuery.Where(x =>
