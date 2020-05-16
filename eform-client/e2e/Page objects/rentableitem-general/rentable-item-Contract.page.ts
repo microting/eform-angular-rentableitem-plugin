@@ -121,6 +121,7 @@ export class RentableItemContractPage extends Page {
   public clickDate(date) {
     const ele = $(`//*[text()=" ${date} "]/..`);
     ele.waitForDisplayed({timeout: 20000});
+    ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public selectOption(name) {

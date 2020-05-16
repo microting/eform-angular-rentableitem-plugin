@@ -52,12 +52,6 @@ describe('Rentable Items - Contracts - add', function () {
     const eForm = 'Number 1';
     rentableItemsPage.createRentableItem(brand, model, date, eForm, serialNumber, vinNumber, plateNumber);
   });
-  /*it('should go to Contracts page', function () {
-    contractsPage.rentableItemDropdown();
-    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
-  });*/
   it('should create contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();

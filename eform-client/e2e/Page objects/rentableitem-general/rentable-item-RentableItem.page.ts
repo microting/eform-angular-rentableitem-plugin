@@ -129,13 +129,15 @@ export class RentableItemRentableItemPage extends Page {
     return $('#editPlateNumber');
   }
   public clickDate(date) {
-    const ele = $(`//*[text()=" ${date} "]/..`);
+    const ele = $(`//span[text()=" ${date} "]/..`);
     ele.waitForDisplayed({timeout: 20000});
+    ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public selectOption(name) {
     const ele = $(`//*[text()="${name}"]/..`);
     ele.waitForDisplayed({timeout: 20000});
+    ele.waitForClickable({timeout: 20000});
     ele.click();
   }
   public get rentableItemDeleteBtn() {

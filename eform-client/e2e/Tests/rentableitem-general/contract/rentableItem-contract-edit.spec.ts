@@ -43,7 +43,7 @@ describe('Rentable Items - Contracts - edit', function () {
   });
   it('should create rentable item with all parameters', function () {
     rentableItemsPage.goToRentableItemsPage();
-    const date2 = Math.floor((Math.random() * 28) + 1);
+    const date2 = loginPage.randomInt(12, 24);
     const brand2 = 'Bosch';
     const model2 = 'Boremaskine';
     const serialNumber2 = Guid.create().toString();
@@ -52,12 +52,6 @@ describe('Rentable Items - Contracts - edit', function () {
     const eForm = 'Number 1';
     rentableItemsPage.createRentableItem(brand2, model2, date2, eForm, serialNumber2, vinNumber2, plateNumber2);
   });
-  // it('should go to Contracts page', function () {
-  //   contractsPage.rentableItemDropdown();
-  //   $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
-  //   contractsPage.rentableItemDropdownItemName('Kontrakter').click();
-  //   $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
-  // });
   it('should create contract', function () {
     loginPage.open('/');
     contractsPage.rentableItemDropdown();
