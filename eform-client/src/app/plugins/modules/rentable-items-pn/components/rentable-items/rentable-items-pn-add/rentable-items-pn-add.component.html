@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-md" *ngIf="frameShow">
+  <div class="modal-dialog modal-xl" *ngIf="frameShow">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'New rentable item' | translate }}</h3>
@@ -95,7 +95,8 @@
       </div>
       <div class="modal-footer">
         <button mdbBtn class="btn-success" id="rentableItemCreateSaveBtn"
-                [disabled]="!newRentableItemModel.modelName || !newRentableItemModel.serialNumber && !newRentableItemModel.vinNumber"
+                [disabled]="!newRentableItemModel.modelName || (!newRentableItemModel.vinNumber && !newRentableItemModel.plateNumber && !newRentableItemModel.serialNumber)"
+
                 (click)="createRentableItem()">
           {{ 'Create' | translate }}
         </button>

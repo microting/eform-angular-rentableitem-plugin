@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable" *ngIf="frameShow">
+  <div class="modal-dialog modal-frame modal-top modal-dialog-scrollable" role="document" *ngIf="frameShow">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'New contract' | translate }}</h3>
@@ -163,7 +163,7 @@
                       [placeholder]="'Rentable Items'"
                       name="Rentable-Item-selector"
                       [bindValue]="'id'"
-                      [bindLabel]="'modelName'"
+                      [bindLabel]="'fullName'"
                       [clearable]="false"
                       [typeahead]="typeahead2"
                       [items]="rentableItemsModel.rentableItems"

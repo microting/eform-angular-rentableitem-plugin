@@ -1,5 +1,5 @@
 <div mdbModal class="modal fade" #frame="mdbModal">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h3>{{ 'Update rentable item' | translate }}</h3>
@@ -96,7 +96,7 @@
       <div class="modal-footer">
         <button mdbBtn class="btn-success"
                 id="rentableItemEditSaveBtn"
-                [disabled]="!selectedRentableItemModel.modelName || !selectedRentableItemModel.serialNumber && !selectedRentableItemModel.vinNumber"
+                [disabled]="!selectedRentableItemModel.modelName || (!selectedRentableItemModel.vinNumber && !selectedRentableItemModel.plateNumber && !selectedRentableItemModel.serialNumber)"
                 (click)="updateRentableItem()">{{ 'Save' | translate}}
         </button>
         <button mdbBtn class="btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>

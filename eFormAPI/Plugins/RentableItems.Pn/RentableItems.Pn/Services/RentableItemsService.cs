@@ -84,7 +84,8 @@ namespace RentableItems.Pn.Services
                         ModelName = rentableItem.ModelName,
                         SerialNumber = rentableItem.SerialNumber,
                         Id = rentableItem.Id,
-                        EFormId = rentableItem.eFormId
+                        EFormId = rentableItem.eFormId,
+                        FullName = $"{rentableItem.Brand} - {rentableItem.ModelName} - {rentableItem.SerialNumber} - {rentableItem.VinNumber} - {rentableItem.PlateNumber}"
                     });
                 });
                 return new OperationDataResult<RentableItemsModel>(true, rentableItemsPnModel);
