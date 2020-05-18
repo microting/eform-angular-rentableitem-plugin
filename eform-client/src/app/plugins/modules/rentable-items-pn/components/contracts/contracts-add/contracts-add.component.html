@@ -75,7 +75,7 @@
                     (change)="onSelectedChanged($event)"></ng-select>-->
                   <ng-select [items]="people$ | async"
                              id="customerSelector"
-                             bindLabel="companyName"
+                             bindLabel="fullName"
                              [addTag]="false"
                              [trackByFn]="trackByFn"
                              [multiple]="false"
@@ -99,7 +99,7 @@
               <mdb-card-body>
                 <div class="row">
                   <div class="col-md-3">
-                    <strong>{{'Name:' | translate }}</strong> {{newContractModel.rentableItemCustomer.contactPerson}}
+                    <strong>{{'Company/Contact name:' | translate }}</strong> {{newContractModel.rentableItemCustomer.companyName}}/{{newContractModel.rentableItemCustomer.contactPerson}}
                   </div>
                   <div class="col-md-3">
                     <strong>{{'Number: ' | translate }}</strong> {{newContractModel.rentableItemCustomer.customerNo}}

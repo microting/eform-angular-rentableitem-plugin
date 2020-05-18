@@ -15,4 +15,5 @@ export class RentableItemCustomerModel {
   eanCode: string;
   vatNumber: string;
   countryCode: string;
+  fullName: string;
 }
