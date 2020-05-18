@@ -36,8 +36,10 @@ export class ContractsUpdateComponent implements OnInit {
       .pipe(
         debounceTime(200),
         switchMap(term => {
-          this.rentableItemsRequestModel.nameFilter = term;
-          return this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel);
+          if (term !== null && term !== '') {
+            this.rentableItemsRequestModel.nameFilter = term;
+            return this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel);
+          }
         })
       )
       .subscribe( items => {
@@ -48,8 +50,10 @@ export class ContractsUpdateComponent implements OnInit {
       .pipe(
         debounceTime(200),
         switchMap(term2 => {
-          this.customersRequestModel.name = term2;
-          return this.contractService.getCustomer(this.customersRequestModel);
+          if (term2 !== null && term2 !== '') {
+            this.customersRequestModel.name = term2;
+            return this.contractService.getCustomer(this.customersRequestModel);
+          }
         })
       )
       .subscribe(items2 => {

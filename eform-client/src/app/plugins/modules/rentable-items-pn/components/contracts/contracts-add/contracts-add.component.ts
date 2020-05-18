@@ -55,8 +55,11 @@ export class ContractsAddComponent implements OnInit {
       .pipe(
         debounceTime(500),
         switchMap(term2 => {
-          this.rentableItemsRequestModel.nameFilter = term2;
+          if (term2 !== null && term2 !== '') {
+            debugger;
+            this.rentableItemsRequestModel.nameFilter = term2;
             return this.rentableItemsService.getAllRentableItems(this.rentableItemsRequestModel);
+          }
         })
       )
       .subscribe( items2 => {
