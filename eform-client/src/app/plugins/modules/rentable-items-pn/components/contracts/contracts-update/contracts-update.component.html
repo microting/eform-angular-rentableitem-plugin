@@ -59,10 +59,10 @@
                 <div class="md-form">
                   <ng-select
                     id="editCustomerIdSelector"
-                    [placeholder]="customerModel.companyName"
+                    [placeholder]="customerModel.fullName"
                     name="Customer-Id-selector"
                     [bindValue]="'id'"
-                    [bindLabel]="'companyName'"
+                    [bindLabel]="'fullName'"
                     [clearable]="false"
                     [typeahead]="typeahead2"
                     [items]="customersModel.customers"
