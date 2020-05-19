@@ -11,7 +11,6 @@ import {GalleryModule} from '@ngx-gallery/core';
 import {FormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
-  ContractInspectionCaseBlockComponent,
   ContractInspectionCaseHeaderComponent,
   ContractInspectionCasePageComponent,
 } from './components';
@@ -20,7 +19,6 @@ import {CasesModule} from 'src/app/modules';
 
 @NgModule({
   declarations: [
-    ContractInspectionCaseBlockComponent,
     ContractInspectionCaseHeaderComponent,
     ContractInspectionCasePageComponent
   ],

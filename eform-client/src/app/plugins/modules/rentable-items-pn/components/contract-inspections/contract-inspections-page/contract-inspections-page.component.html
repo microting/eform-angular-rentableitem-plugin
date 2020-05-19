@@ -248,13 +248,11 @@
                     mdbTooltip="{{ 'Get PDF' | translate }}"
                     (click)="downloadPDF(inspection)" *ngIf="inspection.status === 100">
               <fa-icon icon="file-pdf" size="lg" [fixedWidth]="true" ></fa-icon>
-
             </button>
             <button mdbBtn class="btn-success btn-icon mb-2"
                     mdbTooltip="{{ 'Get DOCX' | translate }}"
                     (click)="downloadDocx(inspection)" *ngIf="inspection.status === 100">
               <fa-icon icon="file-word" size="lg" [fixedWidth]="true"></fa-icon>
-
             </button>
             <button mdbBtn class="btn-danger btn-icon mb-2"
                     mdbTooltip="{{'Delete Inspection' | translate}}"
@@ -268,7 +266,6 @@
       </tbody>
     </table>
   </div>
-
   <div class="row justify-content-between mr-2 ml-2">
     <div class="col-md-1">
       <page-size-pn

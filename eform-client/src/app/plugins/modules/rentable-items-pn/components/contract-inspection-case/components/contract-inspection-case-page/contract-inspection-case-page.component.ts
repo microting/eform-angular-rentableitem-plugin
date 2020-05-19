@@ -4,7 +4,7 @@ import {CasesService} from 'src/app/common/services/cases';
 import {EFormService} from 'src/app/common/services/eform';
 import {CaseEditElementComponent} from '../../../../../../../modules/cases/components';
 import {TemplateDto} from '../../../../../../../common/models/dto';
-import {ReplyElementDto} from '../../../../../../../common/models/cases';
+import {CaseEditRequest, ReplyElementDto, ReplyRequest} from '../../../../../../../common/models/cases';
 import {AuthService} from '../../../../../../../common/services/auth';
 import {ContractInspectionModel, RentableItemCustomerModel, RentableItemPnModel} from 'src/app/plugins/modules/rentable-items-pn/models';
 import {
@@ -31,6 +31,8 @@ export class ContractInspectionCasePageComponent implements OnInit {
   reverseRoute: string;
   customerModel: RentableItemCustomerModel = new RentableItemCustomerModel();
   selectedRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
+  requestModels: Array<CaseEditRequest> = [];
+  replyRequest: ReplyRequest = new ReplyRequest();
 
   get userClaims() {
     return this.authService.userClaims;
@@ -96,7 +98,29 @@ export class ContractInspectionCasePageComponent implements OnInit {
         // this.selectedContractModel.customerId = this.customerModel.id;
       }
     });
+  }
 
+  saveCase(navigateToPosts?: boolean) {
+    this.requestModels = [];
+    this.editElements.forEach(x => {
+      x.extractData();
+      this.requestModels.push(x.requestModel);
+    });
+    this.replyRequest.id = this.replyElement.id;
+    this.replyRequest.label = this.replyElement.label;
+    this.replyRequest.elementList = this.requestModels;
+    this.casesService.updateCase(this.replyRequest, this.currenteForm.id).subscribe(operation => {
+      if (operation && operation.success) {
+        this.replyElement = new ReplyElementDto();
+        this.router.navigate(['/plugins/rentable-items-pn/inspections']).then();
+        // this.isNoSaveExitAllowed = true;
+        // if (navigateToPosts) {
+        //   this.router.navigate(['/cases/posts/', this.id , this.currentTemplate.id, 'new']).then();
+        // } else if (this.isSaveClicked) {
+        //   this.navigateToReverse();
+        // }
+      }
+    });
   }
   // loadInstallationInfo() {
   //   if (this.contractInspectionId) {
