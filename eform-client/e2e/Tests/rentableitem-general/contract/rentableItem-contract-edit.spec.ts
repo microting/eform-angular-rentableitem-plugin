@@ -62,8 +62,8 @@ describe('Rentable Items - Contracts - edit', function () {
     const date1 = loginPage.randomInt(12, 24);
     const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
-    const rentableItemName = 'MacBook';
-    const customerName = 'Oles olie';
+    const rentableItemName = 'Apple - MacBook - - -';
+    const customerName = 'Oles olie - John Smith - ABC Street 22 - Odense - 123124';
     contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
@@ -80,8 +80,8 @@ describe('Rentable Items - Contracts - edit', function () {
     const newStartDate = loginPage.randomInt(12, 24);
     const newEndDate = loginPage.randomInt(12, 24);
     const newContractNumber = Math.floor((Math.random() * 28) + 3);
-    const newRentableItem = 'Boremaskine';
-    const newCustomer = 'Bents bjelker';
+    const newRentableItem = 'Bosch - Boremaskine - - -';
+    const newCustomer = 'Bents bjelker - Jack Black - ABC Street 23 - Odense - 1231245';
     contractsPage.editContract(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(newContractNumber);
@@ -98,8 +98,8 @@ describe('Rentable Items - Contracts - edit', function () {
     const newStartDate = loginPage.randomInt(12, 24);
     const newEndDate = loginPage.randomInt(12, 24);
     const newContractNumber = Math.floor((Math.random() * 28) + 3);
-    const newRentableItem = 'Boremaskine';
-    const newCustomer = 'Oles olie';
+    const newRentableItem = 'Bosh - Boremaskine - - -';
+    const newCustomer = 'Oles olie - John Smith - ABC Street 22 - Odense - 123124';
     contractsPage.editContractCancel(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem);
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     loginPage.open('/');

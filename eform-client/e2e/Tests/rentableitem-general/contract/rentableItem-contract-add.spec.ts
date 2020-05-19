@@ -62,8 +62,8 @@ describe('Rentable Items - Contracts - add', function () {
     const date1 = loginPage.randomInt(12, 24);
     const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
-    const rentableItemName = 'MacBook';
-    const customerName = 'Oles olie';
+    const rentableItemName = 'Apple - MacBook - - -';
+    const customerName = 'Oles olie - John Smith - ABC Street 22 - Odense - 123124';
     contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(contractNr);
@@ -81,8 +81,8 @@ describe('Rentable Items - Contracts - add', function () {
     const date1 = loginPage.randomInt(12, 24);
     const date2 = loginPage.randomInt(12, 24);
     const contractNr = Math.floor((Math.random() * 100) + 1);
-    const rentableItemName = 'MacBook';
-    const customerName = 'Oles olie';
+    const rentableItemName = 'Apple - MacBook - - -';
+    const customerName = 'Oles olie - John Smith - ABC Street 22 - Odense - 123124';
     contractsPage.createContractCancel(date1, date2, contractNr, customerName, rentableItemName);
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     loginPage.open('/');
