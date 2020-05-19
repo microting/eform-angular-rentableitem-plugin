@@ -130,7 +130,8 @@ export class RentableItemContractPage extends Page {
     ele.waitForDisplayed({timeout: 20000});
     ele.click();
   }
-  public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
+  public createContract(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string,
+                        customerFullName: string, rentableItemFullName: string) {
     this.newContractBtn.click();
     $('#startDate').waitForDisplayed({timeout: 20000});
     this.startDateSelector.click();
@@ -141,12 +142,13 @@ export class RentableItemContractPage extends Page {
     this.clickDate(endDate);
     this.contractNumberField.addValue(contractNumber);
     this.customerSelector.addValue(customer);
-    this.selectOption(customer);
+    this.selectOption(customerFullName);
     this.rentableItemSelector.addValue(rentableItem);
-    this.selectOption(rentableItem);
+    this.selectOption(rentableItemFullName);
     this.contractCreateSaveBtn.click();
   }
-  public createContractCancel(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string) {
+  public createContractCancel(startDate: number, endDate: number, contractNumber: number, customer: string, rentableItem: string,
+                              customerFullName: string, rentableItemFullName: string) {
     this.newContractBtn.click();
     $('#startDate').waitForDisplayed({timeout: 20000});
     this.startDateSelector.click();
@@ -157,14 +159,15 @@ export class RentableItemContractPage extends Page {
     this.clickDate(endDate);
     this.contractNumberField.addValue(contractNumber);
     this.customerSelector.addValue(customer);
-    this.selectOption(customer);
+    this.selectOption(customerFullName);
     this.rentableItemSelector.addValue(rentableItem);
-    this.selectOption(rentableItem);
+    this.selectOption(rentableItemFullName);
     this.contractCreateCancelBtn.click();
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
 
-  public editContract(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
+  public editContract(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string,
+                      customerFullName: string, rentableItemFullName: string) {
     const contractForEdit = this.getFirstContractObject();
     contractForEdit.editBtn.click();
     $('#editStartDate').waitForDisplayed({timeout: 20000});
@@ -177,13 +180,14 @@ export class RentableItemContractPage extends Page {
     this.editContractNumberField.clearValue();
     this.editContractNumberField.addValue(contractNumber);
     this.editCustomerSelector.addValue(newCustomer);
-    this.selectOption(newCustomer);
+    this.selectOption(customerFullName);
     this.editRentableItemSelector.addValue(newItem);
-    this.selectOption(newItem);
+    this.selectOption(rentableItemFullName);
     this.contractEditSaveBtn.click();
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }
-  public editContractCancel(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string) {
+  public editContractCancel(startDate: number, endDate: number, contractNumber: number, newCustomer: string, newItem: string,
+                            customerFullName: string, rentableItemFullName: string) {
     const contractForEdit = this.getFirstContractObject();
     contractForEdit.editBtn.click();
     $('#editStartDate').waitForDisplayed({timeout: 20000});
@@ -196,9 +200,9 @@ export class RentableItemContractPage extends Page {
     this.editContractNumberField.clearValue();
     this.editContractNumberField.addValue(contractNumber);
     this.editCustomerSelector.addValue(newCustomer);
-    this.selectOption(newCustomer);
+    this.selectOption(customerFullName);
     this.editRentableItemSelector.addValue(newItem);
-    this.selectOption(newItem);
+    this.selectOption(rentableItemFullName);
     this.contractEditCancelBtn.click();
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   }

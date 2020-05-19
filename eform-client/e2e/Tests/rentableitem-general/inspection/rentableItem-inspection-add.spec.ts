@@ -26,9 +26,11 @@ describe('Rentable Items - Inspections - Add', function () {
     const date1 = Math.floor((Math.random() * 14) + 1);
     const date2 = Math.floor((Math.random() * 28) + 1);
     const contractNr = Math.floor((Math.random() * 100) + 1);
-    const rentableItemName = 'MacBook';
+    const rentableItemName = 'Apple';
+    const expectrentableItemName = 'Apple - MacBook - gfoijwf235 - ihu3t98wrgio34t - 9et9w90342wgr';
     const customerName = 'Oles olie';
-    contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName);
+    const expectcustomerName = 'Oles olie - Samantha Black - ABC Street 22 - Odense - 123124';
+    contractsPage.createContract(date1, date2, contractNr, customerName, rentableItemName, expectcustomerName, expectrentableItemName);
     $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
   });
   it('should create an inspection', function () {
