@@ -240,8 +240,7 @@
         <td>
           <div class="d-flex flex-row justify-content-center">
             <button mdbBtn class="btn-success btn-icon mb-2" *ngIf="inspection.status === 100"
-                    [routerLink]="['/cases/edit/' + inspection.sdkCaseId + '/' + inspection.eFormId]"
-                    [queryParams]="{'reverseRoute': '/plugins/trash-inspection-pn/trash-inspections'}"
+                    [routerLink]="['../case/' + inspection.sdkCaseId + '/' + inspection.eFormId + '/' + inspection.rentableItemCustomer.id + '/' + inspection.rentableItems[0].id]"
                     mdbTooltip="{{ 'Edit Case' | translate }}">
               <fa-icon icon="pen" size="lg" [fixedWidth]="true"></fa-icon>
             </button>

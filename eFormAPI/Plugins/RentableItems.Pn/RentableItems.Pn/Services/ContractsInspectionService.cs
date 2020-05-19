@@ -56,6 +56,7 @@ namespace RentableItems.Pn.Services
             try
             {
                 ContractInspectionsModel contractInspectionsModel = new ContractInspectionsModel();
+                Core _core = await _coreHelper.GetCore();
                 
                 IQueryable<ContractInspection> contractInspectionsQuery = _dbContext.ContractInspection.
                     Where(x => x.WorkflowState != Constants.WorkflowStates.Removed).AsQueryable();
@@ -125,19 +126,27 @@ namespace RentableItems.Pn.Services
                         rentableItemModels.Add(rentableItemModel);
                     }
 
-                    contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
+                    using (var dbContext = _core.dbContextHelper.GetDbContext())
                     {
-                        SdkCaseId = contractInspectionItem.SDKCaseId,
-                        eFormId = rentableItemModels.First().EFormId,
-                        ContractId = contractInspection.ContractId,
-                        ContractStart = contract.ContractStart,
-                        ContractEnd = contract.ContractEnd,
-                        DoneAt = contractInspection.DoneAt,
-                        Id = contractInspection.Id,
-                        Status = contractInspectionItem.Status,
-                        RentableItemCustomer = rentableItemCustomerModel,
-                        RentableItems = rentableItemModels
-                    });
+                        if (contractInspectionItem != null)
+                            contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
+                            {
+                                SdkCaseApiId = contractInspectionItem.SDKCaseId,
+                                SdkCaseId = dbContext.cases
+                                    .Single(x => x.MicrotingUid == contractInspectionItem.SDKCaseId).Id,
+                                eFormId = rentableItemModels.First().EFormId,
+                                ContractId = contractInspection.ContractId,
+                                ContractStart = contract.ContractStart,
+                                ContractEnd = contract.ContractEnd,
+                                DoneAt = contractInspection.DoneAt,
+                                Id = contractInspection.Id,
+                                Status = contractInspectionItem.Status,
+                                RentableItemCustomer = rentableItemCustomerModel,
+                                RentableItems = rentableItemModels
+                            });
+                    }
+                    
+                    
                 });
                 return new OperationDataResult<ContractInspectionsModel>(true, contractInspectionsModel);
             }

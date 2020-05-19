@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {EformReportModel} from 'src/app/common/models/eforms/report';
-import {ContractInspectionModel} from '../../../../models';
+import {ContractInspectionModel, RentableItemCustomerModel} from '../../../../models';
 
 @Component({
   selector: 'app-installation-case-header',
@@ -9,6 +9,7 @@ import {ContractInspectionModel} from '../../../../models';
 })
 export class ContractInspectionCaseHeaderComponent implements OnInit {
   @Input() contractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
+  @Input() customerModel: RentableItemCustomerModel = new RentableItemCustomerModel();
   @ViewChild('reportCropperModal', {static: false}) reportCropperModal;
   constructor() { }
 

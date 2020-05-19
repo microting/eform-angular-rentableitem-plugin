@@ -40,11 +40,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: ImporterComponent
       },
-      // {
-      //   path: 'case',
-      //   loadChildren: () => import('./components/contract-inspection-case/contract-inspection-case.module')
-      //     .then(m => m.ContractInspectionCaseModule)
-      // },
+      {
+        path: 'case',
+        loadChildren: () => import('./components/contract-inspection-case/contract-inspection-case.module')
+          .then(m => m.ContractInspectionCaseModule)
+      },
     ]
   }
 ];

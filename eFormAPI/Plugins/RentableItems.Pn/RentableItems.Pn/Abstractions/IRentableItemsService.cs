@@ -8,6 +8,7 @@ namespace RentableItems.Pn.Abstractions
     {
         Task<OperationDataResult<RentableItemsModel>> Index(RentableItemsRequestModel pnRequestModel);
         Task<OperationResult> Create(RentableItemModel rentableItemPnCreateModel);
+        Task<OperationDataResult<RentableItemModel>> Read(int id);
         Task<OperationResult> Update(RentableItemModel rentableItemPnUpdateModel);
         Task<OperationResult> Delete(int Id);
     }
