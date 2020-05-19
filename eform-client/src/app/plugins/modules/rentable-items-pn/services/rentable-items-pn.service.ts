@@ -5,11 +5,12 @@ import {ToastrService} from 'ngx-toastr';
 import {Observable} from 'rxjs';
 import {BaseService} from 'src/app/common/services/base.service';
 import {RentableItemPnModel, RentableItemsImportModel, RentableItemsPnRequestModel} from 'src/app/plugins/modules/rentable-items-pn/models';
-import {OperationResult} from '../../../../common/models';
+import {OperationDataResult, OperationResult} from '../../../../common/models';
 
 const RentableItemsMethods = {
   RentableItemPn: '/api/rentable-items-pn/rentable-items',
   CreateRentableItemPn: '/api/rentable-items-pn/rentable-items',
+  ReadRenatebleItemPn: '/api/rentable-items-pn/rentable-items',
   UpdateRentableItemPn: '/api/rentable-items-pn/rentable-items',
   DeleteRentableItem: '/api/rentable-items-pn/rentable-items',
   GetEmail: '/api/rentable-items-pn/mail'
@@ -27,6 +28,10 @@ export class RentableItemsPnService extends BaseService {
 
   createRentableItem(model: RentableItemPnModel): Observable<any> {
     return this.post(RentableItemsMethods.CreateRentableItemPn, model);
+  }
+
+  readReantableItem(itemId: number): Observable<OperationDataResult<any>> {
+    return this.get(RentableItemsMethods.ReadRenatebleItemPn + '/' + itemId);
   }
 
   updateRentableItem(model: RentableItemPnModel): Observable<any> {

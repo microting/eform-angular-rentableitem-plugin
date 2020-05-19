@@ -101,12 +101,12 @@ export class ContractInspectionsPageComponent implements OnInit {
   }
 
   downloadPDF(inspection: any) {
-    window.open('/api/rentable-items-pn/inspection-results/' +
+    window.open('/api/rentable-items-pn/inspection/report' +
       inspection.id + '?token=none&fileType=pdf', '_blank');
   }
 
   downloadDocx(inspection: any) {
-    window.open('/api/rentable-items-pn/inspection-results/' +
+    window.open('/api/rentable-items-pn/inspections/report' +
       inspection.id + '?token=none&fileType=docx', '_blank');
   }
 

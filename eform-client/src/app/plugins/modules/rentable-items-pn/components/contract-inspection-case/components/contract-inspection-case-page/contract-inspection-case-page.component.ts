@@ -4,12 +4,12 @@ import {CasesService} from 'src/app/common/services/cases';
 import {EFormService} from 'src/app/common/services/eform';
 import {CaseEditElementComponent} from '../../../../../../../modules/cases/components';
 import {TemplateDto} from '../../../../../../../common/models/dto';
-import {ReplyElementDto} from '../../../../../../../common/models/cases';
+import {CaseEditRequest, ReplyElementDto, ReplyRequest} from '../../../../../../../common/models/cases';
 import {AuthService} from '../../../../../../../common/services/auth';
-import {ContractInspectionModel} from 'src/app/plugins/modules/rentable-items-pn/models';
+import {ContractInspectionModel, RentableItemCustomerModel, RentableItemPnModel} from 'src/app/plugins/modules/rentable-items-pn/models';
 import {
   ContractInspectionsService,
-  ContractRentableItemService,
+  ContractRentableItemService, ContractsService,
   RentableItemsPnService
 } from 'src/app/plugins/modules/rentable-items-pn/services';
 
@@ -22,12 +22,17 @@ export class ContractInspectionCasePageComponent implements OnInit {
   @ViewChildren(CaseEditElementComponent) editElements: QueryList<CaseEditElementComponent>;
   @ViewChild('caseConfirmation', {static: false}) caseConfirmation;
   id: number;
-  contractInspectionId: number;
-  templateId: number;
-  currentTemplate: TemplateDto = new TemplateDto;
+  customerId: number;
+  rentableItemId: number;
+  eFormId: number;
+  currenteForm: TemplateDto = new TemplateDto;
   contractInspectionModel: ContractInspectionModel = new ContractInspectionModel();
   replyElement: ReplyElementDto = new ReplyElementDto();
   reverseRoute: string;
+  customerModel: RentableItemCustomerModel = new RentableItemCustomerModel();
+  selectedRentableItemModel: RentableItemPnModel = new RentableItemPnModel();
+  requestModels: Array<CaseEditRequest> = [];
+  replyRequest: ReplyRequest = new ReplyRequest();
 
   get userClaims() {
     return this.authService.userClaims;
@@ -38,51 +43,95 @@ export class ContractInspectionCasePageComponent implements OnInit {
               private eFormService: EFormService,
               private router: Router,
               private authService: AuthService,
-              private contractInspectionsService: ContractInspectionsService) {
+              private contractInspectionsService: ContractInspectionsService,
+              private contractService: ContractsService,
+              private rentableItemsService: RentableItemsPnService) {
     this.activateRoute.params.subscribe(params => {
-      this.id = +params['id'];
-      this.contractInspectionId = +params['installationId'];
-      this.templateId = +params['templateId'];
+      this.id = +params['sdkCaseId'];
+      this.customerId = +params['customerId'];
+      this.rentableItemId = +params['rentableItemId'];
+      this.eFormId = +params['templateId'];
     });
   }
 
   ngOnInit() {
     this.loadTemplateInfo();
-    this.loadInstallationInfo();
+    // this.loadInstallationInfo();
   }
 
   loadCase() {
     if (!this.id || this.id === 0) {
       return;
     }
-    this.casesService.getById(this.id, this.currentTemplate.id).subscribe(operation => {
+    this.casesService.getById(this.id, this.currenteForm.id).subscribe(operation => {
       if (operation && operation.success) {
         this.replyElement = operation.model;
+        this.loadRentableItem();
+      }
+    });
+  }
+
+  loadRentableItem() {
+    this.rentableItemsService.readReantableItem(this.rentableItemId).subscribe(operation => {
+      if (operation && operation.success) {
+        this.selectedRentableItemModel = operation.model;
       }
     });
   }
 
   loadTemplateInfo() {
-    if (this.templateId) {
-      this.eFormService.getSingle(this.templateId).subscribe(operation => {
+    if (this.eFormId) {
+      this.eFormService.getSingle(this.eFormId).subscribe(operation => {
         if (operation && operation.success) {
-          this.currentTemplate = operation.model;
+          this.currenteForm = operation.model;
           this.loadCase();
+          this.getCustomer(this.customerId);
         }
       });
     }
   }
 
-  loadInstallationInfo() {
-    if (this.contractInspectionId) {
-      this.contractInspectionsService.getInspection(this.contractInspectionId).subscribe(operation => {
-        if (operation && operation.success) {
-          this.contractInspectionModel = operation.model;
-          this.loadCase();
-        }
-      });
-    }
+  getCustomer(customerId: number) {
+    this.contractService.getSingleCustomer(customerId).subscribe( data => {
+      if (data && data.success) {
+        this.customerModel = data.model;
+        // this.selectedContractModel.customerId = this.customerModel.id;
+      }
+    });
   }
+
+  saveCase(navigateToPosts?: boolean) {
+    this.requestModels = [];
+    this.editElements.forEach(x => {
+      x.extractData();
+      this.requestModels.push(x.requestModel);
+    });
+    this.replyRequest.id = this.replyElement.id;
+    this.replyRequest.label = this.replyElement.label;
+    this.replyRequest.elementList = this.requestModels;
+    this.casesService.updateCase(this.replyRequest, this.currenteForm.id).subscribe(operation => {
+      if (operation && operation.success) {
+        this.replyElement = new ReplyElementDto();
+        this.router.navigate(['/plugins/rentable-items-pn/inspections']).then();
+        // this.isNoSaveExitAllowed = true;
+        // if (navigateToPosts) {
+        //   this.router.navigate(['/cases/posts/', this.id , this.currentTemplate.id, 'new']).then();
+        // } else if (this.isSaveClicked) {
+        //   this.navigateToReverse();
+        // }
+      }
+    });
+  }
+  // loadInstallationInfo() {
+  //   if (this.contractInspectionId) {
+  //     this.contractInspectionsService.getInspection(this.contractInspectionId).subscribe(operation => {
+  //       if (operation && operation.success) {
+  //         this.contractInspectionModel = operation.model;
+  //         this.loadCase();
+  //       }
+  //     });
+  //   }
+  // }
 
 
   goToSection(location: string): void {

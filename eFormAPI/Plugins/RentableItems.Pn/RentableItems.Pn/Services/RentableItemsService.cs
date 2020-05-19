@@ -130,6 +130,28 @@ namespace RentableItems.Pn.Services
             }
         }
 
+        public async Task<OperationDataResult<RentableItemModel>> Read(int id)
+        {
+            RentableItem rentableItem = await _dbContext.RentableItem.SingleOrDefaultAsync(x => x.Id == id);
+
+            if (rentableItem != null)
+            {
+                RentableItemModel rentableItemModel = new RentableItemModel()
+                {
+                    Id = rentableItem.Id,
+                    Brand = rentableItem.Brand,
+                    ModelName = rentableItem.ModelName,
+                    VinNumber = rentableItem.VinNumber,
+                    SerialNumber = rentableItem.SerialNumber,
+                    PlateNumber = rentableItem.PlateNumber,
+                    RegistrationDate = rentableItem.RegistrationDate,
+                    FullName = $"{rentableItem.Brand} - {rentableItem.ModelName} - {rentableItem.SerialNumber} - {rentableItem.VinNumber} - {rentableItem.PlateNumber}"
+                };
+                return new OperationDataResult<RentableItemModel>(true, rentableItemModel);
+            }
+            return new OperationDataResult<RentableItemModel>(false, _rentableItemsLocalizationService.GetString("ErrorWhileReadingRentableItemInfo"));
+        }
+        
         public async Task<OperationResult> Update(RentableItemModel rentableItemPnUpdateModel)
         {
             try
@@ -155,7 +177,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<RentableItemsModel>(true,
+                return new OperationDataResult<RentableItemsModel>(false,
                     _rentableItemsLocalizationService.GetString("ErrorWhileUpdatingRentableItemInfo"));
             }
         }

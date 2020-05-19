@@ -1,19 +1,49 @@
 <section>
-  <mdb-card class=" mt-4 mb-4">
-    <div class="row mt-4 mb-4 pl-4">
-      <div class="col">
-        <p>Id: <strong>{{contractInspectionModel.id}}</strong></p>
-        <p>Company Name: <strong>{{contractInspectionModel.customer.companyName}}</strong></p>
-        <p>Company Address: <strong>{{contractInspectionModel.customer.companyAddress}}</strong></p>
-        <p>Zip Code: <strong>{{contractInspectionModel.customer.zipCode}}</strong></p>
-        <p>City Name: <strong>{{contractInspectionModel.customer.cityName}}</strong></p>
+  <mdb-card>
+    <mdb-card-header><p class="h4">{{'Customer' | translate}}</p></mdb-card-header>
+    <mdb-card-body>
+      <div class="row">
+        <div class="col-md-3" >
+          <strong>{{'ID : ' | translate}}</strong> {{customerModel.id}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Name : ' | translate}}</strong> {{customerModel.companyName}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Contact Person : ' | translate}}</strong> {{customerModel.contactPerson}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Nr. : ' | translate}}</strong> {{customerModel.customerNo}}
+        </div>
       </div>
-<!--      <div class="col">-->
-<!--        <p>Date install: <strong>{{contractInspectionModel.dateInstall | date : 'dd.MM.y HH:mm:ss'}}</strong></p>-->
-<!--        <p>Date remove: <strong>{{contractInspectionModel.dateRemove | date : 'dd.MM.y HH:mm:ss'}}</strong></p>-->
-<!--        <p>Date act remove: <strong>{{contractInspectionModel.dateActRemove | date : 'dd.MM.y HH:mm:ss'}}</strong></p>-->
-<!--        <p>Assigned to: <strong>{{contractInspectionModel.assignedTo}}</strong></p>-->
-<!--      </div>-->
-    </div>
+      <div class="row">
+        <div class="col-md-3">
+          <strong>{{'Phone nr : ' | translate}}</strong> {{customerModel.phone}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Email : ' | translate}}</strong> {{customerModel.email}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'City : ' | translate}}</strong> {{customerModel.cityName}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Address : ' | translate}}</strong> {{customerModel.companyAddress}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <strong>{{'VAT number : ' | translate}}</strong> {{customerModel.vatNumber}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'EAN code : ' | translate}}</strong> {{customerModel.eanCode}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Zip Code : ' | translate}}</strong> {{customerModel.zipCode}}
+        </div>
+        <div class="col-md-3">
+          <strong>{{'Address 2 : ' | translate}}</strong> {{customerModel.companyAddress2}}
+        </div>
+      </div>
+    </mdb-card-body>
   </mdb-card>
 </section>

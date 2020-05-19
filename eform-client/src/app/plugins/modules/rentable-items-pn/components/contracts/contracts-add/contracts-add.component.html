@@ -13,7 +13,6 @@
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInput
                          [owlDateTime]="dt1"
-
                          [ngModel]="newContractModel.contractStart"
                          (dateTimeChange)="onStartDateSelected($event)"
                          type="text"
@@ -30,7 +29,6 @@
                   <i class="material-icons prefix">calendar_today</i>
                   <input mdbInput
                          [owlDateTime]="dt2"
-
                          [ngModel]="newContractModel.contractEnd"
                          (dateTimeChange)="onEndDateSelected($event)"
                          type="text"
@@ -56,23 +54,6 @@
               </div>
               <div class="col-md-6">
                 <div class="md-form">
-                  <!--<ng-select
-                    bindValue="id"
-                    bindLabel="text"
-                    [placeholder]="'Customers'"
-                    [typeahead]="typeahead"
-                    (change)="onSelectedChanged($event)"
-                    [items]="rentableItemsModel.rentableItems"></ng-select>-->
-                  <!--<ng-select
-                    id="customerSelector"
-                    [placeholder]="'Customers'"
-                    name="Customer-selector"
-                    [bindValue]="'id'"
-                    [bindLabel]="'companyName'"
-                    [clearable]="false"
-                    [typeahead]="typeahead"
-                    [items]="customersModel.customers"
-                    (change)="onSelectedChanged($event)"></ng-select>-->
                   <ng-select [items]="people$ | async"
                              id="customerSelector"
                              bindLabel="fullName"
@@ -226,10 +207,8 @@
               </mdb-card-body>
             </mdb-card>
             <div class="row">
-
             </div>
             <div class="row p-3 table-responsive no-gutters">
-
             </div>
           </form>
         </div>
@@ -243,4 +222,3 @@
     </div>
   </div>
 </div>
-

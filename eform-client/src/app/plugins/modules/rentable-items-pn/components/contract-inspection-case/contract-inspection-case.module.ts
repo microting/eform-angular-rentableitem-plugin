@@ -11,42 +11,16 @@ import {GalleryModule} from '@ngx-gallery/core';
 import {FormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
-  ElementAudioComponent,
-  ElementCheckboxComponent,
-  ElementCommentComponent,
-  ElementContainerComponent, ElementDateComponent, ElementEntitysearchComponent, ElementEntityselectComponent,
-  ElementMultiselectComponent, ElementNumberComponent, ElementNumberStepperComponent, ElementPdfComponent,
-  ElementPictureComponent, ElementSignatureComponent, ElementSingleselectComponent,
-  ElementTextComponent, ElementTimerComponent,
-  ContractInspectionCaseBlockComponent,
   ContractInspectionCaseHeaderComponent,
   ContractInspectionCasePageComponent,
-  ContractInspectionCaseSwitchComponent
 } from './components';
 import {ContractInspectionCaseRoutingModule} from './contract-inspection-case-routing.module';
+import {CasesModule} from 'src/app/modules';
 
 @NgModule({
   declarations: [
-    ElementTextComponent,
-    ElementNumberComponent,
-    ElementNumberStepperComponent,
-    ElementCheckboxComponent,
-    ElementSingleselectComponent,
-    ElementPdfComponent,
-    ElementAudioComponent,
-    ElementDateComponent,
-    ElementCommentComponent,
-    ElementEntityselectComponent,
-    ElementEntitysearchComponent,
-    ElementMultiselectComponent,
-    ElementTimerComponent,
-    ElementContainerComponent,
-    ElementPictureComponent,
-    ElementSignatureComponent,
-    ContractInspectionCaseBlockComponent,
     ContractInspectionCaseHeaderComponent,
-    ContractInspectionCasePageComponent,
-    ContractInspectionCaseSwitchComponent
+    ContractInspectionCasePageComponent
   ],
   imports: [
     TranslateModule,
@@ -60,7 +34,8 @@ import {ContractInspectionCaseRoutingModule} from './contract-inspection-case-ro
     LightboxModule,
     GalleryModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CasesModule
   ]
 })
 export class ContractInspectionCaseModule {
