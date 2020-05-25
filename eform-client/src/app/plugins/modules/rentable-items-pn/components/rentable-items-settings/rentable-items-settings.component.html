@@ -71,9 +71,54 @@
               <label for="sdkSiteIds">{{'SDK site ids' | translate}}</label>
             </div>
           </div>
+          <div class="col-md-12">
+            <div class="md-form input-group">
+              <input mdbInput
+                     [(ngModel)]="settingsModel.gmailClientSecret"
+                     type="password" name="gmailClientSecret" #sdkSiteIds="ngModel"
+                     id="gmailClientSecret" class="form-control">
+              <label for="gmailClientSecret">{{'Gmail client secret' | translate}}</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="md-form input-group">
+              <input mdbInput
+                     [(ngModel)]="settingsModel.gmailCredentials"
+                     type="text" name="gmailCredentials" #sdkSiteIds="ngModel"
+                     id="gmailCredentials" class="form-control">
+              <label for="gmailCredentials">{{'Gmail credentials JSON' | translate}}</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="md-form input-group">
+              <input mdbInput
+                     [(ngModel)]="settingsModel.gmailEmail"
+                     type="text" name="gmailEmail" #sdkSiteIds="ngModel"
+                     id="gmailEmail" class="form-control">
+              <label for="gmailEmail">{{'Gmail email' | translate}}</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="md-form input-group">
+              <input mdbInput
+                     [(ngModel)]="settingsModel.gmailUserName"
+                     type="text" name="gmailUserName" #sdkSiteIds="ngModel"
+                     id="gmailUserName" class="form-control">
+              <label for="gmailUserName">{{'Gmail user name' | translate}}</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="md-form input-group">
+              <input mdbInput
+                     [(ngModel)]="settingsModel.mailFrom"
+                     type="text" name="mailFrom" #sdkSiteIds="ngModel"
+                     id="mailFrom" class="form-control">
+              <label for="mailFrom">{{'Mail from' | translate}}</label>
+            </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
+</div>

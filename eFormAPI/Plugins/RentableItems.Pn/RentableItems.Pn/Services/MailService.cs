@@ -5,21 +5,18 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using Google.Apis.Json;
+using Microsoft.EntityFrameworkCore;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Models;
 
 namespace RentableItems.Pn.Services
 {
@@ -45,19 +42,26 @@ namespace RentableItems.Pn.Services
         public async Task<OperationResult> Read()
         {
             UserCredential credential;
+            var pluginConfiguration = await _dbContext.PluginConfigurationValues.SingleOrDefaultAsync(x => x.Name == "RentableItemBaseSettings:GmailCredentials");
+            GoogleClientSecrets secrets = NewtonsoftJsonSerializer.Instance.Deserialize<GoogleClientSecrets>(pluginConfiguration.Value);
+            pluginConfiguration = await _dbContext.PluginConfigurationValues.SingleOrDefaultAsync(x => x.Name == "RentableItemBaseSettings:GmailUserName");
+            string gmailUserName = pluginConfiguration.Value;
+            pluginConfiguration = await _dbContext.PluginConfigurationValues.SingleOrDefaultAsync(x => x.Name == "RentableItemBaseSettings:MailFrom");
+            string mailFrom = pluginConfiguration.Value;
+            pluginConfiguration = await _dbContext.PluginConfigurationValues.SingleOrDefaultAsync(x => x.Name == "RentableItemBaseSettings:GmailEmail");
+            string gmailEmail = pluginConfiguration.Value;
+            pluginConfiguration = await _dbContext.PluginConfigurationValues.SingleOrDefaultAsync(x => x.Name == "RentableItemBaseSettings:SdkeFormId");
+            int eFormId = int.Parse(pluginConfiguration.Value);
+
             try
             {
-                using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
-                {
-                    string credPath = "token.json";
-                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "Mathias Husum Nielsen",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                    // Console.WriteLine("Credential file saved to", credPath);
-                }
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    secrets.Secrets,
+                    Scopes,
+                    gmailUserName,
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
 
                 var service = new GmailService(new BaseClientService.Initializer
                 {
@@ -65,10 +69,10 @@ namespace RentableItems.Pn.Services
                     ApplicationName = ApplicationName
                 });
 
-                var emailListRequest = service.Users.Messages.List("mhn@microting.dk");
+                var emailListRequest = service.Users.Messages.List(gmailEmail);
                 emailListRequest.LabelIds = "INBOX";
                 emailListRequest.IncludeSpamTrash = false;
-                emailListRequest.Q = "from:rm@microting.dk";
+                emailListRequest.Q = $"from:{mailFrom}";
                 emailListRequest.MaxResults = 1;
 
                 var emailListResponse = await emailListRequest.ExecuteAsync();
@@ -77,7 +81,7 @@ namespace RentableItems.Pn.Services
                 {
                     foreach (var email in emailListResponse.Messages)
                     {
-                        var emailInfoRequest = service.Users.Messages.Get("mhn@microting.dk", email.Id);
+                        var emailInfoRequest = service.Users.Messages.Get(gmailEmail, email.Id);
                         var emailInfoResponse = await emailInfoRequest.ExecuteAsync();
                         if (emailInfoResponse != null)
                         {
@@ -88,22 +92,14 @@ namespace RentableItems.Pn.Services
                                 {
                                     string attId = part.Body.AttachmentId;
                                     MessagePartBody attachPart = service.Users.Messages.Attachments
-                                        .Get("mhn@microting.dk", email.Id, attId).Execute();
+                                        .Get(gmailEmail, email.Id, attId).Execute();
 
                                     string attachData = attachPart.Data.Replace("-", "+");
                                     attachData = attachData.Replace("_", "/");
 
                                     byte[] data = Convert.FromBase64String(attachData);
-                                    // File.WriteAllBytes(Path.Combine("", part.Filename), data);
 
                                     var bytesAsString = Encoding.Default.GetString(data);
-                                    // var jsonText = JsonConvert.SerializeObject(bytesAsString);
-                                    //
-                                    // JToken rawJson = JToken.Parse(jsonText);
-                                    // Console.WriteLine(rawJson);
-
-
-                                    bytesAsString = bytesAsString.Replace(@"""", @"");
                                     string[] rawFile = bytesAsString.Split("\n");
 
                                     var importList = rawFile.Skip(2);
@@ -111,73 +107,102 @@ namespace RentableItems.Pn.Services
                                     string[] list = importList.ToArray();
 
                                     var headers = rawFile[0].Split(",");
-                                    
-                                    list = list[0].Split(",");
-                                    
-                                    Contract contract = null;
-                                    RentableItem rentableItem = null;
-                                    Customer customer = null;
 
-                                    foreach (var header in headers)
+                                    foreach (string s in list)
                                     {
-                                        if (header == "")
+                                        string[] lSplit = s.Split("\",\"");
+                                        if (lSplit.Length == 8)
                                         {
-                                         
-                                            contract = new Contract
+                                            Contract contract = null;
+                                            Customer customer = null;
+                                            ContractRentableItem contractRentableItem = null;
+                                            try
                                             {
-                                                ContractNr = int.Parse(list[0]),
-                                                // ContractStart = importList[6],
-                                                // ContractEnd = importList[7],
-                                            };
-                                            // if (contract.ContractNr != int.Parse(importList[0]))
-                                            // {
-                                            // await contract.Create(_dbContext);
-                                            // }   
-                                        }
+                                                customer = _customerDbContext.Customers.SingleOrDefault(x => x.CompanyName == lSplit[1] || x.ContactPerson == lSplit[1]);
+                                                if (customer == null)
+                                                {
+                                                    customer = new Customer()
+                                                    {
+                                                        CompanyName = lSplit[1]
+                                                    };
+                                                    await customer.Create(_customerDbContext);
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                                throw;
+                                            }
 
-                                        if (header == ".")
-                                        {
-                                         
-                                            customer = new Customer
+                                            RentableItem rentableItem = null;
+                                            try
                                             {
-                                                // CompanyName = importList[1]
-                                            };
-                                            // if (customer.CompanyName != importList[1])
-                                            // {
-                                            // await customer.Create(_customerDbContext);
-                                            // }   
-                                        }
+                                                rentableItem = _dbContext.RentableItem.SingleOrDefault(x => x.Brand == lSplit[2] && x.ModelName == lSplit[3] && x.RegistrationDate == DateTime.Parse(lSplit[4]));
+                                                if (rentableItem == null)
+                                                {
+                                                    rentableItem = new RentableItem()
+                                                    {
+                                                        Brand = lSplit[2],
+                                                        ModelName = lSplit[3],
+                                                        RegistrationDate = DateTime.Parse(lSplit[4]),
+                                                        VinNumber = lSplit[5],
+                                                        eFormId = eFormId
+                                                    };
+                                                    await rentableItem.Create(_dbContext);
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                                throw;
+                                            }
 
-                                        if (header == "ok")
-                                        {
-                                            rentableItem = new RentableItem
+                                            try
                                             {
-                                                // Brand = importList[2],
-                                                // ModelName = importList[3],
-                                                // RegistrationDate = (DateTime)int.Parse(importList[4]),
-                                                // VinNumber = importList[5]
-                                            };
-                                            // if (rentableItem.Brand != importList[2] &&
-                                            // rentableItem.ModelName != importList[3] &&
-                                            // rentableItem.VinNumber != importList[5])
-                                            // {
-                                            // await rentableItem.Create(_dbContext);
-                                            // }    
+                                                contract = _dbContext.Contract.SingleOrDefault(x =>
+                                                    x.ContractNr == int.Parse(lSplit[0].Replace("\"", "")));
+                                                if (contract == null)
+                                                {
+                                                    contract = new Contract()
+                                                    {
+                                                        ContractNr = int.Parse(lSplit[0].Replace("\"", "")),
+                                                        ContractStart = DateTime.Parse(lSplit[6]),
+                                                        ContractEnd = DateTime.Parse(lSplit[7].Replace("\r", "").Replace("\"", "")),
+                                                        CustomerId = customer.Id,
+                                                        Status = 0
+                                                    };
+                                                    await contract.Create(_dbContext);
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                                throw;
+                                            }
+
+                                            try
+                                            {
+                                                contractRentableItem =
+                                                    _dbContext.ContractRentableItem.SingleOrDefault(x =>
+                                                        x.ContractId == contract.Id &&
+                                                        x.RentableItemId == rentableItem.Id);
+                                                if (contractRentableItem == null)
+                                                {
+                                                    contractRentableItem = new ContractRentableItem()
+                                                    {
+                                                        ContractId = contract.Id,
+                                                        RentableItemId = rentableItem.Id
+                                                    };
+                                                    await contractRentableItem.Create(_dbContext);
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e);
+                                                throw;
+                                            }
                                         }
-                                        
-                                        ContractRentableItem contractRentableItem = null;
-                                        if (rentableItem.Id != null && contract.Id != null)
-                                        {
-                                            contractRentableItem = new ContractRentableItem
-                                            {
-                                                ContractId = contract.Id,
-                                                RentableItemId = rentableItem.Id
-                                            };
-                                            // await contractRentableItem.Create(_dbContext);
-                                        } 
                                     }
-                                       
-                                    // await _importsService.Import(importModel);
                                 }
                             }
                         }

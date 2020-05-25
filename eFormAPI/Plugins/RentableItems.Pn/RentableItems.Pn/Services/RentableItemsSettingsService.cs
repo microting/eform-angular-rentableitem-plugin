@@ -48,17 +48,17 @@ namespace RentableItems.Pn.Services
             {
                 RentableItemBaseSettings option = _options.Value;
                 
-                if (option.SdkConnectionString == "...")
-                {
-                    string connectionString = _dbContext.Database.GetDbConnection().ConnectionString;
-
-                    string dbNameSection = Regex.Match(connectionString, @"(Database=(...)_eform-angular-\w*-plugin;)").Groups[0].Value;
-                    string dbPrefix = Regex.Match(connectionString, @"Database=(\d*)_").Groups[1].Value;
-                    string sdk = $"Database={dbPrefix}_SDK;";
-                    connectionString = connectionString.Replace(dbNameSection, sdk);
-                    await _options.UpdateDb(settings => { settings.SdkConnectionString = connectionString;}, _dbContext, UserId);
-
-                }
+                // if (option.SdkConnectionString == "...")
+                // {
+                //     string connectionString = _dbContext.Database.GetDbConnection().ConnectionString;
+                //
+                //     string dbNameSection = Regex.Match(connectionString, @"(Database=(...)_eform-angular-\w*-plugin;)").Groups[0].Value;
+                //     string dbPrefix = Regex.Match(connectionString, @"Database=(\d*)_").Groups[1].Value;
+                //     string sdk = $"Database={dbPrefix}_SDK;";
+                //     connectionString = connectionString.Replace(dbNameSection, sdk);
+                //     await _options.UpdateDb(settings => { settings.SdkConnectionString = connectionString;}, _dbContext, UserId);
+                //
+                // }
                 
                 return new OperationDataResult<RentableItemBaseSettings>(true, option);
             }
@@ -84,6 +84,11 @@ namespace RentableItems.Pn.Services
                         settings.SdkConnectionString = rentableItemsSettingsModel.SdkConnectionString;
                         settings.SdkeFormId = rentableItemsSettingsModel.SdkeFormId;
                         settings.EnabledSiteIds = rentableItemsSettingsModel.EnabledSiteIds;
+                        settings.GmailCredentials = rentableItemsSettingsModel.GmailCredentials;
+                        settings.GmailEmail = rentableItemsSettingsModel.GmailEmail;
+                        settings.GmailClientSecret = rentableItemsSettingsModel.GmailClientSecret;
+                        settings.GmailUserName = rentableItemsSettingsModel.GmailUserName;
+                        settings.MailFrom = rentableItemsSettingsModel.MailFrom;
                     }, _dbContext, UserId
                 );
                 return new OperationResult(true,

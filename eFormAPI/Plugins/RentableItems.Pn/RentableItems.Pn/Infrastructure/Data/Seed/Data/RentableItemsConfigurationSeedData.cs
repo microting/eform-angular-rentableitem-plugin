@@ -39,7 +39,27 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
             },
             new PluginConfigurationValue()
             {
-                Name = "RentableItemBaseSettings:EnabledSiteIds",
+                Name = "RentableItemBaseSettings:GmailCredentials",
+                Value = ""
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:GmailClientSecret",
+                Value = ""
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:GmailEmail",
+                Value = ""
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:GmailUserName",
+                Value = ""
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:MailFrom",
                 Value = ""
             }
         };
