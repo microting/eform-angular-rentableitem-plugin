@@ -14,5 +14,6 @@ namespace RentableItems.Pn.Infrastructure.Models
         public string GmailEmail { get; set; }
         public string GmailUserName { get; set; }
         public string MailFrom { get; set; }
+        public string Token { get; set; }
     }
 }

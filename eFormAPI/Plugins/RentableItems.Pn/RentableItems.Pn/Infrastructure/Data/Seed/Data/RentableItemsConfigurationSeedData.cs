@@ -61,6 +61,11 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
             {
                 Name = "RentableItemBaseSettings:MailFrom",
                 Value = ""
+            },
+            new PluginConfigurationValue()
+            {
+                Name = "RentableItemBaseSettings:Token",
+                Value = "..."
             }
         };
     }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
@@ -16,10 +17,11 @@ namespace RentableItems.Pn.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<OperationResult> Read(string body)
+        [Route("{token}")]
+        [AllowAnonymous]
+        public async Task<OperationResult> Read(string token)
         {
-            return await _mailService.Read();
+            return await _mailService.Read(token);
         }
         
     }

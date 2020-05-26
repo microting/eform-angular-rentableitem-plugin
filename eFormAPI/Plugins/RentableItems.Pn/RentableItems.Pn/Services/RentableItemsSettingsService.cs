@@ -59,6 +59,13 @@ namespace RentableItems.Pn.Services
                 //     await _options.UpdateDb(settings => { settings.SdkConnectionString = connectionString;}, _dbContext, UserId);
                 //
                 // }
+                if (option.Token == "...")
+                {
+                    string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    Random random = new Random();
+                    string result = new string(chars.Select(c => chars[random.Next(chars.Length)]).Take(32).ToArray());
+                    await _options.UpdateDb(settings => { settings.Token = result;}, _dbContext, UserId);
+                }
                 
                 return new OperationDataResult<RentableItemBaseSettings>(true, option);
             }
@@ -89,6 +96,7 @@ namespace RentableItems.Pn.Services
                         settings.GmailClientSecret = rentableItemsSettingsModel.GmailClientSecret;
                         settings.GmailUserName = rentableItemsSettingsModel.GmailUserName;
                         settings.MailFrom = rentableItemsSettingsModel.MailFrom;
+                        settings.Token = rentableItemsSettingsModel.Token;
                     }, _dbContext, UserId
                 );
                 return new OperationResult(true,

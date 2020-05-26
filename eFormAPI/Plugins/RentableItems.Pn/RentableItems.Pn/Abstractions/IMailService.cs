@@ -5,6 +5,6 @@ namespace RentableItems.Pn.Abstractions
 {
     public interface IMailService
     {
-        Task<OperationResult> Read();
+        Task<OperationResult> Read(string token);
     }
 }

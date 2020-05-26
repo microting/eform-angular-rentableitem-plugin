@@ -5,6 +5,7 @@ export class RentableItemsPnSettingsModel {
   numberOfWorkers: number;
   sdkConnectionString: string;
   sdkeFormId: number;
+  token: string;
   enabledSiteIds: number;
   gmailCredentials: string;
   gmailClientSecret: string;
