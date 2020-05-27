@@ -1,15 +1,17 @@
 <subheader-pn [title]="'Rentable Items' | translate">
   <div class="p-3">
     <button
+      mdbBtn
     id="emailRetrieveBtn"
-    class="btn btn-success"
+    class="btn-success btn-small-height"
     (click)="getEmail()"
     >
     {{'Get email' | translate}}
     </button>
     <button *ngIf="pluginClaimsHelper.check(rentableItemsPnClaims.createRentableItems)"
       id="rentableItemCreateBtn"
-      class="btn btn-success"
+      mdbBtn
+      class="btn-success btn-small-height"
       mdbTooltip="{{ 'Create rentable item' | translate }}"
       (click)="showCreateRentableItemModal()">{{ 'New rentable item' | translate }}
     </button>

@@ -94,13 +94,13 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button mdbBtn class="btn-success" id="rentableItemCreateSaveBtn"
+        <button mdbBtn class="btn-success btn-small-height" id="rentableItemCreateSaveBtn"
                 [disabled]="!newRentableItemModel.modelName || (!newRentableItemModel.vinNumber && !newRentableItemModel.plateNumber && !newRentableItemModel.serialNumber)"
 
                 (click)="createRentableItem()">
           {{ 'Create' | translate }}
         </button>
-        <button mdbBtn class="btn-accent text-black-50" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button mdbBtn class="btn-accent text-black-50 btn-small-height" id="rentableItemCreateCancelBtn" (click)="frame.hide()">{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>

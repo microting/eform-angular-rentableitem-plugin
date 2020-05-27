@@ -36,10 +36,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button id="contractDeleteDeleteBtn" class="btn btn-danger" (click)="deleteContract()">
+        <button id="contractDeleteDeleteBtn" class="btn-danger btn-small-height" (click)="deleteContract()" mdbBtn>
           {{ 'Delete' | translate }}
         </button>
-        <button id="contractDeleteCancelBtn" class="btn btn-accent text-black-50" (click)="frame.hide()">{{'Cancel' | translate}}</button>
+        <button id="contractDeleteCancelBtn" class="btn-accent text-black-50 btn-small-height" (click)="frame.hide()" mdbBtn>{{'Cancel' | translate}}</button>
       </div>
     </div>
   </div>
