@@ -25,10 +25,10 @@
 
     <ItemGroup>
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.48.0.2027" />
-    <PackageReference Include="Microting.eForm" Version="4.0.5" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="2.0.4" />
-    <PackageReference Include="Microting.eFormApi.BasePn" Version="2.0.3" />
-    <PackageReference Include="Microting.eFormRentableItemBase" Version="2.0.0" />
+    <PackageReference Include="Microting.eForm" Version="4.0.8" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="2.0.7" />
+    <PackageReference Include="Microting.eFormApi.BasePn" Version="2.0.6" />
+    <PackageReference Include="Microting.eFormRentableItemBase" Version="2.0.1" />
   </ItemGroup>
   
 
