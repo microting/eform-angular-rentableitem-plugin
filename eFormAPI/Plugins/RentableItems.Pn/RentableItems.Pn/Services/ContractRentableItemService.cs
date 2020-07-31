@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,8 +43,8 @@ namespace RentableItems.Pn.Services
             try
             {
                 RentableItemsModel rentableItemsModel = new RentableItemsModel();
-                IQueryable<ContractRentableItem> itemContractsQuery =
-                    _dbContext.ContractRentableItem.Where(x => x.ContractId == contractId && x.WorkflowState == Constants.WorkflowStates.Created);
+                List<ContractRentableItem> itemContractsQuery = await
+                    _dbContext.ContractRentableItem.Where(x => x.ContractId == contractId && x.WorkflowState == Constants.WorkflowStates.Created).ToListAsync();
                 foreach (var rentableItemContract in itemContractsQuery)
                 {
                     RentableItemModel rentableItemModel = new RentableItemModel();
