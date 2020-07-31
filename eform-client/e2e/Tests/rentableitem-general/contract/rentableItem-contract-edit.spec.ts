@@ -87,6 +87,12 @@ describe('Rentable Items - Contracts - edit', function () {
     const newCustomer = 'Bents bjelker';
     const expectnewCustomer = 'Bents bjelker - Jack Black - ABC Street 23 - Odense - 1231245';
     contractsPage.editContract(newStartDate, newEndDate, newContractNumber, newCustomer, newRentableItem, expectnewCustomer, expectnewRentableItem);
+    loginPage.open('/');
+    contractsPage.rentableItemDropdown();
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
+    contractsPage.rentableItemDropdownItemName('Kontrakter').click();
+    $('#contractCreateBtn').waitForDisplayed({timeout: 20000});
+    $('#spinner-animation').waitForDisplayed({timeout: 90000, reverse: true});
     const contract = contractsPage.getFirstContractObject();
     expect(contract.contractNumber).equal(newContractNumber);
     expect($('#contractCustomer').getText()).equal('Bents bjelker\nJack Black');
