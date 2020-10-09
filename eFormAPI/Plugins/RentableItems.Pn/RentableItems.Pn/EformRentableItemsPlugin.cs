@@ -96,26 +96,15 @@ namespace RentableItems.Pn
             string customersConnectionString = connectionString.Replace(
                 "eform-angular-rentableitem-plugin", 
                 "eform-angular-basecustomer-plugin");
-            if (connectionString.ToLower().Contains("convert zero datetime"))
-            {
-                services.AddDbContext<eFormRentableItemPnDbContext>(o => o.UseMySql(connectionString,
-                    b => b.MigrationsAssembly(PluginAssembly().FullName)));
-                
-                services.AddDbContext<CustomersPnDbAnySql>(p =>
-                    p.UseMySql(customersConnectionString, 
-                        c => c.MigrationsAssembly(PluginAssembly().FullName)));
-            }
-            else
-            {
-                services.AddDbContext<eFormRentableItemPnDbContext>(o => o.UseSqlServer(connectionString,
+            services.AddDbContext<eFormRentableItemPnDbContext>(o =>
+                o.UseMySql(connectionString,
                     b => b.MigrationsAssembly(PluginAssembly().FullName)));
 
-                services.AddDbContext<CustomersPnDbAnySql>(p =>
-                    p.UseSqlServer(customersConnectionString, 
-                        c => c.MigrationsAssembly(PluginAssembly().FullName)));
-            }
+            services.AddDbContext<CustomersPnDbAnySql>(p =>
+                p.UseMySql(customersConnectionString,
+                    c => c.MigrationsAssembly(PluginAssembly().FullName)));
 
-            eFormRentableItemPnDbContextFactory contextFactory = new eFormRentableItemPnDbContextFactory();
+                eFormRentableItemPnDbContextFactory contextFactory = new eFormRentableItemPnDbContextFactory();
             var context = contextFactory.CreateDbContext(new[] {connectionString});
             context.Database.Migrate();
 
