@@ -15,21 +15,32 @@
     <EmbeddedResource Remove="Infrastructure\Migrations\MySQL\**" />
     <None Remove="Infrastructure\Migrations\MySQL\**" />
   </ItemGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="Resources\localization.json" />
+  </ItemGroup>
+
   </ItemGroup>
   <PropertyGroup>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
     <ItemGroup>
+    <PackageReference Include="McMaster.NETCore.Plugins" Version="0.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+    <PackageReference Include="Microting.eForm" Version="3.0.334" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="1.1.35" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
+    <PackageReference Include="Microting.eFormApi.BasePn" Version="1.1.193" />
+    <PackageReference Include="Rebus.MySql" Version="1.1.1" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.49.0.2069" />
     <PackageReference Include="Microting.eForm" Version="4.0.34" />
     <PackageReference Include="Microting.eFormBaseCustomerBase" Version="2.0.42" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="2.0.41" />
     <PackageReference Include="Microting.eFormRentableItemBase" Version="2.0.31" />
   </ItemGroup>
-  
+
 
 </Project>
