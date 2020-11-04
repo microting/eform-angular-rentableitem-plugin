@@ -19,7 +19,6 @@
     <EmbeddedResource Include="Resources\localization.json" />
   </ItemGroup>
 
-  </ItemGroup>
   <PropertyGroup>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
@@ -29,7 +28,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microting.eForm" Version="3.0.334" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microting.eFormBaseCustomerBase" Version="1.1.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
