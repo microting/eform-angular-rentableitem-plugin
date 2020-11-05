@@ -29,9 +29,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microting.eFormApi.BasePn;
+using Microting.eFormApi.BasePn.Infrastructure.Consts;
 using Microting.eFormApi.BasePn.Infrastructure.Database.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Helpers;
 using Microting.eFormApi.BasePn.Infrastructure.Models.Application;
+using Microting.eFormApi.BasePn.Infrastructure.Models.Application.NavigationMenu;
 using Microting.eFormApi.BasePn.Infrastructure.Settings;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
@@ -118,6 +120,275 @@ namespace RentableItems.Pn
             var serviceProvider = appBuilder.ApplicationServices;
             IRebusService rebusService = serviceProvider.GetService<IRebusService>();
             rebusService.Start(_connectionString);
+        }
+
+        public List<PluginMenuItemModel> GetNavigationMenu(IServiceProvider serviceProvider)
+        {
+            var pluginMenu = new List<PluginMenuItemModel>()
+                {
+                    new PluginMenuItemModel
+                    {
+                        Name = "Dropdown",
+                        E2EId = "rentable-items-pn",
+                        Link = "",
+                        Type = MenuItemTypeEnum.Dropdown,
+                        Position = 0,
+                        Translations = new List<PluginMenuTranslationModel>()
+                        {
+                            new PluginMenuTranslationModel
+                            {
+                                 LocaleName = LocaleNames.English,
+                                 Name = "Rentable Items",
+                                 Language = LanguageNames.English,
+                            },
+                            new PluginMenuTranslationModel
+                            {
+                                 LocaleName = LocaleNames.German,
+                                 Name = "Mietbare gegenstände",
+                                 Language = LanguageNames.German,
+                            },
+                            new PluginMenuTranslationModel
+                            {
+                                 LocaleName = LocaleNames.Danish,
+                                 Name = "Udlejning",
+                                 Language = LanguageNames.Danish,
+                            }
+                        },
+                        ChildItems = new List<PluginMenuItemModel>()
+                        {
+                            new PluginMenuItemModel
+                            {
+                                Name = "Rentable Items",
+                                E2EId = "rentable-items-pn-rentable-items",
+                                Link = "/plugins/rentable-items-pn/rentable-items",
+                                Type = MenuItemTypeEnum.Link,
+                                Position = 0,
+                                MenuTemplate = new PluginMenuTemplateModel()
+                                {
+                                    Name = "Rentable Items",
+                                    E2EId = "rentable-items-pn-rentable-items",
+                                    DefaultLink = "/plugins/rentable-items-pn/rentable-items",
+                                    Permissions = new List<PluginMenuTemplatePermissionModel>(),
+                                    Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Rentable Items",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Mietbare gegenstände",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Udlejning",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                                },
+                                Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Rentable Items",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Mietbare gegenstände",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Udlejning",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                            },
+                            new PluginMenuItemModel
+                            {
+                                Name = "Contracts",
+                                E2EId = "rentable-items-pn-contracts",
+                                Link = "/plugins/rentable-items-pn/contracts",
+                                Type = MenuItemTypeEnum.Link,
+                                Position = 1,
+                                MenuTemplate = new PluginMenuTemplateModel()
+                                {
+                                    Name = "Contracts",
+                                    E2EId = "rentable-items-pn-contracts",
+                                    DefaultLink = "/plugins/rentable-items-pn/contracts",
+                                    Permissions = new List<PluginMenuTemplatePermissionModel>(),
+                                    Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Contracts",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Vertrag",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Kontrakter",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                                },
+                                Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Contracts",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Vertrag",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Kontrakter",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                            },
+                            new PluginMenuItemModel
+                            {
+                                Name = "Inspections",
+                                E2EId = "rentable-items-pn-rentable-inspections",
+                                Link = "/plugins/rentable-items-pn/inspections",
+                                Type = MenuItemTypeEnum.Link,
+                                Position = 2,
+                                MenuTemplate = new PluginMenuTemplateModel()
+                                {
+                                    Name = "Inspections",
+                                    E2EId = "rentable-items-pn-rentable-inspections",
+                                    DefaultLink = "/plugins/rentable-items-pn/inspections",
+                                    Permissions = new List<PluginMenuTemplatePermissionModel>(),
+                                    Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Contract Inspections",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Vertragsinspektionen",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Kontrakt Inspectioner",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                                },
+                                Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Contract Inspections",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Vertragsinspektionen",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Kontrakt Inspectioner",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                            },
+                            new PluginMenuItemModel
+                            {
+                                Name = "Importer",
+                                E2EId = "RentableItemsPluginImporter",
+                                Link = "/plugins/rentable-items-pn/import",
+                                Type = MenuItemTypeEnum.Link,
+                                Position = 2,
+                                MenuTemplate = new PluginMenuTemplateModel()
+                                {
+                                    Name = "Importer",
+                                    E2EId = "RentableItemsPluginImporter",
+                                    DefaultLink = "/plugins/rentable-items-pn/import",
+                                    Permissions = new List<PluginMenuTemplatePermissionModel>(),
+                                    Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Importer",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Importeur",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Importør",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                                },
+                                Translations = new List<PluginMenuTranslationModel>
+                                    {
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.English,
+                                            Name = "Importer",
+                                            Language = LanguageNames.English,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.German,
+                                            Name = "Importeur",
+                                            Language = LanguageNames.German,
+                                        },
+                                        new PluginMenuTranslationModel
+                                        {
+                                            LocaleName = LocaleNames.Danish,
+                                            Name = "Importør",
+                                            Language = LanguageNames.Danish,
+                                        },
+                                    }
+                            }
+                        }
+                    }
+                };
+
+            return pluginMenu;
         }
 
         public MenuModel HeaderMenu(IServiceProvider serviceProvider)
