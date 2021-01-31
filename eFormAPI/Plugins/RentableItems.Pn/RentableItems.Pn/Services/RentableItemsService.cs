@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
@@ -14,6 +13,7 @@ using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Models;
 using CollectionExtensions = Castle.Core.Internal.CollectionExtensions;
+using Constants = Microting.eForm.Infrastructure.Constants.Constants;
 
 //using Customers.Pn.Infrastructure.Models.Customer;
 
@@ -75,7 +75,7 @@ namespace RentableItems.Pn.Services
                 List<RentableItem> rentableItems = await rentableItemsQuery.ToListAsync();
                 rentableItems.ForEach(rentableItem =>
                 {
-                    rentableItemsPnModel.RentableItems.Add(new RentableItemModel()
+                    rentableItemsPnModel.RentableItems.Add(new RentableItemModel
                     {
                         VinNumber = rentableItem.VinNumber,
                         RegistrationDate = rentableItem.RegistrationDate,
@@ -136,7 +136,7 @@ namespace RentableItems.Pn.Services
 
             if (rentableItem != null)
             {
-                RentableItemModel rentableItemModel = new RentableItemModel()
+                RentableItemModel rentableItemModel = new RentableItemModel
                 {
                     Id = rentableItem.Id,
                     Brand = rentableItem.Brand,

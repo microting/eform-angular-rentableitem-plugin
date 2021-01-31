@@ -7,62 +7,62 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
     {
         public PluginConfigurationValue[] Data => new[]
         {
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:LogLevel",
                 Value = "4"
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:LogLimit",
                 Value = "25000"
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:SdkConnectionString",
                 Value = "..."
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:MaxParallelism",
                 Value = "1"
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:NumberOfWorkers",
                 Value = "1"
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:SdkeFormId",
                 Value = "..."
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:GmailCredentials",
                 Value = ""
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:GmailClientSecret",
                 Value = ""
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:GmailEmail",
                 Value = ""
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:GmailUserName",
                 Value = ""
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:MailFrom",
                 Value = ""
             },
-            new PluginConfigurationValue()
+            new PluginConfigurationValue
             {
                 Name = "RentableItemBaseSettings:Token",
                 Value = "..."

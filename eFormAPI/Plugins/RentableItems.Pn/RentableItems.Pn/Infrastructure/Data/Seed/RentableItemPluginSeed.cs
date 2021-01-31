@@ -1,7 +1,7 @@
-using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
 using System;
 using System.Linq;
 using Microting.eForm.Infrastructure.Constants;
+using Microting.eFormApi.BasePn.Infrastructure.Database.Entities;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Data.Seed.Data;
 
@@ -17,7 +17,7 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed
             {
                 if (!dbContext.PluginConfigurationValues.Any(x=>x.Name == configurationItem.Name))
                 {
-                    var newConfigValue = new PluginConfigurationValue()
+                    var newConfigValue = new PluginConfigurationValue
                     {
                         Name = configurationItem.Name,
                         Value = configurationItem.Value,

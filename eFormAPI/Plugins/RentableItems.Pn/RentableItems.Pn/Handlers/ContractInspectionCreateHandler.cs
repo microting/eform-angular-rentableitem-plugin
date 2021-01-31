@@ -1,8 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using eFormCore;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Rebus.Handlers;
-using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Messages;
 
 namespace RentableItems.Pn.Handlers
@@ -20,7 +20,7 @@ namespace RentableItems.Pn.Handlers
 
         public Task Handle(ContractInspectionCreate message)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

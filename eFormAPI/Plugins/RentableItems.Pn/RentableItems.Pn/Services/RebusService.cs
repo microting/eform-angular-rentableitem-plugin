@@ -7,7 +7,6 @@ using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Rebus.Bus;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Installers;
 
 namespace RentableItems.Pn.Services
@@ -58,7 +57,7 @@ namespace RentableItems.Pn.Services
             {
                 dbContextOptionsBuilder.UseSqlServer(_connectionString);
             }
-            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+            dbContextOptionsBuilder.UseLazyLoadingProxies();
             return new eFormRentableItemPnDbContext(dbContextOptionsBuilder.Options);
 
         }        

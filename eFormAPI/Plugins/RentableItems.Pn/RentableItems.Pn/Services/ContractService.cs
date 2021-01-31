@@ -9,13 +9,12 @@ using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
+using Microting.eFormBaseCustomerBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data;
+using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Models;
 using RentableItems.Pn.Infrastructure.Models.Customer;
-using Microting.eFormBaseCustomerBase.Infrastructure.Data;
-using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
-using Microting.eFormRentableItemBase.Infrastructure.Data;
-using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 
 namespace RentableItems.Pn.Services
 {
@@ -72,7 +71,7 @@ namespace RentableItems.Pn.Services
                 {
                     var customer =
                          _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
-                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel()
+                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel
                     {
                         Id = customer.Id,
                         CustomerNo = customer.CustomerNo,
@@ -94,7 +93,7 @@ namespace RentableItems.Pn.Services
                     foreach (ContractRentableItem contractRentableItem in _dbContext.ContractRentableItem.Where(x => x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
                     {
                         RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
-                        RentableItemModel rentableItemModel = new RentableItemModel()
+                        RentableItemModel rentableItemModel = new RentableItemModel
                         {
                             Id = rentableItem.Id,
                             Brand = rentableItem.Brand,
@@ -107,7 +106,7 @@ namespace RentableItems.Pn.Services
                         rentableItemModels.Add(rentableItemModel);
                     }
 
-                    contractsModel.Contracts.Add(new ContractModel()
+                    contractsModel.Contracts.Add(new ContractModel
                     {
                         ContractEnd = contract.ContractEnd,
                         ContractNr = contract.ContractNr,
@@ -255,7 +254,7 @@ namespace RentableItems.Pn.Services
         {
             try
             {
-                RentableItemCustomerModel rentableItemCustomer = await _customerDbContext.Customers.Select(x => new RentableItemCustomerModel()
+                RentableItemCustomerModel rentableItemCustomer = await _customerDbContext.Customers.Select(x => new RentableItemCustomerModel
                 {
                     Id = x.Id,
                     Description = x.Description,

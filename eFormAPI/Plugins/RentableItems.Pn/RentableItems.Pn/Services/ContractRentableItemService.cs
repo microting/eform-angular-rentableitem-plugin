@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 using Microting.eForm.Infrastructure.Constants;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
-using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Models;
 using Microting.eFormBaseCustomerBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
+using RentableItems.Pn.Abstractions;
+using RentableItems.Pn.Infrastructure.Models;
 
 namespace RentableItems.Pn.Services
 {
@@ -66,7 +66,7 @@ namespace RentableItems.Pn.Services
             {
                 Trace.TraceError(e.Message);
                 _logger.LogError(e.Message);
-                return new OperationDataResult<RentableItemsModel>(false, $"Could not find any rentable items");
+                return new OperationDataResult<RentableItemsModel>(false, "Could not find any rentable items");
             }
         }
     }

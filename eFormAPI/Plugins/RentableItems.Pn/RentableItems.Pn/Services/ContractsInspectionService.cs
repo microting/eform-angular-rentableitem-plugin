@@ -4,13 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using eFormCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eForm.Dto;
+using Microting.eForm.Infrastructure;
 using Microting.eForm.Infrastructure.Constants;
+using Microting.eForm.Infrastructure.Data.Entities;
 using Microting.eForm.Infrastructure.Models;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Extensions;
@@ -20,8 +21,6 @@ using Microting.eFormBaseCustomerBase.Infrastructure.Data.Entities;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using Microting.eFormRentableItemBase.Infrastructure.Data.Entities;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
-using RentableItems.Pn.Infrastructure.Data.Consts;
 using RentableItems.Pn.Infrastructure.Models;
 using RentableItems.Pn.Infrastructure.Models.Customer;
 
@@ -32,12 +31,14 @@ namespace RentableItems.Pn.Services
         private readonly ILogger<ContractsInspectionService> _logger;
         private readonly IRentableItemsLocalizationService _rentableItemsLocalizationService;
         private readonly eFormRentableItemPnDbContext _dbContext;
+        private readonly IUserService _userService;
         private readonly CustomersPnDbAnySql _customersPnDbContext;
         private readonly IEFormCoreService _coreHelper;
         private readonly CustomersPnDbAnySql _customerDbContext;
 
         public ContractsInspectionService(eFormRentableItemPnDbContext dbContext,
             CustomersPnDbAnySql customerDbContext,
+            IUserService userService,
             CustomersPnDbAnySql customersPnDbContext,
             ILogger<ContractsInspectionService> logger,
             IEFormCoreService coreHelper,
@@ -46,6 +47,7 @@ namespace RentableItems.Pn.Services
         {
             _dbContext = dbContext;
             _customerDbContext = customerDbContext;
+            _userService = userService;
             _customersPnDbContext = customersPnDbContext;
             _logger = logger;
             _coreHelper = coreHelper;
@@ -57,7 +59,7 @@ namespace RentableItems.Pn.Services
             {
                 ContractInspectionsModel contractInspectionsModel = new ContractInspectionsModel();
                 Core _core = await _coreHelper.GetCore();
-                
+
                 IQueryable<ContractInspection> contractInspectionsQuery = _dbContext.ContractInspection.
                     Where(x => x.WorkflowState != Constants.WorkflowStates.Removed).AsQueryable();
                 if (!string.IsNullOrEmpty(contractInspectionsPnRequestModel.SortColumnName)
@@ -90,7 +92,7 @@ namespace RentableItems.Pn.Services
 
                     Customer customer =
                         _customerDbContext.Customers.Single(x => x.Id == contract.CustomerId);
-                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel()
+                    RentableItemCustomerModel rentableItemCustomerModel = new RentableItemCustomerModel
                     {
                         Id = customer.Id,
                         CustomerNo = customer.CustomerNo,
@@ -112,7 +114,7 @@ namespace RentableItems.Pn.Services
                         x.ContractId == contract.Id && x.WorkflowState == Constants.WorkflowStates.Created).ToList())
                     {
                         RentableItem rentableItem = _dbContext.RentableItem.Single(x => x.Id == contractRentableItem.RentableItemId);
-                        RentableItemModel rentableItemModel = new RentableItemModel()
+                        RentableItemModel rentableItemModel = new RentableItemModel
                         {
                             Id = rentableItem.Id,
                             Brand = rentableItem.Brand,
@@ -126,13 +128,13 @@ namespace RentableItems.Pn.Services
                         rentableItemModels.Add(rentableItemModel);
                     }
 
-                    using (var dbContext = _core.dbContextHelper.GetDbContext())
+                    using (var dbContext = _core.DbContextHelper.GetDbContext())
                     {
                         if (contractInspectionItem != null)
-                            contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel()
+                            contractInspectionsModel.ContractInspections.Add(new ContractInspectionModel
                             {
                                 SdkCaseApiId = contractInspectionItem.SDKCaseId,
-                                SdkCaseId = dbContext.cases
+                                SdkCaseId = dbContext.Cases
                                     .Single(x => x.MicrotingUid == contractInspectionItem.SDKCaseId).Id,
                                 eFormId = rentableItemModels.First().EFormId,
                                 ContractId = contractInspection.ContractId,
@@ -145,8 +147,8 @@ namespace RentableItems.Pn.Services
                                 RentableItems = rentableItemModels
                             });
                     }
-                    
-                    
+
+
                 });
                 return new OperationDataResult<ContractInspectionsModel>(true, contractInspectionsModel);
             }
@@ -162,8 +164,9 @@ namespace RentableItems.Pn.Services
         public async Task<OperationResult> Create(ContractInspectionModel contractInspectionCreateModel)
         {
             try
-            {                
-                Core _core = await _coreHelper.GetCore();
+            {
+                Core core = await _coreHelper.GetCore();
+                await using MicrotingDbContext context = core.DbContextHelper.GetDbContext();
 
                 // finde eform fra settings
                 List<ContractRentableItem> contractRentableItem =
@@ -176,14 +179,17 @@ namespace RentableItems.Pn.Services
                     RentableItem rentableItem =
                         await _dbContext.RentableItem.FirstOrDefaultAsync(x => x.Id == rentableItemId);
                     int eFormId = rentableItem.eFormId;
-                    
+
                     Contract dbContract =
                         await _dbContext.Contract.FirstOrDefaultAsync(x =>
                             x.Id == contractInspectionCreateModel.ContractId);
                     Customer dbCustomer =
                         await _customersPnDbContext.Customers.SingleOrDefaultAsync(x => x.Id == dbContract.CustomerId);
 
-                    MainElement mainElement = await _core.TemplateRead(eFormId);
+                    Site site = await context.Sites.SingleAsync(x => x.Id == contractInspectionCreateModel.SiteId);
+                    Language language = await context.Languages.SingleAsync(x => x.Id == site.LanguageId);
+
+                    MainElement mainElement = await core.ReadeForm(eFormId, language);
                     mainElement.Repeated = 1;
                     mainElement.EndDate = DateTime.Now.AddDays(14).ToUniversalTime();
                     mainElement.StartDate = DateTime.Now.ToUniversalTime();
@@ -207,34 +213,27 @@ namespace RentableItems.Pn.Services
                     CDataValue cDataValue = new CDataValue();
                     cDataValue.InderValue = $"<b>Kontrakt Nr:<b>{dbContract.ContractNr.ToString()}<br>";
                     cDataValue.InderValue += $"<b>Kunde Nr:<b>{dbContract.CustomerId.ToString()}";
-                    
+
                     List<SiteDto> sites = new List<SiteDto>();
 
-                    LogEvent($"found siteId {contractInspectionCreateModel.SiteId}");
-                    sites.Add(await _core.SiteRead(contractInspectionCreateModel.SiteId));
+                    int? sdkCaseId = await core.CaseCreate(mainElement, "", (int)site.MicrotingUid, null);
 
-                    foreach (SiteDto siteDto in sites)
+                    if (sdkCaseId != null)
                     {
-
-                        int? sdkCaseId = await _core.CaseCreate(mainElement, "", siteDto.SiteId, null);
-
-                        if (sdkCaseId != null)
+                        ContractInspection contractInspection = new ContractInspection
                         {
-                            ContractInspection contractInspection = new ContractInspection
-                            {
-                                ContractId = contractInspectionCreateModel.ContractId
-                            };
-                            await contractInspection.Create(_dbContext);
-                            ContractInspectionItem contractInspectionItem = new ContractInspectionItem
-                            {
-                                ContractInspectionId = contractInspection.Id,
-                                RentableItemId = rentableItemId,
-                                SiteId = siteDto.SiteId,
-                                SDKCaseId = (int) sdkCaseId,
-                                Status = 33
-                            };
-                            await contractInspectionItem.Create(_dbContext);
-                        }
+                            ContractId = contractInspectionCreateModel.ContractId
+                        };
+                        await contractInspection.Create(_dbContext);
+                        ContractInspectionItem contractInspectionItem = new ContractInspectionItem
+                        {
+                            ContractInspectionId = contractInspection.Id,
+                            RentableItemId = rentableItemId,
+                            SiteId = site.Id,
+                            SDKCaseId = (int) sdkCaseId,
+                            Status = 33
+                        };
+                        await contractInspectionItem.Create(_dbContext);
                     }
                 }
 
@@ -316,6 +315,8 @@ namespace RentableItems.Pn.Services
         public async Task<string> DownloadEFormPdf(int id, string token, string fileType)
         {
             Core core = await _coreHelper.GetCore();
+            var locale = await _userService.GetCurrentUserLocale();
+            var language = core.DbContextHelper.GetDbContext().Languages.Single(x => x.LanguageCode.ToLower() == locale.ToLower());
             string microtingUId;
             string microtingCheckUId;
             int caseId = 0;
@@ -373,8 +374,8 @@ namespace RentableItems.Pn.Services
                 _coreHelper.LogEvent($"DownloadEFormPdf: caseId is {caseId}, eFormId is {eFormId}");
                 var filePath = await core.CaseToPdf(caseId, eFormId.ToString(),
                     DateTime.Now.ToString("yyyyMMddHHmmssffff"),
-                    $"{await core.GetSdkSetting(Settings.httpServerAddress)}/" + "api/template-files/get-image/", fileType, xmlContent.ToString());
-                if (!System.IO.File.Exists(filePath))
+                    $"{await core.GetSdkSetting(Settings.httpServerAddress)}/" + "api/template-files/get-image/", xmlContent.ToString(), language);
+                if (!File.Exists(filePath))
                 {
                     throw new FileNotFoundException();
                 }
@@ -388,7 +389,7 @@ namespace RentableItems.Pn.Services
         private void LogEvent(string appendText)
         {
             try
-            {                
+            {
                 var oldColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("[DBG] " + appendText);
