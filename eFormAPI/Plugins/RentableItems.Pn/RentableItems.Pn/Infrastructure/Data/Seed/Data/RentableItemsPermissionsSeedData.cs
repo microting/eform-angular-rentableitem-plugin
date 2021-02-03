@@ -7,12 +7,12 @@ namespace RentableItems.Pn.Infrastructure.Data.Seed.Data
     {
         public static PluginPermission[] Data => new[]
         {
-            new PluginPermission()
+            new PluginPermission
             {
                 PermissionName = "Access RentableItems Plugin",
                 ClaimName = RentableItemsClaims.AccessRentableItemsPlugin
             },
-            new PluginPermission()
+            new PluginPermission
             {
                 PermissionName = "Create Rentable Items",
                 ClaimName = RentableItemsClaims.CreateRentableItems

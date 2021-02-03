@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using RentableItems.Pn.Abstractions;
 using RentableItems.Pn.Infrastructure.Models;
-using RentableItems.Pn.Infrastructure.Models.Customer;
 
 namespace RentableItems.Pn.Controllers
 {

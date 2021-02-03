@@ -2,17 +2,14 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microting.eFormApi.BasePn.Abstractions;
 using Microting.eFormApi.BasePn.Infrastructure.Helpers.PluginDbOptions;
 using Microting.eFormApi.BasePn.Infrastructure.Models.API;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
 using RentableItems.Pn.Abstractions;
-using RentableItems.Pn.Infrastructure.Data;
 using RentableItems.Pn.Infrastructure.Models;
 
 namespace RentableItems.Pn.Services

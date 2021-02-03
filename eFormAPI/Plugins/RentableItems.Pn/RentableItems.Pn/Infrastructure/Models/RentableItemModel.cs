@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace RentableItems.Pn.Infrastructure.Models
 {
     public class RentableItemModel

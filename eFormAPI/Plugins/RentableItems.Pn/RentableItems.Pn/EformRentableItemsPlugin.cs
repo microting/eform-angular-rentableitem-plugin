@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -44,7 +45,6 @@ using RentableItems.Pn.Infrastructure.Data.Seed;
 using RentableItems.Pn.Infrastructure.Data.Seed.Data;
 using RentableItems.Pn.Infrastructure.Models;
 using RentableItems.Pn.Services;
-
 
 namespace RentableItems.Pn
 {
@@ -124,8 +124,8 @@ namespace RentableItems.Pn
 
         public List<PluginMenuItemModel> GetNavigationMenu(IServiceProvider serviceProvider)
         {
-            var pluginMenu = new List<PluginMenuItemModel>()
-                {
+            var pluginMenu = new List<PluginMenuItemModel>
+            {
                     new PluginMenuItemModel
                     {
                         Name = "Dropdown",
@@ -133,7 +133,7 @@ namespace RentableItems.Pn
                         Link = "",
                         Type = MenuItemTypeEnum.Dropdown,
                         Position = 0,
-                        Translations = new List<PluginMenuTranslationModel>()
+                        Translations = new List<PluginMenuTranslationModel>
                         {
                             new PluginMenuTranslationModel
                             {
@@ -154,7 +154,7 @@ namespace RentableItems.Pn
                                  Language = LanguageNames.Danish,
                             }
                         },
-                        ChildItems = new List<PluginMenuItemModel>()
+                        ChildItems = new List<PluginMenuItemModel>
                         {
                             new PluginMenuItemModel
                             {
@@ -163,7 +163,7 @@ namespace RentableItems.Pn
                                 Link = "/plugins/rentable-items-pn/rentable-items",
                                 Type = MenuItemTypeEnum.Link,
                                 Position = 0,
-                                MenuTemplate = new PluginMenuTemplateModel()
+                                MenuTemplate = new PluginMenuTemplateModel
                                 {
                                     Name = "Rentable Items",
                                     E2EId = "rentable-items-pn-rentable-items",
@@ -220,7 +220,7 @@ namespace RentableItems.Pn
                                 Link = "/plugins/rentable-items-pn/contracts",
                                 Type = MenuItemTypeEnum.Link,
                                 Position = 1,
-                                MenuTemplate = new PluginMenuTemplateModel()
+                                MenuTemplate = new PluginMenuTemplateModel
                                 {
                                     Name = "Contracts",
                                     E2EId = "rentable-items-pn-contracts",
@@ -277,7 +277,7 @@ namespace RentableItems.Pn
                                 Link = "/plugins/rentable-items-pn/inspections",
                                 Type = MenuItemTypeEnum.Link,
                                 Position = 2,
-                                MenuTemplate = new PluginMenuTemplateModel()
+                                MenuTemplate = new PluginMenuTemplateModel
                                 {
                                     Name = "Inspections",
                                     E2EId = "rentable-items-pn-rentable-inspections",
@@ -334,7 +334,7 @@ namespace RentableItems.Pn
                                 Link = "/plugins/rentable-items-pn/import",
                                 Type = MenuItemTypeEnum.Link,
                                 Position = 2,
-                                MenuTemplate = new PluginMenuTemplateModel()
+                                MenuTemplate = new PluginMenuTemplateModel
                                 {
                                     Name = "Importer",
                                     E2EId = "RentableItemsPluginImporter",
@@ -396,28 +396,28 @@ namespace RentableItems.Pn
             IRentableItemsLocalizationService localizationService = serviceProvider
                 .GetService<IRentableItemsLocalizationService>();
 
-            MenuItemModel rentableItem = new MenuItemModel()
+            MenuItemModel rentableItem = new MenuItemModel
             {
                 Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/rentable-items"
 
             };
-            MenuItemModel contracts = new MenuItemModel()
+            MenuItemModel contracts = new MenuItemModel
             {
                 Name = localizationService.GetString("Contracts"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/contracts"
 
             };
-            MenuItemModel inspeciton = new MenuItemModel()
+            MenuItemModel inspeciton = new MenuItemModel
             {
                 Name = localizationService.GetString("Inspections"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn/inspections"
 
             };
-            MenuItemModel importer = new MenuItemModel()
+            MenuItemModel importer = new MenuItemModel
             {
                 Name = localizationService.GetString("Importer"),
                 E2EId = "RentableItemsPluginImporter",
@@ -429,13 +429,13 @@ namespace RentableItems.Pn
             items.Add(inspeciton);
             items.Add(importer);
             MenuModel result = new MenuModel();
-            result.LeftMenu.Add(new MenuItemModel()
+            result.LeftMenu.Add(new MenuItemModel
             {
                 Name = localizationService.GetString("Rentable Items"),
                 E2EId = "",
                 Link = "/plugins/rentable-items-pn",
                 MenuItems = items,
-                Guards = new List<string>() { RentableItemsClaims.AccessRentableItemsPlugin }
+                Guards = new List<string> { RentableItemsClaims.AccessRentableItemsPlugin }
 
             });
             return result;

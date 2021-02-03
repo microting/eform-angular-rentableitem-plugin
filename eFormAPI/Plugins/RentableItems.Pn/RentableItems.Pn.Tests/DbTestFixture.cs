@@ -1,12 +1,10 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microting.eFormRentableItemBase.Infrastructure.Data;
-
+using NUnit.Framework;
 
 namespace RentableItems.Pn.Tests
 {
@@ -17,14 +15,6 @@ namespace RentableItems.Pn.Tests
         protected eFormRentableItemPnDbContext DbContext;
         protected string ConnectionString;
 
-
-        private static string userName = "__USER_NAME__";
-        private static string password = "__PASSWORD__";
-        private static string databaseName = "__DBNAME__";
-        private static string databaseServerId = "__DB_SERVER_ID__";
-        private static string directoryId = "__DIRECTORY_ID__";
-        private static string applicationId = "__APPLICATION_ID__";
-
         //public RentableItemsPnDbAnySql db;
 
         public void GetContext(string connectionStr)
@@ -32,39 +22,19 @@ namespace RentableItems.Pn.Tests
 
             DbContextOptionsBuilder<eFormRentableItemPnDbContext> dbContextOptionsBuilder = new DbContextOptionsBuilder<eFormRentableItemPnDbContext>();
 
-            if (ConnectionString.ToLower().Contains("convert zero datetime"))
-            {
-                dbContextOptionsBuilder.UseMySql(connectionStr);
-            }
-            else
-            {
-                dbContextOptionsBuilder.UseSqlServer(connectionStr);
-            }
-            dbContextOptionsBuilder.UseLazyLoadingProxies(true);
+            dbContextOptionsBuilder.UseMySql(connectionStr);
             DbContext = new eFormRentableItemPnDbContext(dbContextOptionsBuilder.Options);
 
             DbContext.Database.Migrate();
             DbContext.Database.EnsureCreated();
-            //return db;
-
         }
 
         [SetUp]
         public void Setup()
         {
-            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            //{
-            //    ConnectionString = @"data source=(LocalDb)\SharedInstance;Initial catalog=rentable-items-pn-tests;Integrated Security=True";
-            //}
-            //else
-            //{
                 ConnectionString = @"Server = localhost; port = 3306; Database = rentable-items-pn-tests; user = root; Convert Zero Datetime = true;";
-            //}
-
 
             GetContext(ConnectionString);
-
-
             DbContext.Database.SetCommandTimeout(300);
 
             try
@@ -82,7 +52,6 @@ namespace RentableItems.Pn.Tests
         [TearDown]
         public void TearDown()
         {
-
             ClearDb();
 
             ClearFile();
@@ -92,48 +61,53 @@ namespace RentableItems.Pn.Tests
 
         public void ClearDb()
         {
-            List<string> modelNames = new List<string>();
-            modelNames.Add("RentableItemsContractVersions");
-            modelNames.Add("RentableItemContract");
-            modelNames.Add("ContractInspectionVersion");
-            modelNames.Add("ContractInspection");
-            modelNames.Add("ContractVersions");
-            modelNames.Add("Contract");
-            modelNames.Add("RentableItemsSettingsVersions");
-            modelNames.Add("RentableItemsSettings");
-            modelNames.Add("RentableItemsVersion");
-            modelNames.Add("RentableItem");
+            List<string> modelNames = new List<string>
+            {
+                "RentableItemsContractVersions",
+                "RentableItemContract",
+                "ContractInspectionVersion",
+                "ContractInspection",
+                "ContractVersions",
+                "Contract",
+                "RentableItemsSettingsVersions",
+                "RentableItemsSettings",
+                "RentableItemsVersion",
+                "RentableItem"
+            };
 
+            bool firstRunNotDone = true;
 
             foreach (var modelName in modelNames)
             {
                 try
                 {
-                    string sqlCmd = string.Empty;
-                    if (DbContext.Database.IsMySql())
+                    if (firstRunNotDone)
                     {
-                        sqlCmd = string.Format("DELETE FROM `{0}`.`{1}`", "rentable-items-pn-tests", modelName);
+                        DbContext.Database.ExecuteSqlRaw(
+                            $"SET FOREIGN_KEY_CHECKS = 0;TRUNCATE `rentable-items-pn-tests`.`{modelName}`");
                     }
-                    else
-                    {
-                        sqlCmd = string.Format("DELETE FROM [{0}]", modelName);
-                    }
-                    DbContext.Database.ExecuteSqlCommand(sqlCmd);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    if (ex.Message == "Unknown database 'rentable-items-pn-tests'")
+                    {
+                        firstRunNotDone = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
-        private string path;
+        private string _path;
 
         public void ClearFile()
         {
-            path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            path = System.IO.Path.GetDirectoryName(path).Replace(@"file:\", "");
+            _path = Assembly.GetExecutingAssembly().CodeBase;
+            _path = Path.GetDirectoryName(_path).Replace(@"file:\", "");
 
-            string picturePath = path + @"\output\dataFolder\picture\Deleted";
+            string picturePath = _path + @"\output\dataFolder\picture\Deleted";
 
             DirectoryInfo diPic = new DirectoryInfo(picturePath);
 
@@ -144,9 +118,10 @@ namespace RentableItems.Pn.Tests
                     file.Delete();
                 }
             }
-            catch { }
-
-
+            catch
+            {
+                // ignored
+            }
         }
         public virtual void DoSetup() { }
 

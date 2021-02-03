@@ -16,8 +16,8 @@ namespace RentableItems.Pn.Installers
         {
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException(nameof(connectionString));
             this.connectionString = connectionString;
-            this._maxParallelism = maxParallelism;
-            this._numberOfWorkers = numberOfWorkers;
+            _maxParallelism = maxParallelism;
+            _numberOfWorkers = numberOfWorkers;
         }
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
