@@ -56,7 +56,7 @@ jobs:
     - name: Build
       run: dotnet build main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.sln
     - name: Unit Tests
-      run: dotnet test --no-restore -c Release -v n main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.Test/RentableItems.Pn.Test.csproj
+      run: dotnet test --no-restore -c Release -v n main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
     - name: Copy dependencies
       run: |
         cp -av main/eform-client/src/app/plugins/modules/rentableitem-pn eform-angular-frontend/eform-client/src/app/plugins/modules/rentableitem-pn
