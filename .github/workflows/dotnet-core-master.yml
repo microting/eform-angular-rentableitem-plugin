@@ -42,24 +42,33 @@ jobs:
     - name: Extract branch name
       id: extract_branch
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-    - name: 'Preparing Frontend checkout'
+    - name: Frontend checkout
       uses: actions/checkout@v2
       with:
         repository: microting/eform-angular-frontend
         ref: ${{ steps.extract_branch.outputs.branch }}
         path: eform-angular-frontend
+    - name: Customers plugin checkout
+      uses: actions/checkout@v2
+      with:
+        repository: microting/eform-angular-basecustomer-plugin
+        ref: ${{ steps.extract_branch.outputs.branch }}
+        path: eform-angular-basecustomer-plugin
     - name: Install dependencies
       run: dotnet restore main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.sln
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3 | cut -d "v" -f 2)
-    - name: Build
+    - name: Build rentable items plugin
       run: dotnet build main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.sln
+    - name: Build customers plugin
+      run: dotnet build eform-angular-basecustomer-plugin/eFormAPI/Plugins/Customers.Pn/Customers.Pn.sln
     - name: Unit Tests
       run: dotnet test --no-restore -c Release -v n main/eFormAPI/Plugins/RentableItems.Pn/RentableItems.Pn.Tests/RentableItems.Pn.Tests.csproj
     - name: Copy dependencies
       run: |
         cp -av main/eform-client/src/app/plugins/modules/rentable-items-pn eform-angular-frontend/eform-client/src/app/plugins/modules/rentable-items-pn
+        cp -av eform-angular-basecustomer-plugin/eform-client/src/app/plugins/modules/customers-pn eform-angular-frontend/eform-client/src/app/plugins/modules/customers-pn
         cp -av main/eform-client/e2e/Tests/rentableitem-settings eform-angular-frontend/eform-client/e2e/Tests/rentableitem-settings
         cp -av main/eform-client/e2e/Tests/rentableitem-general eform-angular-frontend/eform-client/e2e/Tests/rentableitem-general
         cp -av main/eform-client/e2e/Page\ objects/rentableitem-general eform-angular-frontend/eform-client/e2e/Page\ objects/rentableitem-general
@@ -67,7 +76,9 @@ jobs:
         cp -av main/eform-client/wdio-plugin-step2.conf.js eform-angular-frontend/eform-client/wdio-plugin-step2.conf.js
         mkdir -p eform-angular-frontend/eFormAPI/eFormAPI.Web/Plugins
         cp -av main/eFormAPI/eFormAPI.Web/Plugins/RentableItems eform-angular-frontend/eFormAPI/eFormAPI.Web/Plugins/RentableItems
+        cp -av eform-angular-basecustomer-plugin/eFormAPI/eFormAPI.Web/Plugins/Customers eform-angular-frontend/eFormAPI/eFormAPI.Web/Plugins/Customers
         cd eform-angular-frontend/eform-client && ../../main/testinginstallpn.sh
+        ../../eform-angular-basecustomer-plugin/testinginstallpn.sh
     - name: Build frontend
       run: dotnet build eform-angular-frontend/eFormAPI/eFormAPI.sln > dotnet_log 2>&1 &
     - name: NPM install
