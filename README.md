@@ -1,5 +1,5 @@
 # eform-angular-rentableitem-plugin
-[![.NET Master](https://github.com/microting/eform-angular-outer-inner-resource-plugin/actions/workflows/dotnet-core-master.yml/badge.svg)](https://github.com/microting/eform-angular-outer-inner-resource-plugin/actions/workflows/dotnet-core-master.yml)
+[![.NET Core](https://github.com/microting/eform-angular-rentableitem-plugin/actions/workflows/dotnet-core-master.yml/badge.svg)](https://github.com/microting/eform-angular-rentableitem-plugin/actions/workflows/dotnet-core-master.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/26771de4b55e5ddbfb59/maintainability)](https://codeclimate.com/github/microting/eform-angular-rentableitem-plugin/maintainability)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c2508c3a421141d7800d147bfd7fea85)](https://www.codacy.com/gh/microting/eform-angular-rentableitem-plugin/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=microting/eform-angular-rentableitem-plugin&amp;utm_campaign=Badge_Grade)
 
