@@ -96,16 +96,22 @@ namespace RentableItems.Pn
         {
             _connectionString = connectionString;
             string customersConnectionString = connectionString.Replace(
-                "eform-angular-rentableitem-plugin", 
+                "eform-angular-rentableitem-plugin",
                 "eform-angular-basecustomer-plugin");
             services.AddDbContext<eFormRentableItemPnDbContext>(o =>
-                o.UseMySql(connectionString,
-                    b => b.MigrationsAssembly(PluginAssembly().FullName)));
-
+                o.UseMySql(connectionString, new MariaDbServerVersion(
+                    new Version(10, 4, 0)), mySqlOptionsAction: builder =>
+                {
+                    builder.EnableRetryOnFailure();
+                    builder.MigrationsAssembly(PluginAssembly().FullName);
+                }));
             services.AddDbContext<CustomersPnDbAnySql>(p =>
-                p.UseMySql(customersConnectionString,
-                    c => c.MigrationsAssembly(PluginAssembly().FullName)));
-
+                p.UseMySql(customersConnectionString, new MariaDbServerVersion(
+                    new Version(10, 4, 0)), mySqlOptionsAction: builder =>
+                {
+                    builder.EnableRetryOnFailure();
+                    builder.MigrationsAssembly(PluginAssembly().FullName);
+                }));
                 eFormRentableItemPnDbContextFactory contextFactory = new eFormRentableItemPnDbContextFactory();
             var context = contextFactory.CreateDbContext(new[] {connectionString});
             context.Database.Migrate();
@@ -113,7 +119,7 @@ namespace RentableItems.Pn
             // Seed database
             SeedDatabase(connectionString);
         }
-       
+
 
         public void Configure(IApplicationBuilder appBuilder)
         {
