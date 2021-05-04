@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.0.123](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.123) (2021-05-04)
+
+[Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.122...v1.0.123)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormBaseCustomerBase from 3.0.3 to 3.0.4 [\#172](https://github.com/microting/eform-angular-rentableitem-plugin/issues/172)
+- Bump Microting.eFormApi.BasePn from 3.0.4 to 3.0.5 [\#171](https://github.com/microting/eform-angular-rentableitem-plugin/issues/171)
+- Bump Microting.eForm from 5.1.0 to 5.1.1 [\#170](https://github.com/microting/eform-angular-rentableitem-plugin/issues/170)
+
 ## [v1.0.122](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.122) (2021-05-04)
 
 [Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.121...v1.0.122)
@@ -16,6 +26,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.eFormBaseCustomerBase from 3.0.1 to 3.0.2 [\#164](https://github.com/microting/eform-angular-rentableitem-plugin/issues/164)
 - Bump Microting.eFormApi.BasePn from 3.0.1 to 3.0.3 [\#163](https://github.com/microting/eform-angular-rentableitem-plugin/issues/163)
 - Bump Microting.eForm from 5.0.2 to 5.0.4 [\#162](https://github.com/microting/eform-angular-rentableitem-plugin/issues/162)
 
@@ -25,7 +36,6 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.eFormBaseCustomerBase from 3.0.1 to 3.0.2 [\#164](https://github.com/microting/eform-angular-rentableitem-plugin/issues/164)
 - Bump Microting.eFormBaseCustomerBase from 3.0.0 to 3.0.1 [\#161](https://github.com/microting/eform-angular-rentableitem-plugin/issues/161)
 - Bump Microting.eFormApi.BasePn from 3.0.0 to 3.0.1 [\#160](https://github.com/microting/eform-angular-rentableitem-plugin/issues/160)
 
