@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.0.136](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.136) (2021-06-09)
+
+[Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.135...v1.0.136)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormRentableItemBase from 3.0.9 to 3.0.10 [\#241](https://github.com/microting/eform-angular-rentableitem-plugin/issues/241)
+- Bump Microting.eFormBaseCustomerBase from 3.0.19 to 3.0.20 [\#240](https://github.com/microting/eform-angular-rentableitem-plugin/issues/240)
+- Bump Microting.eFormApi.BasePn from 3.0.19 to 3.0.20 [\#239](https://github.com/microting/eform-angular-rentableitem-plugin/issues/239)
+- Bump Microting.eForm from 5.2.8 to 5.2.9 [\#238](https://github.com/microting/eform-angular-rentableitem-plugin/issues/238)
+
 ## [v1.0.135](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.135) (2021-06-08)
 
 [Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.134...v1.0.135)
