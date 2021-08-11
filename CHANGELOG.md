@@ -1,5 +1,25 @@
 # Changelog
 
+## [v1.0.147](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.147) (2021-08-11)
+
+[Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.146...v1.0.147)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormRentableItemBase from 3.0.22 to 3.0.23 [\#316](https://github.com/microting/eform-angular-rentableitem-plugin/issues/316)
+- Bump Microting.eFormBaseCustomerBase from 3.0.36 to 3.0.37 [\#315](https://github.com/microting/eform-angular-rentableitem-plugin/issues/315)
+- Bump Microting.eFormApi.BasePn from 3.0.40 to 3.0.41 [\#314](https://github.com/microting/eform-angular-rentableitem-plugin/issues/314)
+- Bump Microting.eForm from 5.2.30 to 5.2.31 [\#313](https://github.com/microting/eform-angular-rentableitem-plugin/issues/313)
+
+**Merged pull requests:**
+
+- Bump Microsoft.AspNetCore.Identity.EntityFrameworkCore from 5.0.8 to 5.0.9 in /eFormAPI/Plugins/RentableItems.Pn [\#312](https://github.com/microting/eform-angular-rentableitem-plugin/pull/312) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.EntityFrameworkCore.SqlServer from 5.0.8 to 5.0.9 in /eFormAPI/Plugins/RentableItems.Pn [\#311](https://github.com/microting/eform-angular-rentableitem-plugin/pull/311) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.EntityFrameworkCore.Design from 5.0.8 to 5.0.9 in /eFormAPI/Plugins/RentableItems.Pn [\#310](https://github.com/microting/eform-angular-rentableitem-plugin/pull/310) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.EntityFrameworkCore.Tools from 5.0.8 to 5.0.9 in /eFormAPI/Plugins/RentableItems.Pn [\#309](https://github.com/microting/eform-angular-rentableitem-plugin/pull/309) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Google.Apis.Gmail.v1 from 1.53.0.2356 to 1.54.0.2356 in /eFormAPI/Plugins/RentableItems.Pn [\#304](https://github.com/microting/eform-angular-rentableitem-plugin/pull/304) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.EntityFrameworkCore.Design from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#264](https://github.com/microting/eform-angular-rentableitem-plugin/pull/264) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v1.0.146](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.146) (2021-08-10)
 
 [Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.145...v1.0.146)
@@ -78,10 +98,8 @@
 
 - Bump Microsoft.EntityFrameworkCore.Tools from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#266](https://github.com/microting/eform-angular-rentableitem-plugin/pull/266) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Microsoft.EntityFrameworkCore.SqlServer from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#265](https://github.com/microting/eform-angular-rentableitem-plugin/pull/265) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Bump Microsoft.EntityFrameworkCore.Design from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#264](https://github.com/microting/eform-angular-rentableitem-plugin/pull/264) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Microsoft.AspNetCore.Identity.EntityFrameworkCore from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#263](https://github.com/microting/eform-angular-rentableitem-plugin/pull/263) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Google.Apis.Gmail.v1 from 1.49.0.2118 to 1.52.0.2356 in /eFormAPI/Plugins/RentableItems.Pn [\#245](https://github.com/microting/eform-angular-rentableitem-plugin/pull/245) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Bump NUnit3TestAdapter from 3.17.0 to 4.0.0 in /eFormAPI/Plugins/RentableItems.Pn [\#233](https://github.com/microting/eform-angular-rentableitem-plugin/pull/233) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump McMaster.NETCore.Plugins from 1.3.1 to 1.4.0 in /eFormAPI/Plugins/RentableItems.Pn [\#206](https://github.com/microting/eform-angular-rentableitem-plugin/pull/206) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Upgrade to GitHub-native Dependabot [\#153](https://github.com/microting/eform-angular-rentableitem-plugin/pull/153) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
@@ -98,8 +116,10 @@
 
 **Merged pull requests:**
 
+- Bump NUnit3TestAdapter from 3.17.0 to 4.0.0 in /eFormAPI/Plugins/RentableItems.Pn [\#233](https://github.com/microting/eform-angular-rentableitem-plugin/pull/233) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Microsoft.NET.Test.Sdk from 16.8.3 to 16.10.0 in /eFormAPI/Plugins/RentableItems.Pn [\#200](https://github.com/microting/eform-angular-rentableitem-plugin/pull/200) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump NUnit from 3.13.0 to 3.13.2 in /eFormAPI/Plugins/RentableItems.Pn [\#151](https://github.com/microting/eform-angular-rentableitem-plugin/pull/151) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.3 in /eFormAPI/Plugins/RentableItems.Pn [\#19](https://github.com/microting/eform-angular-rentableitem-plugin/pull/19) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [v1.0.139](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.139) (2021-07-05)
 
@@ -111,7 +131,6 @@
 - Bump Microting.eFormBaseCustomerBase from 3.0.25 to 3.0.27 [\#257](https://github.com/microting/eform-angular-rentableitem-plugin/issues/257)
 - Bump Microting.eFormApi.BasePn from 3.0.25 to 3.0.27 [\#256](https://github.com/microting/eform-angular-rentableitem-plugin/issues/256)
 - Bump Microting.eForm from 5.2.13 to 5.2.14 [\#255](https://github.com/microting/eform-angular-rentableitem-plugin/issues/255)
-- Bump Microting.eFormApi.BasePn from 3.0.20 to 3.0.25 [\#251](https://github.com/microting/eform-angular-rentableitem-plugin/issues/251)
 
 ## [v1.0.138](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.138) (2021-06-27)
 
@@ -121,6 +140,7 @@
 
 - Bump Microting.eFormRentableItemBase from 3.0.10 to 3.0.11 [\#253](https://github.com/microting/eform-angular-rentableitem-plugin/issues/253)
 - Bump Microting.eFormBaseCustomerBase from 3.0.20 to 3.0.25 [\#252](https://github.com/microting/eform-angular-rentableitem-plugin/issues/252)
+- Bump Microting.eFormApi.BasePn from 3.0.20 to 3.0.25 [\#251](https://github.com/microting/eform-angular-rentableitem-plugin/issues/251)
 - Bump Microting.eForm from 5.2.9 to 5.2.13 [\#250](https://github.com/microting/eform-angular-rentableitem-plugin/issues/250)
 
 ## [v1.0.137](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.137) (2021-06-24)
@@ -170,7 +190,6 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.eFormRentableItemBase from 3.0.6 to 3.0.7 [\#223](https://github.com/microting/eform-angular-rentableitem-plugin/issues/223)
 - Bump Microting.eFormBaseCustomerBase from 3.0.16 to 3.0.17 [\#222](https://github.com/microting/eform-angular-rentableitem-plugin/issues/222)
 - Bump Microting.eFormApi.BasePn from 3.0.16 to 3.0.17 [\#221](https://github.com/microting/eform-angular-rentableitem-plugin/issues/221)
 - Bump Microting.eForm from 5.2.7 to 5.2.8 [\#220](https://github.com/microting/eform-angular-rentableitem-plugin/issues/220)
@@ -181,6 +200,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.eFormRentableItemBase from 3.0.6 to 3.0.7 [\#223](https://github.com/microting/eform-angular-rentableitem-plugin/issues/223)
 - Bump Microting.eFormRentableItemBase from 3.0.5 to 3.0.6 [\#218](https://github.com/microting/eform-angular-rentableitem-plugin/issues/218)
 - Bump Microting.eFormBaseCustomerBase from 3.0.15 to 3.0.16 [\#217](https://github.com/microting/eform-angular-rentableitem-plugin/issues/217)
 - Bump Microting.eFormApi.BasePn from 3.0.15 to 3.0.16 [\#216](https://github.com/microting/eform-angular-rentableitem-plugin/issues/216)
@@ -258,6 +278,7 @@
 
 - Bump Microting.eFormBaseCustomerBase from 3.0.5 to 3.0.6 [\#178](https://github.com/microting/eform-angular-rentableitem-plugin/issues/178)
 - Bump Microting.eFormApi.BasePn from 3.0.6 to 3.0.7 [\#177](https://github.com/microting/eform-angular-rentableitem-plugin/issues/177)
+- Bump Microting.eForm from 5.1.2 to 5.1.3 [\#176](https://github.com/microting/eform-angular-rentableitem-plugin/issues/176)
 
 ## [v1.0.124](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.124) (2021-05-05)
 
@@ -265,7 +286,6 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.eForm from 5.1.2 to 5.1.3 [\#176](https://github.com/microting/eform-angular-rentableitem-plugin/issues/176)
 - Bump Microting.eFormBaseCustomerBase from 3.0.4 to 3.0.5 [\#175](https://github.com/microting/eform-angular-rentableitem-plugin/issues/175)
 - Bump Microting.eFormApi.BasePn from 3.0.5 to 3.0.6 [\#174](https://github.com/microting/eform-angular-rentableitem-plugin/issues/174)
 - Bump Microting.eForm from 5.1.1 to 5.1.2 [\#173](https://github.com/microting/eform-angular-rentableitem-plugin/issues/173)
@@ -288,6 +308,7 @@
 
 - Bump Microting.eFormBaseCustomerBase from 3.0.2 to 3.0.3 [\#169](https://github.com/microting/eform-angular-rentableitem-plugin/issues/169)
 - Bump Microting.eFormApi.BasePn from 3.0.3 to 3.0.4 [\#168](https://github.com/microting/eform-angular-rentableitem-plugin/issues/168)
+- Bump Microting.eForm from 5.0.4 to 5.1.0 [\#167](https://github.com/microting/eform-angular-rentableitem-plugin/issues/167)
 
 ## [v1.0.121](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.121) (2021-05-03)
 
@@ -314,17 +335,14 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.eForm from 5.0.4 to 5.1.0 [\#167](https://github.com/microting/eform-angular-rentableitem-plugin/issues/167)
 - Bump Microting.eFormRentableItemBase from 2.0.45 to 2.1.1 [\#159](https://github.com/microting/eform-angular-rentableitem-plugin/issues/159)
 - Bump Microting.eFormBaseCustomerBase from 2.0.96 to 3.0.0 [\#158](https://github.com/microting/eform-angular-rentableitem-plugin/issues/158)
 - Bump Microting.eFormApi.BasePn from 2.0.97 to 3.0.0 [\#157](https://github.com/microting/eform-angular-rentableitem-plugin/issues/157)
 - Bump Microting.eForm from 4.4.1 to 5.0.2 [\#156](https://github.com/microting/eform-angular-rentableitem-plugin/issues/156)
-- Bump Microting.eForm from 4.3.17 to 4.4.1 [\#69](https://github.com/microting/eform-angular-rentableitem-plugin/issues/69)
 
 **Merged pull requests:**
 
 - Bump NUnit from 3.12.0 to 3.13.0 in /eFormAPI/Plugins/RentableItems.Pn [\#20](https://github.com/microting/eform-angular-rentableitem-plugin/pull/20) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.3 in /eFormAPI/Plugins/RentableItems.Pn [\#19](https://github.com/microting/eform-angular-rentableitem-plugin/pull/19) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Changed subheader to use title from router [\#10](https://github.com/microting/eform-angular-rentableitem-plugin/pull/10) ([Gid733](https://github.com/Gid733))
 
 ## [v1.0.118](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.118) (2021-02-23)
@@ -336,6 +354,7 @@
 - Bump Microting.eFormRentableItemBase from 2.0.44 to 2.0.45 [\#72](https://github.com/microting/eform-angular-rentableitem-plugin/issues/72)
 - Bump Microting.eFormBaseCustomerBase from 2.0.94 to 2.0.96 [\#71](https://github.com/microting/eform-angular-rentableitem-plugin/issues/71)
 - Bump Microting.eFormApi.BasePn from 2.0.95 to 2.0.97 [\#70](https://github.com/microting/eform-angular-rentableitem-plugin/issues/70)
+- Bump Microting.eForm from 4.3.17 to 4.4.1 [\#69](https://github.com/microting/eform-angular-rentableitem-plugin/issues/69)
 
 ## [v1.0.117](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.117) (2021-02-18)
 
