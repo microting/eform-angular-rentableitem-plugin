@@ -30,12 +30,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
     <PackageReference Include="Microting.eForm" Version="5.2.37" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="3.0.43" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="3.0.44" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="3.0.47" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.55.0.2356" />
     <PackageReference Include="Microting.eForm" Version="5.2.37" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="3.0.43" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="3.0.44" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="3.0.47" />
     <PackageReference Include="Microting.eFormRentableItemBase" Version="3.0.29" />
   </ItemGroup>
