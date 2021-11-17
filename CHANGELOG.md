@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.0.171](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.171) (2021-11-17)
+
+[Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.170...v1.0.171)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormRentableItemBase from 3.0.48 to 3.0.49 [\#402](https://github.com/microting/eform-angular-rentableitem-plugin/issues/402)
+- Bump Microting.eFormBaseCustomerBase from 3.0.62 to 3.0.63 [\#401](https://github.com/microting/eform-angular-rentableitem-plugin/issues/401)
+- Bump Microting.eFormApi.BasePn from 3.1.1 to 3.1.2 [\#400](https://github.com/microting/eform-angular-rentableitem-plugin/issues/400)
+- Bump Microting.eForm from 5.3.2 to 5.3.4 [\#399](https://github.com/microting/eform-angular-rentableitem-plugin/issues/399)
+
 ## [v1.0.170](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.170) (2021-11-16)
 
 [Full Changelog](https://github.com/microting/eform-angular-rentableitem-plugin/compare/v1.0.169...v1.0.170)
@@ -308,7 +319,6 @@
 - Bump Microsoft.AspNetCore.Identity.EntityFrameworkCore from 3.1.8 to 5.0.8 in /eFormAPI/Plugins/RentableItems.Pn [\#263](https://github.com/microting/eform-angular-rentableitem-plugin/pull/263) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Google.Apis.Gmail.v1 from 1.49.0.2118 to 1.52.0.2356 in /eFormAPI/Plugins/RentableItems.Pn [\#245](https://github.com/microting/eform-angular-rentableitem-plugin/pull/245) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump McMaster.NETCore.Plugins from 1.3.1 to 1.4.0 in /eFormAPI/Plugins/RentableItems.Pn [\#206](https://github.com/microting/eform-angular-rentableitem-plugin/pull/206) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Upgrade to GitHub-native Dependabot [\#153](https://github.com/microting/eform-angular-rentableitem-plugin/pull/153) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [v1.0.140](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.140) (2021-07-08)
 
@@ -325,6 +335,7 @@
 
 - Bump NUnit3TestAdapter from 3.17.0 to 4.0.0 in /eFormAPI/Plugins/RentableItems.Pn [\#233](https://github.com/microting/eform-angular-rentableitem-plugin/pull/233) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Microsoft.NET.Test.Sdk from 16.8.3 to 16.10.0 in /eFormAPI/Plugins/RentableItems.Pn [\#200](https://github.com/microting/eform-angular-rentableitem-plugin/pull/200) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Upgrade to GitHub-native Dependabot [\#153](https://github.com/microting/eform-angular-rentableitem-plugin/pull/153) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump NUnit from 3.13.0 to 3.13.2 in /eFormAPI/Plugins/RentableItems.Pn [\#151](https://github.com/microting/eform-angular-rentableitem-plugin/pull/151) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [v1.0.139](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.139) (2021-07-05)
@@ -493,7 +504,6 @@
 **Implemented enhancements:**
 
 - Bump Microting.eFormBaseCustomerBase from 3.0.4 to 3.0.5 [\#175](https://github.com/microting/eform-angular-rentableitem-plugin/issues/175)
-- Bump Microting.eFormApi.BasePn from 3.0.5 to 3.0.6 [\#174](https://github.com/microting/eform-angular-rentableitem-plugin/issues/174)
 - Bump Microting.eForm from 5.1.1 to 5.1.2 [\#173](https://github.com/microting/eform-angular-rentableitem-plugin/issues/173)
 
 ## [v1.0.123](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.123) (2021-05-04)
@@ -502,6 +512,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.eFormApi.BasePn from 3.0.5 to 3.0.6 [\#174](https://github.com/microting/eform-angular-rentableitem-plugin/issues/174)
 - Bump Microting.eFormBaseCustomerBase from 3.0.3 to 3.0.4 [\#172](https://github.com/microting/eform-angular-rentableitem-plugin/issues/172)
 - Bump Microting.eFormApi.BasePn from 3.0.4 to 3.0.5 [\#171](https://github.com/microting/eform-angular-rentableitem-plugin/issues/171)
 - Bump Microting.eForm from 5.1.0 to 5.1.1 [\#170](https://github.com/microting/eform-angular-rentableitem-plugin/issues/170)
@@ -514,6 +525,7 @@
 
 - Bump Microting.eFormBaseCustomerBase from 3.0.2 to 3.0.3 [\#169](https://github.com/microting/eform-angular-rentableitem-plugin/issues/169)
 - Bump Microting.eFormApi.BasePn from 3.0.3 to 3.0.4 [\#168](https://github.com/microting/eform-angular-rentableitem-plugin/issues/168)
+- Bump Microting.eForm from 5.0.4 to 5.1.0 [\#167](https://github.com/microting/eform-angular-rentableitem-plugin/issues/167)
 
 ## [v1.0.121](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.121) (2021-05-03)
 
@@ -521,10 +533,10 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.eForm from 5.0.4 to 5.1.0 [\#167](https://github.com/microting/eform-angular-rentableitem-plugin/issues/167)
 - Bump Microting.eFormBaseCustomerBase from 3.0.1 to 3.0.2 [\#164](https://github.com/microting/eform-angular-rentableitem-plugin/issues/164)
 - Bump Microting.eFormApi.BasePn from 3.0.1 to 3.0.3 [\#163](https://github.com/microting/eform-angular-rentableitem-plugin/issues/163)
 - Bump Microting.eForm from 5.0.2 to 5.0.4 [\#162](https://github.com/microting/eform-angular-rentableitem-plugin/issues/162)
+- Bump Microting.eFormApi.BasePn from 3.0.0 to 3.0.1 [\#160](https://github.com/microting/eform-angular-rentableitem-plugin/issues/160)
 
 ## [v1.0.120](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.120) (2021-05-02)
 
@@ -533,7 +545,6 @@
 **Implemented enhancements:**
 
 - Bump Microting.eFormBaseCustomerBase from 3.0.0 to 3.0.1 [\#161](https://github.com/microting/eform-angular-rentableitem-plugin/issues/161)
-- Bump Microting.eFormApi.BasePn from 3.0.0 to 3.0.1 [\#160](https://github.com/microting/eform-angular-rentableitem-plugin/issues/160)
 
 ## [v1.0.119](https://github.com/microting/eform-angular-rentableitem-plugin/tree/v1.0.119) (2021-05-02)
 
