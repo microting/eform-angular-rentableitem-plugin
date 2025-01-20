@@ -27,11 +27,11 @@
     <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
     <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
     <PackageReference Include="Microting.eForm" Version="9.0.8" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="8.0.71" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="9.0.0" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="9.0.6" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.60.0.2958" />
     <PackageReference Include="Microting.eForm" Version="9.0.8" />
-    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="8.0.71" />
+    <PackageReference Include="Microting.eFormBaseCustomerBase" Version="9.0.0" />
     <PackageReference Include="Microting.eFormApi.BasePn" Version="9.0.6" />
     <PackageReference Include="Microting.eFormRentableItemBase" Version="8.0.0" />
   </ItemGroup>
