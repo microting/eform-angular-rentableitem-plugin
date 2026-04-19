@@ -98,14 +98,14 @@ namespace RentableItems.Pn
             string customersConnectionString = connectionString.Replace(
                 "eform-angular-rentableitem-plugin",
                 "eform-angular-basecustomer-plugin");
-            services.AddDbContext<eFormRentableItemPnDbContext>(o =>
+            services.AddDbContextPool<eFormRentableItemPnDbContext>(o =>
                 o.UseMySql(connectionString, new MariaDbServerVersion(
                     new Version(10, 4, 0)), mySqlOptionsAction: builder =>
                 {
                     builder.EnableRetryOnFailure();
                     builder.MigrationsAssembly(PluginAssembly().FullName);
                 }));
-            services.AddDbContext<CustomersPnDbAnySql>(p =>
+            services.AddDbContextPool<CustomersPnDbAnySql>(p =>
                 p.UseMySql(customersConnectionString, new MariaDbServerVersion(
                     new Version(10, 4, 0)), mySqlOptionsAction: builder =>
                 {
