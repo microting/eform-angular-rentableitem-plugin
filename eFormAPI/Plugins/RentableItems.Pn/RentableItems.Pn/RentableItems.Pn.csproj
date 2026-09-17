@@ -28,7 +28,7 @@
     <PackageReference Include="Microting.eForm" Version="10.0.40" />
     <PackageReference Include="Microting.eFormBaseCustomerBase" Version="10.0.37" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.75.0.4225" />
-    <PackageReference Include="Microting.eFormApi.BasePn" Version="10.0.34" />
+    <PackageReference Include="Microting.eFormApi.BasePn" Version="10.0.35" />
     <PackageReference Include="Microting.eFormRentableItemBase" Version="10.0.37" />
   </ItemGroup>
 
